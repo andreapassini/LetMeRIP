@@ -31,7 +31,7 @@ public class MovementWASD : MonoBehaviour
 
 	private void Move()
 	{
-		//rb.MovePosition(transform.position + input * speed * Time.deltaTime);
-		rb.velocity = input * speed;
+		rb.MovePosition(transform.position + input.ToIso() * speed * Time.deltaTime);
+		//rb.velocity = input.ToIso() * speed;
 	}
 }

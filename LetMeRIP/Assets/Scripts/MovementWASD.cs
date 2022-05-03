@@ -32,6 +32,8 @@ public class MovementWASD : MonoBehaviour
 	private void Move()
 	{
 		rb.MovePosition(transform.position + input.ToIso() * speed * Time.deltaTime);
+		// The problem of slow-folling was caused by this guy
+		// since we are also changing his vertical velocity
 		//rb.velocity = input.ToIso() * speed;
 	}
 }

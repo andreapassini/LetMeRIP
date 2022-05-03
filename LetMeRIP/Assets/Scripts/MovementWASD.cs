@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class MovementWASD : MonoBehaviour
 {
-	[SerializeField] private Rigidbody2D rb;
+	[SerializeField] private Rigidbody rb;
 	[SerializeField] private float speed = 5f;
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
-	private Vector3 input;
+    private Vector3 input;
 
     void Update()
     {
@@ -27,6 +31,7 @@ public class MovementWASD : MonoBehaviour
 
 	private void Move()
 	{
-		rb.MovePosition(transform.position + input * speed * Time.deltaTime);
+		//rb.MovePosition(transform.position + input * speed * Time.deltaTime);
+		rb.velocity = input * speed;
 	}
 }

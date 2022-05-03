@@ -5,13 +5,25 @@ using UnityEngine.AI;
 
 public class GoToClick : MonoBehaviour {
 
-	void Update() {
+    [SerializeField] private GameObject indicator;
+    //private NavMeshAgent agent;
+    //private readonly float epsilon = 2f;
+
+    //   private void Start()
+    //   {
+    //       agent = GetComponent<NavMeshAgent>();
+    //   }
+
+    void Update() {
 		if(Input.GetMouseButton(0)) {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			if (Physics.Raycast (ray, out hit)) {
 				GetComponent<NavMeshAgent>().destination = hit.point;
-			}
-		}
+
+                //GameObject indicatorInstance = Instantiate(indicator, hit.point, Quaternion.identity);
+                //Destroy(indicatorInstance, 2f);
+            }
+        }
 	}
 }

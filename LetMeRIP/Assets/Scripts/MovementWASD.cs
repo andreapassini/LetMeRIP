@@ -12,12 +12,12 @@ public class MovementWASD : MonoBehaviour
 
     void Update()
     {
-        
+		GatherInput();
     }
 
 	private void FixedUpdate()
 	{
-		
+		Move();
 	}
 
 	private void GatherInput()

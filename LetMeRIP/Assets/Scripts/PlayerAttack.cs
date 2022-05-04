@@ -39,7 +39,7 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && Time.time >= nextAttackTime)
         {
             lightAttack = true;
-            nextAttackTime = Time.time + 1f / attackRate;
+            nextAttackTime = Time.time + 1f / attackRate;   
         }
 
         if (Input.GetMouseButtonDown(1))

@@ -78,6 +78,7 @@ public class SimpleEnemy : MonoBehaviour
 
         if ((target.position - lastSeenPos).magnitude <= 1f){
             // Go to a random new pos on the Navmesh
+            GetComponent<NavMeshAgent>().isStopped = false;
             GetComponent<NavMeshAgent>().destination = RandomNavmeshLocation(10f);
         }
     }
@@ -86,21 +87,22 @@ public class SimpleEnemy : MonoBehaviour
     public void Chase()
 	{
         Debug.Log("Chase");
-
+        GetComponent<NavMeshAgent>().isStopped = false;
         GetComponent<NavMeshAgent>().destination = target.position;
+
     }
 
     public void Attack()
 	{
         // Stop Moving
-        GetComponent<NavMeshAgent>().destination = transform.position;
-
+        GetComponent<NavMeshAgent>().isStopped = true;
         animator.SetTrigger("attack");
 
         // Look at Target
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z), Vector3.up);
 
         // Play attack animation
+        
 
         // Create Collider
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, whatIsTarget);

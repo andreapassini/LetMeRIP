@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class MovementWASD : MonoBehaviour
 {
-	[SerializeField] private Rigidbody rb;
 	[SerializeField] private float speed = 5f;
+	private Rigidbody rb;
 
     private PlayerInputActions playerInputActions;
 

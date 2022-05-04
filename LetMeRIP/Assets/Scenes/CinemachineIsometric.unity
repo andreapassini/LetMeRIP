@@ -443,6 +443,7 @@ Transform:
   - {fileID: 1753945435}
   - {fileID: 753190104}
   - {fileID: 1924797800}
+  - {fileID: 2091221988}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -621,7 +622,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8da0ea385bf6f8409ce5bbdbb31bc30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 256
   animator: {fileID: 429417613}
+  attackPoint: {fileID: 2091221988}
+  attackRange: 0.5
 --- !u!1 &619870488
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,7 +832,7 @@ GameObject:
   - component: {fileID: 919901268}
   - component: {fileID: 919901267}
   - component: {fileID: 919901266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1014,7 +1020,7 @@ GameObject:
   - component: {fileID: 1225267924}
   - component: {fileID: 1225267923}
   - component: {fileID: 1225267922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1126,7 +1132,7 @@ GameObject:
   - component: {fileID: 1397509637}
   - component: {fileID: 1397509636}
   - component: {fileID: 1397509635}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1238,7 +1244,7 @@ GameObject:
   - component: {fileID: 1415900929}
   - component: {fileID: 1415900928}
   - component: {fileID: 1415900927}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1578,3 +1584,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &2091221987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2091221988}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2091221988
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091221987}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.306, y: 0, z: 1.175}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 429417604}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

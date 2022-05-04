@@ -13,12 +13,14 @@ public class SimpleEnemy : MonoBehaviour
     [SerializeField] private LayerMask whatIsTarget;
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private Transform target;
+    [SerializeField] private Animator animator;
 
     private Vector3 lastSeenPos;
     private FSM fsm;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
 
         lastSeenPos = target.position;
 
@@ -93,7 +95,7 @@ public class SimpleEnemy : MonoBehaviour
         // Stop Moving
         GetComponent<NavMeshAgent>().destination = transform.position;
 
-        Debug.Log("Attack");
+        animator.SetTrigger("attack");
 
         // Look at Target
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z), Vector3.up);

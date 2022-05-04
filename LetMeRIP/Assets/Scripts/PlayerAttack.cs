@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     public LayerMask enemyLayers;
@@ -18,40 +18,27 @@ public class PlayerAttack : MonoBehaviour
     private bool lightAttack = false;
     private bool heavyAttack = false;
 
-    void Start()
-    {
-    }
+    //private void GatherInput()
+    //{
+    //    // Maybe better to use coroutine to manage "reload" time
+    //    if (Input.GetMouseButtonDown(0) && Time.time >= nextAttackTime)
+    //    {
+    //        lightAttack = true;
+    //        nextAttackTime = Time.time + 1f / attackRate;   
+    //    }
 
-    void Update()
-    {
-        GatherInput();
-    }
+    //    if (Input.GetMouseButtonDown(1))
+    //    {
+    //        heavyAttack = true;
+    //    }
+    //}
 
-    private void FixedUpdate()
+    public void LightAttack(InputAction.CallbackContext context)
     {
-        Attack();
-    }
-
-
-    private void GatherInput()
-    {
-        // Maybe better to use coroutine to manage "reload" time
-        if (Input.GetMouseButtonDown(0) && Time.time >= nextAttackTime)
+        if (context.performed && !lightAttack)
         {
             lightAttack = true;
-            nextAttackTime = Time.time + 1f / attackRate;   
-        }
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            heavyAttack = true;
-        }
-    }
-
-    private void Attack()
-    {
-        if (lightAttack)
-        {
             // Start Animation ( maybe an event )
             animator.SetTrigger("attack");
 
@@ -65,10 +52,16 @@ public class PlayerAttack : MonoBehaviour
             }
 
             // End attack
-            lightAttack = false;
+            StartCoroutine(AttackCooldown());
 
             // Wait for end animation
         }
+    }
+
+    private IEnumerator AttackCooldown()
+    {
+        yield return new WaitForSeconds(attackRate);
+        lightAttack = false;
     }
 
     private void OnDrawGizmos()

@@ -12,10 +12,16 @@ public class LookAtMouse : MonoBehaviour
 
     private Quaternion rot;
 
+    private PlayerInputActions playerInputActions;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Player.Enable();
+
     }
 
     // Update is called once per frame
@@ -30,15 +36,15 @@ public class LookAtMouse : MonoBehaviour
 	}
 
     private (bool success, Vector3 position) GetMousePosition()
-	{
-        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+    {
+        Ray ray = camera.ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>());
 
-        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask)) 
+        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask))
         {
             // If hit something return the pos
             return (success: true, position: hitInfo.point);
-        } 
-        else 
+        }
+        else
         {
             // If hit something return the pos
             return (success: false, position: Vector3.zero);
@@ -46,21 +52,20 @@ public class LookAtMouse : MonoBehaviour
     }
 
     private void CalcolateAngle()
-	{
+    {
         var (success, position) = GetMousePosition();
-		if (success) 
+        if (success)
         {
             // Calculate direction
             directionToLook = position - transform.position;
-		}
-        
+        }
+
     }
 
     void Rotate()
 	{
         // to keep the same hight
         directionToLook.y = 0;
-
         transform.forward = directionToLook;
-	}
+    }
 }

@@ -1,39 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MovementWASD : MonoBehaviour
 {
-	[SerializeField] private Rigidbody rb;
 	[SerializeField] private float speed = 5f;
+	private Rigidbody rb;
+
+    private PlayerInputActions playerInputActions;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Player.Enable();
+
     }
 
-    private Vector3 input;
-
-    void Update()
+    private void FixedUpdate()
     {
-		GatherInput();
+        Movement();
     }
 
-	private void FixedUpdate()
-	{
-		Move();
-	}
 
-	private void GatherInput()
-	{
-		input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-	}
-
-	private void Move()
-	{
-		rb.MovePosition(transform.position + input.ToIso() * speed * Time.deltaTime);
-		// The problem of slow-folling was caused by this guy
-		// since we are also changing his vertical velocity
-		//rb.velocity = input.ToIso() * speed;
-	}
+    public void Movement()
+    {
+        Vector3 direction = playerInputActions.Player.Movement.ReadValue<Vector3>();
+        rb.MovePosition(transform.position + direction.ToIso() * speed * Time.deltaTime);
+    }
 }

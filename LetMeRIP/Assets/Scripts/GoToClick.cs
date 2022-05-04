@@ -9,10 +9,10 @@ public class GoToClick : MonoBehaviour {
     //private NavMeshAgent agent;
     //private readonly float epsilon = 2f;
 
-    //   private void Start()
-    //   {
-    //       agent = GetComponent<NavMeshAgent>();
-    //   }
+    private void Start()
+    {
+        GetComponent<NavMeshAgent>().speed = 10f;
+    }
 
     void Update() {
 		if(Input.GetMouseButton(0)) {
@@ -20,7 +20,6 @@ public class GoToClick : MonoBehaviour {
 			RaycastHit hit;
 			if (Physics.Raycast (ray, out hit)) {
 				GetComponent<NavMeshAgent>().destination = hit.point;
-
                 //GameObject indicatorInstance = Instantiate(indicator, hit.point, Quaternion.identity);
                 //Destroy(indicatorInstance, 2f);
             }

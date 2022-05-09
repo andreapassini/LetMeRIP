@@ -11,14 +11,16 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(DestroyBulletAfterTime());
+        Destroy(gameObject, destroyAfterTime);
+        //StartCoroutine(DestroyBulletAfterTime());
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject effect = Instantiate(hitDmgEffect, transform.position, Quaternion.identity);
-        Destroy(effect, 2f);
-        Destroy(gameObject);
+        //GameObject effect = Instantiate(hitDmgEffect, transform.position, Quaternion.identity);
+        //Destroy(effect, 2f);
+        if(collision.collider.CompareTag("Enemy"))
+            Destroy(gameObject);
     }
 
     public IEnumerator DestroyBulletAfterTime()

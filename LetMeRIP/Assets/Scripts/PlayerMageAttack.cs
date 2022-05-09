@@ -11,7 +11,7 @@ public class PlayerMageAttack : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Transform attackPoint;
     [SerializeField] private GameObject bullet;
-    [SerializeField] private float bulletForce = 2f;
+    [SerializeField] private float bulletForce = 200f;
 
     private bool mageLightAttack = false;
 
@@ -27,8 +27,8 @@ public class PlayerMageAttack : MonoBehaviour
             // Fire bullet
             Instantiate(bullet, attackPoint.position, attackPoint.rotation);
 
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.AddForce(attackPoint.up * bulletForce, ForceMode2D.Impulse);
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            rb.AddForce(attackPoint.up * bulletForce, ForceMode.Impulse);
 
             // End attack
             StartCoroutine(AttackCooldown());

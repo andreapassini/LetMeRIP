@@ -10,8 +10,8 @@ public class PlayerMageAttack : MonoBehaviour
 
     [SerializeField] private Animator animator;
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private GameObject bullet;
-    [SerializeField] private float bulletForce = 200f;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float bulletForce = 10f;
 
     private bool mageLightAttack = false;
 
@@ -25,10 +25,10 @@ public class PlayerMageAttack : MonoBehaviour
             animator.SetTrigger("attack");
 
             // Fire bullet
-            Instantiate(bullet, attackPoint.position, attackPoint.rotation);
+            GameObject bullet = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
 
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            rb.AddForce(attackPoint.up * bulletForce, ForceMode.Impulse);
+            rb.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
 
             // End attack
             StartCoroutine(AttackCooldown());

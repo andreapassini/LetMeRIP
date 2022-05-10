@@ -74,8 +74,6 @@ public class SimpleEnemy : MonoBehaviour
     // Search
     public void Search()
 	{
-        Debug.Log("Search");
-
         if ((target.position - lastSeenPos).magnitude <= 1f){
             // Go to a random new pos on the Navmesh
             GetComponent<NavMeshAgent>().isStopped = false;
@@ -86,7 +84,6 @@ public class SimpleEnemy : MonoBehaviour
     // Chase
     public void Chase()
 	{
-        Debug.Log("Chase");
         GetComponent<NavMeshAgent>().isStopped = false;
         GetComponent<NavMeshAgent>().destination = target.position;
 

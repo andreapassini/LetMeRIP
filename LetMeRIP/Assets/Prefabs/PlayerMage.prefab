@@ -112,7 +112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1535086054749452190, guid: 5f0714afa848a474cbf2b177115f4f76, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.897
+      value: 1.32
       objectReference: {fileID: 0}
     - target: {fileID: 1535086055201891154, guid: 5f0714afa848a474cbf2b177115f4f76, type: 3}
       propertyPath: m_LocalScale.y
@@ -250,5 +250,5 @@ MonoBehaviour:
   attackRate: 1
   animator: {fileID: 0}
   attackPoint: {fileID: 2855400974875892041}
-  bullet: {fileID: 4043689014094602698, guid: 6b16cca2fb104954caac045fb3d7b95e, type: 3}
+  bulletPrefab: {fileID: 0}
   bulletForce: 2

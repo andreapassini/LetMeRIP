@@ -220,6 +220,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitDmgEffect: {fileID: 0}
   destroyAfterTime: 5
+  whatToIgnore:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!54 &-4610850781437077570
 Rigidbody:
   m_ObjectHideFlags: 0

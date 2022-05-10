@@ -19,7 +19,8 @@ public class Bullet : MonoBehaviour
     {
         //GameObject effect = Instantiate(hitDmgEffect, transform.position, Quaternion.identity);
         //Destroy(effect, 2f);
-        if(collision.collider.CompareTag("Enemy"))
+
+        //if(collision.collider.CompareTag("Enemy"))
             Destroy(gameObject);
     }
 

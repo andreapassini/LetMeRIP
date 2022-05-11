@@ -220,6 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitDmgEffect: {fileID: 0}
   destroyAfterTime: 5
+  damage: 20
 --- !u!54 &-4610850781437077570
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -243,7 +244,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4043689014094602698}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}

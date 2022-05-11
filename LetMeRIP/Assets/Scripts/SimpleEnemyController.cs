@@ -9,6 +9,7 @@ public class SimpleEnemyController : MonoBehaviour
 {
     public float reactionTime = 1f;
     public float attackDuration = 10f;
+    public float damage = 10f;
 
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask whatIsTarget;
@@ -112,6 +113,13 @@ public class SimpleEnemyController : MonoBehaviour
         // Check for collision
         foreach (Collider enemy in hitEnemies) {
             Debug.Log("Hit this guy: " + enemy.name);
+
+            PlayerHealth playerHealth = enemy.gameObject.GetComponent<PlayerHealth>();
+
+            if (playerHealth != null)
+            {
+                playerHealth.OnDamage(damage, transform.position);
+            }
         }
 
         // Wait for the end of animation

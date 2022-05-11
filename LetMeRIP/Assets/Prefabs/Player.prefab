@@ -192,13 +192,14 @@ GameObject:
   - component: {fileID: 1535086055366250743}
   - component: {fileID: 1535086055366250740}
   - component: {fileID: 1535086055366250741}
+  - component: {fileID: 7632958496877406579}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1535086055366250750
 Transform:
   m_ObjectHideFlags: 0
@@ -344,6 +345,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicator: {fileID: 3142474996665392722, guid: 1919140b4c223b042a380fff5d11b305, type: 3}
+  movementMask:
+    serializedVersion: 2
+    m_Bits: 0
+  maxDistance: 0
 --- !u!114 &1535086055366250742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,6 +461,19 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &7632958496877406579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535086055366250745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a9323ef8ef106458a0c246950cc1b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &1535086055550513325
 GameObject:
   m_ObjectHideFlags: 0

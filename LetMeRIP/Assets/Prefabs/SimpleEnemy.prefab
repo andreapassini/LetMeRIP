@@ -152,7 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b160f7a15d66b9f428662d06510bd3d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reactionTime: 0.01
+  reactionTime: 0.1
+  attackDuration: 0.75
+  damage: 10
   attackPoint: {fileID: 8607900224844952020}
   whatIsTarget:
     serializedVersion: 2

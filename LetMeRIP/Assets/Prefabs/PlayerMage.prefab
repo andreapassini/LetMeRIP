@@ -157,6 +157,14 @@ PrefabInstance:
     - target: {fileID: 1535086055366250741, guid: 5f0714afa848a474cbf2b177115f4f76, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 5247271175078359217}
+    - target: {fileID: 1535086055366250741, guid: 5f0714afa848a474cbf2b177115f4f76, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LightMageAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535086055366250741, guid: 5f0714afa848a474cbf2b177115f4f76, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerMageAttack, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1535086055366250743, guid: 5f0714afa848a474cbf2b177115f4f76, type: 3}
       propertyPath: m_Controller
@@ -180,11 +188,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1535086055366250750, guid: 5f0714afa848a474cbf2b177115f4f76, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1535086055366250750, guid: 5f0714afa848a474cbf2b177115f4f76, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -6.67
       objectReference: {fileID: 0}
     - target: {fileID: 1535086055366250750, guid: 5f0714afa848a474cbf2b177115f4f76, type: 3}
       propertyPath: m_LocalRotation.w
@@ -222,6 +230,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1535086055366250745, guid: 5f0714afa848a474cbf2b177115f4f76, type: 3}
   m_PrefabInstance: {fileID: 3669823110572879575}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &2855400974291697184 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1535086055366250743, guid: 5f0714afa848a474cbf2b177115f4f76, type: 3}
+  m_PrefabInstance: {fileID: 3669823110572879575}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2855400974642024389 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1535086054982328594, guid: 5f0714afa848a474cbf2b177115f4f76, type: 3}
@@ -248,7 +261,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   attackRate: 1
-  animator: {fileID: 0}
+  animator: {fileID: 2855400974291697184}
   attackPoint: {fileID: 2855400974875892041}
-  bulletPrefab: {fileID: 0}
-  bulletForce: 2
+  bulletPrefab: {fileID: 4043689014094602698, guid: 6b16cca2fb104954caac045fb3d7b95e, type: 3}
+  bulletForce: 10
+--- !u!114 &3615967538647257920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2855400974291697198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a9323ef8ef106458a0c246950cc1b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100

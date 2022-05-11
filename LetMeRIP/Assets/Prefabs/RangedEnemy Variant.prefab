@@ -94,13 +94,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reactionTime: 0.1
-  attackDuration: 1.5
+  attackDuration: 3
   attackPoint: {fileID: 275727462063041611}
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
-  attackRange: 20
+  attackRange: 10
   target: {fileID: 0}
   animator: {fileID: 275727460348433317}
   bulletForce: 10
-  enemyBulletPrefab: {fileID: 4043689014094602698, guid: 6b16cca2fb104954caac045fb3d7b95e, type: 3}
+  enemyBulletPrefab: {fileID: 677228077099532806, guid: c0014c06b809d7a4392a79c22d733883, type: 3}

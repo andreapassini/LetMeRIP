@@ -1,28 +1,34 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class SimpleEnemyController : MonoBehaviour
+public class RangedEnemyController : MonoBehaviour
 {
     public float reactionTime = 1f;
     public float attackDuration = 10f;
 
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask whatIsTarget;
-    [SerializeField] private float attackRange = 2f;
+    [SerializeField] private float attackRange = 10f;
     [SerializeField] private Transform target;
     [SerializeField] private Animator animator;
+    [SerializeField] private float bulletForce = 10f;
 
-    private float reactionReference;
+    [SerializeField] private GameObject enemyBulletPrefab;
 
     private Vector3 lastSeenPos;
     private FSM fsm;
 
+    private float reactionReference;
+
+    private bool canAttack;
+
     void Start()
     {
+        canAttack = true;
+
         reactionReference = reactionTime;
 
         animator = GetComponent<Animator>();
@@ -36,7 +42,7 @@ public class SimpleEnemyController : MonoBehaviour
         chase.stayActions.Add(Chase);
 
         FSMState attack = new FSMState();
-        attack.stayActions.Add(Attack);
+        attack.stayActions.Add(RangedAttack);
 
         List<FSMAction> listActions = new List<FSMAction>();
         FSMAction a1 = new FSMAction(GoToLastSeenPos);
@@ -69,7 +75,8 @@ public class SimpleEnemyController : MonoBehaviour
     // Periodic update, run forever
     public IEnumerator Patrol()
     {
-        while (true) {
+        while (true)
+        {
             fsm.Update();
             yield return new WaitForSeconds(reactionTime);
         }
@@ -78,8 +85,9 @@ public class SimpleEnemyController : MonoBehaviour
     #region Actions
     // Search
     public void Search()
-	{
-        if ((target.position - lastSeenPos).magnitude <= 1f){
+    {
+        if ((target.position - lastSeenPos).magnitude <= 1f)
+        {
             // Go to a random new pos on the Navmesh
             GetComponent<NavMeshAgent>().isStopped = false;
             GetComponent<NavMeshAgent>().destination = RandomNavmeshLocation(10f);
@@ -88,34 +96,36 @@ public class SimpleEnemyController : MonoBehaviour
 
     // Chase
     public void Chase()
-	{
+    {
         GetComponent<NavMeshAgent>().isStopped = false;
         GetComponent<NavMeshAgent>().destination = target.position;
 
     }
 
-    public void Attack()
-	{
-        // Stop Moving
-        GetComponent<NavMeshAgent>().isStopped = true;
-        animator.SetTrigger("attack");
+    public void RangedAttack()
+    {
+        if (canAttack)
+        {
+            // Stop Moving
+            GetComponent<NavMeshAgent>().isStopped = true;
+            animator.SetTrigger("attack");
 
-        // Look at Target
-        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z), Vector3.up);
+            // Look at Target
+            transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z), Vector3.up);
 
-        // Play attack animation
-        
+            // Play attack animation
 
-        // Create Collider
-        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, whatIsTarget);
+            // Fire bullet
+            GameObject bullet = Instantiate(enemyBulletPrefab, attackPoint.position, attackPoint.rotation);
 
-        // Check for collision
-        foreach (Collider enemy in hitEnemies) {
-            Debug.Log("Hit this guy: " + enemy.name);
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            rb.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
+
+            canAttack = false;
+
+            StartCoroutine(WaitForAttack());
         }
 
-        // Wait for the end of animation
-        StartCoroutine(StopAI());
     }
 
     public void GoToLastSeenPos()
@@ -128,30 +138,33 @@ public class SimpleEnemyController : MonoBehaviour
     #region Conditions
     // Target Visible
     public bool TargetVisible()
-	{
+    {
         Vector3 ray = target.position - transform.position;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, ray, out hit)) {
-            if (hit.transform == target) {
+        if (Physics.Raycast(transform.position, ray, out hit))
+        {
+            if (hit.transform == target)
+            {
                 return true;
             }
         }
         return false;
-	}
+    }
 
     public bool TargetInRange()
     {
         float distance = (target.position - transform.position).magnitude;
-        if(distance <= attackRange) {
+        if (distance <= attackRange)
+        {
             return true;
-		}
+        }
         return false;
     }
 
     public bool TargetNotVisible()
-	{
+    {
         return !TargetVisible();
-	}
+    }
 
     public bool TargetNotInRange()
     {
@@ -161,12 +174,14 @@ public class SimpleEnemyController : MonoBehaviour
 
     public Vector3 RandomNavmeshLocation(float radius)
     {
-        while (true) {
+        while (true)
+        {
             Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * radius;
             randomDirection += transform.position;
             NavMeshHit hit;
 
-            if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1)) {
+            if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
+            {
                 return hit.position;
             }
         }
@@ -181,5 +196,11 @@ public class SimpleEnemyController : MonoBehaviour
         reactionTime = attackDuration;
         yield return new WaitForSeconds(attackDuration);
         reactionTime = reactionReference;
+    }
+
+    public IEnumerator WaitForAttack()
+    {
+        yield return new WaitForSeconds(attackDuration);
+        canAttack = true;
     }
 }

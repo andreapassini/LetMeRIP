@@ -14,6 +14,8 @@ public class EnemyBullet : MonoBehaviour
     {
         Destroy(gameObject, destroyAfterTime);
         //StartCoroutine(DestroyBulletAfterTime());
+
+        Physics.IgnoreLayerCollision(9, 9);
     }
 
     private void OnCollisionEnter(Collision collision)

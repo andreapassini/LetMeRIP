@@ -5,9 +5,10 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class SimpleEnemy : MonoBehaviour
+public class SimpleEnemyController : MonoBehaviour
 {
     public float reactionTime = 1f;
+    public float attackDuration = 10f;
 
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask whatIsTarget;
@@ -15,11 +16,15 @@ public class SimpleEnemy : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private Animator animator;
 
+    private float reactionReference;
+
     private Vector3 lastSeenPos;
     private FSM fsm;
 
     void Start()
     {
+        reactionReference = reactionTime;
+
         animator = GetComponent<Animator>();
 
         lastSeenPos = target.position;
@@ -109,6 +114,8 @@ public class SimpleEnemy : MonoBehaviour
             Debug.Log("Hit this guy: " + enemy.name);
         }
 
+        // Wait for the end of animation
+        StartCoroutine(WaitForAttack());
     }
 
     public void GoToLastSeenPos()
@@ -168,4 +175,11 @@ public class SimpleEnemy : MonoBehaviour
     // To manage getting Hit:
     //  => Event when something hit an enemy
     //  => The enemy hit by it will resolve the event
+
+    public IEnumerator WaitForAttack()
+    {
+        reactionTime = attackDuration;
+        yield return new WaitForSeconds(attackDuration);
+        reactionTime = reactionReference;
+    }
 }

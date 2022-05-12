@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(NavMeshAgent))]
 
@@ -18,15 +19,28 @@ public class GoToClick : MonoBehaviour {
         GetComponent<NavMeshAgent>().speed = 10f;
     }
 
-    void Update() {
-		if(Input.GetMouseButton(0)) {
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-			if (Physics.Raycast (ray, out hit, maxDistance, movementMask)) {
-				GetComponent<NavMeshAgent>().destination = hit.point;
+ //   void Update() {
+	//	if(Input.GetMouseButton(0)) {
+	//		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+	//		RaycastHit hit;
+	//		if (Physics.Raycast (ray, out hit, maxDistance, movementMask)) {
+	//			GetComponent<NavMeshAgent>().destination = hit.point;
+ //               //GameObject indicatorInstance = Instantiate(indicator, hit.point, Quaternion.identity);
+ //               //Destroy(indicatorInstance, 2f);
+ //           }
+ //       }
+	//}
+
+    public void Move(InputAction.CallbackContext context)
+	{
+        if (context.performed) {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, maxDistance, movementMask)) {
+                GetComponent<NavMeshAgent>().destination = hit.point;
                 //GameObject indicatorInstance = Instantiate(indicator, hit.point, Quaternion.identity);
                 //Destroy(indicatorInstance, 2f);
             }
         }
-	}
+    }
 }

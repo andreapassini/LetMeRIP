@@ -647,6 +647,31 @@
 							"nameLabel": {
 								"$ref": "AAAAAAGA2IQLOe/HH44="
 							}
+						},
+						{
+							"_type": "EllipseView",
+							"_id": "AAAAAAGA2JNV1PBpycM=",
+							"_parent": {
+								"$ref": "AAAAAAGA04uHShTXclM="
+							},
+							"font": "Arial;13;0",
+							"left": 168,
+							"top": 360,
+							"width": 18,
+							"height": 17
+						},
+						{
+							"_type": "UMLTextView",
+							"_id": "AAAAAAGA2JPxVvBzE20=",
+							"_parent": {
+								"$ref": "AAAAAAGA04uHShTXclM="
+							},
+							"font": "Arial;13;0",
+							"left": 184,
+							"top": 352,
+							"width": 60,
+							"height": 25,
+							"text": "=>"
 						}
 					]
 				},
@@ -818,6 +843,263 @@
 						"$ref": "AAAAAAGA04uHShTWnIo="
 					},
 					"name": "Idle"
+				}
+			]
+		},
+		{
+			"_type": "UMLStateMachine",
+			"_id": "AAAAAAGA2I6UF/AoY7o=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "StateMachine1",
+			"ownedElements": [
+				{
+					"_type": "UMLStatechartDiagram",
+					"_id": "AAAAAAGA2I6UF/Aq9wE=",
+					"_parent": {
+						"$ref": "AAAAAAGA2I6UF/AoY7o="
+					},
+					"name": "StatechartDiagram1"
+				}
+			],
+			"regions": [
+				{
+					"_type": "UMLRegion",
+					"_id": "AAAAAAGA2I6UF/ApZvU=",
+					"_parent": {
+						"$ref": "AAAAAAGA2I6UF/AoY7o="
+					}
+				}
+			]
+		},
+		{
+			"_type": "FCFlowchart",
+			"_id": "AAAAAAGA2I7kKfAvgRo=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Flowchart2",
+			"ownedElements": [
+				{
+					"_type": "FCFlowchartDiagram",
+					"_id": "AAAAAAGA2I7kKfAwF88=",
+					"_parent": {
+						"$ref": "AAAAAAGA2I7kKfAvgRo="
+					},
+					"name": "FlowchartDiagram1",
+					"ownedViews": [
+						{
+							"_type": "FCProcessView",
+							"_id": "AAAAAAGA2JAsMPA2pPQ=",
+							"_parent": {
+								"$ref": "AAAAAAGA2I7kKfAwF88="
+							},
+							"model": {
+								"$ref": "AAAAAAGA2JAsMPA0hAM="
+							},
+							"subViews": [
+								{
+									"_type": "LabelView",
+									"_id": "AAAAAAGA2JAsMPA3DMo=",
+									"_parent": {
+										"$ref": "AAAAAAGA2JAsMPA2pPQ="
+									},
+									"font": "Arial;13;0",
+									"left": 42,
+									"top": 106,
+									"width": 93,
+									"height": 13,
+									"text": "Search",
+									"wordWrap": true
+								}
+							],
+							"font": "Arial;13;0",
+							"left": 32,
+							"top": 96,
+							"width": 113,
+							"height": 105,
+							"nameLabel": {
+								"$ref": "AAAAAAGA2JAsMPA3DMo="
+							}
+						},
+						{
+							"_type": "FCProcessView",
+							"_id": "AAAAAAGA2JHd4/BBMxA=",
+							"_parent": {
+								"$ref": "AAAAAAGA2I7kKfAwF88="
+							},
+							"model": {
+								"$ref": "AAAAAAGA2JHd3/A/ncQ="
+							},
+							"subViews": [
+								{
+									"_type": "LabelView",
+									"_id": "AAAAAAGA2JHd4/BCeew=",
+									"_parent": {
+										"$ref": "AAAAAAGA2JHd4/BBMxA="
+									},
+									"font": "Arial;13;0",
+									"left": 234,
+									"top": 106,
+									"width": 92,
+									"height": 13,
+									"text": "Chase",
+									"wordWrap": true
+								}
+							],
+							"font": "Arial;13;0",
+							"left": 224,
+							"top": 96,
+							"width": 112,
+							"height": 104,
+							"nameLabel": {
+								"$ref": "AAAAAAGA2JHd4/BCeew="
+							}
+						},
+						{
+							"_type": "FCProcessView",
+							"_id": "AAAAAAGA2JI+yvBLCnU=",
+							"_parent": {
+								"$ref": "AAAAAAGA2I7kKfAwF88="
+							},
+							"model": {
+								"$ref": "AAAAAAGA2JI+yvBJ2mQ="
+							},
+							"subViews": [
+								{
+									"_type": "LabelView",
+									"_id": "AAAAAAGA2JI+yvBMyF0=",
+									"_parent": {
+										"$ref": "AAAAAAGA2JI+yvBLCnU="
+									},
+									"font": "Arial;13;0",
+									"left": 58,
+									"top": 274,
+									"width": 397,
+									"height": 13,
+									"text": "Fight",
+									"wordWrap": true
+								}
+							],
+							"font": "Arial;13;0",
+							"left": 48,
+							"top": 264,
+							"width": 417,
+							"height": 281,
+							"nameLabel": {
+								"$ref": "AAAAAAGA2JI+yvBMyF0="
+							}
+						},
+						{
+							"_type": "FCProcessView",
+							"_id": "AAAAAAGA2JKaOPBU84o=",
+							"_parent": {
+								"$ref": "AAAAAAGA2I7kKfAwF88="
+							},
+							"model": {
+								"$ref": "AAAAAAGA2JKaOPBSVbc="
+							},
+							"subViews": [
+								{
+									"_type": "LabelView",
+									"_id": "AAAAAAGA2JKaOPBVMuU=",
+									"_parent": {
+										"$ref": "AAAAAAGA2JKaOPBU84o="
+									},
+									"font": "Arial;13;0",
+									"left": 122,
+									"top": 378,
+									"width": 60,
+									"height": 13,
+									"text": "Block",
+									"wordWrap": true
+								}
+							],
+							"font": "Arial;13;0",
+							"left": 112,
+							"top": 368,
+							"width": 80,
+							"height": 80,
+							"nameLabel": {
+								"$ref": "AAAAAAGA2JKaOPBVMuU="
+							}
+						},
+						{
+							"_type": "FCProcessView",
+							"_id": "AAAAAAGA2JK2qPBdp8A=",
+							"_parent": {
+								"$ref": "AAAAAAGA2I7kKfAwF88="
+							},
+							"model": {
+								"$ref": "AAAAAAGA2JK2qPBbREY="
+							},
+							"subViews": [
+								{
+									"_type": "LabelView",
+									"_id": "AAAAAAGA2JK2qPBerOU=",
+									"_parent": {
+										"$ref": "AAAAAAGA2JK2qPBdp8A="
+									},
+									"font": "Arial;13;0",
+									"left": 338,
+									"top": 378,
+									"width": 69,
+									"height": 13,
+									"text": "Attack",
+									"wordWrap": true
+								}
+							],
+							"font": "Arial;13;0",
+							"left": 328,
+							"top": 368,
+							"width": 89,
+							"height": 81,
+							"nameLabel": {
+								"$ref": "AAAAAAGA2JK2qPBerOU="
+							}
+						}
+					]
+				},
+				{
+					"_type": "FCProcess",
+					"_id": "AAAAAAGA2JAsMPA0hAM=",
+					"_parent": {
+						"$ref": "AAAAAAGA2I7kKfAvgRo="
+					},
+					"name": "Search"
+				},
+				{
+					"_type": "FCProcess",
+					"_id": "AAAAAAGA2JHd3/A/ncQ=",
+					"_parent": {
+						"$ref": "AAAAAAGA2I7kKfAvgRo="
+					},
+					"name": "Chase"
+				},
+				{
+					"_type": "FCProcess",
+					"_id": "AAAAAAGA2JI+yvBJ2mQ=",
+					"_parent": {
+						"$ref": "AAAAAAGA2I7kKfAvgRo="
+					},
+					"name": "Fight"
+				},
+				{
+					"_type": "FCProcess",
+					"_id": "AAAAAAGA2JKaOPBSVbc=",
+					"_parent": {
+						"$ref": "AAAAAAGA2I7kKfAvgRo="
+					},
+					"name": "Block"
+				},
+				{
+					"_type": "FCProcess",
+					"_id": "AAAAAAGA2JK2qPBbREY=",
+					"_parent": {
+						"$ref": "AAAAAAGA2I7kKfAvgRo="
+					},
+					"name": "Attack"
 				}
 			]
 		}

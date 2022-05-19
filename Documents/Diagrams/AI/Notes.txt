@@ -1,0 +1,5 @@
+Melee and Ranged have different FSMs:
+
+- Melee: keep chasing the player even if !LoS but still near him
+
+- Ranged: when the player is !LoS he will go to last seen position

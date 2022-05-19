@@ -1136,7 +1136,7 @@
 										"$ref": "AAAAAAGA22ABKf9rcdA="
 									},
 									"font": "Arial;13;0",
-									"left": 154,
+									"left": 210,
 									"top": 34,
 									"width": 100,
 									"height": 13,
@@ -1145,7 +1145,7 @@
 								}
 							],
 							"font": "Arial;13;0",
-							"left": 144,
+							"left": 200,
 							"top": 24,
 							"width": 120,
 							"height": 96,
@@ -1309,7 +1309,7 @@
 										"$ref": "AAAAAAGA22F0vP+XyOE="
 									},
 									"font": "Arial;13;0",
-									"left": 48,
+									"left": 104,
 									"top": 139,
 									"width": 123.5634765625,
 									"height": 13,
@@ -1330,7 +1330,7 @@
 								"$ref": "AAAAAAGA22ABKf9rcdA="
 							},
 							"lineStyle": 2,
-							"points": "176:119;176:176",
+							"points": "232:119;232:176",
 							"nameLabel": {
 								"$ref": "AAAAAAGA22F0vP+aSuE="
 							}
@@ -1355,7 +1355,7 @@
 										"$ref": "AAAAAAGA22F+RP+gXEo="
 									},
 									"font": "Arial;13;0",
-									"left": 247,
+									"left": 303,
 									"top": 139,
 									"width": 143.79345703125,
 									"height": 13,
@@ -1376,7 +1376,7 @@
 								"$ref": "AAAAAAGA22A3MP918K0="
 							},
 							"lineStyle": 2,
-							"points": "240:176;240:119",
+							"points": "296:176;296:119",
 							"nameLabel": {
 								"$ref": "AAAAAAGA22F+RP+jcAM="
 							}
@@ -1572,7 +1572,7 @@
 								"$ref": "AAAAAAGA21zkKf9lHYg="
 							},
 							"font": "Arial;13;0",
-							"left": 152,
+							"left": 208,
 							"top": 80,
 							"width": 144,
 							"height": 72,
@@ -1643,7 +1643,7 @@
 								"$ref": "AAAAAAGA22jw3QAxGII="
 							},
 							"lineStyle": 1,
-							"points": "105:50;143:58"
+							"points": "105:49;199:63"
 						},
 						{
 							"_type": "EllipseView",
@@ -1672,6 +1672,19 @@
 							},
 							"lineStyle": 1,
 							"points": "56:201;69:215"
+						},
+						{
+							"_type": "UMLTextView",
+							"_id": "AAAAAAGA25tq4jYHsm4=",
+							"_parent": {
+								"$ref": "AAAAAAGA21zkKf9lHYg="
+							},
+							"font": "Arial;13;0",
+							"left": 24,
+							"top": 88,
+							"width": 150.91162109375,
+							"height": 41,
+							"text": "TransitionAction: GoToLastSeenPosition()"
 						}
 					]
 				},

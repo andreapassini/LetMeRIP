@@ -127,7 +127,7 @@
 											"top": 256,
 											"width": 161,
 											"height": 51,
-											"text": "onStayAction: GoTo(Transform targetPosition)"
+											"text": "onStayAction: GoToTarget()"
 										},
 										{
 											"_type": "FCProcessView",
@@ -367,11 +367,11 @@
 												"$ref": "AAAAAAGAiWxTB3EHrvM="
 											},
 											"font": "Arial;13;0",
-											"left": 96,
+											"left": 56,
 											"top": 160,
-											"width": 111.1689453125,
+											"width": 150.91162109375,
 											"height": 51,
-											"text": "TransitionAction: GoTo(Transform lastSeenPosition)"
+											"text": "TransitionAction: GoToLastSeenPosition()"
 										}
 									]
 								},

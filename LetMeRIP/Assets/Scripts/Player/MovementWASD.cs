@@ -7,6 +7,7 @@ public class MovementWASD : MonoBehaviour
 {
 	[SerializeField] private float speed = 5f;
 	private Rigidbody rb;
+    private Vector3 direction;
 
     private PlayerInputActions playerInputActions;
 
@@ -19,15 +20,24 @@ public class MovementWASD : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
+	private void Update()
+	{
+        GatherInputs();
+	}
+
+	private void FixedUpdate()
     {
         Movement();
+    }
+
+    public void GatherInputs()
+	{
+        this.direction = playerInputActions.Player.Movement.ReadValue<Vector3>();
     }
 
 
     public void Movement()
     {
-        Vector3 direction = playerInputActions.Player.Movement.ReadValue<Vector3>();
-        rb.MovePosition(transform.position + direction.ToIso() * speed * Time.deltaTime);
+        rb.MovePosition(transform.position + this.direction.ToIso() * speed * Time.deltaTime);
     }
 }

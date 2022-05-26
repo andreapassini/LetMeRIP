@@ -38,6 +38,15 @@ public class PlayerCanvas : MonoBehaviour
         OnPlayerDamaged?.Invoke(this);
     }
 
+    public void Heal(float healAmmount)
+	{
+        health += healAmmount;
+
+        if(health > playerStats.maxHealth) {
+            health = playerStats.maxHealth;
+		}
+	}
+
     public virtual void Die()
     {
         // Die Event 

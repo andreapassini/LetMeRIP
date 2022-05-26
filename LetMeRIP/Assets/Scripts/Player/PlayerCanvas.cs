@@ -9,8 +9,8 @@ public class PlayerCanvas : MonoBehaviour
     public static event Action<PlayerCanvas> OnPlayerKilled;
     public static event Action<PlayerCanvas> OnPlayerDamaged;
     public PlayerStats playerStats;
-    private float health;
-    private float spiritGauge;
+    public float health;
+    public float spiritGauge;
 
     private Rigidbody rb;
 
@@ -54,4 +54,5 @@ public class PlayerCanvas : MonoBehaviour
 
         // Overwrite
     }
+
 }

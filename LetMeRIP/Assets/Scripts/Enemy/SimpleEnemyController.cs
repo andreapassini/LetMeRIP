@@ -118,7 +118,7 @@ public class SimpleEnemyController : MonoBehaviour
 
             if (playerHealth != null)
             {
-                playerHealth.OnDamage(damage, transform.position);
+                playerHealth.TakeDamage(damage, transform.position);
             }
         }
 

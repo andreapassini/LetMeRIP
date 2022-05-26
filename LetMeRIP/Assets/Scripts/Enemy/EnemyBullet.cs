@@ -26,7 +26,7 @@ public class EnemyBullet : MonoBehaviour
 
         if(playerHealth != null)
         {
-            playerHealth.OnDamage(damage, transform.position);
+            playerHealth.TakeDamage(damage, transform.position);
         }
 
         // NOT WORKING

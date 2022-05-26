@@ -1,12 +1,13 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class PlayerHealth : MonoBehaviour
+[RequireComponent(typeof(Rigidbody))]
+public class PlayerCanvas : MonoBehaviour
 {
-    public static event Action<PlayerHealth> OnPlayerKilled;
-    public static event Action<PlayerHealth> OnPlayerDamaged;
+    public static event Action<PlayerCanvas> OnPlayerKilled;
+    public static event Action<PlayerCanvas> OnPlayerDamaged;
     public PlayerStats playerStats;
     private float health;
     private float spiritGauge;
@@ -15,20 +16,21 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
+        // Gather Stats
         health = playerStats.maxHealth;
         spiritGauge = playerStats.maxSpiritGauge;
         rb = GetComponent<Rigidbody>();
     }
 
-    public void TakeDamage(float dmg, Vector3 positionHit)
+    public void TakeDamage(float dmg)
     {
-        Debug.Log("Got HIT");
-
         // Calcolate defense reduction
+        dmg -= playerStats.defense;
+        dmg = Mathf.Clamp(dmg, 0, float.MaxValue);
+        
         health -= dmg;
 
-        if (health <= 0)
-        {
+        if (health <= 0) {
             Die();
         }
 
@@ -36,7 +38,7 @@ public class PlayerHealth : MonoBehaviour
         OnPlayerDamaged?.Invoke(this);
     }
 
-    public void Die()
+    public virtual void Die()
     {
         // Die Event 
         OnPlayerKilled?.Invoke(this);

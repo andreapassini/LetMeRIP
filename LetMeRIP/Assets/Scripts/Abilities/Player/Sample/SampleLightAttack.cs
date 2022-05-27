@@ -5,7 +5,7 @@ using UnityEngine;
 public class SampleLightAttack : Ability
 {
     private LayerMask enemyLayer;
-    [SerializeField]private Animator animator;
+    private Animator animator;
     private Transform attackPoint;
 
     private float attackRange = 1f;
@@ -19,7 +19,7 @@ public class SampleLightAttack : Ability
     public override void Init()
     {
         attackPoint = transform.Find("AttackPoint");
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>(false);
         Debug.Log(animator.name);
     }
 

@@ -48,7 +48,8 @@ public class FormManager : MonoBehaviour
 
     public void SwitchForm(int index)
     {
-        if (index >= forms.Count || forms[index] == null) return;
+        if (index >= forms.Count || forms[index] == null) { Debug.Log("Invalid form"); return; }
+        if (currentForm != null && forms[index].GetType().Name.Equals(currentForm.GetType().Name)) { Debug.Log("Form already in use"); return; }
 
         Debug.Log($"Switching to {forms[index].GetType().Name}");
 

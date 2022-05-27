@@ -21,7 +21,7 @@ public class SampleHeavyAttack : Ability
 
     public override void Init()
     {
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>(false);
         attackPoint = transform.Find("AttackPoint");
     }
 

@@ -12,6 +12,7 @@ public class SampleForm2 : PlayerForm
     public override void Init()
     {
         // add model
+        formModelPrefab ??= Resources.Load<GameObject>("Prefabs/Models/sampleModel2");
         Instantiate(formModelPrefab, transform);
 
         // abilities declaration

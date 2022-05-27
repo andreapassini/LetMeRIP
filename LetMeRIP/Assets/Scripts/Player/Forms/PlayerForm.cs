@@ -28,6 +28,8 @@ public class PlayerForm : MonoBehaviour
         if(abilityHandler != null)
             Destroy(abilityHandler);
         Debug.Log($"Destroying {formModelPrefab.name}(Clone)");
-        Destroy(transform.Find($"{formModelPrefab.name}(Clone)").gameObject);
+        GameObject modelToDestroy = transform.Find($"{formModelPrefab.name}(Clone)").gameObject;
+        modelToDestroy.SetActive(false);
+        Destroy(modelToDestroy);
     }
 }

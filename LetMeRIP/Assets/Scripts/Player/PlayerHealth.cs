@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float dmg, Vector3 positionHit)
     {
-        Debug.Log("Got HIT");
+        //Debug.Log("Got HIT");
 
         // Calcolate defense reduction
         health -= dmg;

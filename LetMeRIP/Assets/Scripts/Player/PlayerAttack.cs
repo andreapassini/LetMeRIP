@@ -35,6 +35,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void LightAttack(InputAction.CallbackContext context)
     {
+        Debug.Log(context);
         if (context.performed && !lightAttack)
         {
             lightAttack = true;

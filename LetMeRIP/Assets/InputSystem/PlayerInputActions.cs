@@ -62,6 +62,24 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Transformation1"",
+                    ""type"": ""Button"",
+                    ""id"": ""a56b58c5-b081-479b-8208-adcb5dffd2c6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Transformation2"",
+                    ""type"": ""Button"",
+                    ""id"": ""276b2a43-38f0-4f19-897c-9528f8b053b6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -174,6 +192,72 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""LookAt"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Button With One Modifier"",
+                    ""id"": ""991804e3-d191-485c-9c30-93ae13e3635a"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Transformation1"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Modifier"",
+                    ""id"": ""1d5f81f1-56ac-4149-b0c5-741fc1091384"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Transformation1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button"",
+                    ""id"": ""ce45792a-c389-49fd-ab6a-55e285bbb28b"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Transformation1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button With One Modifier"",
+                    ""id"": ""27a9749c-fe3c-4738-8721-fd06ce03b238"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Transformation2"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Modifier"",
+                    ""id"": ""8eb46cd7-2bdd-4e32-a60d-ded64a9fdfad"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Transformation2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button"",
+                    ""id"": ""53503f98-7de8-4f95-b748-b98835fac7f5"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Transformation2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -186,6 +270,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_HeavyAttack = m_Player.FindAction("HeavyAttack", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_LookAt = m_Player.FindAction("LookAt", throwIfNotFound: true);
+        m_Player_Transformation1 = m_Player.FindAction("Transformation1", throwIfNotFound: true);
+        m_Player_Transformation2 = m_Player.FindAction("Transformation2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,6 +335,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_HeavyAttack;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_LookAt;
+    private readonly InputAction m_Player_Transformation1;
+    private readonly InputAction m_Player_Transformation2;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -257,6 +345,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @LookAt => m_Wrapper.m_Player_LookAt;
+        public InputAction @Transformation1 => m_Wrapper.m_Player_Transformation1;
+        public InputAction @Transformation2 => m_Wrapper.m_Player_Transformation2;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -278,6 +368,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @LookAt.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookAt;
                 @LookAt.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookAt;
                 @LookAt.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookAt;
+                @Transformation1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTransformation1;
+                @Transformation1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTransformation1;
+                @Transformation1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTransformation1;
+                @Transformation2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTransformation2;
+                @Transformation2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTransformation2;
+                @Transformation2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTransformation2;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -294,6 +390,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @LookAt.started += instance.OnLookAt;
                 @LookAt.performed += instance.OnLookAt;
                 @LookAt.canceled += instance.OnLookAt;
+                @Transformation1.started += instance.OnTransformation1;
+                @Transformation1.performed += instance.OnTransformation1;
+                @Transformation1.canceled += instance.OnTransformation1;
+                @Transformation2.started += instance.OnTransformation2;
+                @Transformation2.performed += instance.OnTransformation2;
+                @Transformation2.canceled += instance.OnTransformation2;
             }
         }
     }
@@ -304,5 +406,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnHeavyAttack(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnLookAt(InputAction.CallbackContext context);
+        void OnTransformation1(InputAction.CallbackContext context);
+        void OnTransformation2(InputAction.CallbackContext context);
     }
 }

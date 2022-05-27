@@ -11,15 +11,18 @@ public class SampleHeavyAttack : Ability
     private GameObject bulletPrefab;
     private float bulletForce = 10f;
 
-
+    // things that do not change within a change of forms
     private void Start()
     {
         cooldown = 1f;
         enemyLayer = LayerMask.NameToLayer("Enemy");
-
-        animator = GetComponent<Animator>();
-        attackPoint = transform.Find("AttackPoint");
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
+    }
+
+    public override void Init()
+    {
+        animator = GetComponentInChildren<Animator>();
+        attackPoint = transform.Find("AttackPoint");
     }
 
     public override void StartedAction()

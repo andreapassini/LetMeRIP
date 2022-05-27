@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AbilityHandler : MonoBehaviour
 {
-    Dictionary<string, Ability> abilities; // assegnamo ad ogni abilità una chiave
+    private Dictionary<string, Ability> abilities; // assegnamo ad ogni abilità una chiave
     private float cooldown = 0.5f; // cooldown tra un abilità e l'altra
     private bool isReady = true;
 
@@ -14,6 +14,8 @@ public class AbilityHandler : MonoBehaviour
     public void Init(Dictionary<string, Ability> abilities)
     {
         this.abilities = new Dictionary<string, Ability>(abilities);
+        foreach (Ability ability in abilities.Values)
+            ability.Init();
     }
 
     /**

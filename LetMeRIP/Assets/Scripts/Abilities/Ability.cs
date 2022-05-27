@@ -9,6 +9,9 @@ public class Ability : MonoBehaviour
     protected bool isReady = true;
     public virtual bool IsReady { get => isReady; }
 
+    // ability instance startup, treat it like an OnEnable, useful to retrieve components
+    public virtual void Init() { }
+
     // setup, performed beofre Perform action, on button down
     public virtual void StartedAction() { }
 

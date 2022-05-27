@@ -1,30 +1,35 @@
 using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-
     [SerializeField] GameObject hitDmgEffect;
     [SerializeField] float destroyAfterTime = 5f;
     [SerializeField] float damage = 20f;
 
-
+    public PhotonView view;
+    
     void Start()
     {
-        Destroy(gameObject, destroyAfterTime);
-        //StartCoroutine(DestroyBulletAfterTime());
+        if (!view.IsMine) return;
+        
+        // Destroy(gameObject, destroyAfterTime);
+        // PhotonNetwork.Destroy(gameObject);
+        StartCoroutine(DestroyBulletAfterTime());
 
         Physics.IgnoreLayerCollision(9, 9);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!view.IsMine) return;
+
         Debug.Log("HIT: " + collision.gameObject.GetComponent<EnemyHealth>());
 
         EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
 
-        if(enemyHealth != null)
+        if (enemyHealth != null)
         {
             enemyHealth.OnDamage(damage, transform.position);
         }
@@ -39,12 +44,12 @@ public class Bullet : MonoBehaviour
         //Destroy(effect, 2f);
 
         //if(collision.collider.CompareTag("Enemy"))
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 
-    public IEnumerator DestroyBulletAfterTime()
+    private IEnumerator DestroyBulletAfterTime()
     {
         yield return new WaitForSeconds(destroyAfterTime);
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 }

@@ -1,15 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class MovementWASD : MonoBehaviour
 {
-	[SerializeField] private float speed = 5f;
+    public PhotonView view;
+    
+    [SerializeField] private float speed = 5f;
 	private Rigidbody rb;
     private Vector3 direction;
 
     private PlayerInputActions playerInputActions;
+    
+    
 
     private void Start()
     {
@@ -18,16 +20,18 @@ public class MovementWASD : MonoBehaviour
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
 
+
+        view = GetComponent<PhotonView>();
     }
 
 	private void Update()
 	{
-        GatherInputs();
+        if (view.IsMine) GatherInputs();
 	}
 
 	private void FixedUpdate()
     {
-        Movement();
+        if (view.IsMine) Movement();
     }
 
     public void GatherInputs()

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class LookAtMouse : MonoBehaviour
@@ -13,6 +14,9 @@ public class LookAtMouse : MonoBehaviour
     private Quaternion rot;
 
     private PlayerInputActions playerInputActions;
+    public PhotonView view;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -22,18 +26,25 @@ public class LookAtMouse : MonoBehaviour
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
 
+        camera = Camera.main;
+        view = GetComponent<PhotonView>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!view.IsMine) return;
+        
         CalcolateAngle();
     }
 
 	private void FixedUpdate()
-	{
+    {
+        if (!view.IsMine) return;
+        
         Rotate();
-	}
+    }
 
     private (bool success, Vector3 position) GetMousePosition()
     {

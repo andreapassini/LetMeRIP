@@ -1,0 +1,25 @@
+Perché avere le abilità MonoBehaviour? 
+Si potrebbero fare Scriptable Objects (limite coroutine cd abilità fatto partire in Handler)
+così da evitare il fatto di doverle associare al Game Object e settare i cd?
+
+Gli input li ho solo settati in PLayerInputActions, ma non sono ancora inseriti negli script
+in quanto prima va deciso come procedere con le abilità.
+
+1) Player Canvas
+	Light Attack
+	Heavy Attack
+	E
+	Q
+	
+	1 => Spirit (2)
+		Spirit Gauge Suck
+		PickUp Body
+	
+	1 => Class Canvas (3)
+		Transformation E
+		Transformation Q
+		Exit Body
+		
+		3 => Transformation Canvas
+			Consuming SG as in GDD
+			

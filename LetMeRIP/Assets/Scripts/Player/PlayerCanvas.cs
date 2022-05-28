@@ -11,18 +11,34 @@ public class PlayerCanvas : MonoBehaviour
     public PlayerStats playerStats;
     public float health;
     public float spiritGauge;
+    public float speed;
 
     private Rigidbody rb;
+
+    private Vector3 direction;
+
+    private PlayerInputActions playerInputActions;
 
     void Start()
     {
         // Gather Stats
         health = playerStats.maxHealth;
         spiritGauge = playerStats.maxSpiritGauge;
+        speed = playerStats.swiftness;
         rb = GetComponent<Rigidbody>();
     }
 
-    public void TakeDamage(float dmg)
+	private void Update()
+	{
+        GatherInputsMovement();
+	}
+
+	private void FixedUpdate()
+	{
+        Movement();
+	}
+
+	public void TakeDamage(float dmg)
     {
         // Calcolate defense reduction
         dmg -= playerStats.defense;
@@ -53,6 +69,16 @@ public class PlayerCanvas : MonoBehaviour
         OnPlayerKilled?.Invoke(this);
 
         // Overwrite
+    }
+
+    public void GatherInputsMovement()
+    {
+        this.direction = playerInputActions.Player.Movement.ReadValue<Vector3>();
+    }
+
+    public void Movement()
+    {
+        rb.MovePosition(transform.position + this.direction.ToIso() * speed * Time.deltaTime);
     }
 
 }

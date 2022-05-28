@@ -30,14 +30,16 @@ public class MovementWASD : MonoBehaviour
         Movement();
     }
 
+
     public void GatherInputs()
-	{
+    {
         this.direction = playerInputActions.Player.Movement.ReadValue<Vector3>();
     }
-
 
     public void Movement()
     {
         rb.MovePosition(transform.position + this.direction.ToIso() * speed * Time.deltaTime);
     }
+
+
 }

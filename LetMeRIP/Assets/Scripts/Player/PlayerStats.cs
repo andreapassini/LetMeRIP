@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class PlayerStats : ScriptableObject
 {
-	public string formName; // meglio non usare name come nome di variabile
+	public string formName;
 	public float health;
 	public float maxHealth;
 	public float spiritGauge;

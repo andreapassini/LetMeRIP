@@ -20,7 +20,7 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("HIT: " + collision.gameObject.GetComponent<EnemyHealth>());
+        //Debug.Log("HIT: " + collision.gameObject.GetComponent<EnemyHealth>());
 
         PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
 

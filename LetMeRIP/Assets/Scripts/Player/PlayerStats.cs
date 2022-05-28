@@ -5,17 +5,17 @@ using UnityEngine;
 [CreateAssetMenu]
 public class PlayerStats : ScriptableObject
 {
-	public string name;
+	public string formName; // meglio non usare name come nome di variabile
 	public float health;
 	public float maxHealth;
 	public float spiritGauge;
 	public float maxSpiritGauge;
-	public float strenght;
+	public float strength;
 	public float dexterity;
 	public float intelligence;
 
 	public float defense;
-	public float agility;
+	public float swiftness;
 
 	public float critDamage;
 	public float critChance;

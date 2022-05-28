@@ -112,7 +112,7 @@ public class SimpleEnemyController : MonoBehaviour
 
         // Check for collision
         foreach (Collider enemy in hitEnemies) {
-            Debug.Log("Hit this guy: " + enemy.name);
+            //Debug.Log("Hit this guy: " + enemy.name);
 
             PlayerHealth playerHealth = enemy.gameObject.GetComponent<PlayerHealth>();
 

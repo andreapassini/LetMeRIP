@@ -42,6 +42,7 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        Debug.Log("Joined Room");
         PhotonNetwork.LoadLevel(1);
         MenuManager.Instance.OpenMenu("joined");
     }

@@ -17,6 +17,7 @@ public class EnemySimple : EnemyForm
 		reactionReference = AiFrameRate;
 
         targets = GameObject.FindGameObjectsWithTag(targetTag);
+        target = targets[0].transform;
 
         FSMState search = new FSMState();
 		search.stayActions.Add(Search);
@@ -69,30 +70,21 @@ public class EnemySimple : EnemyForm
 	// Search
 	public void Search()
 	{
-		foreach (var ability in enemyAbilities) {
-			if (ability.abilityName.ToLower().Contains("search")) {
-                ability.StartAbility(this);
-			}
-		}
+        search.StartAbility(this);
 	}
 
     // Chase
     public void Chase()
     {
-        foreach (var ability in enemyAbilities) {
-            if (ability.abilityName.ToLower().Contains("chase")) {
-                ability.StartAbility(this);
-            }
-        }
+        chase.StartAbility(this);
     }
 
     public void Attack()
     {
-        foreach (var ability in enemyAbilities) {
-            if (ability.abilityName.ToLower().Contains("attack")) {
-                ability.StartAbility(this);
-            }
-        }
+        attack.StartAbility(this);
+
+        // Wait for the end of animation
+        StartCoroutine(StopAI());
     }
 
     public void GoToLastSeenPos()
@@ -108,7 +100,7 @@ public class EnemySimple : EnemyForm
     {
         Vector3 ray = target.position - transform.position;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, ray, out hit)) {
+        if (Physics.Raycast(transform.position, ray, out hit, whatICanSeeThrough)) {
             if (hit.transform == target) {
                 return true;
             }
@@ -140,7 +132,7 @@ public class EnemySimple : EnemyForm
     {
         while (true) {
             Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * radius;
-            randomDirection += transform.position;
+            randomDirection = randomDirection * 10 + transform.position;
             NavMeshHit hit;
 
             if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1)) {
@@ -157,8 +149,8 @@ public class EnemySimple : EnemyForm
     {
         float attackDuration = 1f; // Just as an example 
 
-        // reactionTime = attackDuration;
+        AiFrameRate = attackDuration;
         yield return new WaitForSeconds(attackDuration);
-        // reactionTime = reactionReference;
+        AiFrameRate = reactionReference;
     }
 }

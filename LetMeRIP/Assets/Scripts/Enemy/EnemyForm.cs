@@ -12,10 +12,15 @@ public class EnemyForm : MonoBehaviour
 
     public EnemyStats enemyStats;
 
-    public List<EnemyAbility> enemyAbilities;
+    //public List<EnemyAbility> enemyAbilities;
+    public EnemyAbility attack;
+    public EnemyAbility chase;
+    public EnemyAbility search;
+
 
     public float AiFrameRate = 1f;
 
+    [System.NonSerialized]
     public Vector3 lastSeenPos;
 
     public Transform attackPoint;
@@ -26,8 +31,14 @@ public class EnemyForm : MonoBehaviour
     private Rigidbody rb;
 
     public LayerMask whatIsTarget;
+    public LayerMask whatICanSeeThrough;
+
     public Animator animator;
+
+    [System.NonSerialized]
     public GameObject[] targets;
+
+    [System.NonSerialized]
     public Transform target;
 
     // Start is called before the first frame update

@@ -10,12 +10,15 @@ public class AbilityHandler : MonoBehaviour
 
     private string current = null;
     public bool IsReady { get { return isReady && current == null; } }
+    private CharacterController characterController;
 
-    public void Init(Dictionary<string, Ability> abilities)
+    public void Init(Dictionary<string, Ability> abilities, CharacterController characterController)
     {
+        this.characterController = characterController;
+
         this.abilities = new Dictionary<string, Ability>(abilities);
         foreach (Ability ability in abilities.Values)
-            ability.Init();
+            ability.Init(characterController);
     }
 
     /**
@@ -51,7 +54,7 @@ public class AbilityHandler : MonoBehaviour
         {
             abilities[key].CancelAction();
             current = null;
-            StartCoroutine("Cooldown");
+            StartCoroutine(Cooldown());
 
             Debug.Log("Finished " + current);
         }

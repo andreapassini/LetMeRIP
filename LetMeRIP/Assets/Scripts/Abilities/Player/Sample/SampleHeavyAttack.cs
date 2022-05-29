@@ -19,8 +19,9 @@ public class SampleHeavyAttack : Ability
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
     }
 
-    public override void Init()
+    public override void Init(CharacterController characterController)
     {
+        base.Init(characterController);
         animator = GetComponentInChildren<Animator>(false);
         attackPoint = transform.Find("AttackPoint");
     }

@@ -19,5 +19,4 @@ public class PlayerStats : ScriptableObject
 
 	public float critDamage;
 	public float critChance;
-
 }

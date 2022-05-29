@@ -9,8 +9,9 @@ public class SampleForm2 : PlayerForm
         formModelPrefab = Resources.Load<GameObject>("Prefabs/Models/sampleModel2");
     }
 
-    public override void Init()
+    public override void Init(CharacterController characterController)
     {
+        base.Init(characterController);
         // add model
         formModelPrefab ??= Resources.Load<GameObject>("Prefabs/Models/sampleModel2");
         Instantiate(formModelPrefab, transform);
@@ -25,7 +26,7 @@ public class SampleForm2 : PlayerForm
 
         // ability handler initialization
         abilityHandler = gameObject.AddComponent<AbilityHandler>();
-        abilityHandler.Init(abilities);
+        abilityHandler.Init(abilities, characterController);
 
     }
 }

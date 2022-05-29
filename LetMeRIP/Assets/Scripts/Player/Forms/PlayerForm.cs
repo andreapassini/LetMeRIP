@@ -11,6 +11,7 @@ public class PlayerForm : MonoBehaviour
     public AbilityHandler abilityHandler;
     protected Dictionary<string, Ability> abilities;
     protected GameObject formModelPrefab; // contains the model and the animator of the transformation
+    protected CharacterController characterController;
 
     private void Awake()
     {
@@ -18,7 +19,10 @@ public class PlayerForm : MonoBehaviour
         playerInputActions = new PlayerInputActions();
     }
 
-    public virtual void Init() { }
+    public virtual void Init(CharacterController characterController) 
+    {
+        this.characterController = characterController;
+    }
 
     public void RemoveComponents()
     {

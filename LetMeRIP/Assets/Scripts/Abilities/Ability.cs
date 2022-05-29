@@ -11,7 +11,7 @@ public class Ability : MonoBehaviour
 
     // ability instance startup, treat it like an OnEnable, useful to retrieve components instantiated at runtime
     public virtual void Init() { }
-
+    public virtual void Init(CharacterController characterController) { }
 
     // setup, performed before Perform action, on button down
     public virtual void StartedAction() { }

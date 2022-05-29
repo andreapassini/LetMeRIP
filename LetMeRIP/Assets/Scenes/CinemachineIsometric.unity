@@ -1572,7 +1572,7 @@ GameObject:
   - component: {fileID: 696727625127497208}
   - component: {fileID: 696727625127497211}
   - component: {fileID: 2028120986325426329}
-  - component: {fileID: 696727625127497210}
+  - component: {fileID: 696727625127497209}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -1596,7 +1596,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   camera: {fileID: 403702102}
---- !u!114 &696727625127497210
+--- !u!114 &696727625127497209
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1605,11 +1605,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 696727625127497207}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0509a2edc2a2df04e8f75d8c50dee548, type: 3}
+  m_Script: {fileID: 11500000, guid: e255b9c0dc885424d918793d5042545b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forms: []
-  currentForm: {fileID: 0}
+  spiritStats: {fileID: 0}
+  bodyStats: {fileID: 0}
+  currentStats: {fileID: 0}
+  playerClass: sample
 --- !u!114 &696727625127497211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1653,7 +1655,7 @@ MonoBehaviour:
     m_ActionName: Player/LookAt[/Mouse/position]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 696727625127497210}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: FormManager, Assembly-CSharp
         m_MethodName: SwitchForm
         m_Mode: 3
@@ -1669,7 +1671,7 @@ MonoBehaviour:
     m_ActionName: Player/Transformation1[/Keyboard/leftShift,/Keyboard/q]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 696727625127497210}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: FormManager, Assembly-CSharp
         m_MethodName: SwitchForm
         m_Mode: 3

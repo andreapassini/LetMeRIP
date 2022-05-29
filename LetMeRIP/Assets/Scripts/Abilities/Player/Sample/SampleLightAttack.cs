@@ -16,8 +16,10 @@ public class SampleLightAttack : Ability
         enemyLayer = LayerMask.NameToLayer("Enemy");
     }
 
-    public override void Init()
+
+    public override void Init(CharacterController characterController)
     {
+        base.Init(characterController);
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
         Debug.Log(animator.name);

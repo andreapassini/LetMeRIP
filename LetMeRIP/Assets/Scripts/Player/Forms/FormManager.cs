@@ -8,22 +8,18 @@ public class FormManager : MonoBehaviour
     [HideInInspector] public List<PlayerForm> forms;
     [HideInInspector] public PlayerForm currentForm;
 
-    private PlayerInputActions playerInputActions;
-    private AbilityHandler sharedAbilityHandler; // handler of shared abilities, like dash and interact
-    private void Start()
+    protected PlayerInputActions playerInputActions;
+    protected AbilityHandler sharedAbilityHandler; // handler of shared abilities, like dash and interact
+    protected CharacterController characterController;
+
+    public virtual void Init(CharacterController characterController)
     {
         playerInputActions = new PlayerInputActions();
-
+        this.characterController = characterController;
         forms = new List<PlayerForm>();
-        forms.Add(gameObject.AddComponent<SampleForm1>());
-        forms.Add(gameObject.AddComponent<SampleForm2>());
-
-        SwitchForm(0);
-
-        if(currentForm != null) BindAbilities();
     }
 
-    private void BindAbilities()
+    protected virtual void BindAbilities()
     {
         playerInputActions.Player.LightAttack.started += CastAbility;
         playerInputActions.Player.LightAttack.performed += CastAbility;
@@ -34,13 +30,13 @@ public class FormManager : MonoBehaviour
         playerInputActions.Player.HeavyAttack.canceled += CastAbility;
     }
 
-    private void EnableAbilities()
+    protected virtual void EnableAbilities()
     {
         playerInputActions.Player.LightAttack.Enable();
         playerInputActions.Player.HeavyAttack.Enable();
     }
 
-    private void DisableAbilities()
+    protected virtual void DisableAbilities()
     {
         playerInputActions.Player.LightAttack.Disable();
         playerInputActions.Player.HeavyAttack.Disable();
@@ -61,7 +57,7 @@ public class FormManager : MonoBehaviour
 
         // switch to new form and add its components
         currentForm = forms[index];
-        currentForm.Init();
+        currentForm.Init(characterController);
 
         EnableAbilities();
     }

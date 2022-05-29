@@ -5,16 +5,23 @@ using System;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(NavMeshAgent))]
 public class EnemyCanvas : MonoBehaviour
 {
     public static event Action<EnemyCanvas> OnEnemyKilled;
     public static event Action<EnemyCanvas> OnEnemyDamaged;
 
     public EnemyStats enemyStats;
+
+    public float AiFrameRate = 1f;
+
     private float health;
 
     private Rigidbody rb;
+
+    public LayerMask whatIsTarget;
+    public Animator animator;
+    public GameObject[] targets;
+    public Transform target;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +29,8 @@ public class EnemyCanvas : MonoBehaviour
         // Gather Stats
         health = enemyStats.maxHealth;
         rb = GetComponent<Rigidbody>();
+
+        animator = GetComponent<Animator>();
     }
 
     public void TakeDamage(float dmg)

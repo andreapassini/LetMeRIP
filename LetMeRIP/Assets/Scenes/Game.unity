@@ -123,6 +123,27 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 720767e5f509bcf48b68d58ea027784e, type: 2}
+--- !u!1 &72586179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6652083691051747256, guid: ba01c935da2d12845925a15b0b41d5fa, type: 3}
+  m_PrefabInstance: {fileID: 8930812683817540710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &72586196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72586179}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b6ee0c267fe924ea375778383c273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivity: 5
+  walkSpeed: 0
+  smoothTime: 0
+  camera: {fileID: 0}
 --- !u!1 &88060406
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +155,7 @@ GameObject:
   - component: {fileID: 88060408}
   - component: {fileID: 88060407}
   m_Layer: 0
-  m_Name: CM vcam1
+  m_Name: PlayerVirtualCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,7 +180,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 130894972}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -188,7 +209,7 @@ Transform:
   m_Children:
   - {fileID: 1466167198}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 32, y: 45, z: 0}
 --- !u!4 &130894972 stripped
 Transform:
@@ -407,7 +428,7 @@ Transform:
   m_LocalScale: {x: 10.068672, y: 1, z: 8.43983}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &919901265
 GameObject:
@@ -1417,13 +1438,17 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 403702102}
+    - target: {fileID: 6652083691051747255, guid: ba01c935da2d12845925a15b0b41d5fa, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6652083691051747256, guid: ba01c935da2d12845925a15b0b41d5fa, type: 3}
       propertyPath: m_Name
       value: PlayerMage
       objectReference: {fileID: 0}
     - target: {fileID: 6652083691051747256, guid: ba01c935da2d12845925a15b0b41d5fa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6652083691051747263, guid: ba01c935da2d12845925a15b0b41d5fa, type: 3}
       propertyPath: m_RootOrder

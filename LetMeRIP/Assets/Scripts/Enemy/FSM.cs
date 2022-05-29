@@ -8,7 +8,6 @@ public delegate bool FSMCondition();
 
 // Defer function to perform action
 public delegate void FSMAction();
-public delegate void FSMSpecialAction(Object caller);
 
 public class FSMTransition {
 
@@ -17,27 +16,15 @@ public class FSMTransition {
 
 	// A list of actions to perform when this transition fires
 	private List<FSMAction> myActions = new List<FSMAction>();
-	private List<FSMSpecialAction> mySpecialActions = new List<FSMSpecialAction>();
 
 	public FSMTransition(FSMCondition condition, FSMAction[] actions = null) {
 		myCondition = condition;
 		if (actions != null) myActions.AddRange(actions);
 	}
 
-	public FSMTransition(FSMCondition condition, FSMSpecialAction[] specialActions = null)
-	{
-		myCondition = condition;
-		if (specialActions != null) mySpecialActions.AddRange(specialActions);
-	}
-
 	// Call all  actions
 	public void Fire() {
 		foreach (FSMAction action in myActions) action();
-	}
-
-	public void FireSpecialActions(Object caller)
-	{
-		foreach (FSMSpecialAction specialAction in mySpecialActions) specialAction(caller);
 	}
 }
 
@@ -48,10 +35,6 @@ public class FSMState {
 	public List<FSMAction> enterActions = new List<FSMAction> ();
 	public List<FSMAction> stayActions = new List<FSMAction> ();
 	public List<FSMAction> exitActions = new List<FSMAction> ();
-
-	public List<FSMSpecialAction> enterSpecialActions = new List<FSMSpecialAction>();
-	public List<FSMSpecialAction> staySpecialActions = new List<FSMSpecialAction>();
-	public List<FSMSpecialAction> exitSpecialActions = new List<FSMSpecialAction>();
 
 	// A dictionary of transitions and the states they are leading to
 	private Dictionary<FSMTransition, FSMState> links;
@@ -86,47 +69,15 @@ public class FSMState {
 		foreach (FSMAction a in exitActions) a();
 	}
 
-
-	// These methods will perform the Special Actions in each list
-	public void EnterSpecialActions(Object obj)
-	{
-		foreach (FSMSpecialAction sa in enterSpecialActions) {
-			sa(obj);
-		}
-	}
-	public void StaySpecialActions(Object obj)
-	{
-		foreach (FSMSpecialAction sa in enterSpecialActions) {
-			sa(obj);
-		}
-	}
-
-	public void ExitSpecialActions(Object obj)
-	{
-		foreach (FSMSpecialAction sa in enterSpecialActions) {
-			sa(obj);
-		}
-	}
-
 }
 
 public class FSM {
-
-	public Object caller;
-
 	// Current state
 	public FSMState current;
 
 	public FSM(FSMState state) {
 		current = state;
 		current.Enter();
-	}
-
-	public FSM(FSMState state, Object o)
-	{
-		current = state;
-		current.Enter();
-		caller = o;
 	}
 
 	// Examine transitions leading out from the current state
@@ -142,15 +93,11 @@ public class FSM {
 		FSMTransition transition = current.VerifyTransitions ();
 		if (transition != null) {
 			current.Exit();     // 1
-			current.ExitSpecialActions(caller);
 			transition.Fire();  // 2
-			transition.FireSpecialActions(caller);
 			current = current.NextState(transition);	// 3
 			current.Enter();    // 4
-			current.EnterSpecialActions(caller);
 		} else {
 			current.Stay();     // 5
-			current.StaySpecialActions(caller);
 		}
 	}
 }

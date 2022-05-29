@@ -10,9 +10,9 @@ public abstract class EnemyAbility : ScriptableObject
 
 	public float damage;
 
-	private EnemyForm enemy;
+	public EnemyForm enemy;
 
-	public abstract void StartAbility();
+	public abstract void StartAbility(EnemyForm  enemy);
 
 	public abstract void PerformAbility();
 

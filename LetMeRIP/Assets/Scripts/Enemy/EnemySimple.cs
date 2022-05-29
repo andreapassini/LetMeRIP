@@ -6,17 +6,11 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemySimple : EnemyForm
 {
-	[SerializeField] private float attackRange = 2f;
-	[SerializeField] private Transform attackPoint;
-
-	private Vector3 lastSeenPos;
 	private FSM fsm;
 
 	private float reactionReference;
 
     [SerializeField]private string targetTag = "Player";
-
-
 
 	private void Start()
 	{
@@ -25,7 +19,7 @@ public class EnemySimple : EnemyForm
         targets = GameObject.FindGameObjectsWithTag(targetTag);
 
         FSMState search = new FSMState();
-        search.stayActions.Add(Search);
+		search.stayActions.Add(Search);
 
         FSMState chase = new FSMState();
         chase.stayActions.Add(Chase);
@@ -71,63 +65,34 @@ public class EnemySimple : EnemyForm
     }
 
 
-    #region Actions
-    // Search
-    public void Search()
-    {
-        float distance = float.MaxValue;
-
-		foreach (GameObject t in targets) {
-            float calculatedDistance = (t.transform.position - transform.position).magnitude;
-            if (calculatedDistance < distance) {
-                distance = calculatedDistance;
-                target = t.transform;
+	#region Actions
+	// Search
+	public void Search()
+	{
+		foreach (var ability in enemyAbilities) {
+			if (ability.abilityName.ToLower().Contains("search")) {
+                ability.StartAbility(this);
 			}
 		}
-
-        if ((target.position - lastSeenPos).magnitude <= 1f) {
-            // Go to a random new pos on the Navmesh
-            GetComponent<NavMeshAgent>().isStopped = false;
-            GetComponent<NavMeshAgent>().destination = RandomNavmeshLocation(10f);
-        }
-    }
+	}
 
     // Chase
     public void Chase()
     {
-        GetComponent<NavMeshAgent>().isStopped = false;
-        GetComponent<NavMeshAgent>().destination = target.position;
-
+        foreach (var ability in enemyAbilities) {
+            if (ability.abilityName.ToLower().Contains("chase")) {
+                ability.StartAbility(this);
+            }
+        }
     }
 
     public void Attack()
     {
-        // Stop Moving
-        GetComponent<NavMeshAgent>().isStopped = true;
-        animator.SetTrigger("attack");
-
-        // Look at Target
-        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z), Vector3.up);
-
-        // Play attack animation
-
-
-        // Create Collider
-        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, base.whatIsTarget);
-
-        // Check for collision
-        foreach (Collider enemy in hitEnemies) {
-            //Debug.Log("Hit this guy: " + enemy.name);
-
-            PlayerHealth playerHealth = enemy.gameObject.GetComponent<PlayerHealth>();
-
-            if (playerHealth != null) {
-                playerHealth.TakeDamage(enemyStats.attack, transform.position);
+        foreach (var ability in enemyAbilities) {
+            if (ability.abilityName.ToLower().Contains("attack")) {
+                ability.StartAbility(this);
             }
         }
-
-        // Wait for the end of animation
-        StartCoroutine(StopAI());
     }
 
     public void GoToLastSeenPos()

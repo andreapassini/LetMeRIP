@@ -5,12 +5,14 @@ using System;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
-public class EnemyCanvas : MonoBehaviour
+public class EnemyForm : MonoBehaviour
 {
-    public static event Action<EnemyCanvas> OnEnemyKilled;
-    public static event Action<EnemyCanvas> OnEnemyDamaged;
+    public static event Action<EnemyForm> OnEnemyKilled;
+    public static event Action<EnemyForm> OnEnemyDamaged;
 
     public EnemyStats enemyStats;
+
+    public List<EnemyAbility> enemyAbilities;
 
     public float AiFrameRate = 1f;
 

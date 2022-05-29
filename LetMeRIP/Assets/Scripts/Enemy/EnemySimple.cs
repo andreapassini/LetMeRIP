@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemySimple : EnemyCanvas
+public class EnemySimple : EnemyForm
 {
 	[SerializeField] private float attackRange = 2f;
 	[SerializeField] private Transform attackPoint;

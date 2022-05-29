@@ -12,7 +12,7 @@ public class EnemyForm : MonoBehaviour
 
     public EnemyStats enemyStats;
 
-    public List<EnemyAbility> enemyAbilities;
+    public Dictionary<string, EnemyAbility> enemyAbilities;
 
     public float AiFrameRate = 1f;
 

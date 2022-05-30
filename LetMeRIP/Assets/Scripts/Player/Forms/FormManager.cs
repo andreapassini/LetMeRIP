@@ -44,7 +44,7 @@ public class FormManager : MonoBehaviour
         playerInputActions.Player.HeavyAttack.Disable();
     }
 
-    public void SwitchForm(int index)
+    public void SwitchForm(int index, bool enableAbilities = true)
     {
         if (index >= forms.Count || forms[index] == null) { Debug.Log("Invalid form"); return; }
         if (currentForm != null && forms[index].GetType().Name.Equals(currentForm.GetType().Name)) { Debug.Log("Form already in use"); return; }
@@ -60,8 +60,9 @@ public class FormManager : MonoBehaviour
         // switch to new form and add its components
         currentForm = forms[index];
         currentForm.Init(characterController);
-
-        EnableAbilities();
+        
+        if(enableAbilities)
+            EnableAbilities();
     }
 
 

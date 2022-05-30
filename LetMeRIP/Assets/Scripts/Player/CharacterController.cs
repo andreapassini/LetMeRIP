@@ -12,13 +12,14 @@ public class CharacterController : MonoBehaviour
     public PlayerStats bodyStats;
     [HideInInspector] public PlayerStats currentStats;
 
-    public HPManager HPManager;
-    public SGManager SGManager;
-    // Start is called before the first frame update
+    [HideInInspector] public HPManager HPManager;
+    [HideInInspector] public SGManager SGManager;
+
     void Start()
     {
         currentStats = bodyStats;
         HPManager = gameObject.AddComponent<HPManager>();
+        SGManager = gameObject.AddComponent<SGManager>();
         HPManager.Stats = currentStats;
         SGManager.Stats = bodyStats; // we want to keep using the body spirit gauge, since it's always shared, no matter the form
 

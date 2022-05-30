@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MovementWASD : MonoBehaviour
+public class Movement : MonoBehaviour
 {
 	[SerializeField] private float speed = 5f;
 	private Rigidbody rb;
@@ -14,10 +14,8 @@ public class MovementWASD : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
-
     }
 
 	private void Update()
@@ -27,16 +25,15 @@ public class MovementWASD : MonoBehaviour
 
 	private void FixedUpdate()
     {
-        Movement();
+        Move();
     }
-
 
     public void GatherInputs()
     {
         this.direction = playerInputActions.Player.Movement.ReadValue<Vector3>();
     }
 
-    public void Movement()
+    public void Move()
     {
         rb.MovePosition(transform.position + this.direction.ToIso() * speed * Time.deltaTime);
     }

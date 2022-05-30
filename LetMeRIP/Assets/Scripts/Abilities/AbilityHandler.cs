@@ -5,14 +5,14 @@ using UnityEngine;
 public class AbilityHandler : MonoBehaviour
 {
     private Dictionary<string, Ability> abilities; // assegnamo ad ogni abilità una chiave
-    private float cooldown = 0.5f; // cooldown tra un abilità e l'altra
+    private float cooldown = 0.1f; // cooldown tra un abilità e l'altra
     private bool isReady = true;
 
     private string current = null;
     public bool IsReady { get { return isReady && current == null; } }
-    private CharacterController characterController;
+    private PlayerController characterController;
 
-    public void Init(Dictionary<string, Ability> abilities, CharacterController characterController)
+    public void Init(Dictionary<string, Ability> abilities, PlayerController characterController)
     {
         this.characterController = characterController;
 

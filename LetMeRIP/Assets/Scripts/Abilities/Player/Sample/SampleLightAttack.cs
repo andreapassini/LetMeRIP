@@ -17,7 +17,7 @@ public class SampleLightAttack : Ability
     }
 
 
-    public override void Init(CharacterController characterController)
+    public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
         attackPoint = transform.Find("AttackPoint");

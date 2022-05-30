@@ -9,7 +9,7 @@ public class SampleForm2 : PlayerForm
         formModelPrefab = Resources.Load<GameObject>("Prefabs/Models/sampleModel2");
     }
 
-    public override void Init(CharacterController characterController)
+    public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
         // add model

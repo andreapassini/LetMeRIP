@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SampleFormManager : FormManager
 {
-    public override void Init(CharacterController characterController)
+    public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
 
@@ -14,5 +14,12 @@ public class SampleFormManager : FormManager
         SwitchForm(1); // possiamo dire di avere sempre lo spirito sullo 0 e la forma base della classe sull'1
         
         if (currentForm != null) BindAbilities();
+    }
+
+    protected override void BindAbilities()
+    {
+        base.BindAbilities();
+        playerInputActions.Player.Transformation1.performed += ctx => SwitchForm(1);
+        playerInputActions.Player.Transformation2.performed += ctx => SwitchForm(2);
     }
 }

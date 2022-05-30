@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpiritForm : PlayerForm
 {
-    public override void Init(CharacterController characterController)
+    public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
         // add model prefab

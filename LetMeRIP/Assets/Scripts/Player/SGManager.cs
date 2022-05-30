@@ -19,13 +19,13 @@ public class SGManager : MonoBehaviour
         }
     }
 
-    private CharacterController characterController;
+    private PlayerController characterController;
 
     private float spiritGauge;
 
     void Start()
     {
-        gameObject.GetComponent<CharacterController>();
+        gameObject.GetComponent<PlayerController>();
     }
 
     /**

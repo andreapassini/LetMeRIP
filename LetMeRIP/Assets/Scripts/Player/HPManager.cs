@@ -19,13 +19,13 @@ public class HPManager : MonoBehaviour
         }
     }
 
-    private CharacterController characterController;
+    private PlayerController characterController;
 
     private float health;
 
     void Start()
     {
-        gameObject.GetComponent<CharacterController>();
+        gameObject.GetComponent<PlayerController>();
     }
 
     public void TakeDamage(float dmg, Vector3 positionHit)

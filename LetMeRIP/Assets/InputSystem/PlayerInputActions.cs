@@ -80,6 +80,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""c417e5e4-4852-4e7b-9bdb-5bb6de2ae05e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -106,7 +115,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""3D Vector"",
+                    ""name"": ""WASD"",
                     ""id"": ""1ab5fe46-e1bd-4c9e-b4b9-f6cd8bc3ce42"",
                     ""path"": ""3DVector"",
                     ""interactions"": """",
@@ -115,28 +124,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""c829a367-0160-4346-bf02-7de08f95bc81"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""de55e435-ee50-428b-9fcd-3409a7bca587"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
@@ -258,6 +245,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Transformation2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3dc7ed19-a0ae-4f08-b3dd-1b05bf030c3c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -272,6 +270,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_LookAt = m_Player.FindAction("LookAt", throwIfNotFound: true);
         m_Player_Transformation1 = m_Player.FindAction("Transformation1", throwIfNotFound: true);
         m_Player_Transformation2 = m_Player.FindAction("Transformation2", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -337,6 +336,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LookAt;
     private readonly InputAction m_Player_Transformation1;
     private readonly InputAction m_Player_Transformation2;
+    private readonly InputAction m_Player_Dash;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -347,6 +347,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @LookAt => m_Wrapper.m_Player_LookAt;
         public InputAction @Transformation1 => m_Wrapper.m_Player_Transformation1;
         public InputAction @Transformation2 => m_Wrapper.m_Player_Transformation2;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -374,6 +375,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Transformation2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTransformation2;
                 @Transformation2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTransformation2;
                 @Transformation2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTransformation2;
+                @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -396,6 +400,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Transformation2.started += instance.OnTransformation2;
                 @Transformation2.performed += instance.OnTransformation2;
                 @Transformation2.canceled += instance.OnTransformation2;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -408,5 +415,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnLookAt(InputAction.CallbackContext context);
         void OnTransformation1(InputAction.CallbackContext context);
         void OnTransformation2(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CharacterController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
+    PlayerInputActions playerInputActions;
+
     [SerializeField] private string playerClass; // archer, mage or warrior
     private FormManager formManager;
     
@@ -17,6 +19,8 @@ public class CharacterController : MonoBehaviour
 
     void Start()
     {
+        playerInputActions = new PlayerInputActions();
+
         currentStats = bodyStats;
         HPManager = gameObject.AddComponent<HPManager>();
         SGManager = gameObject.AddComponent<SGManager>();
@@ -41,5 +45,8 @@ public class CharacterController : MonoBehaviour
                 break;
         }
         formManager.Init(this);
+
+        playerInputActions.Player.Enable();
+        playerInputActions.Player.Movement.Enable();
     }
 }

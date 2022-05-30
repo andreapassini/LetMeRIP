@@ -11,7 +11,7 @@ public class PlayerForm : MonoBehaviour
     public AbilityHandler abilityHandler;
     protected Dictionary<string, Ability> abilities;
     protected GameObject formModelPrefab; // contains the model and the animator of the transformation
-    protected CharacterController characterController;
+    protected PlayerController characterController;
 
     private void Awake()
     {
@@ -19,7 +19,7 @@ public class PlayerForm : MonoBehaviour
         playerInputActions = new PlayerInputActions();
     }
 
-    public virtual void Init(CharacterController characterController) 
+    public virtual void Init(PlayerController characterController) 
     {
         this.characterController = characterController;
     }
@@ -31,7 +31,6 @@ public class PlayerForm : MonoBehaviour
 
         if(abilityHandler != null)
             Destroy(abilityHandler);
-        Debug.Log($"Destroying {formModelPrefab.name}(Clone)");
         GameObject modelToDestroy = transform.Find($"{formModelPrefab.name}(Clone)").gameObject;
         modelToDestroy.SetActive(false);
         Destroy(modelToDestroy);

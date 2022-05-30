@@ -10,19 +10,32 @@ public class FormManager : MonoBehaviour
 
     protected PlayerInputActions playerInputActions;
     protected AbilityHandler sharedAbilityHandler; // handler of shared abilities, like dash and interact
-    protected CharacterController characterController;
+    protected PlayerController characterController;
 
-    public virtual void Init(CharacterController characterController)
+    public virtual void Init(PlayerController characterController)
     {
-        characterController.currentStats = characterController.bodyStats;
-        playerInputActions = new PlayerInputActions();
         this.characterController = characterController;
+        playerInputActions = new PlayerInputActions();
+        
+        // initialize list form and adding Spirit form as first form available (and shared by every macro class)
         forms = new List<PlayerForm>();
         forms.Add(gameObject.AddComponent<SpiritForm>());
+
+        // adding shared abilities
+        Dash dash = gameObject.AddComponent<Dash>();
+        Dictionary<string, Ability> sharedAbilities = new Dictionary<string, Ability>();
+        sharedAbilities[playerInputActions.Player.Dash.name] = dash;
+        
+        sharedAbilityHandler = gameObject.AddComponent<AbilityHandler>();
+        sharedAbilityHandler.Init(sharedAbilities, characterController);
     }
 
     protected virtual void BindAbilities()
     {
+        playerInputActions.Player.Dash.started += CastSharedAbility;
+        playerInputActions.Player.Dash.performed += CastSharedAbility;
+        playerInputActions.Player.Dash.canceled += CastSharedAbility;
+
         playerInputActions.Player.LightAttack.started += CastAbility;
         playerInputActions.Player.LightAttack.performed += CastAbility;
         playerInputActions.Player.LightAttack.canceled += CastAbility;
@@ -36,12 +49,18 @@ public class FormManager : MonoBehaviour
     {
         playerInputActions.Player.LightAttack.Enable();
         playerInputActions.Player.HeavyAttack.Enable();
+        playerInputActions.Player.Dash.Enable();
+        playerInputActions.Player.Transformation1.Enable();
+        playerInputActions.Player.Transformation2.Enable();
     }
 
     protected virtual void DisableAbilities()
     {
         playerInputActions.Player.LightAttack.Disable();
         playerInputActions.Player.HeavyAttack.Disable();
+        playerInputActions.Player.Dash.Disable();
+        playerInputActions.Player.Transformation1.Disable();
+        playerInputActions.Player.Transformation2.Disable();
     }
 
     public void SwitchForm(int index, bool enableAbilities = true)
@@ -73,4 +92,10 @@ public class FormManager : MonoBehaviour
         else if (context.canceled) currentForm.abilityHandler.CancelAbility(context.action.name);
     }
 
+    public void CastSharedAbility(InputAction.CallbackContext context)
+    {
+        if (context.started) sharedAbilityHandler.StartAbility(context.action.name);
+        else if (context.performed) sharedAbilityHandler.PerformAbility(context.action.name);
+        else if (context.canceled) sharedAbilityHandler.CancelAbility(context.action.name);
+    }
 }

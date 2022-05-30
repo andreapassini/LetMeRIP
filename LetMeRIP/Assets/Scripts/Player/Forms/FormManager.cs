@@ -14,9 +14,11 @@ public class FormManager : MonoBehaviour
 
     public virtual void Init(CharacterController characterController)
     {
+        characterController.currentStats = characterController.bodyStats;
         playerInputActions = new PlayerInputActions();
         this.characterController = characterController;
         forms = new List<PlayerForm>();
+        forms.Add(gameObject.AddComponent<SpiritForm>());
     }
 
     protected virtual void BindAbilities()

@@ -12,6 +12,7 @@ public class SampleForm1 : PlayerForm
     public override void Init(CharacterController characterController)
     {
         base.Init(characterController);
+        // add model
         formModelPrefab ??= Resources.Load<GameObject>("Prefabs/Models/sampleModel1");
         Instantiate(formModelPrefab, transform); // let this be first, the following istruction may look for something that this instance might have
 
@@ -26,9 +27,5 @@ public class SampleForm1 : PlayerForm
         // ability handler initialization
         abilityHandler = gameObject.AddComponent<AbilityHandler>();
         abilityHandler.Init(abilities, characterController);
-
-
-        abilityHandler.StartAbility("LightAttack");
-        // add model
     }
 }

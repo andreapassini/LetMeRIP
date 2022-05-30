@@ -5,15 +5,23 @@ using UnityEngine.InputSystem;
 
 public class CharacterController : MonoBehaviour
 {
+    [SerializeField] private string playerClass; // archer, mage or warrior
+    private FormManager formManager;
+    
     public PlayerStats spiritStats;
     public PlayerStats bodyStats;
     [HideInInspector] public PlayerStats currentStats;
-    [SerializeField] private string playerClass; // archer, mage or warrior
-    private FormManager formManager;
 
+    public HPManager HPManager;
+    public SGManager SGManager;
     // Start is called before the first frame update
     void Start()
     {
+        currentStats = bodyStats;
+        HPManager = gameObject.AddComponent<HPManager>();
+        HPManager.Stats = currentStats;
+        SGManager.Stats = bodyStats; // we want to keep using the body spirit gauge, since it's always shared, no matter the form
+
         switch (playerClass.ToLower())
         {
             case "archer":

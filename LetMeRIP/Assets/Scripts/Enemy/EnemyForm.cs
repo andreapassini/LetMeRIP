@@ -13,9 +13,9 @@ public class EnemyForm : MonoBehaviour
     public EnemyStats enemyStats;
 
     //public List<EnemyAbility> enemyAbilities;
-    public EnemyAbility attack;
-    public EnemyAbility chase;
-    public EnemyAbility search;
+    public EnemyAbility attackAction;
+    public EnemyAbility chaseAction;
+    public EnemyAbility searchAction;
 
 
     public float AiFrameRate = 1f;

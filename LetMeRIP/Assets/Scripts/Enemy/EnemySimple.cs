@@ -70,18 +70,18 @@ public class EnemySimple : EnemyForm
 	// Search
 	public void Search()
 	{
-        search.StartAbility(this);
+        searchAction.StartAbility(this);
 	}
 
     // Chase
     public void Chase()
     {
-        chase.StartAbility(this);
+        chaseAction.StartAbility(this);
     }
 
     public void Attack()
     {
-        attack.StartAbility(this);
+        attackAction.StartAbility(this);
 
         // Wait for the end of animation
         StartCoroutine(StopAI());

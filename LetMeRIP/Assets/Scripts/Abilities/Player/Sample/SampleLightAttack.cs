@@ -14,9 +14,15 @@ public class SampleLightAttack : Ability
     {
         cooldown = 1f;
         enemyLayer = LayerMask.NameToLayer("Enemy");
+    }
 
+
+    public override void Init(CharacterController characterController)
+    {
+        base.Init(characterController);
         attackPoint = transform.Find("AttackPoint");
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>(false);
+        Debug.Log(animator.name);
     }
 
     public override void StartedAction()

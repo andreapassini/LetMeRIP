@@ -64,45 +64,18 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""E"",
+                    ""name"": ""Transformation1"",
                     ""type"": ""Button"",
-                    ""id"": ""25e66276-0583-41ac-b3d5-5f1c8e5b4965"",
+                    ""id"": ""a56b58c5-b081-479b-8208-adcb5dffd2c6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Q"",
+                    ""name"": ""Transformation2"",
                     ""type"": ""Button"",
-                    ""id"": ""a197b663-4051-4bac-8eb9-2850a7e0fa8d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Dash"",
-                    ""type"": ""Button"",
-                    ""id"": ""b323628f-b797-489e-9ee3-59cc8b07d581"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CorpesInteraction"",
-                    ""type"": ""Button"",
-                    ""id"": ""02341232-2408-44b6-b384-82af7f4034a9"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Shift"",
-                    ""type"": ""Button"",
-                    ""id"": ""eab1f80b-01d3-46cf-a16e-4fb22b14c556"",
+                    ""id"": ""276b2a43-38f0-4f19-897c-9528f8b053b6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -221,59 +194,70 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""f5d26beb-2f74-4618-9f41-42212f17230b"",
-                    ""path"": ""<Keyboard>/#(E)"",
+                    ""name"": ""Button With One Modifier"",
+                    ""id"": ""991804e3-d191-485c-9c30-93ae13e3635a"",
+                    ""path"": ""ButtonWithOneModifier"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""E"",
-                    ""isComposite"": false,
+                    ""action"": ""Transformation1"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""9024872b-a34c-4295-9b0d-5110016fabb6"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Q"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""117cd21a-b13b-4d96-bb1f-8c967bc464c7"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c2c71a16-f98a-4d3e-8cb1-ab9f6cc29060"",
-                    ""path"": ""<Keyboard>/leftCtrl"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CorpesInteraction"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""851cd3ab-c038-4265-95ac-f6a0ffbb0da2"",
+                    ""name"": ""Modifier"",
+                    ""id"": ""1d5f81f1-56ac-4149-b0c5-741fc1091384"",
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Shift"",
+                    ""action"": ""Transformation1"",
                     ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button"",
+                    ""id"": ""ce45792a-c389-49fd-ab6a-55e285bbb28b"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Transformation1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button With One Modifier"",
+                    ""id"": ""27a9749c-fe3c-4738-8721-fd06ce03b238"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Transformation2"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Modifier"",
+                    ""id"": ""8eb46cd7-2bdd-4e32-a60d-ded64a9fdfad"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Transformation2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button"",
+                    ""id"": ""53503f98-7de8-4f95-b748-b98835fac7f5"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Transformation2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -286,11 +270,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_HeavyAttack = m_Player.FindAction("HeavyAttack", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_LookAt = m_Player.FindAction("LookAt", throwIfNotFound: true);
-        m_Player_E = m_Player.FindAction("E", throwIfNotFound: true);
-        m_Player_Q = m_Player.FindAction("Q", throwIfNotFound: true);
-        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-        m_Player_CorpesInteraction = m_Player.FindAction("CorpesInteraction", throwIfNotFound: true);
-        m_Player_Shift = m_Player.FindAction("Shift", throwIfNotFound: true);
+        m_Player_Transformation1 = m_Player.FindAction("Transformation1", throwIfNotFound: true);
+        m_Player_Transformation2 = m_Player.FindAction("Transformation2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -354,11 +335,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_HeavyAttack;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_LookAt;
-    private readonly InputAction m_Player_E;
-    private readonly InputAction m_Player_Q;
-    private readonly InputAction m_Player_Dash;
-    private readonly InputAction m_Player_CorpesInteraction;
-    private readonly InputAction m_Player_Shift;
+    private readonly InputAction m_Player_Transformation1;
+    private readonly InputAction m_Player_Transformation2;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -367,11 +345,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @LookAt => m_Wrapper.m_Player_LookAt;
-        public InputAction @E => m_Wrapper.m_Player_E;
-        public InputAction @Q => m_Wrapper.m_Player_Q;
-        public InputAction @Dash => m_Wrapper.m_Player_Dash;
-        public InputAction @CorpesInteraction => m_Wrapper.m_Player_CorpesInteraction;
-        public InputAction @Shift => m_Wrapper.m_Player_Shift;
+        public InputAction @Transformation1 => m_Wrapper.m_Player_Transformation1;
+        public InputAction @Transformation2 => m_Wrapper.m_Player_Transformation2;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -393,21 +368,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @LookAt.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookAt;
                 @LookAt.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookAt;
                 @LookAt.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookAt;
-                @E.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnE;
-                @E.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnE;
-                @E.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnE;
-                @Q.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQ;
-                @Q.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQ;
-                @Q.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQ;
-                @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                @CorpesInteraction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCorpesInteraction;
-                @CorpesInteraction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCorpesInteraction;
-                @CorpesInteraction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCorpesInteraction;
-                @Shift.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShift;
-                @Shift.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShift;
-                @Shift.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShift;
+                @Transformation1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTransformation1;
+                @Transformation1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTransformation1;
+                @Transformation1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTransformation1;
+                @Transformation2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTransformation2;
+                @Transformation2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTransformation2;
+                @Transformation2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTransformation2;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -424,21 +390,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @LookAt.started += instance.OnLookAt;
                 @LookAt.performed += instance.OnLookAt;
                 @LookAt.canceled += instance.OnLookAt;
-                @E.started += instance.OnE;
-                @E.performed += instance.OnE;
-                @E.canceled += instance.OnE;
-                @Q.started += instance.OnQ;
-                @Q.performed += instance.OnQ;
-                @Q.canceled += instance.OnQ;
-                @Dash.started += instance.OnDash;
-                @Dash.performed += instance.OnDash;
-                @Dash.canceled += instance.OnDash;
-                @CorpesInteraction.started += instance.OnCorpesInteraction;
-                @CorpesInteraction.performed += instance.OnCorpesInteraction;
-                @CorpesInteraction.canceled += instance.OnCorpesInteraction;
-                @Shift.started += instance.OnShift;
-                @Shift.performed += instance.OnShift;
-                @Shift.canceled += instance.OnShift;
+                @Transformation1.started += instance.OnTransformation1;
+                @Transformation1.performed += instance.OnTransformation1;
+                @Transformation1.canceled += instance.OnTransformation1;
+                @Transformation2.started += instance.OnTransformation2;
+                @Transformation2.performed += instance.OnTransformation2;
+                @Transformation2.canceled += instance.OnTransformation2;
             }
         }
     }
@@ -449,10 +406,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnHeavyAttack(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnLookAt(InputAction.CallbackContext context);
-        void OnE(InputAction.CallbackContext context);
-        void OnQ(InputAction.CallbackContext context);
-        void OnDash(InputAction.CallbackContext context);
-        void OnCorpesInteraction(InputAction.CallbackContext context);
-        void OnShift(InputAction.CallbackContext context);
+        void OnTransformation1(InputAction.CallbackContext context);
+        void OnTransformation2(InputAction.CallbackContext context);
     }
 }

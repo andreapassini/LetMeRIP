@@ -42,45 +42,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "E",
+                    "name": "Transformation1",
                     "type": "Button",
-                    "id": "25e66276-0583-41ac-b3d5-5f1c8e5b4965",
+                    "id": "a56b58c5-b081-479b-8208-adcb5dffd2c6",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Q",
+                    "name": "Transformation2",
                     "type": "Button",
-                    "id": "a197b663-4051-4bac-8eb9-2850a7e0fa8d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "b323628f-b797-489e-9ee3-59cc8b07d581",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "CorpesInteraction",
-                    "type": "Button",
-                    "id": "02341232-2408-44b6-b384-82af7f4034a9",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Shift",
-                    "type": "Button",
-                    "id": "eab1f80b-01d3-46cf-a16e-4fb22b14c556",
+                    "id": "276b2a43-38f0-4f19-897c-9528f8b053b6",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -199,59 +172,70 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "f5d26beb-2f74-4618-9f41-42212f17230b",
-                    "path": "<Keyboard>/#(E)",
+                    "name": "Button With One Modifier",
+                    "id": "991804e3-d191-485c-9c30-93ae13e3635a",
+                    "path": "ButtonWithOneModifier",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "E",
-                    "isComposite": false,
+                    "action": "Transformation1",
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "9024872b-a34c-4295-9b0d-5110016fabb6",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Q",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "117cd21a-b13b-4d96-bb1f-8c967bc464c7",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c2c71a16-f98a-4d3e-8cb1-ab9f6cc29060",
-                    "path": "<Keyboard>/leftCtrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CorpesInteraction",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "851cd3ab-c038-4265-95ac-f6a0ffbb0da2",
+                    "name": "Modifier",
+                    "id": "1d5f81f1-56ac-4149-b0c5-741fc1091384",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shift",
+                    "action": "Transformation1",
                     "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Button",
+                    "id": "ce45792a-c389-49fd-ab6a-55e285bbb28b",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Transformation1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Button With One Modifier",
+                    "id": "27a9749c-fe3c-4738-8721-fd06ce03b238",
+                    "path": "ButtonWithOneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Transformation2",
+                    "isComposite": true,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "Modifier",
+                    "id": "8eb46cd7-2bdd-4e32-a60d-ded64a9fdfad",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Transformation2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Button",
+                    "id": "53503f98-7de8-4f95-b748-b98835fac7f5",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Transformation2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

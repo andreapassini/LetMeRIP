@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class AbilityHandler : MonoBehaviour
 {
-    Dictionary<string, Ability> abilities; // assegnamo ad ogni abilità una chiave
+    private Dictionary<string, Ability> abilities; // assegnamo ad ogni abilità una chiave
     private float cooldown = 0.5f; // cooldown tra un abilità e l'altra
     private bool isReady = true;
 
     private string current = null;
     public bool IsReady { get { return isReady && current == null; } }
+    private CharacterController characterController;
 
-    public void Init(Dictionary<string, Ability> abilities)
+    public void Init(Dictionary<string, Ability> abilities, CharacterController characterController)
     {
+        this.characterController = characterController;
+
         this.abilities = new Dictionary<string, Ability>(abilities);
+        foreach (Ability ability in abilities.Values)
+            ability.Init(characterController);
     }
 
     /**
@@ -49,7 +54,7 @@ public class AbilityHandler : MonoBehaviour
         {
             abilities[key].CancelAction();
             current = null;
-            StartCoroutine("Cooldown");
+            StartCoroutine(Cooldown());
 
             Debug.Log("Finished " + current);
         }

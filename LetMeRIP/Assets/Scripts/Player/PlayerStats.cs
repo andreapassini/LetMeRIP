@@ -10,14 +10,13 @@ public class PlayerStats : ScriptableObject
 	public float maxHealth;
 	public float spiritGauge;
 	public float maxSpiritGauge;
-	public float strength;
-	public float dexterity;
-	public float intelligence;
+	public int strength;
+	public int dexterity;
+	public int intelligence;
 
 	public float defense;
 	public float swiftness;
 
 	public float critDamage;
 	public float critChance;
-
 }

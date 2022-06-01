@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8a97f40cd03392419836da423e53e25, type: 3}
-  m_Name: dashBack
+  m_Script: {fileID: 11500000, guid: 4c15c72eac709c34c8a4160846d1031a, type: 3}
+  m_Name: rangedAttack
   m_EditorClassIdentifier: 
-  abilityName: DahsBack
-  coolDown: 0
-  damage: 0
-  dashForce: 10
-  dashDuration: 5
+  abilityName: 
+  coolDown: 3
+  damage: 25
+  numberOfBullets: 1
+  bulletPrefab: {fileID: 677228077099532806, guid: c0014c06b809d7a4392a79c22d733883, type: 3}
+  bulletForce: 5

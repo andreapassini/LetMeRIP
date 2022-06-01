@@ -147,16 +147,22 @@ public class EnemyRanged : EnemyForm
     #region Actions
     public void Search()
     {
+        navMeshAgent.isStopped = false;
+
         searchAction.StartAbility(this);
     }
 
     public void Chase()
     {
+        //navMeshAgent.isStopped = false;
+
         chaseAction.StartAbility(this);
     }
 
     public void Attack()
     {
+        navMeshAgent.isStopped = true;
+
         attackAction.StartAbility(this);
 
         // Wait for the end of animation
@@ -165,6 +171,8 @@ public class EnemyRanged : EnemyForm
 
     public void GoToLastSeenPos()
     {
+        navMeshAgent.isStopped = false;
+
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         GetComponent<NavMeshAgent>().destination = lastSeenPos;
     }
@@ -179,7 +187,7 @@ public class EnemyRanged : EnemyForm
         dashAction.StartAbility(this);
 
         // Wait for the end of animation
-        StartCoroutine(StopAI(1f));
+        StartCoroutine(StopAI(10f));
     }
     #endregion
 
@@ -208,10 +216,8 @@ public class EnemyRanged : EnemyForm
 
     public IEnumerator StopAI(float stopTime)
     {
-        float attackDuration = stopTime; // Just as an example 
-
-        AiFrameRate = attackDuration;
-        yield return new WaitForSeconds(attackDuration);
+        AiFrameRate = stopTime;
+        yield return new WaitForSeconds(stopTime);
         AiFrameRate = reactionReference;
     }
     #endregion

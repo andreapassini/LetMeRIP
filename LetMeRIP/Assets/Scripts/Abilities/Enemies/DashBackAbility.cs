@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "EnemyAbilities/DashBack")]
 public class DashBackAbility : EnemyAbility
 {
-	public float dashForce = 10f;
+	public float dashForce = 100f;
+
+	public float dashDuration = 1.5f;
+	private float dashTime = 0;
+	private bool dashReady = true;
 
 	public override void CancelAbility()
 	{
@@ -13,16 +15,28 @@ public class DashBackAbility : EnemyAbility
 
 	public override void PerformAbility()
 	{
+		if (dashTime < Time.time) {
+			return;
+		}
+
 		// Enable isKinematic
 		enemy.rb.isKinematic = true;
 		enemy.rb.detectCollisions = false; // Double check this in test
 										   // Enable Navmesh
 		enemy.navMeshAgent.enabled = true;
 		// Disable collisions	
+
+		dashReady = true;
 	}
 
 	public override void StartAbility(EnemyForm enemy)
 	{
+		if (!dashReady) {
+			return;
+		}
+
+		dashTime = Time.time + dashDuration;
+
 		// Disable Navmesh
 		enemy.navMeshAgent.enabled = false;
 		// Disable isKinematic

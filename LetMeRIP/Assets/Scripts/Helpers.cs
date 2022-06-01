@@ -10,4 +10,18 @@ public static class Helpers
 	// To return the skewed vector 3
 	// (Used the keyword "this" because it's an extension method
 	public static Vector3 ToIso(this Vector3 input) => isoMatrix.MultiplyPoint3x4(input);
+
+	public static Vector3 RandomNavmeshLocation(float radius, Vector3 position)
+	{
+		while (true) {
+			Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * radius;
+			randomDirection += position;
+			UnityEngine.AI.NavMeshHit hit;
+
+			if (UnityEngine.AI.NavMesh.SamplePosition(randomDirection, out hit, radius, 1)) {
+				return hit.position;
+			}
+		}
+	}
+
 }

@@ -1,27 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
-public class EnemyCanvas : MonoBehaviour
+public class EnemyForm : MonoBehaviour
 {
-    public static event Action<EnemyCanvas> OnEnemyKilled;
-    public static event Action<EnemyCanvas> OnEnemyDamaged;
+    public static event Action<EnemyForm> OnEnemyKilled;
+    public static event Action<EnemyForm> OnEnemyDamaged;
 
     public EnemyStats enemyStats;
 
+    //public List<EnemyAbility> enemyAbilities;
+    public EnemyAbility attackAction;
+    public EnemyAbility chaseAction;
+    public EnemyAbility searchAction;
+
+
     public float AiFrameRate = 1f;
+
+    [System.NonSerialized]
+    public Vector3 lastSeenPos;
+
+    public Transform attackPoint;
+    public float attackRange = 3f;
 
     private float health;
 
-    private Rigidbody rb;
-
     public LayerMask whatIsTarget;
+    public LayerMask whatICanSeeThrough;
+
     public Animator animator;
+
+    [System.NonSerialized]
+    public Rigidbody rb;
+
+    [System.NonSerialized]
     public GameObject[] targets;
+
+    [System.NonSerialized]
     public Transform target;
+
+    [System.NonSerialized]
+    public NavMeshAgent navMeshAgent;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +52,8 @@ public class EnemyCanvas : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         animator = GetComponent<Animator>();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     public void TakeDamage(float dmg)

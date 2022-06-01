@@ -59,14 +59,19 @@ public class FSMState {
 	}
 	
 	// These methods will perform the actions in each list
-	public void Enter() { foreach (FSMAction a in enterActions) a(); }
-	public void Stay() { foreach (FSMAction a in stayActions) a(); }
-	public void Exit() { foreach (FSMAction a in exitActions) a(); }
+	public void Enter() { 
+		foreach (FSMAction a in enterActions) a();
+	}
+	public void Stay() { 
+		foreach (FSMAction a in stayActions) a();
+	}
+	public void Exit() { 
+		foreach (FSMAction a in exitActions) a();
+	}
 
 }
 
 public class FSM {
-
 	// Current state
 	public FSMState current;
 
@@ -87,12 +92,12 @@ public class FSM {
 	public void Update() { // NOTE: this is NOT a MonoBehaviour
 		FSMTransition transition = current.VerifyTransitions ();
 		if (transition != null) {
-			current.Exit();		// 1
-			transition.Fire();	// 2
+			current.Exit();     // 1
+			transition.Fire();  // 2
 			current = current.NextState(transition);	// 3
-			current.Enter();	// 4
+			current.Enter();    // 4
 		} else {
-			current.Stay();		// 5
+			current.Stay();     // 5
 		}
 	}
 }

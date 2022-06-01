@@ -4,28 +4,23 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemySimple : EnemyCanvas
+public class EnemySimple : EnemyForm
 {
-	[SerializeField] private float attackRange = 2f;
-	[SerializeField] private Transform attackPoint;
-
-	private Vector3 lastSeenPos;
 	private FSM fsm;
 
 	private float reactionReference;
 
     [SerializeField]private string targetTag = "Player";
 
-
-
 	private void Start()
 	{
 		reactionReference = AiFrameRate;
 
         targets = GameObject.FindGameObjectsWithTag(targetTag);
+        target = targets[0].transform;
 
         FSMState search = new FSMState();
-        search.stayActions.Add(Search);
+		search.stayActions.Add(Search);
 
         FSMState chase = new FSMState();
         chase.stayActions.Add(Chase);
@@ -71,60 +66,22 @@ public class EnemySimple : EnemyCanvas
     }
 
 
-    #region Actions
-    // Search
-    public void Search()
-    {
-        float distance = float.MaxValue;
-
-		foreach (GameObject t in targets) {
-            float calculatedDistance = (t.transform.position - transform.position).magnitude;
-            if (calculatedDistance < distance) {
-                distance = calculatedDistance;
-                target = t.transform;
-			}
-		}
-
-        if ((target.position - lastSeenPos).magnitude <= 1f) {
-            // Go to a random new pos on the Navmesh
-            GetComponent<NavMeshAgent>().isStopped = false;
-            GetComponent<NavMeshAgent>().destination = RandomNavmeshLocation(10f);
-        }
-    }
+	#region Actions
+	// Search
+	public void Search()
+	{
+        searchAction.StartAbility(this);
+	}
 
     // Chase
     public void Chase()
     {
-        GetComponent<NavMeshAgent>().isStopped = false;
-        GetComponent<NavMeshAgent>().destination = target.position;
-
+        chaseAction.StartAbility(this);
     }
 
     public void Attack()
     {
-        // Stop Moving
-        GetComponent<NavMeshAgent>().isStopped = true;
-        animator.SetTrigger("attack");
-
-        // Look at Target
-        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z), Vector3.up);
-
-        // Play attack animation
-
-
-        // Create Collider
-        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, base.whatIsTarget);
-
-        // Check for collision
-        foreach (Collider enemy in hitEnemies) {
-            //Debug.Log("Hit this guy: " + enemy.name);
-
-            HPManager playerHealth = enemy.gameObject.GetComponent<HPManager>();
-
-            if (playerHealth != null) {
-                playerHealth.TakeDamage(enemyStats.attack, transform.position);
-            }
-        }
+        attackAction.StartAbility(this);
 
         // Wait for the end of animation
         StartCoroutine(StopAI());
@@ -143,7 +100,7 @@ public class EnemySimple : EnemyCanvas
     {
         Vector3 ray = target.position - transform.position;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, ray, out hit)) {
+        if (Physics.Raycast(transform.position, ray, out hit, whatICanSeeThrough)) {
             if (hit.transform == target) {
                 return true;
             }
@@ -175,7 +132,7 @@ public class EnemySimple : EnemyCanvas
     {
         while (true) {
             Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * radius;
-            randomDirection += transform.position;
+            randomDirection = randomDirection * 10 + transform.position;
             NavMeshHit hit;
 
             if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1)) {
@@ -192,8 +149,8 @@ public class EnemySimple : EnemyCanvas
     {
         float attackDuration = 1f; // Just as an example 
 
-        // reactionTime = attackDuration;
+        AiFrameRate = attackDuration;
         yield return new WaitForSeconds(attackDuration);
-        // reactionTime = reactionReference;
+        AiFrameRate = reactionReference;
     }
 }

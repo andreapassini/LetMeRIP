@@ -26,12 +26,14 @@ public class Dungeon : MonoBehaviour
         if(gate != null && gate.spawnPoint != null && gate.room != null)
         {
             current.Exit();
+            Debug.Log($"Exited {current.name}");
             foreach(PlayerController player in players)
             {
                 player.transform.position = gate.connection.spawnPoint.position;
             }
-            current = gate.room;
+            current = gate.connection.room;
             current.Init();
+            Debug.Log($"Initiated {current.name}");
         }
     }
 

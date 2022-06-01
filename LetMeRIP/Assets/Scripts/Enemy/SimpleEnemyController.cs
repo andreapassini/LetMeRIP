@@ -24,6 +24,7 @@ public class SimpleEnemyController : MonoBehaviour
 
     void Start()
     {
+        target = FindObjectOfType<PlayerController>().transform;
         reactionReference = reactionTime;
 
         animator = GetComponent<Animator>();

@@ -27,6 +27,7 @@ public class RangedEnemyController : MonoBehaviour
 
     void Start()
     {
+        target = FindObjectOfType<PlayerController>().transform;
         canAttack = true;
 
         reactionReference = reactionTime;

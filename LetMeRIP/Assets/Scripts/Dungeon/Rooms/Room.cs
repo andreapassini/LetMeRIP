@@ -11,14 +11,18 @@ public class Room : MonoBehaviour
 {
     /*[HideInInspector] */public List<Room> connectedRooms;
     public List<Gate> gates;
-    // enemy count
-    // time
     private float timeStep = 0.2f;
     protected float timeSpent = 0f;
+    protected RoomSpawner spawners;
 
     #region UI
     [SerializeField] private TextMeshProUGUI timerText;
     #endregion
+
+    private void Awake()
+    {
+        spawners = gameObject.GetComponentInChildren<RoomSpawner>();
+    }
 
     private void Start()
     {
@@ -28,7 +32,6 @@ public class Room : MonoBehaviour
             if (connectedRooms.Contains(gate.room)) continue;
             connectedRooms.Add(gate.room);
         }
-        Debug.Log(gates[0].room.name);
     }
 
     /**
@@ -38,6 +41,7 @@ public class Room : MonoBehaviour
     {
         timeSpent = 0f;
         StartCoroutine(Timer());
+        spawners.Init(); // there might be rooms without enemies
     }
     
     /**
@@ -45,6 +49,7 @@ public class Room : MonoBehaviour
      */
     public virtual void Exit() 
     {
+        spawners.Exit(); // also pretty meh, we should handle multiple players not one so...
         StopAllCoroutines(); // works but it's pretty meh with we have other coroutines
         Debug.Log($"time: {timeSpent}");
     }

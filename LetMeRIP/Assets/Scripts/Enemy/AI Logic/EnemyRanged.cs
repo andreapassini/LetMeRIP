@@ -25,6 +25,8 @@ public class EnemyRanged : EnemyForm
         targets = GameObject.FindGameObjectsWithTag(targetTag);
         target = targets[0].transform;
 
+		navMeshAgent = transform.GetComponent<NavMeshAgent>();
+
         FSMState search = new FSMState();
         search.stayActions.Add(Search);
 
@@ -156,12 +158,12 @@ public class EnemyRanged : EnemyForm
     public void Attack()
     {
         // navMeshAgent.enabled = false;
-        // navMeshAgent.isStopped = true;
+        navMeshAgent.isStopped = true;
 
         attackAction.StartAbility(this);
 
         // Wait for the end of animation
-        // StartCoroutine(StopAI(1f));
+        // StartCoroutine(StopAI(2f));
     }
 
     public void GoToLastSeenPos()
@@ -179,10 +181,22 @@ public class EnemyRanged : EnemyForm
 
     public void Escape()
     {
+        // Disable Navmesh
+        navMeshAgent.isStopped = true;
+        navMeshAgent.enabled = false;
+        // Disable isKinematic
+        rb.isKinematic = false;
+        // Enable collisions
+        rb.detectCollisions = true;
+
         dashAction.StartAbility(this);
 
-        // Wait for the end of animation
-        StartCoroutine(StopAI(2f));
+        // Enable isKinematic
+        rb.isKinematic = true;
+        rb.detectCollisions = false; // Double check this in test
+                                           // Enable Navmesh
+        navMeshAgent.enabled = true;
+        // Disable collisions	
     }
     #endregion
 
@@ -214,6 +228,8 @@ public class EnemyRanged : EnemyForm
         AiFrameRate = stopTime;
         yield return new WaitForSeconds(stopTime);
         AiFrameRate = reactionReference;
+
+        navMeshAgent.isStopped = false;
     }
     #endregion
 }

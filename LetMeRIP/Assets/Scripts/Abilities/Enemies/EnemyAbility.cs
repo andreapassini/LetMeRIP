@@ -17,27 +17,17 @@ public abstract class EnemyAbility : ScriptableObject
 	public float previousAbilityTime = 0;
 
 	public virtual void StartAbility(EnemyForm enemy) 
-	{ 
-		if(previousAbilityTime+coolDown > Time.time) {
-			return;
-		}
+	{
+		//if (base.previousAbilityTime + coolDown > Time.time) {
+		//	return;
+		//}
 
 		this.enemy = enemy;
 		previousAbilityTime = Time.time;
 	}
-	
-	public virtual void PerformAbility()
-	{
-		if (previousAbilityTime + coolDown > Time.time) {
-			return;
-		}
-	}
 
-	public virtual void CancelAbility()
-	{
-		if (previousAbilityTime + coolDown > Time.time) {
-			return;
-		}
-	}
+	public abstract void PerformAbility();
+	public abstract void CancelAbility();
+
 
 }

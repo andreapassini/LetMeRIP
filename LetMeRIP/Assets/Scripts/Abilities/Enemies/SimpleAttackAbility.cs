@@ -20,11 +20,11 @@ public class SimpleAttackAbility : EnemyAbility
         foreach (Collider e in hitEnemies) {
             //Debug.Log("Hit this guy: " + enemy.name);
 
-            PlayerHealth playerHealth = enemy.gameObject.GetComponent<PlayerHealth>();
+            //PlayerHealth playerHealth = enemy.gameObject.GetComponent<PlayerHealth>();
 
-            if (playerHealth != null) {
-                playerHealth.TakeDamage(enemy.enemyStats.attack, enemy.transform.position);
-            }
+            //if (playerHealth != null) {
+            //    playerHealth.TakeDamage(enemy.enemyStats.attack, enemy.transform.position);
+            //}
         }
     }
 

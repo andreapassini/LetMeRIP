@@ -11,12 +11,10 @@ public class RangedAttackAbility : EnemyAbility
 
 	public override void CancelAbility()
 	{
-		throw new System.NotImplementedException();
 	}
 
 	public override void PerformAbility()
 	{
-		throw new System.NotImplementedException();
 	}
 
 	public override void StartAbility(EnemyForm enemy)

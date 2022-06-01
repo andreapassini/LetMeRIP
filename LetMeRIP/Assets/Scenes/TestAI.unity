@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -544,11 +544,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8607900224844952020, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
   m_PrefabInstance: {fileID: 950383148}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &746790951 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 275727462063041611, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
-  m_PrefabInstance: {fileID: 8405673003302205807}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &783738900 stripped
 GameObject:
@@ -1456,11 +1451,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1619843935 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8607900224844952020, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
-  m_PrefabInstance: {fileID: 1631989640}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1631989640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1471,22 +1461,6 @@ PrefabInstance:
     - target: {fileID: 8607900224311430706, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: m_Name
       value: SimpleEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 8607900224311430706, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8607900224311430708, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
-      propertyPath: damage
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8607900224311430708, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 130894972}
-    - target: {fileID: 8607900224311430708, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8607900224311430709, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: m_RootOrder
@@ -1532,49 +1506,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8607900224311430711, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3279137e13e1ffd4791e8ca6a29c75b8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
---- !u!1 &1631989641 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8607900224311430706, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
-  m_PrefabInstance: {fileID: 1631989640}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1631989642 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8607900224311430714, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
-  m_PrefabInstance: {fileID: 1631989640}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1631989643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1631989641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c810da61f51aae4d87fe6e1897033ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyStats: {fileID: 11400000, guid: 828a1eaa568f8a54faa250bf80988581, type: 2}
-  attackAction: {fileID: 11400000, guid: 44149625b820b5a4abb30b053e82ff74, type: 2}
-  chaseAction: {fileID: 11400000, guid: 11bc26dd1a157a8459c06a21789eda7e, type: 2}
-  searchAction: {fileID: 11400000, guid: 2578fd283d54ae24abc0f9d87a44e47d, type: 2}
-  AiFrameRate: 0.1
-  attackPoint: {fileID: 1619843935}
-  attackRange: 3
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 128
-  whatICanSeeThrough:
-    serializedVersion: 2
-    m_Bits: 256
-  animator: {fileID: 1631989642}
-  targetTag: Player
 --- !u!1 &1949840148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,18 +1690,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 522069235, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 130894972}
-    - target: {fileID: 522069235, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 133056420114318251, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 275727460348433322, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -1817,44 +1738,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: RangedEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8405673003302205809, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
+      propertyPath: tooNearRange
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
---- !u!1 &8405673003302205808 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 275727460348433325, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
-  m_PrefabInstance: {fileID: 8405673003302205807}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8405673003302205809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8405673003302205808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5635f010069d4949bc247c66d4953f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyStats: {fileID: 11400000, guid: 828a1eaa568f8a54faa250bf80988581, type: 2}
-  attackAction: {fileID: 11400000, guid: 03efd65c398609245b0dc6e09f57d597, type: 2}
-  chaseAction: {fileID: 11400000, guid: 11bc26dd1a157a8459c06a21789eda7e, type: 2}
-  searchAction: {fileID: 11400000, guid: 2578fd283d54ae24abc0f9d87a44e47d, type: 2}
-  AiFrameRate: 0.1
-  attackPoint: {fileID: 746790951}
-  attackRange: 5
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 128
-  whatICanSeeThrough:
-    serializedVersion: 2
-    m_Bits: 256
-  animator: {fileID: 8405673003302205810}
-  tooNearRange: 1
-  targetTag: Player
-  dashAction: {fileID: 11400000, guid: e66e6aa5f0b398443bef8d6d0d764e51, type: 2}
---- !u!95 &8405673003302205810 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 275727460348433317, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
-  m_PrefabInstance: {fileID: 8405673003302205807}
-  m_PrefabAsset: {fileID: 0}

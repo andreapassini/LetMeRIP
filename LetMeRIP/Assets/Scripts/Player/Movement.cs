@@ -10,12 +10,16 @@ public class Movement : MonoBehaviour
     private Vector3 direction;
 
     private PlayerInputActions playerInputActions;
+    private Animator animator;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
+
+        animator = GetComponentInChildren<Animator>(false);
+        FormManager.OnFormChanged += formManager => animator = GetComponentInChildren<Animator>(false);
     }
 
 	private void Update()
@@ -31,12 +35,24 @@ public class Movement : MonoBehaviour
     public void GatherInputs()
     {
         this.direction = playerInputActions.Player.Movement.ReadValue<Vector3>();
+        if (animator != null)
+        {
+            if (!direction.Equals(Vector3.zero))
+            {
+                animator.SetBool("isRunning", true);
+                animator.SetBool("isIdle", false);
+            }
+            else
+            {
+                animator.SetBool("isIdle", true);
+                animator.SetBool("isRunning", false);
+            }
+        }
     }
 
     public void Move()
     {
         rb.MovePosition(transform.position + this.direction.ToIso() * speed * Time.deltaTime);
     }
-
 
 }

@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public PlayerStats bodyStats;
     [HideInInspector] public PlayerStats currentStats;
 
+    [HideInInspector] public Movement movement;
+
     [HideInInspector] public HPManager HPManager;
     [HideInInspector] public SGManager SGManager;
 
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour
         }
         formManager.Init(this);
 
+        movement = gameObject.AddComponent<Movement>();
         playerInputActions.Player.Enable();
         playerInputActions.Player.Movement.Enable();
     }

@@ -5,14 +5,14 @@ using UnityEngine;
 public class Dash : Ability
 {
     private PlayerInputActions playerInputActions;
+    [SerializeField]
     private Animator animator;
     private Rigidbody rb;
     
-    private readonly float time = 0.1f;
+    private readonly float time = 0.2f;
     private float currentTime;
-    private float speed = 30f;
+    private float speed = 12f;
     private Vector3 direction;
-
     // prevents the cancel action to start too soon
     private bool isDashing = false;
 
@@ -34,6 +34,7 @@ public class Dash : Ability
      */
     public override void StartedAction()
     {
+        animator ??= GetComponentInChildren<Animator>(false);
         Debug.Log("Dash starting");
         isReady = false;
 
@@ -57,6 +58,7 @@ public class Dash : Ability
         Debug.Log("Dashing");
         if (!direction.Equals(Vector3.zero))
         {
+            animator.SetTrigger("Dash");
             StartCoroutine(DashAction());
             StartCoroutine(Cooldown());
         } else

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class FormManager : MonoBehaviour
 {
+    public static event Action<FormManager> OnFormChanged;
+
     [HideInInspector] public List<PlayerForm> forms;
     [HideInInspector] public PlayerForm currentForm;
 
@@ -82,6 +85,8 @@ public class FormManager : MonoBehaviour
         
         if(enableAbilities)
             EnableAbilities();
+
+        OnFormChanged?.Invoke(this);
     }
 
 

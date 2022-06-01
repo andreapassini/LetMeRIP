@@ -31,6 +31,8 @@ public class DashBackAbility : EnemyAbility
 
 	public override void StartAbility(EnemyForm enemy)
 	{
+		base.StartAbility(enemy);
+
 		if (!dashReady) {
 			return;
 		}

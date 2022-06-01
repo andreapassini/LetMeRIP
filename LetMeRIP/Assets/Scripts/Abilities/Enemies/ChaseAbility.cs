@@ -18,6 +18,8 @@ public class ChaseAbility : EnemyAbility
 
 	public override void StartAbility(EnemyForm enemy)
 	{
+		base.StartAbility(enemy);
+
 		enemy.GetComponent<NavMeshAgent>().isStopped = false;
 		enemy.GetComponent<NavMeshAgent>().destination = enemy.target.position;
 	}

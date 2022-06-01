@@ -30,6 +30,8 @@ public class SimpleAttackAbility : EnemyAbility
 
 	public override void StartAbility(EnemyForm enemy)
 	{
+        base.StartAbility(enemy);
+
         // Stop Moving
         enemy.GetComponent<NavMeshAgent>().isStopped = true;
         enemy.animator.SetTrigger("attack");

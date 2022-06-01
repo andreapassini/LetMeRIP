@@ -8,6 +8,8 @@ public class SearchAbility : EnemyAbility
 {
 	public override void StartAbility(EnemyForm enemy)
 	{
+		base.StartAbility(enemy);
+
 		float distance = float.MaxValue;
 
 		foreach (GameObject t in enemy.targets) {

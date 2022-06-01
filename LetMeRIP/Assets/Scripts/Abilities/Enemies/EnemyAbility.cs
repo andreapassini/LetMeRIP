@@ -13,9 +13,11 @@ public abstract class EnemyAbility : ScriptableObject
 	[System.NonSerialized]
 	public EnemyForm enemy;
 
-	private float previousAbilityTime;
+	[System.NonSerialized]
+	public float previousAbilityTime = 0;
 
-	public virtual void StartAbility(EnemyForm enemy) { 
+	public virtual void StartAbility(EnemyForm enemy) 
+	{ 
 		if(previousAbilityTime+coolDown > Time.time) {
 			return;
 		}
@@ -24,14 +26,12 @@ public abstract class EnemyAbility : ScriptableObject
 		previousAbilityTime = Time.time;
 	}
 	
-
 	public virtual void PerformAbility()
 	{
 		if (previousAbilityTime + coolDown > Time.time) {
 			return;
 		}
 	}
-
 
 	public virtual void CancelAbility()
 	{

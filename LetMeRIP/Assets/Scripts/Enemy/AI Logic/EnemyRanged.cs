@@ -11,7 +11,7 @@ public class EnemyRanged : EnemyForm
 
     private float reactionReference;
 
-    public float tooNearRange = 3f;
+    public float tooNearRange = 2f;
 
     [SerializeField] private string targetTag = "Player";
 
@@ -86,12 +86,6 @@ public class EnemyRanged : EnemyForm
         StartCoroutine(Patrol());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     #region Conditions
     // Target Visible
     public bool TargetVisible()
@@ -147,7 +141,7 @@ public class EnemyRanged : EnemyForm
     #region Actions
     public void Search()
     {
-        navMeshAgent.isStopped = false;
+        // navMeshAgent.isStopped = false;
 
         searchAction.StartAbility(this);
     }
@@ -161,17 +155,18 @@ public class EnemyRanged : EnemyForm
 
     public void Attack()
     {
-        navMeshAgent.isStopped = true;
+        // navMeshAgent.enabled = false;
+        // navMeshAgent.isStopped = true;
 
         attackAction.StartAbility(this);
 
         // Wait for the end of animation
-        StartCoroutine(StopAI(1f));
+        // StartCoroutine(StopAI(1f));
     }
 
     public void GoToLastSeenPos()
     {
-        navMeshAgent.isStopped = false;
+        // navMeshAgent.isStopped = false;
 
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         GetComponent<NavMeshAgent>().destination = lastSeenPos;
@@ -187,7 +182,7 @@ public class EnemyRanged : EnemyForm
         dashAction.StartAbility(this);
 
         // Wait for the end of animation
-        StartCoroutine(StopAI(10f));
+        StartCoroutine(StopAI(2f));
     }
     #endregion
 

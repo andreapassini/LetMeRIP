@@ -21,9 +21,15 @@ public class RangedAttackAbility : EnemyAbility
 
 	public override void StartAbility(EnemyForm enemy)
 	{
-		base.StartAbility(enemy);
 
-		//Look at Target
+		if (base.previousAbilityTime + coolDown > Time.time)
+		{
+			return;
+		}
+
+		previousAbilityTime = Time.time;
+
+		// Look at Target
 		// Maybe better to use RigidBody and use Slerp for a smoother rotation
 		enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
 

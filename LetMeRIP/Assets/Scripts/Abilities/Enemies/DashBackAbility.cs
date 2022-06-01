@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "EnemyAbilities/DashBack")]
-public class EnemyDashBackAbility : EnemyAbility
+public class DashBackAbility : EnemyAbility
 {
+	public float dashForce = 10f;
+
 	public override void CancelAbility()
 	{
-		// Enable isKinematic
-		// Enable Navmesh
-		// Disable collisions
 	}
 
 	public override void PerformAbility()
 	{
-		throw new System.NotImplementedException();
+		// Enable isKinematic
+		enemy.rb.isKinematic = true;
+		enemy.rb.detectCollisions = false; // Double check this in test
+										   // Enable Navmesh
+		enemy.navMeshAgent.enabled = true;
+		// Disable collisions	
 	}
 
 	public override void StartAbility(EnemyForm enemy)
@@ -26,7 +30,7 @@ public class EnemyDashBackAbility : EnemyAbility
 		// Enable collisions
 		enemy.rb.detectCollisions = true;
 
-		Vector3 dashBackDirection = new Vector3(enemy.transform.forward.magnitude * -1, enemy.transform.position.y, enemy.transform.position.z);
+		Vector3 dashBackDirection = new Vector3(enemy.transform.forward.magnitude * -1 * dashForce, enemy.transform.position.y, enemy.transform.position.z);
 		// Perform Dash Back
 		enemy.rb.AddRelativeForce(dashBackDirection, ForceMode.Impulse);
 	}

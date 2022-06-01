@@ -12,7 +12,8 @@ public abstract class EnemyAbility : ScriptableObject
 
 	public EnemyForm enemy;
 
-	public abstract void StartAbility(EnemyForm  enemy);
+	public virtual void StartAbility(EnemyForm enemy) { this.enemy = enemy; }
+	
 
 	public abstract void PerformAbility();
 

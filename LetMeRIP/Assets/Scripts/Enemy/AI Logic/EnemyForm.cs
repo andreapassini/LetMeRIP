@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyForm : MonoBehaviour
 {
@@ -28,18 +29,22 @@ public class EnemyForm : MonoBehaviour
 
     private float health;
 
-    private Rigidbody rb;
-
     public LayerMask whatIsTarget;
     public LayerMask whatICanSeeThrough;
 
     public Animator animator;
 
     [System.NonSerialized]
+    public Rigidbody rb;
+
+    [System.NonSerialized]
     public GameObject[] targets;
 
     [System.NonSerialized]
     public Transform target;
+
+    [System.NonSerialized]
+    public NavMeshAgent navMeshAgent;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +54,8 @@ public class EnemyForm : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         animator = GetComponent<Animator>();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     public void TakeDamage(float dmg)

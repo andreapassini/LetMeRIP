@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class FormManager : MonoBehaviour
 {
+    protected PhotonView photonView;
     public static event Action<FormManager> OnFormChanged;
 
     [HideInInspector] public List<PlayerForm> forms;
@@ -17,6 +19,7 @@ public class FormManager : MonoBehaviour
 
     public virtual void Init(PlayerController characterController)
     {
+        photonView = GetComponent<PhotonView>();
         this.characterController = characterController;
         playerInputActions = new PlayerInputActions();
         
@@ -37,6 +40,7 @@ public class FormManager : MonoBehaviour
 
     protected virtual void BindAbilities()
     {
+        if (!photonView.IsMine) return;
         playerInputActions.Player.Dash.started += CastSharedAbility;
         playerInputActions.Player.Dash.performed += CastSharedAbility;
         playerInputActions.Player.Dash.canceled += CastSharedAbility;
@@ -52,6 +56,7 @@ public class FormManager : MonoBehaviour
 
     protected virtual void EnableAbilities()
     {
+        if (!photonView.IsMine) return;
         playerInputActions.Player.LightAttack.Enable();
         playerInputActions.Player.HeavyAttack.Enable();
         playerInputActions.Player.Dash.Enable();
@@ -61,6 +66,7 @@ public class FormManager : MonoBehaviour
 
     protected virtual void DisableAbilities()
     {
+        if (!photonView.IsMine) return;
         playerInputActions.Player.LightAttack.Disable();
         playerInputActions.Player.HeavyAttack.Disable();
         playerInputActions.Player.Dash.Disable();
@@ -94,6 +100,7 @@ public class FormManager : MonoBehaviour
 
     public void CastAbility(InputAction.CallbackContext context)
     {
+        if (!photonView.IsMine) return;
         if (context.started) currentForm.abilityHandler.StartAbility(context.action.name);
         else if (context.performed) currentForm.abilityHandler.PerformAbility(context.action.name);
         else if (context.canceled) currentForm.abilityHandler.CancelAbility(context.action.name);

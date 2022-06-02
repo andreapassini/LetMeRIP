@@ -10,9 +10,8 @@ public class PlayerManager : MonoBehaviour
     {
         PV = GetComponent<PhotonView>();
     }
-
-    // Start is called before the first frame update
-    void Start()
+    
+    private void Start()
     {
         if (!PV.IsMine) return;
 

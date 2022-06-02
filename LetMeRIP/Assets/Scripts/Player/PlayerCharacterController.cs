@@ -1,10 +1,12 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class PlayerCharacterController : MonoBehaviour
 {
+    private PhotonView PV;
+
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float speed = 5f;
-
 
     private Camera playerCamera;
     private Rigidbody rb;
@@ -15,23 +17,31 @@ public class PlayerCharacterController : MonoBehaviour
 
     private void Awake()
     {
+        PV = GetComponentInParent<PhotonView>();
+        rb = GetComponent<Rigidbody>();
+
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
+        
+        playerCamera = Camera.main;
     }
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        playerCamera = Camera.main;
+        if (!PV.IsMine) Destroy(rb);
     }
 
     private void Update()
     {
+        if (!PV.IsMine) return;
+        
         GatherInputs();
     }
 
     private void FixedUpdate()
     {
+        if (!PV.IsMine) return;
+        
         Move();
         Rotate();
     }
@@ -51,9 +61,9 @@ public class PlayerCharacterController : MonoBehaviour
     {
         Ray ray = playerCamera.ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>());
 
-        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask))
-            this.directionToLook = hitInfo.point - transform.position;
-        else this.directionToLook = Vector3.zero;
+        this.directionToLook = Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask)
+            ? hitInfo.point - transform.position
+            : Vector3.zero;
     }
 
     private void Move()
@@ -64,9 +74,8 @@ public class PlayerCharacterController : MonoBehaviour
     private void Rotate()
     {
         if (this.directionToLook == Vector3.zero) return;
-        
+
         this.directionToLook.y = 0;
         transform.forward = this.directionToLook;
-
     }
 }

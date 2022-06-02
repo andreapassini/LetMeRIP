@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerMageAttack : MonoBehaviour
 {
     public LayerMask whatIsEnemy;
-    public float attackRate = 1f; // How many hit per second
+    public float attackRate = 10f; // How many hit per second
 
     [SerializeField] private Animator animator;
     [SerializeField] private Transform attackPoint;
@@ -19,13 +19,15 @@ public class PlayerMageAttack : MonoBehaviour
 
     public void LightMageAttack(InputAction.CallbackContext context)
     {
+        Debug.Log("CALLED");
+        
         if (!view.IsMine) return;
-        if (!context.performed || mageLightAttack) return;
+        if (!context.performed || mageLightAttack) return;  
         
         mageLightAttack = true;
 
         // Start Animation ( maybe an event )
-        animator.SetTrigger("attack");
+        // animator.SetTrigger("attack");
 
         // Fire bullet
         GameObject bullet = PhotonNetwork.Instantiate("Bullet", attackPoint.position, attackPoint.rotation);

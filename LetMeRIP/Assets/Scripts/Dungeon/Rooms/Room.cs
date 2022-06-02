@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Cinemachine;
+using Photon.Pun;
 /**
 * A piece of a dungeon, it can contain enemies or/and rewards.
 * It keeps track of a number of things: the enemies in it, their spawn position and rate,
@@ -10,6 +11,8 @@ using Cinemachine;
 */
 public class Room : MonoBehaviour
 {
+    public PhotonView photonView;
+    private Dungeon dungeon;
     /*[HideInInspector] */public List<Room> connectedRooms;
     public List<Gate> gates;
     private float timeStep = 0.2f;
@@ -23,10 +26,12 @@ public class Room : MonoBehaviour
     private void Awake()
     {
         spawners = gameObject.GetComponentInChildren<RoomSpawner>();
+        dungeon = gameObject.GetComponentInParent<Dungeon>();
     }
 
     private void Start()
     {
+        photonView = dungeon.photonView;
         connectedRooms = new List<Room>();
         foreach(Gate gate in gates)
         {

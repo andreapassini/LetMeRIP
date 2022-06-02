@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public PhotonView photonView; 
     PlayerInputActions playerInputActions;
 
     [SerializeField] private string playerClass; // archer, mage or warrior
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        photonView = GetComponent<PhotonView>();
         playerInputActions = new PlayerInputActions();
 
         currentStats = bodyStats;

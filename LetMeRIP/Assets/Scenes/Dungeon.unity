@@ -570,14 +570,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 848969000550139989, guid: 5afc051ea82884847b27233ef41ff811, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 1274801569816051480, guid: 5afc051ea82884847b27233ef41ff811, type: 3}
       propertyPath: connection
       value: 
       objectReference: {fileID: 1430627244}
+    - target: {fileID: 4517384911170366641, guid: 5afc051ea82884847b27233ef41ff811, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5afc051ea82884847b27233ef41ff811, type: 3}
 --- !u!4 &61120917 stripped
@@ -2667,6 +2667,10 @@ PrefabInstance:
       propertyPath: connection
       value: 
       objectReference: {fileID: 1430627244}
+    - target: {fileID: 4517384911170366641, guid: 5afc051ea82884847b27233ef41ff811, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5afc051ea82884847b27233ef41ff811, type: 3}
 --- !u!1001 &279991395
@@ -4661,6 +4665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21c4e64d9da1294797a0c9a7dbab3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 0}
   connectedRooms: []
   gates:
   - {fileID: 1430627244}
@@ -6266,6 +6271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 814220222}
   - component: {fileID: 814220221}
+  - component: {fileID: 814220223}
   m_Layer: 0
   m_Name: Dungeon
   m_TagString: Untagged
@@ -6285,6 +6291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d91b16b20c238bb4b9e4b2c1909fa4d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 0}
   players: []
   rooms: []
 --- !u!4 &814220222
@@ -6303,6 +6310,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &814220223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814220220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!4 &825679608 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 450008, guid: 9830f561f80768b4f92139c1c15bc835, type: 3}
@@ -11300,6 +11329,14 @@ PrefabInstance:
       propertyPath: connection
       value: 
       objectReference: {fileID: 61120919}
+    - target: {fileID: 4517384911170366641, guid: 5afc051ea82884847b27233ef41ff811, type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466989807385257039, guid: 5afc051ea82884847b27233ef41ff811, type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5afc051ea82884847b27233ef41ff811, type: 3}
 --- !u!1001 &1512094433
@@ -13797,6 +13834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21c4e64d9da1294797a0c9a7dbab3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 0}
   connectedRooms: []
   gates:
   - {fileID: 533009780}

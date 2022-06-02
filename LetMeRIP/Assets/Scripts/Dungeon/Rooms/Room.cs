@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Cinemachine;
 /**
- * A piece of a dungeon, it can contain enemies or/and rewards.
- * It keeps track of a number of things: the enemies in it, their spawn position and rate,
- * the time since the player came in and the gates for the next rooms if any.
- */
+* A piece of a dungeon, it can contain enemies or/and rewards.
+* It keeps track of a number of things: the enemies in it, their spawn position and rate,
+* the time since the player came in and the gates for the next rooms if any.
+*/
 public class Room : MonoBehaviour
 {
     /*[HideInInspector] */public List<Room> connectedRooms;
@@ -41,7 +42,7 @@ public class Room : MonoBehaviour
     {
         timeSpent = 0f;
         StartCoroutine(Timer());
-        spawners.Init(); // there might be rooms without enemies
+        if(spawners != null) spawners.Init(); // there might be rooms without enemies
     }
     
     /**
@@ -49,7 +50,7 @@ public class Room : MonoBehaviour
      */
     public virtual void Exit() 
     {
-        spawners.Exit(); // also pretty meh, we should handle multiple players not one so...
+        if (spawners != null) spawners.Exit(); // also pretty meh, we should handle multiple players not one so...
         StopAllCoroutines(); // works but it's pretty meh with we have other coroutines
         Debug.Log($"time: {timeSpent}");
     }

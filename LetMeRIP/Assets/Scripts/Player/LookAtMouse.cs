@@ -5,7 +5,7 @@ using UnityEngine;
 public class LookAtMouse : MonoBehaviour
 {
     [SerializeField] private LayerMask groundMask;
-    [SerializeField] private Camera camera;
+    private Camera camera;
 
     private Vector3 directionToLook;
     private Rigidbody rb;
@@ -18,10 +18,10 @@ public class LookAtMouse : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        camera = FindObjectOfType<Camera>();
 
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
-
     }
 
     // Update is called once per frame

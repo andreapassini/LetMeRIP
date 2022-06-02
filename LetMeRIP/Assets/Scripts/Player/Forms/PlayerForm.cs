@@ -17,11 +17,13 @@ public class PlayerForm : MonoBehaviour
     {
         abilities = new Dictionary<string, Ability>();
         playerInputActions = new PlayerInputActions();
+        formModelPrefab = transform.Find(GetType().Name.ToString()).gameObject;
     }
 
     public virtual void Init(PlayerController characterController) 
     {
         this.characterController = characterController;
+        formModelPrefab.SetActive(true);
     }
 
     public void RemoveComponents()
@@ -31,8 +33,6 @@ public class PlayerForm : MonoBehaviour
 
         if(abilityHandler != null)
             Destroy(abilityHandler);
-        GameObject modelToDestroy = transform.Find($"{formModelPrefab.name}(Clone)").gameObject;
-        modelToDestroy.SetActive(false);
-        Destroy(modelToDestroy);
+        formModelPrefab.SetActive(false);
     }
 }

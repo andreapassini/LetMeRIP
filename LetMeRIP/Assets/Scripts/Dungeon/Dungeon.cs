@@ -36,6 +36,4 @@ public class Dungeon : MonoBehaviour
             Debug.Log($"Initiated {current.name}");
         }
     }
-
-
 }

@@ -22,7 +22,9 @@ public class FormManager : MonoBehaviour
         
         // initialize list form and adding Spirit form as first form available (and shared by every macro class)
         forms = new List<PlayerForm>();
-        forms.Add(gameObject.AddComponent<SpiritForm>());
+        SpiritForm addedForm = gameObject.AddComponent<SpiritForm>();
+        //addedForm.transform.parent = transform;
+        forms.Add(addedForm);
 
         // adding shared abilities
         Dash dash = gameObject.AddComponent<Dash>();

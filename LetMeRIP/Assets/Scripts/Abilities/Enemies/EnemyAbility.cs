@@ -24,10 +24,17 @@ public abstract class EnemyAbility : ScriptableObject
 		//}
 
 		this.enemy = enemy;
+
+		Debug.Log(this.name);
+
+	}
+
+	public virtual void PerformAbility()
+    {
+		enemy.CastAbilityDuration(this);
 		previousAbilityTime = Time.time;
 	}
 
-	public abstract void PerformAbility();
 	public abstract void CancelAbility();
 
 

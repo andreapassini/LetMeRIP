@@ -19,13 +19,13 @@ public class RangedAttackAbility : EnemyAbility
 
 	public override void StartAbility(EnemyForm enemy)
 	{
+		base.StartAbility(enemy);
 
-		if (base.previousAbilityTime + coolDown > Time.time)
+		if (previousAbilityTime + coolDown > Time.time)
 		{
+			Debug.Log("Waiting Coolwon " + previousAbilityTime + coolDown);
 			return;
 		}
-
-		previousAbilityTime = Time.time;
 
 		// Look at Target
 		// Maybe better to use RigidBody and use Slerp for a smoother rotation
@@ -38,6 +38,10 @@ public class RangedAttackAbility : EnemyAbility
 			Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
 			rbBullet.AddForce(enemy.attackPoint.forward * bulletForce, ForceMode.Impulse);
 		}
+
+		// enemy.CastAbilityDuration(this);
+
+		base.PerformAbility();
 
 	}
 }

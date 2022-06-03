@@ -9,8 +9,6 @@ public class EnemyRanged : EnemyForm
     private FSM fsm;
     private FSM fightFSM;
 
-    private float reactionReference;
-
     public float tooNearRange = 2f;
 
     [SerializeField] private string targetTag = "Player";
@@ -168,7 +166,7 @@ public class EnemyRanged : EnemyForm
 
     public void GoToLastSeenPos()
     {
-        // navMeshAgent.isStopped = false;
+        navMeshAgent.isStopped = false;
 
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         GetComponent<NavMeshAgent>().destination = lastSeenPos;

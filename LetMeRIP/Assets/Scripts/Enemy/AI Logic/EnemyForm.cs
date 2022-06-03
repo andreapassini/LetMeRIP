@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.AI;
+using System.Collections;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
@@ -15,7 +16,6 @@ public class EnemyForm : MonoBehaviour
     public EnemyAbility attackAction;
     public EnemyAbility chaseAction;
     public EnemyAbility searchAction;
-
 
     public float AiFrameRate = 1f;
 
@@ -44,8 +44,8 @@ public class EnemyForm : MonoBehaviour
     [System.NonSerialized]
     public NavMeshAgent navMeshAgent;
 
-    // Do not update FSM until the action is over
-    private bool isExecutingAction = false;
+    [System.NonSerialized]
+    public float reactionReference;
 
     // Start is called before the first frame update
     void Start()
@@ -81,5 +81,30 @@ public class EnemyForm : MonoBehaviour
         OnEnemyKilled?.Invoke(this);
 
         // Overwrite
+    }
+
+    // Wait until the end of the action to update again the FSM
+    public virtual void CastAbilityDuration(EnemyAbility ability)
+    {
+        Debug.Log("Casting " + ability.name);
+
+        if (AiFrameRate < ability.abilityDurtation)
+        {
+            StartCoroutine(AbilityDuration(ability));
+        }
+    }
+
+    private IEnumerator AbilityDuration(EnemyAbility ability)
+    {
+        // Stop FSM
+        reactionReference = AiFrameRate;
+        AiFrameRate = ability.abilityDurtation;
+
+        Debug.Log("Waiting " + ability.abilityDurtation);
+
+        yield return new WaitForSeconds(ability.abilityDurtation);
+
+        AiFrameRate = reactionReference;
+        
     }
 }

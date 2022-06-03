@@ -18,7 +18,7 @@ public class SimpleAttackAbility : EnemyAbility
 
         // Check for collision
         foreach (Collider e in hitEnemies) {
-            //Debug.Log("Hit this guy: " + enemy.name);
+            Debug.Log("Hit this guy: " + e.name);
 
             //PlayerHealth playerHealth = enemy.gameObject.GetComponent<PlayerHealth>();
 
@@ -40,5 +40,7 @@ public class SimpleAttackAbility : EnemyAbility
         enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
 
         // Play attack animation
+
+        base.PerformAbility();
     }
 }

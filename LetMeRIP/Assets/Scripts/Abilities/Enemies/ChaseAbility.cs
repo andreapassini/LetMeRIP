@@ -22,5 +22,7 @@ public class ChaseAbility : EnemyAbility
 
 		enemy.GetComponent<NavMeshAgent>().isStopped = false;
 		enemy.GetComponent<NavMeshAgent>().destination = enemy.target.position;
+
+		base.PerformAbility();
 	}
 }

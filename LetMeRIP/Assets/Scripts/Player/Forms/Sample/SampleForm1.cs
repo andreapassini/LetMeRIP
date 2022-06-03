@@ -8,19 +8,9 @@ public class SampleForm1 : PlayerForm
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
-        photonView.RPC("RpcChangeToSample1Model", RpcTarget.All);
-        photonView.RPC("RpcAddSample1Abilities", RpcTarget.All);
-    }
-
-    [PunRPC]
-    protected void RpcChangeToSample1Model()
-    {
+        
         formModelPrefab.SetActive(true);
-    }
 
-    [PunRPC]
-    protected void RpcAddSample1Abilities()
-    {
         // abilities declaration
         SampleLightAttack lightAttack = gameObject.AddComponent<SampleLightAttack>();
         SampleHeavyAttack heavyAttack = gameObject.AddComponent<SampleHeavyAttack>();

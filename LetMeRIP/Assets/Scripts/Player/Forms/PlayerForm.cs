@@ -28,16 +28,9 @@ public class PlayerForm : MonoBehaviourPun
 
     public void RemoveComponents()
     {
-        // if (photonView.IsMine)
-        photonView.RPC("RpcRemoveComponents", RpcTarget.All);
-    }
-
-    [PunRPC]
-    public void RpcRemoveComponents()
-    {
         foreach (Ability ability in abilities.Values) Destroy(ability);
         if (abilityHandler != null) Destroy(abilityHandler);
-        
+
         formModelPrefab.SetActive(false);
     }
 }

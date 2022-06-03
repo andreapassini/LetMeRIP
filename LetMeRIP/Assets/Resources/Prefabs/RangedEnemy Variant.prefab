@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8466280302829559348, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8466280302829559348, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: maxHealth
       value: 50
       objectReference: {fileID: 0}
@@ -17,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8607900224311430706, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8607900224311430709, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: m_RootOrder
@@ -105,6 +109,7 @@ MonoBehaviour:
   AiFrameRate: 0.1
   attackPoint: {fileID: 275727462063041611}
   attackRange: 5
+  health: 0
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
@@ -112,6 +117,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   animator: {fileID: 275727460348433317}
-  tooNearRange: 1
+  takeDamageDuration: 1
+  navMeshAgent: {fileID: 0}
+  tooNearRange: 3
   targetTag: Player
   dashAction: {fileID: 11400000, guid: e66e6aa5f0b398443bef8d6d0d764e51, type: 2}

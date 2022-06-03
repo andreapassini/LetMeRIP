@@ -19,7 +19,6 @@ public class SampleFormManager : FormManager
     protected override void BindAbilities()
     {
         base.BindAbilities();
-        if (!photonView.IsMine) return;
         playerInputActions.Player.Transformation1.performed += ctx => SwitchForm(1);
         playerInputActions.Player.Transformation2.performed += ctx => SwitchForm(2);
     }

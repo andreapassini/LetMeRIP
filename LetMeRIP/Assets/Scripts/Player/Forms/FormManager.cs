@@ -40,7 +40,6 @@ public class FormManager : MonoBehaviour
 
     protected virtual void BindAbilities()
     {
-        if (!photonView.IsMine) return;
         playerInputActions.Player.Dash.started += CastSharedAbility;
         playerInputActions.Player.Dash.performed += CastSharedAbility;
         playerInputActions.Player.Dash.canceled += CastSharedAbility;
@@ -56,7 +55,6 @@ public class FormManager : MonoBehaviour
 
     protected virtual void EnableAbilities()
     {
-        if (!photonView.IsMine) return;
         playerInputActions.Player.LightAttack.Enable();
         playerInputActions.Player.HeavyAttack.Enable();
         playerInputActions.Player.Dash.Enable();
@@ -66,7 +64,6 @@ public class FormManager : MonoBehaviour
 
     protected virtual void DisableAbilities()
     {
-        if (!photonView.IsMine) return;
         playerInputActions.Player.LightAttack.Disable();
         playerInputActions.Player.HeavyAttack.Disable();
         playerInputActions.Player.Dash.Disable();

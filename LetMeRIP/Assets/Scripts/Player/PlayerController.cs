@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        photonView = GetComponent<PhotonView>();
+        photonView = GetComponentInParent<PhotonView>();
         playerInputActions = new PlayerInputActions();
 
         currentStats = bodyStats;

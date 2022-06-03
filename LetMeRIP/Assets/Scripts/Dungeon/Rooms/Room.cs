@@ -13,8 +13,12 @@ public class Room : MonoBehaviour
 {
     public PhotonView photonView;
     private Dungeon dungeon;
-    /*[HideInInspector] */public List<Room> connectedRooms;
-    public List<Gate> gates;
+    [SerializeField] private List<Gate> inputGates;
+    
+    [HideInInspector] public List<Room> connectedRooms;
+    public Dictionary<int, Gate> gates;
+    public Dictionary<int, PlayerController> players;
+    
     private float timeStep = 0.2f;
     protected float timeSpent = 0f;
     protected RoomSpawner spawners;
@@ -27,14 +31,19 @@ public class Room : MonoBehaviour
     {
         spawners = gameObject.GetComponentInChildren<RoomSpawner>();
         dungeon = gameObject.GetComponentInParent<Dungeon>();
+        photonView = GetComponent<PhotonView>();
+
+        connectedRooms = new List<Room>();
+        gates = new Dictionary<int, Gate>();
+        players = new Dictionary<int, PlayerController>();
     }
 
     private void Start()
     {
-        photonView = dungeon.photonView;
-        connectedRooms = new List<Room>();
-        foreach(Gate gate in gates)
+        foreach(Gate gate in inputGates)
         {
+            gates[gate.photonView.ViewID] = gate;
+         
             if (connectedRooms.Contains(gate.room)) continue;
             connectedRooms.Add(gate.room);
         }
@@ -45,6 +54,8 @@ public class Room : MonoBehaviour
      */
     public virtual void Init() 
     {
+        if (!PhotonNetwork.IsMasterClient) return; // it just means that this gets executed just once, and it'll be from the master
+        
         timeSpent = 0f;
         StartCoroutine(Timer());
         if(spawners != null) spawners.Init(); // there might be rooms without enemies
@@ -55,6 +66,8 @@ public class Room : MonoBehaviour
      */
     public virtual void Exit() 
     {
+        if (!PhotonNetwork.IsMasterClient) return; // it just means that this gets executed just once, and it'll be from the master
+
         if (spawners != null) spawners.Exit(); // also pretty meh, we should handle multiple players not one so...
         StopAllCoroutines(); // works but it's pretty meh with we have other coroutines
         Debug.Log($"time: {timeSpent}");
@@ -62,12 +75,12 @@ public class Room : MonoBehaviour
 
     public void CloseGates()
     {
-        foreach (Gate gate in gates) gate.Close();
+        foreach (Gate gate in gates.Values) gate.Close();
     }
 
     public void OpenGates()
     {
-        foreach (Gate gate in gates) gate.Open();
+        foreach (Gate gate in gates.Values) gate.Open();
     }
 
     private IEnumerator Timer()

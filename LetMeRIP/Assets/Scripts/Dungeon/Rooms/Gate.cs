@@ -20,10 +20,6 @@ public class Gate : MonoBehaviour
         spawnPoint = transform.Find("spawnPoint"); // default spawn point
         dungeon = FindObjectOfType<Dungeon>();
         room = gameObject.GetComponentInParent<Room>();
-    }
-
-    private void Start()
-    {
         photonView = GetComponent<PhotonView>();
     }
 
@@ -32,10 +28,8 @@ public class Gate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        photonView.RPC("RpcSendMessage", RpcTarget.All, "helo");
-        //photonView.RPC("dungeon.Switch", RpcTarget.All, connection.spawnPoint.position);
-        if (other.CompareTag("Player") && isOpen && other.GetComponentInParent<PhotonView>().IsMine && PhotonNetwork.IsMasterClient)
-            dungeon.Switch(this);
+        if (other.CompareTag("Player") && isOpen)
+            dungeon.Switch(this, other.GetComponent<PlayerController>().photonView.ViewID);
     }
 
     [PunRPC]

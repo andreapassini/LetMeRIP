@@ -1896,6 +1896,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2652796758672869878, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
+      propertyPath: sceneViewId
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8607900224311430706, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: m_Name
       value: SimpleEnemy (1)
@@ -2673,6 +2677,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5afc051ea82884847b27233ef41ff811, type: 3}
+--- !u!114 &278571890 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1274801569816051480, guid: 5afc051ea82884847b27233ef41ff811, type: 3}
+  m_PrefabInstance: {fileID: 278571889}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ebfe6cf3526541a933958d7cc251d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &279991395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4374,17 +4389,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 467220, guid: e73dff4b52d607f4ca11b85eca8f146b, type: 3}
   m_PrefabInstance: {fileID: 1105145312}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &533009780 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1274801569816051480, guid: 5afc051ea82884847b27233ef41ff811, type: 3}
-  m_PrefabInstance: {fileID: 278571889}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d9ebfe6cf3526541a933958d7cc251d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &533206334
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4646,6 +4650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 574431937}
   - component: {fileID: 574431936}
+  - component: {fileID: 574431938}
   m_Layer: 0
   m_Name: room2
   m_TagString: Untagged
@@ -4666,9 +4671,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photonView: {fileID: 0}
-  connectedRooms: []
-  gates:
+  inputGates:
   - {fileID: 1430627244}
+  connectedRooms: []
   timerText: {fileID: 234296332}
 --- !u!4 &574431937
 Transform:
@@ -4690,6 +4695,28 @@ Transform:
   m_Father: {fileID: 814220222}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &574431938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574431935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 9
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!4 &581388123 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 452598, guid: 3e0f6b0ee51e6eb42a731a26210989b9, type: 3}
@@ -6292,8 +6319,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photonView: {fileID: 0}
-  players: []
-  rooms: []
+  inputRooms:
+  - {fileID: 1823609277}
+  - {fileID: 574431936}
+  startGate: {fileID: 278571890}
 --- !u!4 &814220222
 Transform:
   m_ObjectHideFlags: 0
@@ -12323,6 +12352,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2652796758672869878, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
+      propertyPath: sceneViewId
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8607900224311430706, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: m_Name
       value: SimpleEnemy
@@ -13794,6 +13827,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823609276}
   - component: {fileID: 1823609277}
+  - component: {fileID: 1823609278}
   m_Layer: 0
   m_Name: room1
   m_TagString: Untagged
@@ -13835,11 +13869,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photonView: {fileID: 0}
-  connectedRooms: []
-  gates:
-  - {fileID: 533009780}
+  inputGates:
+  - {fileID: 278571890}
   - {fileID: 61120919}
+  connectedRooms: []
   timerText: {fileID: 234296332}
+--- !u!114 &1823609278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823609275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 10
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &1827291360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17134,6 +17190,14 @@ PrefabInstance:
     - target: {fileID: 275727460348433325, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3425458556903353237, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
+      propertyPath: sceneViewId
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5421361351284706917, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
+      propertyPath: sceneViewId
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}

@@ -175,7 +175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3981361058750459946
 Transform:
   m_ObjectHideFlags: 0
@@ -333,8 +333,19 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3244932396781188048, guid: 983266afa658f7844a20055eeab32ce2, type: 3}
+    - target: {fileID: 7321366890837544408, guid: 983266afa658f7844a20055eeab32ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7321366890837544408, guid: 983266afa658f7844a20055eeab32ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: ac281565-d83d-4069-8d39-1fd050040b2d
+      objectReference: {fileID: 0}
+    - target: {fileID: 7321366890837544408, guid: 983266afa658f7844a20055eeab32ce2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: Player/Spirit[/Keyboard/leftCtrl]
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 983266afa658f7844a20055eeab32ce2, type: 3}
 --- !u!4 &2453646422693256491 stripped
 Transform:

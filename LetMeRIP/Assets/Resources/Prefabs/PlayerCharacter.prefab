@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -8238721795462298622}
   - component: {fileID: 33823046798643375}
   m_Layer: 7
-  m_Name: Player
+  m_Name: PlayerCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,6 +160,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c417e5e4-4852-4e7b-9bdb-5bb6de2ae05e
     m_ActionName: Player/Dash[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ac281565-d83d-4069-8d39-1fd050040b2d
+    m_ActionName: Player/Spirit[/Keyboard/leftCtrl]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -192,7 +196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e255b9c0dc885424d918793d5042545b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
   playerClass: sample
   spiritStats: {fileID: 11400000, guid: 914b81d7560a88a408eb0b907232a558, type: 2}
   bodyStats: {fileID: 11400000, guid: 0ebda0e8c7b520942b5fa99b4e9ba7e2, type: 2}
@@ -200,6 +203,8 @@ MonoBehaviour:
   movement: {fileID: 0}
   HPManager: {fileID: 0}
   SGManager: {fileID: 0}
+  playerCameraGOName: PlayerCamera
+  followPointGOName: FollowPoint
 --- !u!114 &-8238721795462298622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,9 +238,10 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 0
+  observableSearch: 2
   ObservedComponents:
   - {fileID: -8238721795462298622}
+  - {fileID: 1698764257197877848}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -249,7 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7321366892197641228}
   m_Layer: 7
-  m_Name: follow
+  m_Name: FollowPoint
   m_TagString: Untagged
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -372,6 +378,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7321366890837544403}
     m_Modifications:
+    - target: {fileID: 2772817014532192198, guid: 3f9e8b896b153254f9367e637bce87ce, type: 3}
+      propertyPath: m_SynchronizeLayers.Array.data[0].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772817014532192198, guid: 3f9e8b896b153254f9367e637bce87ce, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[0].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772817014532192198, guid: 3f9e8b896b153254f9367e637bce87ce, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[1].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772817014532192198, guid: 3f9e8b896b153254f9367e637bce87ce, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[2].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772817014532192198, guid: 3f9e8b896b153254f9367e637bce87ce, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[3].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4550187409256391072, guid: 3f9e8b896b153254f9367e637bce87ce, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -431,6 +457,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4550187409256391072, guid: 3f9e8b896b153254f9367e637bce87ce, type: 3}
   m_PrefabInstance: {fileID: 3596194075561254302}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1698764257197877848 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2772817014532192198, guid: 3f9e8b896b153254f9367e637bce87ce, type: 3}
+  m_PrefabInstance: {fileID: 3596194075561254302}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7606710792579399726
 PrefabInstance:
   m_ObjectHideFlags: 0

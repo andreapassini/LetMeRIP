@@ -1,17 +1,14 @@
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public PhotonView photonView; 
+    private PhotonView photonView;
     PlayerInputActions playerInputActions;
 
     [SerializeField] private string playerClass; // archer, mage or warrior
     private FormManager formManager;
-    
+
     public PlayerStats spiritStats;
     public PlayerStats bodyStats;
     [HideInInspector] public PlayerStats currentStats;
@@ -23,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        photonView = GetComponent<PhotonView>();
+        photonView = GetComponentInParent<PhotonView>();
         playerInputActions = new PlayerInputActions();
 
         currentStats = bodyStats;
@@ -49,6 +46,7 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
+
         formManager.Init(this);
 
         movement = gameObject.AddComponent<Movement>();

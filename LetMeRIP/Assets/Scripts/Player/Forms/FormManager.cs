@@ -19,7 +19,7 @@ public class FormManager : MonoBehaviour
 
     public virtual void Init(PlayerController characterController)
     {
-        photonView = GetComponent<PhotonView>();
+        photonView = GetComponentInParent<PhotonView>();
         this.characterController = characterController;
         playerInputActions = new PlayerInputActions();
         

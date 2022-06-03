@@ -6,9 +6,18 @@ using UnityEngine.AI;
 [CreateAssetMenu(menuName = "EnemyAbilities/Search")]
 public class SearchAbility : EnemyAbility
 {
+	private Vector3 searchDestination;
+
 	public override void StartAbility(EnemyForm enemy)
 	{
 		base.StartAbility(enemy);
+
+		if(Vector3.Distance(enemy.transform.position, searchDestination) < enemy.navMeshAgent.stoppingDistance)
+        {
+			// Go to a random new pos on the Navmesh
+			enemy.GetComponent<NavMeshAgent>().isStopped = false;
+			enemy.GetComponent<NavMeshAgent>().destination = RandomNavmeshLocation(10f, enemy.transform.position);
+		}
 
 		float distance = float.MaxValue;
 
@@ -19,20 +28,16 @@ public class SearchAbility : EnemyAbility
 				enemy.target = t.transform;
 			}
 		}
-
-		// Go to a random new pos on the Navmesh
-		enemy.GetComponent<NavMeshAgent>().isStopped = false;
-		enemy.GetComponent<NavMeshAgent>().destination = RandomNavmeshLocation(10f, enemy.transform.position);
+		
 	}
 
 	public override void PerformAbility()
 	{
-		throw new System.NotImplementedException();
 	}
 
 	public override void CancelAbility()
 	{
-		throw new System.NotImplementedException();
+
 	}
 
 	public static Vector3 RandomNavmeshLocation(float radius, Vector3 position)

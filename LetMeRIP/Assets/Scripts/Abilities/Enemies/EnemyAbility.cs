@@ -7,6 +7,7 @@ public abstract class EnemyAbility : ScriptableObject
 	public string abilityName;
 
 	public float coolDown;
+	public float abilityDurtation;
 
 	public float damage;
 

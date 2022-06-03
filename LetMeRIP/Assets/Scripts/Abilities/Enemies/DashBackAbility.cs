@@ -7,7 +7,6 @@ public class DashBackAbility : EnemyAbility
 
 	public float dashDuration = 1.5f;
 	private float dashTime = 0;
-	private bool dashReady = true;
 
 	public override void CancelAbility()
 	{

@@ -44,6 +44,9 @@ public class EnemyForm : MonoBehaviour
     [System.NonSerialized]
     public NavMeshAgent navMeshAgent;
 
+    // Do not update FSM until the action is over
+    private bool isExecutingAction = false;
+
     // Start is called before the first frame update
     void Start()
     {

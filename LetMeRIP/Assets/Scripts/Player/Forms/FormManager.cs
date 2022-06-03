@@ -8,6 +8,9 @@ using UnityEngine.InputSystem;
 public class FormManager : MonoBehaviour
 {
     protected PhotonView photonView;
+    public int ViewID { get => photonView.ViewID; }
+    public bool IsMine { get => photonView.IsMine; }
+
     public static event Action<FormManager> OnFormChanged;
 
     [HideInInspector] public List<PlayerForm> forms;
@@ -40,6 +43,7 @@ public class FormManager : MonoBehaviour
 
     protected virtual void BindAbilities()
     {
+        if (!IsMine) return;
         playerInputActions.Player.Dash.started += CastSharedAbility;
         playerInputActions.Player.Dash.performed += CastSharedAbility;
         playerInputActions.Player.Dash.canceled += CastSharedAbility;
@@ -55,6 +59,7 @@ public class FormManager : MonoBehaviour
 
     protected virtual void EnableAbilities()
     {
+        if (!IsMine) return;
         playerInputActions.Player.LightAttack.Enable();
         playerInputActions.Player.HeavyAttack.Enable();
         playerInputActions.Player.Dash.Enable();
@@ -64,6 +69,7 @@ public class FormManager : MonoBehaviour
 
     protected virtual void DisableAbilities()
     {
+        if (!IsMine) return;
         playerInputActions.Player.LightAttack.Disable();
         playerInputActions.Player.HeavyAttack.Disable();
         playerInputActions.Player.Dash.Disable();

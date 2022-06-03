@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public HPManager HPManager;
     [HideInInspector] public SGManager SGManager;
 
+    public int ViewID { get => photonView.ViewID; }
+    public bool IsMine { get => photonView.IsMine; }
+
     void Start()
     {
         photonView = GetComponentInParent<PhotonView>();

@@ -1,21 +1,14 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SampleForm1 : PlayerForm
 {
-    private void Start()
-    {
-        formModelPrefab = Resources.Load<GameObject>("Prefabs/Models/sampleModel1");
-    }
-
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
-        // add model
-        formModelPrefab ??= Resources.Load<GameObject>("Prefabs/Models/sampleModel1");
-        Instantiate(formModelPrefab, transform); // let this be first, the following istruction may look for something that this instance might have
-
+        photonView.RPC("RpcChangeToSample1Model", RpcTarget.All);
         // abilities declaration
         SampleLightAttack lightAttack = gameObject.AddComponent<SampleLightAttack>();
         SampleHeavyAttack heavyAttack = gameObject.AddComponent<SampleHeavyAttack>();
@@ -27,5 +20,11 @@ public class SampleForm1 : PlayerForm
         // ability handler initialization
         abilityHandler = gameObject.AddComponent<AbilityHandler>();
         abilityHandler.Init(abilities, characterController);
+    }
+
+    [PunRPC]
+    protected void RpcChangeToSample1Model()
+    {
+        formModelPrefab.SetActive(true);
     }
 }

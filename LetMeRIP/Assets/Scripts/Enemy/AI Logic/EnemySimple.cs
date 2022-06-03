@@ -14,7 +14,17 @@ public class EnemySimple : EnemyForm
 
 	private void Start()
 	{
-		reactionReference = AiFrameRate;
+        // Gather Stats
+        health = enemyStats.maxHealth;
+        Debug.Log("Start Health " + health);
+
+        rb = GetComponent<Rigidbody>();
+
+        animator = GetComponent<Animator>();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
+        reactionReference = AiFrameRate;
 
         targets = GameObject.FindGameObjectsWithTag(targetTag);
         target = targets[0].transform;

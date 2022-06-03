@@ -21,6 +21,16 @@ public class EnemyDefensive : EnemyForm
 
     private void Start()
     {
+        // Gather Stats
+        health = enemyStats.maxHealth;
+        Debug.Log("Start Health " + health);
+
+        rb = GetComponent<Rigidbody>();
+
+        animator = GetComponent<Animator>();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
         reactionReference = AiFrameRate;
 
         isBlocking = true;

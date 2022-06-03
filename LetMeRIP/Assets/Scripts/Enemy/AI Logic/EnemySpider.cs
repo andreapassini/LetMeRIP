@@ -13,6 +13,16 @@ public class EnemySpider : EnemyForm
     private void Start()
     {
 
+        // Gather Stats
+        health = enemyStats.maxHealth;
+        Debug.Log("Start Health " + health);
+
+        rb = GetComponent<Rigidbody>();
+
+        animator = GetComponent<Animator>();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
         reactionReference = AiFrameRate;
 
         targets = GameObject.FindGameObjectsWithTag(targetTag);
@@ -158,14 +168,9 @@ public class EnemySpider : EnemyForm
         while (true)
         {
             fsm.Update();
-            Debug.Log("Vel " + navMeshAgent.velocity.magnitude);
             yield return new WaitForSeconds(AiFrameRate);
         }
     }
-
-    // To manage getting Hit:
-    //  => Event when something hit an enemy
-    //  => The enemy hit by it will resolve the event
 
     public IEnumerator StopAI()
     {
@@ -178,18 +183,19 @@ public class EnemySpider : EnemyForm
 
     public IEnumerator StopAI(float duration)
     {
-        navMeshAgent.enabled = false;
+        navMeshAgent.velocity = Vector3.zero;
         //navMeshAgent.isStopped = true;
         AiFrameRate = duration;
         yield return new WaitForSeconds(duration);
         AiFrameRate = reactionReference;
         //navMeshAgent.isStopped = false;
-        navMeshAgent.enabled = true;
+        //navMeshAgent.isStopped = false;
     }
 
     public void TakeDamageEffect(EnemyForm e)
     {
-        StartCoroutine(StopAI(takeDamageDuration));
+        if(this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
     }
 
 }

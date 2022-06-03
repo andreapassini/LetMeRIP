@@ -173,7 +173,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   animator: {fileID: 1754272607362742359}
-  takeDamageDuration: 0.6
+  takeDamageDuration: 0.35
   navMeshAgent: {fileID: 725012623}
   targetTag: Player
 --- !u!195 &725012623
@@ -185,7 +185,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1805265623673178751}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.2
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50

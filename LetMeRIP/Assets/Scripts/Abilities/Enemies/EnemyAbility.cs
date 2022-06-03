@@ -25,8 +25,6 @@ public abstract class EnemyAbility : ScriptableObject
 
 		this.enemy = enemy;
 
-		Debug.Log(this.name);
-
 	}
 
 	public virtual void PerformAbility()

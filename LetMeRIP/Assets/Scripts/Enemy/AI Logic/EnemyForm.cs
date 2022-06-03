@@ -25,7 +25,8 @@ public class EnemyForm : MonoBehaviour
     public Transform attackPoint;
     public float attackRange = 3f;
 
-    private float health;
+    [HideInInspector]
+    public float health;
 
     public LayerMask whatIsTarget;
     public LayerMask whatICanSeeThrough;
@@ -52,26 +53,20 @@ public class EnemyForm : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Gather Stats
-        health = enemyStats.maxHealth;
-        rb = GetComponent<Rigidbody>();
-
-        animator = GetComponent<Animator>();
-
-        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     public virtual void TakeDamage(float dmg)
     {
         animator.SetTrigger("damage");      
 
-        Debug.Log("Got HIT " + name);
-
         // Calcolate defense reduction
         dmg -= enemyStats.defense;
         dmg = Mathf.Clamp(dmg, 0, float.MaxValue);
+        Debug.Log("Health " + health);
+        Debug.Log("dmg " + dmg);
+        health = health - dmg;
 
-        health -= dmg;
+        Debug.Log("Health " + health);
 
         if (health <= 0) {
             Die();
@@ -87,13 +82,12 @@ public class EnemyForm : MonoBehaviour
         OnEnemyKilled?.Invoke(this);
 
         // Overwrite
+        Destroy(gameObject);
     }
 
     // Wait until the end of the action to update again the FSM
     public virtual void CastAbilityDuration(EnemyAbility ability)
     {
-        Debug.Log("Casting " + ability.name);
-
         if (AiFrameRate < ability.abilityDurtation)
         {
             StartCoroutine(AbilityDuration(ability));
@@ -105,8 +99,6 @@ public class EnemyForm : MonoBehaviour
         // Stop FSM
         reactionReference = AiFrameRate;
         AiFrameRate = ability.abilityDurtation;
-
-        Debug.Log("Waiting " + ability.abilityDurtation);
 
         yield return new WaitForSeconds(ability.abilityDurtation);
 

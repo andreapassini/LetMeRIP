@@ -9,12 +9,7 @@ public class SpiritForm : PlayerForm
     {
         base.Init(characterController);
         photonView.RPC("RpcChangeToSpiritModel", RpcTarget.All);
-
-        // declare abilities
-        // populate abilites dictionary
-
-        // add ability handleer
-        abilityHandler = gameObject.AddComponent<AbilityHandler>();
+        photonView.RPC("RpcAddSpiritAbilities", RpcTarget.All);
     }
 
     // the reason behind this redundancy: many forms are attached to the same gameobject, and all of them inherit from player form, if we 
@@ -24,5 +19,12 @@ public class SpiritForm : PlayerForm
     protected void RpcChangeToSpiritModel()
     {
         formModelPrefab.SetActive(true);
+    }
+
+    [PunRPC]
+    protected void RpcAddSpiritAbilities()
+    {
+        // add ability handler
+        abilityHandler = gameObject.AddComponent<AbilityHandler>();
     }
 }

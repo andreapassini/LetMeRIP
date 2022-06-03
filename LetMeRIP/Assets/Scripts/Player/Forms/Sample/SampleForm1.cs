@@ -9,7 +9,18 @@ public class SampleForm1 : PlayerForm
     {
         base.Init(characterController);
         photonView.RPC("RpcChangeToSample1Model", RpcTarget.All);
-        // abilities declaration
+        photonView.RPC("RpcAddSample1Abilities", RpcTarget.All);
+    }
+
+    [PunRPC]
+    protected void RpcChangeToSample1Model()
+    {
+        formModelPrefab.SetActive(true);
+    }
+
+    [PunRPC]
+    protected void RpcAddSample1Abilities()
+    {
         SampleLightAttack lightAttack = gameObject.AddComponent<SampleLightAttack>();
         SampleHeavyAttack heavyAttack = gameObject.AddComponent<SampleHeavyAttack>();
 
@@ -20,11 +31,5 @@ public class SampleForm1 : PlayerForm
         // ability handler initialization
         abilityHandler = gameObject.AddComponent<AbilityHandler>();
         abilityHandler.Init(abilities, characterController);
-    }
-
-    [PunRPC]
-    protected void RpcChangeToSample1Model()
-    {
-        formModelPrefab.SetActive(true);
     }
 }

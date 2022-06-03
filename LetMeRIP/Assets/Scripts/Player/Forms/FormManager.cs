@@ -44,6 +44,8 @@ public class FormManager : MonoBehaviour
     protected virtual void BindAbilities()
     {
         if (!IsMine) return;
+        playerInputActions.Player.Spirit.performed += ctx => SwitchForm(0);
+
         playerInputActions.Player.Dash.started += CastSharedAbility;
         playerInputActions.Player.Dash.performed += CastSharedAbility;
         playerInputActions.Player.Dash.canceled += CastSharedAbility;
@@ -65,6 +67,7 @@ public class FormManager : MonoBehaviour
         playerInputActions.Player.Dash.Enable();
         playerInputActions.Player.Transformation1.Enable();
         playerInputActions.Player.Transformation2.Enable();
+        playerInputActions.Player.Spirit.Enable();
     }
 
     protected virtual void DisableAbilities()
@@ -75,6 +78,7 @@ public class FormManager : MonoBehaviour
         playerInputActions.Player.Dash.Disable();
         playerInputActions.Player.Transformation1.Disable();
         playerInputActions.Player.Transformation2.Disable();
+        playerInputActions.Player.Spirit.Disable();
     }
 
     public void SwitchForm(int index, bool enableAbilities = true)

@@ -41,8 +41,8 @@ public class Dungeon : MonoBehaviour
         foreach (PlayerController player in FindObjectsOfType<PlayerController>())
             players[player.photonView.ViewID] = player;
 
-        foreach (int key in players.Keys)
-            Switch(startGate, key);
+        //foreach (int key in players.Keys)
+        //    Switch(startGate, key);
     }
 
     public void Switch(Gate gate, int playerViewID)

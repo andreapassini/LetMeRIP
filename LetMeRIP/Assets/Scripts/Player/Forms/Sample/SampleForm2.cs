@@ -9,7 +9,21 @@ public class SampleForm2 : PlayerForm
     {
         base.Init(characterController);
         photonView.RPC("RpcChangeToSample2Model", RpcTarget.All);
+        photonView.RPC("RpcAddSample2Abilities", RpcTarget.All);
 
+    }
+
+    // the reason behind this redundancy: many forms are attached to the same gameobject, and all of them inherit from player form, if we 
+    // define a general rpc that switches the model, this will be called once for every component inheriting from playerform (activating all of the models at on
+    [PunRPC]
+    protected void RpcChangeToSample2Model()
+    {
+        formModelPrefab.SetActive(true);
+    }
+
+    [PunRPC]
+    protected void RpcAddSample2Abilities()
+    {
         // abilities declaration
         SampleLightAttack lightAttack = gameObject.AddComponent<SampleLightAttack>();
         SampleHeavyAttack heavyAttack = gameObject.AddComponent<SampleHeavyAttack>();
@@ -21,14 +35,5 @@ public class SampleForm2 : PlayerForm
         // ability handler initialization
         abilityHandler = gameObject.AddComponent<AbilityHandler>();
         abilityHandler.Init(abilities, characterController);
-
-    }
-
-    // the reason behind this redundancy: many forms are attached to the same gameobject, and all of them inherit from player form, if we 
-    // define a general rpc that switches the model, this will be called once for every component inheriting from playerform (activating all of the models at on
-    [PunRPC]
-    protected void RpcChangeToSample2Model()
-    {
-        formModelPrefab.SetActive(true);
     }
 }

@@ -4,10 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using WebSocketSharp;
 
-public class FormManager : MonoBehaviour
+public class FormManager : MonoBehaviourPun
 {
-    protected PhotonView photonView;
+    // protected PhotonView photonView;
     public int ViewID { get => photonView.ViewID; }
     public bool IsMine { get => photonView.IsMine; }
 
@@ -22,7 +23,6 @@ public class FormManager : MonoBehaviour
 
     public virtual void Init(PlayerController characterController)
     {
-        photonView = GetComponentInParent<PhotonView>();
         this.characterController = characterController;
         playerInputActions = new PlayerInputActions();
         
@@ -91,32 +91,39 @@ public class FormManager : MonoBehaviour
         DisableAbilities();
 
         // clean player from old form components
-        if (currentForm != null)
-            currentForm.RemoveComponents();
+        if (currentForm != null) currentForm.RemoveComponents();
 
         // switch to new form and add its components
         currentForm = forms[index];
         currentForm.Init(characterController);
         
-        if(enableAbilities)
-            EnableAbilities();
-
+        if(enableAbilities) EnableAbilities();
+ 
         OnFormChanged?.Invoke(this);
     }
 
 
     public void CastAbility(InputAction.CallbackContext context)
     {
-        if (!photonView.IsMine) return;
-        if (context.started) currentForm.abilityHandler.StartAbility(context.action.name);
-        else if (context.performed) currentForm.abilityHandler.PerformAbility(context.action.name);
-        else if (context.canceled) currentForm.abilityHandler.CancelAbility(context.action.name);
+        photonView.RPC("RpcCastAbility", RpcTarget.All, false, context.started, context.performed, context.canceled, context.action.name);
     }
 
     public void CastSharedAbility(InputAction.CallbackContext context)
     {
-        if (context.started) sharedAbilityHandler.StartAbility(context.action.name);
-        else if (context.performed) sharedAbilityHandler.PerformAbility(context.action.name);
-        else if (context.canceled) sharedAbilityHandler.CancelAbility(context.action.name);
+        photonView.RPC("RpcCastAbility", RpcTarget.All, true, context.started, context.performed, context.canceled, context.action.name);
+    }
+    
+    [PunRPC]
+    public void RpcCastAbility(bool isSharedAbility, bool isStarted, bool isPerformed, bool isCanceled, string actionName)
+    {
+        Debug.Log("CIAO SONO l'RPC");
+        Debug.Log("sharedAbilityHandler: " + sharedAbilityHandler);
+        Debug.Log("abilityHandler: " + currentForm.abilityHandler);
+
+        AbilityHandler abilityHandler = isSharedAbility ? sharedAbilityHandler : currentForm.abilityHandler;
+        
+        if (isStarted) abilityHandler.StartAbility(actionName);
+        else if (isPerformed) abilityHandler.PerformAbility(actionName);
+        else if (isCanceled) abilityHandler.CancelAbility(actionName);
     }
 }

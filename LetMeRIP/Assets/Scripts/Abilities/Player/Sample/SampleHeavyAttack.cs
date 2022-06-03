@@ -35,18 +35,14 @@ public class SampleHeavyAttack : Ability
 
     public override void PerformedAction()
     {
-        photonView.RPC("RpcHeavyAttack", RpcTarget.All);
-    }
-
-    public override void CancelAction() { }
-    
-    [PunRPC]
-    void RpcHeavyAttack()
-    {
+        Debug.Log("ciao");
+        
         GameObject bullet = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         bulletRb.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
 
         StartCoroutine(Cooldown());
     }
+
+    public override void CancelAction() { }
 }

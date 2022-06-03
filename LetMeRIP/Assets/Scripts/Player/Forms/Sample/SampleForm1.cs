@@ -21,6 +21,7 @@ public class SampleForm1 : PlayerForm
     [PunRPC]
     protected void RpcAddSample1Abilities()
     {
+        // abilities declaration
         SampleLightAttack lightAttack = gameObject.AddComponent<SampleLightAttack>();
         SampleHeavyAttack heavyAttack = gameObject.AddComponent<SampleHeavyAttack>();
 

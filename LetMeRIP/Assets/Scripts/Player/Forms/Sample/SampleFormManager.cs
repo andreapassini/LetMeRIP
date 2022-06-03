@@ -11,7 +11,7 @@ public class SampleFormManager : FormManager
         forms.Add(gameObject.AddComponent<SampleForm1>());
         forms.Add(gameObject.AddComponent<SampleForm2>());
 
-        SwitchForm(1); // possiamo dire di avere sempre lo spirito sullo 0 e la forma base della classe sull'1
+        SwitchForm(2); // possiamo dire di avere sempre lo spirito sullo 0 e la forma base della classe sull'1
         
         if (currentForm != null) BindAbilities();
     }

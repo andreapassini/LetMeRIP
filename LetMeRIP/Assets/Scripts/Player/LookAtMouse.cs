@@ -3,74 +3,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LookAtMouse : MonoBehaviour
+public class LookAtMouse : MonoBehaviourPun
 {
-    private PhotonView photonView;
     [SerializeField] private LayerMask groundMask;
-    private Camera camera;
-
-    private Vector3 directionToLook;
-    private Rigidbody rb;
-
-    private Quaternion rot;
-
+    
     private PlayerInputActions playerInputActions;
-
-    // Start is called before the first frame update
-    void Start()
+    private Camera playerCamera;
+    private Rigidbody rb;
+    
+    private Vector3 directionToLook;
+    
+    private void Start()
     {
-        photonView = GetComponentInParent<PhotonView>();
         rb = GetComponent<Rigidbody>();
-        camera = FindObjectOfType<Camera>();
 
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
-    }
 
-    // Update is called once per frame
-    void Update()
+        playerCamera = Camera.main;
+    }
+    
+    private void Update()
     {
         if (!photonView.IsMine) return;
-        CalcolateAngle();
+        
+        GatherDirectionInput();
     }
 
 	private void FixedUpdate()
 	{
         if (!photonView.IsMine) return;
+        
         Rotate();
 	}
-
-    private (bool success, Vector3 position) GetMousePosition()
+    
+    private void GatherDirectionInput()
     {
-        Ray ray = camera.ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>());
+        Ray ray = playerCamera.ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>());
 
-        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask))
-        {
-            // If hit something return the pos
-            return (success: true, position: hitInfo.point);
-        }
-        else
-        {
-            // If hit something return the pos
-            return (success: false, position: Vector3.zero);
-        }
+        this.directionToLook = Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask)
+            ? hitInfo.point - transform.position
+            : Vector3.zero;
     }
-
-    private void CalcolateAngle()
+    
+    private void Rotate()
     {
-        var (success, position) = GetMousePosition();
-        if (success)
-        {
-            // Calculate direction
-            directionToLook = position - transform.position;
-        }
+        if (this.directionToLook == Vector3.zero) return;
 
-    }
-
-    void Rotate()
-	{
-        // to keep the same hight
-        directionToLook.y = 0;
-        transform.forward = directionToLook;
+        this.directionToLook.y = 0;
+        transform.forward = this.directionToLook;
     }
 }

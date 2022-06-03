@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Ability : MonoBehaviour
+public class Ability : MonoBehaviourPun
 {
     protected float cooldown;
     protected bool isReady = true;

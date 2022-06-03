@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private PhotonView photonView;
+    public PhotonView photonView;
     PlayerInputActions playerInputActions;
 
     [SerializeField] private string playerClass; // archer, mage or warrior

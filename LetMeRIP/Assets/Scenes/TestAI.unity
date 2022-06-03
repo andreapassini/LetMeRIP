@@ -488,6 +488,7 @@ MonoBehaviour:
   AiFrameRate: 0.1
   attackPoint: {fileID: 2065557801}
   attackRange: 3
+  health: 0
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
@@ -672,10 +673,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 322886706, guid: 82ffdf9f0d3e20e478add2c23c36daf6, type: 3}
-      propertyPath: takeDamageDuration
-      value: 0.35
-      objectReference: {fileID: 0}
     - target: {fileID: 1802735933824692851, guid: 82ffdf9f0d3e20e478add2c23c36daf6, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -750,6 +747,7 @@ MonoBehaviour:
   AiFrameRate: 0.1
   attackPoint: {fileID: 975950033}
   attackRange: 3
+  health: 0
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
@@ -1167,6 +1165,7 @@ MonoBehaviour:
   AiFrameRate: 0.1
   attackPoint: {fileID: 641279981}
   attackRange: 3
+  health: 0
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128

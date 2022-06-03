@@ -12,7 +12,6 @@ public class EnemySpider : EnemyForm
 
     private void Start()
     {
-        animator.SetFloat("speed", 1);
 
         reactionReference = AiFrameRate;
 
@@ -71,12 +70,14 @@ public class EnemySpider : EnemyForm
     public void Search()
     {
         searchAction.StartAbility(this);
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
 
     // Chase
     public void Chase()
     {
         chaseAction.StartAbility(this);
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
 
     public void Attack()
@@ -93,6 +94,7 @@ public class EnemySpider : EnemyForm
     {
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         GetComponent<NavMeshAgent>().destination = lastSeenPos;
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
     #endregion
 
@@ -156,6 +158,7 @@ public class EnemySpider : EnemyForm
         while (true)
         {
             fsm.Update();
+            Debug.Log("Vel " + navMeshAgent.velocity.magnitude);
             yield return new WaitForSeconds(AiFrameRate);
         }
     }

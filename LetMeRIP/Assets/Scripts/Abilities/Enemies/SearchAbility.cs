@@ -12,16 +12,16 @@ public class SearchAbility : EnemyAbility
 	{
 		base.StartAbility(enemy);
 
-		enemy.GetComponent<NavMeshAgent>().isStopped = false;
+		enemy.navMeshAgent.isStopped = false;
 
 		if (searchDestination == null 
-			|| Vector3.Distance(enemy.transform.position, searchDestination) < enemy.navMeshAgent.stoppingDistance)
+			|| Vector3.Distance(enemy.transform.position, searchDestination) < 4)
         {
 			searchDestination = RandomNavmeshLocation(20f, enemy.transform.position);
 		}
 
 		// Go to a random new pos on the Navmesh
-		enemy.GetComponent<NavMeshAgent>().destination = searchDestination;
+		enemy.navMeshAgent.destination = searchDestination;
 
 		float distance = float.MaxValue;
 

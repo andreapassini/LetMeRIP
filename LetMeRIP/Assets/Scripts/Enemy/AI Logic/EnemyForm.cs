@@ -32,6 +32,8 @@ public class EnemyForm : MonoBehaviour
 
     public Animator animator;
 
+    public float takeDamageDuration = 1f;
+
     [System.NonSerialized]
     public Rigidbody rb;
 
@@ -41,7 +43,7 @@ public class EnemyForm : MonoBehaviour
     [System.NonSerialized]
     public Transform target;
 
-    [System.NonSerialized]
+    //[System.NonSerialized]
     public NavMeshAgent navMeshAgent;
 
     [System.NonSerialized]
@@ -59,8 +61,12 @@ public class EnemyForm : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    public void TakeDamage(float dmg)
+    public virtual void TakeDamage(float dmg)
     {
+        animator.SetTrigger("damage");      
+
+        Debug.Log("Got HIT " + name);
+
         // Calcolate defense reduction
         dmg -= enemyStats.defense;
         dmg = Mathf.Clamp(dmg, 0, float.MaxValue);

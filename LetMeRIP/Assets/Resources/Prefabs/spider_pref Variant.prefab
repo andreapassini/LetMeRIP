@@ -97,6 +97,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95681433750800818, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
 --- !u!1 &1805265623673178751 stripped
@@ -143,7 +147,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.428689, y: 0.36669382, z: 0.38080403}
   m_Center: {x: -0.001031971, y: 0.1785727, z: -0.02270385}
---- !u!114 &725012621
+--- !u!114 &322886706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,7 +156,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1805265623673178751}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c810da61f51aae4d87fe6e1897033ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 340c00ac9007279499808fa5f295ab85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyStats: {fileID: 11400000, guid: 828a1eaa568f8a54faa250bf80988581, type: 2}
@@ -169,6 +173,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   animator: {fileID: 1754272607362742359}
+  takeDamageDuration: 1
+  navMeshAgent: {fileID: 725012623}
   targetTag: Player
 --- !u!195 &725012623
 NavMeshAgent:
@@ -199,7 +205,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1805265623673178751}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de4022dedfbda1748a10da045ab7142c, type: 3}
   m_Name: 

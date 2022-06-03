@@ -22,11 +22,11 @@ public class Bullet : MonoBehaviour
     {
         Debug.Log("HIT: " + collision.gameObject.GetComponent<EnemyHealth>());
 
-        EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
+        EnemyForm enemyHealth = collision.gameObject.GetComponent<EnemyForm>();
 
         if(enemyHealth != null)
         {
-            enemyHealth.OnDamage(damage, transform.position);
+            enemyHealth.TakeDamage(damage);
         }
 
         // NOT WORKING

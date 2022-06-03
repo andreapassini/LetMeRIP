@@ -210,7 +210,7 @@ public class EnemyRanged : EnemyForm
 
     public IEnumerator PatrolFight()
     {
-        while (true)
+        while (TargetVisible())
         {
             fightFSM.Update();
             yield return new WaitForSeconds(AiFrameRate);

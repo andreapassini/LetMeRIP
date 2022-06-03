@@ -197,7 +197,7 @@ public class EnemyDefensive : EnemyForm
 
     public IEnumerator PatrolFight()
     {
-        while (true)
+        while (TargetInRange())
         {
             fightFSM.Update();
             yield return new WaitForSeconds(AiFrameRate);

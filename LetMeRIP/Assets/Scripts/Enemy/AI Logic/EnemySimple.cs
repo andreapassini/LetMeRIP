@@ -71,6 +71,7 @@ public class EnemySimple : EnemyForm
     {
         while (true) {
             fsm.Update();
+            animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
             yield return new WaitForSeconds(AiFrameRate);
         }
     }
@@ -81,16 +82,19 @@ public class EnemySimple : EnemyForm
 	public void Search()
 	{
         searchAction.StartAbility(this);
-	}
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+    }
 
     // Chase
     public void Chase()
     {
         chaseAction.StartAbility(this);
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
 
     public void Attack()
     {
+        animator.SetTrigger("attack");
         attackAction.StartAbility(this);
 
         // Wait for the end of animation
@@ -101,6 +105,7 @@ public class EnemySimple : EnemyForm
     {
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         GetComponent<NavMeshAgent>().destination = lastSeenPos;
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
     #endregion
 

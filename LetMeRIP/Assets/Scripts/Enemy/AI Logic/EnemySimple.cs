@@ -8,8 +8,6 @@ public class EnemySimple : EnemyForm
 {
 	private FSM fsm;
 
-	private float reactionReference;
-
     [SerializeField]private string targetTag = "Player";
 
 	private void Start()
@@ -63,6 +61,18 @@ public class EnemySimple : EnemyForm
         fsm = new FSM(search);
 
         StartCoroutine(Patrol());
+    }
+
+    private void OnEnable()
+    {
+        OnEnemyDamaged += TakeDamageEffect;
+        OnEnemyKilled += DieEffect;
+    }
+
+    private void OnDisable()
+    {
+        OnEnemyDamaged -= TakeDamageEffect;
+        OnEnemyKilled -= DieEffect;
     }
 
     // Patrol coroutine
@@ -167,5 +177,38 @@ public class EnemySimple : EnemyForm
         AiFrameRate = attackDuration;
         yield return new WaitForSeconds(attackDuration);
         AiFrameRate = reactionReference;
+    }
+
+    public IEnumerator StopAI(float duration)
+    {
+        navMeshAgent.velocity = Vector3.zero;
+        //navMeshAgent.isStopped = true;
+        AiFrameRate = duration;
+        yield return new WaitForSeconds(duration);
+        AiFrameRate = reactionReference;
+        //navMeshAgent.isStopped = false;
+        //navMeshAgent.isStopped = false;
+    }
+
+    
+
+    public void TakeDamageEffect(EnemyForm e)
+    {
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
+
+    public void DieEffect(EnemyForm e)
+	{
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
+
+    public IEnumerator WaitDieAnimation(float duration)
+    {
+        navMeshAgent.enabled = false;
+        yield return new WaitForSeconds(duration);
+        Destroy(gameObject);
+
     }
 }

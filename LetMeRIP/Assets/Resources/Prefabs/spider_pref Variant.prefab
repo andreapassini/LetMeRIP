@@ -41,6 +41,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: spider_pref Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1715103906888602, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4251409082942358, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -166,6 +170,7 @@ MonoBehaviour:
   AiFrameRate: 0.1
   attackPoint: {fileID: 2007489298}
   attackRange: 3
+  health: 0
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128

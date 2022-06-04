@@ -67,11 +67,13 @@ public class EnemySpider : EnemyForm
     private void OnEnable()
     {
         OnEnemyDamaged += TakeDamageEffect;
+        OnEnemyKilled += DieEffect;
     }
 
     private void OnDisable()
     {
         OnEnemyDamaged -= TakeDamageEffect;
+        OnEnemyKilled -= DieEffect;
     }
 
 
@@ -196,6 +198,20 @@ public class EnemySpider : EnemyForm
     {
         if(this == e)
             StartCoroutine(StopAI(takeDamageDuration));
+    }
+
+    public void DieEffect(EnemyForm e)
+    {
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
+
+    public IEnumerator WaitDieAnimation(float duration)
+    {
+        navMeshAgent.enabled = false;
+        yield return new WaitForSeconds(duration);
+        Destroy(gameObject);
+
     }
 
 }

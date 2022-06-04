@@ -15,14 +15,17 @@ public class MenuManager : MonoBehaviour
     {
         foreach (Menu menu in menus)
             if (menu.menuName == menuName)
+            {
                 OpenMenu(menu);
+                break;
+            }
     }
 
     public void OpenMenu(Menu menu)
     {
         if (menu == null) return;
+        
         CloseAllMenus();
-
         menu.Open();
     }
 
@@ -34,8 +37,7 @@ public class MenuManager : MonoBehaviour
     private void CloseAllMenus()
     {
         foreach (Menu menu in menus)
-            if (menu.isOpen)
-                CloseMenu(menu);
+            if (menu.isOpen) CloseMenu(menu);
     }
 
     public void QuitGame()

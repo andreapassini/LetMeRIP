@@ -96,6 +96,18 @@ public class EnemyRanged : EnemyForm
         StartCoroutine(Patrol());
     }
 
+    private void OnEnable()
+    {
+        OnEnemyDamaged += TakeDamageEffect;
+        OnEnemyKilled += DieEffect;
+    }
+
+    private void OnDisable()
+    {
+        OnEnemyDamaged -= TakeDamageEffect;
+        OnEnemyKilled -= DieEffect;
+    }
+
     #region Conditions
     // Target Visible
     public bool TargetVisible()
@@ -154,6 +166,8 @@ public class EnemyRanged : EnemyForm
         // navMeshAgent.isStopped = false;
 
         searchAction.StartAbility(this);
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+
     }
 
     public void Chase()
@@ -161,10 +175,13 @@ public class EnemyRanged : EnemyForm
         //navMeshAgent.isStopped = false;
 
         chaseAction.StartAbility(this);
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+
     }
 
     public void Attack()
     {
+        animator.SetTrigger("attack");
         // navMeshAgent.enabled = false;
         navMeshAgent.isStopped = true;
 
@@ -180,6 +197,8 @@ public class EnemyRanged : EnemyForm
 
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         GetComponent<NavMeshAgent>().destination = lastSeenPos;
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+
     }
 
     public void RunFightFSM()
@@ -189,6 +208,8 @@ public class EnemyRanged : EnemyForm
 
     public void Escape()
     {
+        animator.SetTrigger("dash"); // TO CREATE
+
         // Disable Navmesh
         navMeshAgent.isStopped = true;
         navMeshAgent.enabled = false;
@@ -239,5 +260,25 @@ public class EnemyRanged : EnemyForm
 
         navMeshAgent.isStopped = false;
     }
+
+    public IEnumerator WaitDieAnimation(float duration)
+    {
+        navMeshAgent.enabled = false;
+        yield return new WaitForSeconds(duration);
+        Destroy(gameObject);
+
+    }
     #endregion
+
+    public void TakeDamageEffect(EnemyForm e)
+    {
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
+
+    public void DieEffect(EnemyForm e)
+    {
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
 }

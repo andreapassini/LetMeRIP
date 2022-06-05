@@ -12,21 +12,7 @@ public class EnemySpider : EnemyForm
 
     private void Start()
     {
-
-        // Gather Stats
-        health = enemyStats.maxHealth;
-        Debug.Log("Start Health " + health);
-
-        rb = GetComponent<Rigidbody>();
-
-        animator = GetComponent<Animator>();
-
-        navMeshAgent = GetComponent<NavMeshAgent>();
-
-        reactionReference = AiFrameRate;
-
-        targets = GameObject.FindGameObjectsWithTag(targetTag);
-        target = targets[0].transform;
+        InitStats();
 
         FSMState search = new FSMState();
         search.stayActions.Add(Search);
@@ -183,7 +169,7 @@ public class EnemySpider : EnemyForm
         AiFrameRate = reactionReference;
     }
 
-    public IEnumerator StopAI(float duration)
+    public IEnumerator WaitDamageAnimation(float duration)
     {
         navMeshAgent.velocity = Vector3.zero;
         //navMeshAgent.isStopped = true;
@@ -197,13 +183,13 @@ public class EnemySpider : EnemyForm
     public void TakeDamageEffect(EnemyForm e)
     {
         if(this == e)
-            StartCoroutine(StopAI(takeDamageDuration));
+            StartCoroutine(WaitDamageAnimation(takeDamageDuration));
     }
 
     public void DieEffect(EnemyForm e)
     {
         if (this == e)
-            StartCoroutine(StopAI(takeDamageDuration));
+            StartCoroutine(WaitDieAnimation(takeDamageDuration));
     }
 
     public IEnumerator WaitDieAnimation(float duration)
@@ -212,6 +198,23 @@ public class EnemySpider : EnemyForm
         yield return new WaitForSeconds(duration);
         Destroy(gameObject);
 
+    }
+
+    public override void InitStats()
+    {
+        // Gather Stats
+        health = enemyStats.maxHealth;
+
+        rb = GetComponent<Rigidbody>();
+
+        animator = GetComponent<Animator>();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
+        reactionReference = AiFrameRate;
+
+        targets = GameObject.FindGameObjectsWithTag(targetTag);
+        target = targets[0].transform;
     }
 
 }

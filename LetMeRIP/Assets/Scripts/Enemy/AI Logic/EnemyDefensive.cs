@@ -21,22 +21,9 @@ public class EnemyDefensive : EnemyForm
 
     private void Start()
     {
-        // Gather Stats
-        health = enemyStats.maxHealth;
-        Debug.Log("Start Health " + health);
-
-        rb = GetComponent<Rigidbody>();
-
-        animator = GetComponent<Animator>();
-
-        navMeshAgent = GetComponent<NavMeshAgent>();
-
-        reactionReference = AiFrameRate;
+        InitStats();
 
         isBlocking = true;
-
-        targets = GameObject.FindGameObjectsWithTag(targetTag);
-        target = targets[0].transform;
 
         FSMState search = new FSMState();
         search.stayActions.Add(Search);
@@ -238,4 +225,22 @@ public class EnemyDefensive : EnemyForm
         yield return new WaitForSeconds(attackDuration);
         AiFrameRate = reactionReference;
     }
+
+    public override void InitStats()
+    {
+        // Gather Stats
+        health = enemyStats.maxHealth;
+
+        rb = GetComponent<Rigidbody>();
+
+        animator = GetComponent<Animator>();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
+        reactionReference = AiFrameRate;
+
+        targets = GameObject.FindGameObjectsWithTag(targetTag);
+        target = targets[0].transform;
+    }
+
 }

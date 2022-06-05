@@ -18,22 +18,7 @@ public class EnemyRanged : EnemyForm
     // Start is called before the first frame update
     void Start()
     {
-        // Gather Stats
-        health = enemyStats.maxHealth;
-        Debug.Log("Start Health " + health);
-
-        rb = GetComponent<Rigidbody>();
-
-        animator = GetComponent<Animator>();
-
-        navMeshAgent = GetComponent<NavMeshAgent>();
-
-        reactionReference = AiFrameRate;
-
-        targets = GameObject.FindGameObjectsWithTag(targetTag);
-        target = targets[0].transform;
-
-		navMeshAgent = transform.GetComponent<NavMeshAgent>();
+        InitStats();
 
         FSMState search = new FSMState();
         search.stayActions.Add(Search);
@@ -54,7 +39,7 @@ public class EnemyRanged : EnemyForm
         attack.stayActions.Add(Attack);
 
         FSMState escape = new FSMState();
-        escape.stayActions.Add(Escape);
+        escape.stayActions.Add(Dash);
 
         FSMTransition t1 = new FSMTransition(TargetVisible);
         FSMTransition t2 = new FSMTransition(TargetInRange);
@@ -126,11 +111,19 @@ public class EnemyRanged : EnemyForm
 
     public bool TargetInRange()
     {
-        float distance = (target.position - transform.position).magnitude;
+        
+        if (attackAction.previousAbilityTime + attackAction.coolDown > Time.time)
+        {
+            return false;
+        }
+
+        float distance = Vector3.Distance(transform.position, target.position);
         if (distance <= attackRange)
         {
+            Debug.Log("In Range");
             return true;
         }
+
         return false;
     }
 
@@ -146,6 +139,7 @@ public class EnemyRanged : EnemyForm
 
     private bool TargetTooNear()
     {
+        Debug.Log("Too near");
         float distance = (target.position - transform.position).magnitude;
         if (distance <= tooNearRange)
         {
@@ -187,8 +181,7 @@ public class EnemyRanged : EnemyForm
 
         attackAction.StartAbility(this);
 
-        // Wait for the end of animation
-        // StartCoroutine(StopAI(2f));
+        
     }
 
     public void GoToLastSeenPos()
@@ -206,26 +199,25 @@ public class EnemyRanged : EnemyForm
         StartCoroutine(PatrolFight());
     }
 
-    public void Escape()
+    public void Dash()
     {
         animator.SetTrigger("dash"); // TO CREATE
 
+        animator.SetFloat("speed", 0);
+
         // Disable Navmesh
-        navMeshAgent.isStopped = true;
-        navMeshAgent.enabled = false;
+        // navMeshAgent.isStopped = true;
+        // navMeshAgent.enabled = false;
+
         // Disable isKinematic
-        rb.isKinematic = false;
+        // rb.isKinematic = false;
         // Enable collisions
-        rb.detectCollisions = true;
+        // rb.detectCollisions = true;
 
         dashAction.StartAbility(this);
 
-        // Enable isKinematic
-        rb.isKinematic = true;
-        rb.detectCollisions = false; // Double check this in test
-                                           // Enable Navmesh
-        navMeshAgent.enabled = true;
-        // Disable collisions	
+        StartCoroutine(WaitDashAnimation(dashAction.abilityDurtation));
+
     }
     #endregion
 
@@ -252,9 +244,10 @@ public class EnemyRanged : EnemyForm
     //  => Event when something hit an enemy
     //  => The enemy hit by it will resolve the event
 
-    public IEnumerator StopAI(float stopTime)
+    public IEnumerator WaitDamageAnimation(float stopTime)
     {
         AiFrameRate = stopTime;
+        navMeshAgent.velocity = Vector3.zero;
         yield return new WaitForSeconds(stopTime);
         AiFrameRate = reactionReference;
 
@@ -268,17 +261,51 @@ public class EnemyRanged : EnemyForm
         Destroy(gameObject);
 
     }
+
+    public IEnumerator WaitDashAnimation(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        rb.isKinematic = true;
+        navMeshAgent.enabled = true;
+    }
     #endregion
 
     public void TakeDamageEffect(EnemyForm e)
     {
         if (this == e)
-            StartCoroutine(StopAI(takeDamageDuration));
+            StartCoroutine(WaitDamageAnimation(takeDamageDuration));
     }
 
     public void DieEffect(EnemyForm e)
     {
         if (this == e)
-            StartCoroutine(StopAI(takeDamageDuration));
+            StartCoroutine(WaitDieAnimation(takeDamageDuration));
+    }
+
+    public override void InitStats()
+    {
+        // Gather Stats
+        health = enemyStats.maxHealth;
+
+        rb = GetComponent<Rigidbody>();
+
+        animator = GetComponent<Animator>();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
+        reactionReference = AiFrameRate;
+
+        targets = GameObject.FindGameObjectsWithTag(targetTag);
+        target = targets[0].transform;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, tooNearRange);
     }
 }

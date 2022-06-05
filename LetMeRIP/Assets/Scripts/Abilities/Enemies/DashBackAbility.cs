@@ -23,10 +23,20 @@ public class DashBackAbility : EnemyAbility
 			return;
 		}
 
-		Vector3 dashBackDirection = new Vector3(enemy.transform.position.x * -1 * (dashForce*dashForce), enemy.transform.position.y, enemy.transform.position.z);
-		// Perform Dash Back
-		enemy.rb.AddRelativeForce(dashBackDirection, ForceMode.Impulse);
-
 		base.PerformAbility();
+
+		enemy.enabled = false;
+		enemy.rb.isKinematic = false;
+
+		Vector3 dashBackDirection = new Vector3(
+			enemy.transform.position.x * -1 * (dashForce * dashForce),
+			enemy.transform.position.y,
+			enemy.transform.position.z);
+
+		Vector3 oppositeDir = enemy.transform.forward * -1;
+
+		// Perform Dash Back
+		enemy.rb.AddForce(oppositeDir * dashForce, ForceMode.Impulse);
+
 	}
 }

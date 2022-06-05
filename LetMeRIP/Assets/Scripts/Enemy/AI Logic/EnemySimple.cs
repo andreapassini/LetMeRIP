@@ -12,20 +12,7 @@ public class EnemySimple : EnemyForm
 
 	private void Start()
 	{
-        // Gather Stats
-        health = enemyStats.maxHealth;
-        Debug.Log("Start Health " + health);
-
-        rb = GetComponent<Rigidbody>();
-
-        animator = GetComponent<Animator>();
-
-        navMeshAgent = GetComponent<NavMeshAgent>();
-
-        reactionReference = AiFrameRate;
-
-        targets = GameObject.FindGameObjectsWithTag(targetTag);
-        target = targets[0].transform;
+        InitStats();
 
         FSMState search = new FSMState();
 		search.stayActions.Add(Search);
@@ -210,5 +197,22 @@ public class EnemySimple : EnemyForm
         yield return new WaitForSeconds(duration);
         Destroy(gameObject);
 
+    }
+
+    public override void InitStats()
+    {
+        // Gather Stats
+        health = enemyStats.maxHealth;
+
+        rb = GetComponent<Rigidbody>();
+
+        animator = GetComponent<Animator>();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
+        reactionReference = AiFrameRate;
+
+        targets = GameObject.FindGameObjectsWithTag(targetTag);
+        target = targets[0].transform;
     }
 }

@@ -13,17 +13,15 @@ public class RangedAttackAbility : EnemyAbility
 	{
 	}
 
-	public override void PerformAbility()
-	{
-	}
-
 	public override void StartAbility(EnemyForm enemy)
 	{
 		base.StartAbility(enemy);
 
+		Debug.Log(name);
+
 		if (previousAbilityTime + coolDown > Time.time)
 		{
-			Debug.Log("Waiting Coolwon " + previousAbilityTime + coolDown);
+			Debug.Log(name + " Waiting Coolwon " + previousAbilityTime + coolDown);
 			return;
 		}
 
@@ -33,13 +31,12 @@ public class RangedAttackAbility : EnemyAbility
 
 		for (int i=0; i < numberOfBullets; i++) {
 			// Fire Bullet
-			GameObject bulletFired = Instantiate(bulletPrefab, enemy.attackPoint.position, enemy.attackPoint.rotation);
+			GameObject bulletFired = Instantiate(bulletPrefab, enemy.attackPoint.forward, Quaternion.identity);
 
 			Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
-			rbBullet.AddForce(enemy.attackPoint.forward * bulletForce, ForceMode.Impulse);
+			rbBullet.AddForce(enemy.attackPoint.forward.normalized * bulletForce, ForceMode.Impulse);
 		}
 
-		// enemy.CastAbilityDuration(this);
 
 		base.PerformAbility();
 

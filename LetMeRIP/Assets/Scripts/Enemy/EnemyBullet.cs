@@ -12,6 +12,8 @@ public class EnemyBullet : MonoBehaviour
 
     void Start()
     {
+        Debug.Log(name);
+
         Destroy(gameObject, destroyAfterTime);
         //StartCoroutine(DestroyBulletAfterTime());
 
@@ -29,16 +31,9 @@ public class EnemyBullet : MonoBehaviour
             playerHealth.TakeDamage(damage, transform.position);
         }
 
-        // NOT WORKING
-        //if (TryGetComponent (out EnemyHealth h))
-        //{
-        //    h.OnDamage(damage, transform.position);
-        //}
-
         //GameObject effect = Instantiate(hitDmgEffect, transform.position, Quaternion.identity);
         //Destroy(effect, 2f);
 
-        //if(collision.collider.CompareTag("Enemy"))
         Destroy(gameObject);
     }
 

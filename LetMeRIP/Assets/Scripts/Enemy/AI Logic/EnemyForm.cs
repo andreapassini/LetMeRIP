@@ -5,7 +5,7 @@ using System.Collections;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
-public class EnemyForm : MonoBehaviour
+public abstract class EnemyForm : MonoBehaviour
 {
     public static event Action<EnemyForm> OnEnemyKilled;
     public static event Action<EnemyForm> OnEnemyDamaged;
@@ -62,11 +62,7 @@ public class EnemyForm : MonoBehaviour
         // Calcolate defense reduction
         dmg -= enemyStats.defense;
         dmg = Mathf.Clamp(dmg, 0, float.MaxValue);
-        Debug.Log("Health " + health);
-        Debug.Log("dmg " + dmg);
         health = health - dmg;
-
-        Debug.Log("Health " + health);
 
         if (health <= 0) {
             Die();
@@ -105,4 +101,6 @@ public class EnemyForm : MonoBehaviour
         AiFrameRate = reactionReference;
         
     }
+
+    public abstract void InitStats();
 }

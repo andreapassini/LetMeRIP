@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "EnemyAbilities/DashBack")]
 public class DashBackAbility : EnemyAbility
 {
-	public float dashForce = 100f;
+	public float dashForce = 10f;
 
 	public float dashDuration = 1.5f;
 
@@ -25,7 +25,7 @@ public class DashBackAbility : EnemyAbility
 
 		base.PerformAbility();
 
-		enemy.enabled = false;
+		enemy.navMeshAgent.enabled = false;
 		enemy.rb.isKinematic = false;
 
 		Vector3 dashBackDirection = new Vector3(

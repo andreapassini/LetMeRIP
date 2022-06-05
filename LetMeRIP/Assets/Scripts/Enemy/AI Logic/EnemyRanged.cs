@@ -54,7 +54,7 @@ public class EnemyRanged : EnemyForm
         attack.stayActions.Add(Attack);
 
         FSMState escape = new FSMState();
-        escape.stayActions.Add(Escape);
+        escape.stayActions.Add(Dash);
 
         FSMTransition t1 = new FSMTransition(TargetVisible);
         FSMTransition t2 = new FSMTransition(TargetInRange);
@@ -151,35 +151,32 @@ public class EnemyRanged : EnemyForm
     #region Actions
     public void Search()
     {
-        // navMeshAgent.isStopped = false;
-
         searchAction.StartAbility(this);
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
 
     public void Chase()
     {
-        //navMeshAgent.isStopped = false;
-
         chaseAction.StartAbility(this);
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
 
     public void Attack()
     {
-        // navMeshAgent.enabled = false;
-        navMeshAgent.isStopped = true;
+        animator.SetTrigger("attack");
+        animator.SetFloat("speed", 0);
 
         attackAction.StartAbility(this);
 
-        // Wait for the end of animation
-        // StartCoroutine(StopAI(2f));
+        //StartCoroutine(StopAI());
     }
 
     public void GoToLastSeenPos()
     {
-        navMeshAgent.isStopped = false;
-
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         GetComponent<NavMeshAgent>().destination = lastSeenPos;
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+
     }
 
     public void RunFightFSM()
@@ -187,24 +184,10 @@ public class EnemyRanged : EnemyForm
         StartCoroutine(PatrolFight());
     }
 
-    public void Escape()
+    public void Dash()
     {
-        // Disable Navmesh
-        navMeshAgent.isStopped = true;
-        navMeshAgent.enabled = false;
-        // Disable isKinematic
-        rb.isKinematic = false;
-        // Enable collisions
-        rb.detectCollisions = true;
-
         dashAction.StartAbility(this);
-
-        // Enable isKinematic
-        rb.isKinematic = true;
-        rb.detectCollisions = false; // Double check this in test
-                                           // Enable Navmesh
-        navMeshAgent.enabled = true;
-        // Disable collisions	
+        StartCoroutine(WaitDashAnimation());
     }
     #endregion
 
@@ -231,6 +214,15 @@ public class EnemyRanged : EnemyForm
     //  => Event when something hit an enemy
     //  => The enemy hit by it will resolve the event
 
+    public IEnumerator StopAI()
+    {
+        float attackDuration = 1f; // Just as an example 
+
+        AiFrameRate = attackDuration;
+        yield return new WaitForSeconds(attackDuration);
+        AiFrameRate = reactionReference;
+    }
+
     public IEnumerator StopAI(float stopTime)
     {
         AiFrameRate = stopTime;
@@ -238,6 +230,15 @@ public class EnemyRanged : EnemyForm
         AiFrameRate = reactionReference;
 
         navMeshAgent.isStopped = false;
+    }
+
+    public IEnumerator WaitDashAnimation()
+	{
+        yield return new WaitForSeconds(dashAction.abilityDurtation);
+        navMeshAgent.enabled = true;
+
+        // Enable isKinematic
+        rb.isKinematic = true;
     }
     #endregion
 }

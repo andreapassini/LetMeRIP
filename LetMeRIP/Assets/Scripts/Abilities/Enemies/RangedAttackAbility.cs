@@ -23,7 +23,6 @@ public class RangedAttackAbility : EnemyAbility
 
 		if (previousAbilityTime + coolDown > Time.time)
 		{
-			Debug.Log("Waiting Coolwon " + previousAbilityTime + coolDown);
 			return;
 		}
 

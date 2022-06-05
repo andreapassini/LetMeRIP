@@ -23,9 +23,14 @@ public class DashBackAbility : EnemyAbility
 			return;
 		}
 
-		Vector3 dashBackDirection = new Vector3(enemy.transform.position.x * -1 * (dashForce*dashForce), enemy.transform.position.y, enemy.transform.position.z);
+		// Disable Navmesh
+		enemy.navMeshAgent.enabled = false;
+		// Disable isKinematic
+		enemy.rb.isKinematic = false;
+
+		Vector3 dashBackDirection = enemy.transform.forward * -1;
 		// Perform Dash Back
-		enemy.rb.AddRelativeForce(dashBackDirection, ForceMode.Impulse);
+		enemy.rb.AddForce(dashBackDirection * dashForce, ForceMode.Impulse);
 
 		base.PerformAbility();
 	}

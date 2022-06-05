@@ -139,7 +139,6 @@ public class EnemyRanged : EnemyForm
 
     private bool TargetTooNear()
     {
-        Debug.Log("Too near");
         float distance = (target.position - transform.position).magnitude;
         if (distance <= tooNearRange)
         {
@@ -239,10 +238,6 @@ public class EnemyRanged : EnemyForm
             yield return new WaitForSeconds(AiFrameRate);
         }
     }
-
-    // To manage getting Hit:
-    //  => Event when something hit an enemy
-    //  => The enemy hit by it will resolve the event
 
     public IEnumerator WaitDamageAnimation(float stopTime)
     {

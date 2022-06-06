@@ -7,6 +7,7 @@ public abstract class EnemyAbility : ScriptableObject
 	public string abilityName;
 
 	public float coolDown;
+	public float abilityDurtation;
 
 	public float damage;
 
@@ -17,27 +18,22 @@ public abstract class EnemyAbility : ScriptableObject
 	public float previousAbilityTime = 0;
 
 	public virtual void StartAbility(EnemyForm enemy) 
-	{ 
-		if(previousAbilityTime+coolDown > Time.time) {
-			return;
-		}
+	{
+		//if (base.previousAbilityTime + coolDown > Time.time) {
+		//	return;
+		//}
 
 		this.enemy = enemy;
-		previousAbilityTime = Time.time;
-	}
-	
-	public virtual void PerformAbility()
-	{
-		if (previousAbilityTime + coolDown > Time.time) {
-			return;
-		}
+
 	}
 
-	public virtual void CancelAbility()
-	{
-		if (previousAbilityTime + coolDown > Time.time) {
-			return;
-		}
+	public virtual void PerformAbility(EnemyForm enemy)
+    {
+		enemy.CastAbilityDuration(this);
+		previousAbilityTime = Time.time;
 	}
+
+	public abstract void CancelAbility();
+
 
 }

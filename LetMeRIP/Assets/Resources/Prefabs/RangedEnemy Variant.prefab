@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8466280302829559348, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8466280302829559348, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: maxHealth
       value: 50
       objectReference: {fileID: 0}
@@ -15,13 +19,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: RangedEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8607900224311430706, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8607900224311430709, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8607900224311430709, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.86
+      value: 21.56
       objectReference: {fileID: 0}
     - target: {fileID: 8607900224311430709, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: m_LocalPosition.y
@@ -29,7 +37,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8607900224311430709, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.45
+      value: -2.61
       objectReference: {fileID: 0}
     - target: {fileID: 8607900224311430709, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: m_LocalRotation.w
@@ -65,6 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 616e45360e6c7cd4c8d447f7da5b804e, type: 2}
     m_RemovedComponents:
     - {fileID: 8607900224311430708, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
+    - {fileID: 1631989643, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
 --- !u!1 &275727460348433325 stripped
 GameObject:
@@ -81,7 +90,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8607900224844952020, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
   m_PrefabInstance: {fileID: 8405673003185413535}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &522069235
+--- !u!114 &8405673003302205809
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,17 +99,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 275727460348433325}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15330575bd4194c41afe303c25b5500e, type: 3}
+  m_Script: {fileID: 11500000, guid: b5635f010069d4949bc247c66d4953f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reactionTime: 0.1
-  attackDuration: 3
+  enemyStats: {fileID: 11400000, guid: 828a1eaa568f8a54faa250bf80988581, type: 2}
+  attackAction: {fileID: 11400000, guid: 03efd65c398609245b0dc6e09f57d597, type: 2}
+  chaseAction: {fileID: 11400000, guid: 11bc26dd1a157a8459c06a21789eda7e, type: 2}
+  searchAction: {fileID: 11400000, guid: 2578fd283d54ae24abc0f9d87a44e47d, type: 2}
+  AiFrameRate: 0.1
   attackPoint: {fileID: 275727462063041611}
+  attackRange: 5
+  health: 0
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
-  attackRange: 10
-  target: {fileID: 0}
+  whatICanSeeThrough:
+    serializedVersion: 2
+    m_Bits: 256
   animator: {fileID: 275727460348433317}
-  bulletForce: 10
-  enemyBulletPrefab: {fileID: 677228077099532806, guid: c0014c06b809d7a4392a79c22d733883, type: 3}
+  takeDamageDuration: 1
+  navMeshAgent: {fileID: 0}
+  tooNearRange: 3
+  targetTag: Player
+  dashAction: {fileID: 11400000, guid: e66e6aa5f0b398443bef8d6d0d764e51, type: 2}

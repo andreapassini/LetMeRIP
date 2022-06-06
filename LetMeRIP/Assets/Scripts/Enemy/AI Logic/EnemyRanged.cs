@@ -9,8 +9,6 @@ public class EnemyRanged : EnemyForm
     private FSM fsm;
     private FSM fightFSM;
 
-    private float reactionReference;
-
     public float tooNearRange = 2f;
 
     [SerializeField] private string targetTag = "Player";
@@ -20,10 +18,22 @@ public class EnemyRanged : EnemyForm
     // Start is called before the first frame update
     void Start()
     {
+        // Gather Stats
+        health = enemyStats.maxHealth;
+        Debug.Log("Start Health " + health);
+
+        rb = GetComponent<Rigidbody>();
+
+        animator = GetComponent<Animator>();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
         reactionReference = AiFrameRate;
 
         targets = GameObject.FindGameObjectsWithTag(targetTag);
         target = targets[0].transform;
+
+		navMeshAgent = transform.GetComponent<NavMeshAgent>();
 
         FSMState search = new FSMState();
         search.stayActions.Add(Search);
@@ -44,7 +54,7 @@ public class EnemyRanged : EnemyForm
         attack.stayActions.Add(Attack);
 
         FSMState escape = new FSMState();
-        escape.stayActions.Add(Escape);
+        escape.stayActions.Add(Dash);
 
         FSMTransition t1 = new FSMTransition(TargetVisible);
         FSMTransition t2 = new FSMTransition(TargetInRange);
@@ -84,6 +94,18 @@ public class EnemyRanged : EnemyForm
         fightFSM = new FSM(chase);
 
         StartCoroutine(Patrol());
+    }
+
+    private void OnEnable()
+    {
+        OnEnemyDamaged += TakeDamageEffect;
+        OnEnemyKilled += DieEffect;
+    }
+
+    private void OnDisable()
+    {
+        OnEnemyDamaged -= TakeDamageEffect;
+        OnEnemyKilled -= DieEffect;
     }
 
     #region Conditions
@@ -141,35 +163,32 @@ public class EnemyRanged : EnemyForm
     #region Actions
     public void Search()
     {
-        // navMeshAgent.isStopped = false;
-
         searchAction.StartAbility(this);
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
 
     public void Chase()
     {
-        //navMeshAgent.isStopped = false;
-
         chaseAction.StartAbility(this);
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
 
     public void Attack()
     {
-        // navMeshAgent.enabled = false;
-        // navMeshAgent.isStopped = true;
+        animator.SetTrigger("attack");
+        animator.SetFloat("speed", 0);
 
         attackAction.StartAbility(this);
 
-        // Wait for the end of animation
-        // StartCoroutine(StopAI(1f));
+        //StartCoroutine(StopAI());
     }
 
     public void GoToLastSeenPos()
     {
-        // navMeshAgent.isStopped = false;
-
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         GetComponent<NavMeshAgent>().destination = lastSeenPos;
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+
     }
 
     public void RunFightFSM()
@@ -177,12 +196,10 @@ public class EnemyRanged : EnemyForm
         StartCoroutine(PatrolFight());
     }
 
-    public void Escape()
+    public void Dash()
     {
         dashAction.StartAbility(this);
-
-        // Wait for the end of animation
-        StartCoroutine(StopAI(2f));
+        StartCoroutine(WaitDashAnimation());
     }
     #endregion
 
@@ -198,7 +215,7 @@ public class EnemyRanged : EnemyForm
 
     public IEnumerator PatrolFight()
     {
-        while (true)
+        while (TargetVisible())
         {
             fightFSM.Update();
             yield return new WaitForSeconds(AiFrameRate);
@@ -209,11 +226,43 @@ public class EnemyRanged : EnemyForm
     //  => Event when something hit an enemy
     //  => The enemy hit by it will resolve the event
 
+    public IEnumerator StopAI()
+    {
+        float attackDuration = 1f; // Just as an example 
+
+        AiFrameRate = attackDuration;
+        yield return new WaitForSeconds(attackDuration);
+        AiFrameRate = reactionReference;
+    }
+
     public IEnumerator StopAI(float stopTime)
     {
         AiFrameRate = stopTime;
         yield return new WaitForSeconds(stopTime);
         AiFrameRate = reactionReference;
+
+        navMeshAgent.isStopped = false;
+    }
+
+    public IEnumerator WaitDashAnimation()
+	{
+        yield return new WaitForSeconds(dashAction.abilityDurtation);
+        navMeshAgent.enabled = true;
+
+        // Enable isKinematic
+        rb.isKinematic = true;
     }
     #endregion
+
+    public void TakeDamageEffect(EnemyForm e)
+    {
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
+
+    public void DieEffect(EnemyForm e)
+    {
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
 }

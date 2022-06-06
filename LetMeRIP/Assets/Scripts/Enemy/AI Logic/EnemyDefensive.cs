@@ -21,6 +21,16 @@ public class EnemyDefensive : EnemyForm
 
     private void Start()
     {
+        // Gather Stats
+        health = enemyStats.maxHealth;
+        Debug.Log("Start Health " + health);
+
+        rb = GetComponent<Rigidbody>();
+
+        animator = GetComponent<Animator>();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
         reactionReference = AiFrameRate;
 
         isBlocking = true;
@@ -197,7 +207,7 @@ public class EnemyDefensive : EnemyForm
 
     public IEnumerator PatrolFight()
     {
-        while (true)
+        while (TargetInRange())
         {
             fightFSM.Update();
             yield return new WaitForSeconds(AiFrameRate);

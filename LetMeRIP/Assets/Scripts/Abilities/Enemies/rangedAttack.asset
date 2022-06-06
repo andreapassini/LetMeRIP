@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c15c72eac709c34c8a4160846d1031a, type: 3}
   m_Name: rangedAttack
   m_EditorClassIdentifier: 
-  abilityName: 
+  abilityName: rangedAttack
   coolDown: 3
+  abilityDurtation: 0.5
   damage: 25
   numberOfBullets: 1
   bulletPrefab: {fileID: 677228077099532806, guid: c0014c06b809d7a4392a79c22d733883, type: 3}

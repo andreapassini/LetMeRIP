@@ -14,16 +14,16 @@ GameObject:
   - component: {fileID: 8607900224311430704}
   - component: {fileID: 8607900224311430705}
   - component: {fileID: 8607900224311430715}
-  - component: {fileID: 8607900224311430708}
   - component: {fileID: 8607900224311430714}
   - component: {fileID: 8466280302829559348}
+  - component: {fileID: 1631989643}
   m_Layer: 8
   m_Name: SimpleEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8607900224311430709
 Transform:
   m_ObjectHideFlags: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6c35479a1fcd0014e8139ba85b4897b3, type: 2}
+  - {fileID: 2100000, guid: 3279137e13e1ffd4791e8ca6a29c75b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -140,28 +140,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8607900224311430708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8607900224311430706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b160f7a15d66b9f428662d06510bd3d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reactionTime: 0.1
-  attackDuration: 0.75
-  damage: 10
-  attackPoint: {fileID: 8607900224844952020}
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 128
-  attackRange: 3
-  target: {fileID: 0}
-  animator: {fileID: 8607900224311430714}
 --- !u!95 &8607900224311430714
 Animator:
   serializedVersion: 3
@@ -194,6 +172,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!114 &1631989643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8607900224311430706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c810da61f51aae4d87fe6e1897033ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyStats: {fileID: 11400000, guid: 828a1eaa568f8a54faa250bf80988581, type: 2}
+  attackAction: {fileID: 11400000, guid: 44149625b820b5a4abb30b053e82ff74, type: 2}
+  chaseAction: {fileID: 11400000, guid: 11bc26dd1a157a8459c06a21789eda7e, type: 2}
+  searchAction: {fileID: 11400000, guid: 2578fd283d54ae24abc0f9d87a44e47d, type: 2}
+  AiFrameRate: 0.1
+  attackPoint: {fileID: 8607900224844952020}
+  attackRange: 3
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 128
+  whatICanSeeThrough:
+    serializedVersion: 2
+    m_Bits: 256
+  animator: {fileID: 8607900224311430714}
+  targetTag: Player
 --- !u!1 &8607900224652204166
 GameObject:
   m_ObjectHideFlags: 0

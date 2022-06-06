@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.AI;
+using System.Collections;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
@@ -8,6 +9,7 @@ public class EnemyForm : MonoBehaviour
 {
     public static event Action<EnemyForm> OnEnemyKilled;
     public static event Action<EnemyForm> OnEnemyDamaged;
+    public static event Action<EnemyForm> OnEnemyAttack;
 
     public EnemyStats enemyStats;
 
@@ -15,7 +17,6 @@ public class EnemyForm : MonoBehaviour
     public EnemyAbility attackAction;
     public EnemyAbility chaseAction;
     public EnemyAbility searchAction;
-
 
     public float AiFrameRate = 1f;
 
@@ -25,12 +26,15 @@ public class EnemyForm : MonoBehaviour
     public Transform attackPoint;
     public float attackRange = 3f;
 
-    private float health;
+    [HideInInspector]
+    public float health;
 
     public LayerMask whatIsTarget;
     public LayerMask whatICanSeeThrough;
 
     public Animator animator;
+
+    public float takeDamageDuration = 1f;
 
     [System.NonSerialized]
     public Rigidbody rb;
@@ -41,28 +45,36 @@ public class EnemyForm : MonoBehaviour
     [System.NonSerialized]
     public Transform target;
 
-    [System.NonSerialized]
+    //[System.NonSerialized]
     public NavMeshAgent navMeshAgent;
+
+    [System.NonSerialized]
+    public float reactionReference;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Gather Stats
-        health = enemyStats.maxHealth;
-        rb = GetComponent<Rigidbody>();
-
-        animator = GetComponent<Animator>();
-
-        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    public void TakeDamage(float dmg)
+    // This method will cast an event when Attack Anim. Event is cast
+    // Cause anim events are only related to the object attached to the animator
+    public void OnAttack()
     {
+        OnEnemyAttack?.Invoke(this);
+    }
+
+    public virtual void TakeDamage(float dmg)
+    {
+        animator.SetTrigger("damage");      
+
         // Calcolate defense reduction
         dmg -= enemyStats.defense;
         dmg = Mathf.Clamp(dmg, 0, float.MaxValue);
+        Debug.Log("Health " + health);
+        Debug.Log("dmg " + dmg);
+        health = health - dmg;
 
-        health -= dmg;
+        Debug.Log("Health " + health);
 
         if (health <= 0) {
             Die();
@@ -78,5 +90,27 @@ public class EnemyForm : MonoBehaviour
         OnEnemyKilled?.Invoke(this);
 
         // Overwrite
+        Destroy(gameObject);
+    }
+
+    // Wait until the end of the action to update again the FSM
+    public virtual void CastAbilityDuration(EnemyAbility ability)
+    {
+        if (AiFrameRate < ability.abilityDurtation)
+        {
+            StartCoroutine(AbilityDuration(ability));
+        }
+    }
+
+    private IEnumerator AbilityDuration(EnemyAbility ability)
+    {
+        // Stop FSM
+        reactionReference = AiFrameRate;
+        AiFrameRate = ability.abilityDurtation;
+
+        yield return new WaitForSeconds(ability.abilityDurtation);
+
+        AiFrameRate = reactionReference;
+        
     }
 }

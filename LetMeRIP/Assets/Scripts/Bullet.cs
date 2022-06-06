@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] GameObject hitDmgEffect;
     [SerializeField] float destroyAfterTime = 5f;
-    [SerializeField] float damage = 20f;
+    [SerializeField] float damage = 10f;
 
 
     void Start()
@@ -20,13 +20,13 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("HIT: " + collision.gameObject.GetComponent<EnemyHealth>());
+        // Debug.Log("HIT: " + collision.gameObject.GetComponent<EnemyForm>());
 
-        EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
+        EnemyForm enemyHealth = collision.gameObject.GetComponent<EnemyForm>();
 
         if(enemyHealth != null)
         {
-            enemyHealth.OnDamage(damage, transform.position);
+            enemyHealth.TakeDamage(damage);
         }
 
         // NOT WORKING

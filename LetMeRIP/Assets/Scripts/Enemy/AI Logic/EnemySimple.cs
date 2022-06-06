@@ -8,13 +8,21 @@ public class EnemySimple : EnemyForm
 {
 	private FSM fsm;
 
-	private float reactionReference;
-
     [SerializeField]private string targetTag = "Player";
 
 	private void Start()
 	{
-		reactionReference = AiFrameRate;
+        // Gather Stats
+        health = enemyStats.maxHealth;
+        Debug.Log("Start Health " + health);
+
+        rb = GetComponent<Rigidbody>();
+
+        animator = GetComponent<Animator>();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
+        reactionReference = AiFrameRate;
 
         targets = GameObject.FindGameObjectsWithTag(targetTag);
         target = targets[0].transform;
@@ -55,12 +63,25 @@ public class EnemySimple : EnemyForm
         StartCoroutine(Patrol());
     }
 
+    private void OnEnable()
+    {
+        OnEnemyDamaged += TakeDamageEffect;
+        OnEnemyKilled += DieEffect;
+    }
+
+    private void OnDisable()
+    {
+        OnEnemyDamaged -= TakeDamageEffect;
+        OnEnemyKilled -= DieEffect;
+    }
+
     // Patrol coroutine
     // Periodic update, run forever
     public IEnumerator Patrol()
     {
         while (true) {
             fsm.Update();
+            animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
             yield return new WaitForSeconds(AiFrameRate);
         }
     }
@@ -71,16 +92,19 @@ public class EnemySimple : EnemyForm
 	public void Search()
 	{
         searchAction.StartAbility(this);
-	}
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+    }
 
     // Chase
     public void Chase()
     {
         chaseAction.StartAbility(this);
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
 
     public void Attack()
     {
+        animator.SetTrigger("attack");
         attackAction.StartAbility(this);
 
         // Wait for the end of animation
@@ -91,6 +115,7 @@ public class EnemySimple : EnemyForm
     {
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         GetComponent<NavMeshAgent>().destination = lastSeenPos;
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
     #endregion
 
@@ -152,5 +177,38 @@ public class EnemySimple : EnemyForm
         AiFrameRate = attackDuration;
         yield return new WaitForSeconds(attackDuration);
         AiFrameRate = reactionReference;
+    }
+
+    public IEnumerator StopAI(float duration)
+    {
+        navMeshAgent.velocity = Vector3.zero;
+        //navMeshAgent.isStopped = true;
+        AiFrameRate = duration;
+        yield return new WaitForSeconds(duration);
+        AiFrameRate = reactionReference;
+        //navMeshAgent.isStopped = false;
+        //navMeshAgent.isStopped = false;
+    }
+
+    
+
+    public void TakeDamageEffect(EnemyForm e)
+    {
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
+
+    public void DieEffect(EnemyForm e)
+	{
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
+
+    public IEnumerator WaitDieAnimation(float duration)
+    {
+        navMeshAgent.enabled = false;
+        yield return new WaitForSeconds(duration);
+        Destroy(gameObject);
+
     }
 }

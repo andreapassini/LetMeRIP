@@ -11,20 +11,20 @@ public class SimpleAttackAbility : EnemyAbility
 		throw new System.NotImplementedException();
 	}
 
-	public override void PerformAbility()
+	public override void PerformAbility(EnemyForm enemy)
 	{
         // Create Collider
         Collider[] hitEnemies = Physics.OverlapSphere(enemy.attackPoint.position, enemy.attackRange, enemy.whatIsTarget);
 
         // Check for collision
         foreach (Collider e in hitEnemies) {
-            //Debug.Log("Hit this guy: " + enemy.name);
+            Debug.Log("Hit this guy: " + e.name);
 
-            HPManager playerHealth = enemy.gameObject.GetComponent<HPManager>();
+            //PlayerHealth playerHealth = enemy.gameObject.GetComponent<PlayerHealth>();
 
-            if (playerHealth != null) {
-                playerHealth.TakeDamage(enemy.enemyStats.attack, enemy.transform.position);
-            }
+            //if (playerHealth != null) {
+            //    playerHealth.TakeDamage(enemy.enemyStats.attack, enemy.transform.position);
+            //}
         }
     }
 
@@ -40,5 +40,7 @@ public class SimpleAttackAbility : EnemyAbility
         enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
 
         // Play attack animation
+
+        base.PerformAbility(this.enemy);
     }
 }

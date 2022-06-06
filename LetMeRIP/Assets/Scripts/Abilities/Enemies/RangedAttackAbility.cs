@@ -9,37 +9,51 @@ public class RangedAttackAbility : EnemyAbility
 	public GameObject bulletPrefab;
 	public float bulletForce;
 
-	public override void CancelAbility()
+    private void OnEnable()
+    {
+		EnemyForm.OnEnemyAttack += PerformAbility;
+    }
+
+    private void OnDisable()
+    {
+        
+    }
+
+    public override void CancelAbility()
 	{
-		throw new System.NotImplementedException();
 	}
 
-	public override void PerformAbility()
+	public override void PerformAbility(EnemyForm enemy)
 	{
-		throw new System.NotImplementedException();
+		if(this.enemy == enemy)
+        {
+			for (int i = 0; i < numberOfBullets; i++)
+			{
+				// Fire Bullet
+				GameObject bulletFired = Instantiate(bulletPrefab, enemy.attackPoint.position, enemy.attackPoint.rotation);
+
+				Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
+				rbBullet.AddForce(enemy.attackPoint.forward * bulletForce, ForceMode.Impulse);
+			}
+		}
 	}
 
 	public override void StartAbility(EnemyForm enemy)
 	{
+		base.StartAbility(enemy);
 
-		if (base.previousAbilityTime + coolDown > Time.time)
+		if (previousAbilityTime + coolDown > Time.time)
 		{
 			return;
 		}
-
-		previousAbilityTime = Time.time;
 
 		// Look at Target
 		// Maybe better to use RigidBody and use Slerp for a smoother rotation
 		enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
 
-		for (int i=0; i < numberOfBullets; i++) {
-			// Fire Bullet
-			GameObject bulletFired = Instantiate(bulletPrefab, enemy.attackPoint.position, enemy.attackPoint.rotation);
+		// enemy.CastAbilityDuration(this);
 
-			Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
-			rbBullet.AddForce(enemy.attackPoint.forward * bulletForce, ForceMode.Impulse);
-		}
+		base.PerformAbility(enemy);
 
 	}
 }

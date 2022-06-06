@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using UnityEngine.AI;
 using System.Collections;
+using System.Collections.Generic;
 using Photon.Pun;
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -18,6 +19,8 @@ public class EnemyForm : MonoBehaviourPun
     public static event Action<EnemyForm> OnEnemyAttack;
 
     public EnemyStats enemyStats;
+
+    public Dictionary<string, EnemyAbility> abilites;
 
     //public List<EnemyAbility> enemyAbilities;
     public EnemyAbility attackAction;
@@ -132,7 +135,14 @@ public class EnemyForm : MonoBehaviourPun
     [PunRPC]
     public void RpcCastEnemyAbility(string enemyAbilityName)
 	{
-        EnemyAbility e = GameObject.Find(enemyAbilityName).GetComponent<EnemyAbility>();
+        abilites.TryGetValue(enemyAbilityName, out EnemyAbility e);
         e.StartAbility(this);
 	}
+
+    public virtual void Init()
+	{
+        abilites.Add("attackAction", attackAction);
+        abilites.Add("chaseAction", chaseAction);
+        abilites.Add("searchAction", searchAction);
+    }
 }

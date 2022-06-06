@@ -284,6 +284,6 @@ public class EnemyRanged : EnemyForm
 	{
 		base.Init();
 
-        abilities.Add("dashAction", dashAction);
+        abilites.Add("dashAction", dashAction);
 	}
 }

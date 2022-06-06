@@ -10,8 +10,12 @@ public class EnemySimple : EnemyForm
 
     [SerializeField]private string targetTag = "Player";
 
-	private void Start()
+    public bool lateStart = false;
+
+    private void Start()
 	{
+        Init();
+
         // Gather Stats
         health = enemyStats.maxHealth;
         // Debug.Log("Start Health " + health);
@@ -24,8 +28,12 @@ public class EnemySimple : EnemyForm
 
         reactionReference = AiFrameRate;
 
-        targets = GameObject.FindGameObjectsWithTag(targetTag);
-        target = targets[0].transform;
+        if (lateStart) {
+            StartCoroutine(LateStart());
+        } else {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }
 
         FSMState search = new FSMState();
 		search.stayActions.Add(Search);
@@ -166,10 +174,7 @@ public class EnemySimple : EnemyForm
         }
     }
 
-    // To manage getting Hit:
-    //  => Event when something hit an enemy
-    //  => The enemy hit by it will resolve the event
-
+    #region Coroutines
     public IEnumerator StopAI()
     {
         float attackDuration = 1f; // Just as an example 
@@ -190,20 +195,6 @@ public class EnemySimple : EnemyForm
         //navMeshAgent.isStopped = false;
     }
 
-    
-
-    public void TakeDamageEffect(EnemyForm e)
-    {
-        if (this == e)
-            StartCoroutine(StopAI(takeDamageDuration));
-    }
-
-    public void DieEffect(EnemyForm e)
-	{
-        if (this == e)
-            StartCoroutine(StopAI(takeDamageDuration));
-    }
-
     public IEnumerator WaitDieAnimation(float duration)
     {
         navMeshAgent.enabled = false;
@@ -211,4 +202,27 @@ public class EnemySimple : EnemyForm
         Destroy(gameObject);
 
     }
+
+    public IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(1f);
+        targets = GameObject.FindGameObjectsWithTag(targetTag);
+        target = targets[0].transform;
+    }
+    #endregion
+
+    #region Effects
+    public void TakeDamageEffect(EnemyForm e)
+    {
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
+
+    public void DieEffect(EnemyForm e)
+    {
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
+    #endregion
+
 }

@@ -15,9 +15,13 @@ public class EnemyRanged : EnemyForm
 
     public EnemyAbility dashAction;
 
+    public bool lateStart = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        Init();
+
         // Gather Stats
         health = enemyStats.maxHealth;
         // Debug.Log("Start Health " + health);
@@ -30,10 +34,14 @@ public class EnemyRanged : EnemyForm
 
         reactionReference = AiFrameRate;
 
-        targets = GameObject.FindGameObjectsWithTag(targetTag);
-        target = targets[0].transform;
+        if (lateStart) {
+            StartCoroutine(LateStart());
+        } else {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }
 
-		navMeshAgent = transform.GetComponent<NavMeshAgent>();
+        navMeshAgent = transform.GetComponent<NavMeshAgent>();
 
         FSMState search = new FSMState();
         search.stayActions.Add(Search);
@@ -175,7 +183,6 @@ public class EnemyRanged : EnemyForm
 
     public void Attack()
     {
-        animator.SetTrigger("attack");
         animator.SetFloat("speed", 0);
 
         attackAction.StartAbility(this);
@@ -252,6 +259,13 @@ public class EnemyRanged : EnemyForm
         // Enable isKinematic
         rb.isKinematic = true;
     }
+
+    public IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(1f);
+        targets = GameObject.FindGameObjectsWithTag(targetTag);
+        target = targets[0].transform;
+    }
     #endregion
 
     public void TakeDamageEffect(EnemyForm e)
@@ -265,4 +279,11 @@ public class EnemyRanged : EnemyForm
         if (this == e)
             StartCoroutine(StopAI(takeDamageDuration));
     }
+
+	public override void Init()
+	{
+		base.Init();
+
+        abilities.Add("dashAction", dashAction);
+	}
 }

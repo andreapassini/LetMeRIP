@@ -8,6 +8,11 @@ using Photon.Pun;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyForm : MonoBehaviourPun
 {
+    public int ViewID { get => photonView.ViewID; }
+
+    [System.NonSerialized]
+    public PhotonView photonView;
+
     public static event Action<EnemyForm> OnEnemyKilled;
     public static event Action<EnemyForm> OnEnemyDamaged;
     public static event Action<EnemyForm> OnEnemyAttack;
@@ -115,4 +120,19 @@ public class EnemyForm : MonoBehaviourPun
         AiFrameRate = reactionReference;
         
     }
+
+    public void CastEnemyAbility(EnemyAbility enemyAbility)
+	{
+        photonView.RPC("RpcCastEnemyAbility",
+            RpcTarget.All,
+            enemyAbility.name
+            );
+	}
+
+    [PunRPC]
+    public void RpcCastEnemyAbility(string enemyAbilityName)
+	{
+        EnemyAbility e = GameObject.Find(enemyAbilityName).GetComponent<EnemyAbility>();
+        e.StartAbility(this);
+	}
 }

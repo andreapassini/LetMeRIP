@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,7 @@ public abstract class EnemyAbility : ScriptableObject
 		//}
 
 		this.enemy = enemy;
-
+		enemy.CastEnemyAbility(this);
 	}
 
 	public virtual void PerformAbility(EnemyForm enemy)
@@ -34,6 +35,4 @@ public abstract class EnemyAbility : ScriptableObject
 	}
 
 	public abstract void CancelAbility();
-
-
 }

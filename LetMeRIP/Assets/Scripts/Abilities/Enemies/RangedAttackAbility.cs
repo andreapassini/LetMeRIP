@@ -47,6 +47,8 @@ public class RangedAttackAbility : EnemyAbility
 			return;
 		}
 
+		enemy.animator.SetTrigger("attack");
+
 		// Look at Target
 		// Maybe better to use RigidBody and use Slerp for a smoother rotation
 		enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);

@@ -10,8 +10,11 @@ public class EnemySpider : EnemyForm
 
     [SerializeField] private string targetTag = "Player";
 
+    private bool lateStart = false;
+
     private void Start()
     {
+        Init();
 
         // Gather Stats
         health = enemyStats.maxHealth;
@@ -25,8 +28,13 @@ public class EnemySpider : EnemyForm
 
         reactionReference = AiFrameRate;
 
-        targets = GameObject.FindGameObjectsWithTag(targetTag);
-        target = targets[0].transform;
+		if (lateStart) {
+            StartCoroutine(LateStart());
+		} else {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }        
+        
 
         FSMState search = new FSMState();
         search.stayActions.Add(Search);
@@ -164,12 +172,12 @@ public class EnemySpider : EnemyForm
     }
 
 
+    #region Coroutines
     // Patrol coroutine
     // Periodic update, run forever
     public IEnumerator Patrol()
     {
-        while (true)
-        {
+        while (true) {
             fsm.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
@@ -195,17 +203,7 @@ public class EnemySpider : EnemyForm
         //navMeshAgent.isStopped = false;
     }
 
-    public void TakeDamageEffect(EnemyForm e)
-    {
-        if(this == e)
-            StartCoroutine(StopAI(takeDamageDuration));
-    }
 
-    public void DieEffect(EnemyForm e)
-    {
-        if (this == e)
-            StartCoroutine(StopAI(takeDamageDuration));
-    }
 
     public IEnumerator WaitDieAnimation(float duration)
     {
@@ -215,4 +213,25 @@ public class EnemySpider : EnemyForm
 
     }
 
+    public IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(1f);
+        targets = GameObject.FindGameObjectsWithTag(targetTag);
+        target = targets[0].transform;
+    }
+    #endregion
+
+    #region effects
+    public void TakeDamageEffect(EnemyForm e)
+    {
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
+
+    public void DieEffect(EnemyForm e)
+    {
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
+    #endregion
 }

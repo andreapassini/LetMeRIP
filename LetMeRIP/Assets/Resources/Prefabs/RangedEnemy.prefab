@@ -38,6 +38,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7954997921229432874}
     m_Modifications:
+    - target: {fileID: 121783230, guid: cc2904f8420d54e45b80616562ff859c, type: 3}
+      propertyPath: tooNearRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 121783230, guid: cc2904f8420d54e45b80616562ff859c, type: 3}
+      propertyPath: takeDamageDuration
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 121783231, guid: cc2904f8420d54e45b80616562ff859c, type: 3}
+      propertyPath: m_Constraints
+      value: 36
+      objectReference: {fileID: 0}
     - target: {fileID: 1839304754744059133, guid: cc2904f8420d54e45b80616562ff859c, type: 3}
       propertyPath: m_Name
       value: FreeLichPolyart

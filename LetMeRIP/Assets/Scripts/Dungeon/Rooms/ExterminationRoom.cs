@@ -27,6 +27,7 @@ public class ExterminationRoom : Room
         if (!cleared)
         {
             spawners.Init();
+            spawners.Spawn();
             closeGatesCoroutine = CloseGates(3f);
             StartCoroutine(closeGatesCoroutine); 
         }

@@ -20,9 +20,9 @@ public class Room : MonoBehaviour
     public Dictionary<int, Gate> gates;
     public Dictionary<int, PlayerController> players;
     
-    private float timeStep = 0.2f;
+    protected float timeStep = 0.2f;
     protected float timeSpent = 0f;
-    //protected RoomSpawner spawners;
+    protected IEnumerator timerCoroutine;
 
     #region UI
     [SerializeField] private TextMeshProUGUI timerText;
@@ -78,7 +78,8 @@ public class Room : MonoBehaviour
         Debug.Log($"room {photonView.ViewID} Init");
 
         timeSpent = 0f;
-        StartCoroutine(Timer());
+        timerCoroutine = Timer();
+        StartCoroutine(timerCoroutine);
     }
 
     /**
@@ -89,7 +90,7 @@ public class Room : MonoBehaviour
         if (!PhotonNetwork.IsMasterClient) return; // it just means that this gets executed just once, and it'll be from the master
         Debug.Log($"room {photonView.ViewID} Exit");
 
-        StopAllCoroutines(); // works but it's pretty meh with we have other coroutines
+        StopCoroutine(timerCoroutine); // works but it's pretty meh with we have other coroutines
         Debug.Log($"time: {timeSpent}");
     }
 
@@ -117,9 +118,12 @@ public class Room : MonoBehaviour
 
     private IEnumerator Timer()
     {
-        timerText.text = timeSpent.ToString("0.00");
-        yield return new WaitForSeconds(timeStep);
-        timeSpent += timeStep;
-        StartCoroutine(Timer());
+        for (; ; )
+        {
+            timerText.text = timeSpent.ToString("0.00");
+            yield return new WaitForSeconds(timeStep);
+            timeSpent += timeStep;
+            //StartCoroutine(Timer());
+        }
     }
 }

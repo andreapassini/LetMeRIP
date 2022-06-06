@@ -7,9 +7,8 @@ using UnityEngine;
  * A set of linked rooms, with a start and an end.
  * Handles the switch between rooms
  */
-public class Dungeon : MonoBehaviour
+public class Dungeon : MonoBehaviourPun
 {
-    public PhotonView photonView;
     [SerializeField] private List<Room> inputRooms;
     [SerializeField] private Gate startGate;
 
@@ -18,31 +17,35 @@ public class Dungeon : MonoBehaviour
     
     private void Start()
     {
-        photonView = GetComponent<PhotonView>();
         players = new Dictionary<int, PlayerController>();
         rooms = new Dictionary<int, Room>();
         
         inputRooms = new List<Room>(gameObject.GetComponentsInChildren<Room>());
         foreach(Room room  in inputRooms)
             rooms[room.photonView.ViewID] = room;
-
         StartCoroutine(LateStart());
-
-        //current = inputRooms[0];
-        //current.Init();
     }
 
+    [PunRPC]
+    private void AddPlayer()
+    {
+        foreach (PlayerController player in FindObjectsOfType<PlayerController>())
+        {
+            if (!players.ContainsKey(player.photonView.ViewID))
+            {
+                players[player.photonView.ViewID] = player;
+                if (player.photonView.IsMine) Switch(startGate, player.photonView.ViewID);
+            }
+        }
+    }
+
+    /**
+     * If performed in the start the players are not yet spawned and the procedure fails
+     */
     private IEnumerator LateStart()
     {
-        if (!PhotonNetwork.IsMasterClient) yield break;
-
-        yield return new WaitForSeconds(3f);
-        Debug.Log("Started");
-        foreach (PlayerController player in FindObjectsOfType<PlayerController>())
-            players[player.photonView.ViewID] = player;
-
-        //foreach (int key in players.Keys)
-        //    Switch(startGate, key);
+        yield return new WaitForSeconds(1f);
+        photonView.RPC("AddPlayer", RpcTarget.All);
     }
 
     public void Switch(Gate gate, int playerViewID)
@@ -53,12 +56,7 @@ public class Dungeon : MonoBehaviour
         Debug.Log("Switching");
         if(gate != null && gate.spawnPoint != null && gate.room != null)
         {
-            //current.Exit();
-            //Debug.Log($"Exited {current.name}");
             photonView.RPC("RpcSwitch", RpcTarget.All, players[playerViewID].photonView.ViewID, gate.room.photonView.ViewID, gate.photonView.ViewID);
-            //current = gate.connection.room;
-            //current.Init();
-            //Debug.Log($"Initiated {current.name}");
         }
     }
 
@@ -71,9 +69,11 @@ public class Dungeon : MonoBehaviour
         {
             player.transform.position = gate.connection.spawnPoint.position;
 
-            rooms[roomViewID].players.Remove(playerViewID);
+            //rooms[roomViewID].players.Remove(playerViewID);
+            rooms[roomViewID].ExitPlayer(player);
             Debug.Log($"Old: {string.Join(",", rooms[roomViewID].players.Keys)}");
-            gate.connection.room.players[playerViewID] = player;
+            //gate.connection.room.players[playerViewID] = player;
+            gate.connection.room.EnterPlayer(player);
             Debug.Log($"New: {string.Join(",", gate.connection.room.players.Keys)}");
         }
     }

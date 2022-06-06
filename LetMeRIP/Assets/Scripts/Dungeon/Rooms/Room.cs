@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Cinemachine;
 using Photon.Pun;
+using System;
 /**
 * A piece of a dungeon, it can contain enemies or/and rewards.
 * It keeps track of a number of things: the enemies in it, their spawn position and rate,
@@ -49,24 +50,46 @@ public class Room : MonoBehaviour
         }
     }
 
+    public void EnterPlayer(PlayerController player) 
+    {
+        int playerViewID = player.photonView.ViewID;
+        if (players.ContainsKey(playerViewID)) return;
+
+        players[playerViewID] = player;
+        if (players.Count == 1) Init();
+        Debug.Log($"{playerViewID} entered room {photonView.ViewID}");
+    }
+
+    public void ExitPlayer(PlayerController player)
+    {
+        int playerViewID = player.photonView.ViewID;
+        if (!players.ContainsKey(playerViewID)) return;
+
+        players.Remove(playerViewID);
+        if (players.Count == 0) Exit();
+        Debug.Log($"{playerViewID} exited room {photonView.ViewID}");
+    }
+
     /**
      * Called when entered
      */
-    public virtual void Init() 
+    protected virtual void Init() 
     {
         if (!PhotonNetwork.IsMasterClient) return; // it just means that this gets executed just once, and it'll be from the master
-        
+        Debug.Log($"room {photonView.ViewID} Init");
+
         timeSpent = 0f;
         StartCoroutine(Timer());
         if(spawners != null) spawners.Init(); // there might be rooms without enemies
     }
-    
+
     /**
      * Called when exited
      */
-    public virtual void Exit() 
+    protected virtual void Exit() 
     {
         if (!PhotonNetwork.IsMasterClient) return; // it just means that this gets executed just once, and it'll be from the master
+        Debug.Log($"room {photonView.ViewID} Exit");
 
         if (spawners != null) spawners.Exit(); // also pretty meh, we should handle multiple players not one so...
         StopAllCoroutines(); // works but it's pretty meh with we have other coroutines

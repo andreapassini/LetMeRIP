@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public abstract class EnemyAbility : ScriptableObject
 {
@@ -20,10 +21,6 @@ public abstract class EnemyAbility : ScriptableObject
 
 	public virtual void StartAbility(EnemyForm enemy) 
 	{
-		//if (base.previousAbilityTime + coolDown > Time.time) {
-		//	return;
-		//}
-
 		this.enemy = enemy;
 		enemy.CastEnemyAbility(this);
 	}

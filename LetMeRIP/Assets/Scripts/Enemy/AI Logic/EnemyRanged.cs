@@ -20,8 +20,6 @@ public class EnemyRanged : EnemyForm
     // Start is called before the first frame update
     void Start()
     {
-        Init();
-
         // Gather Stats
         health = enemyStats.maxHealth;
         // Debug.Log("Start Health " + health);
@@ -285,5 +283,5 @@ public class EnemyRanged : EnemyForm
 		base.Init();
 
         abilites.Add("dashAction", dashAction);
-	}
+    }
 }

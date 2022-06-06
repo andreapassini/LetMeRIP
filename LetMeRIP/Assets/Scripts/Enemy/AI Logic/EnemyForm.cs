@@ -128,8 +128,7 @@ public class EnemyForm : MonoBehaviourPun
 	{
         photonView.RPC("RpcCastEnemyAbility",
             RpcTarget.All,
-            enemyAbility.name
-            );
+            enemyAbility.name);
 	}
 
     [PunRPC]
@@ -141,6 +140,7 @@ public class EnemyForm : MonoBehaviourPun
 
     public virtual void Init()
 	{
+        abilites = new Dictionary<string, EnemyAbility>();
         abilites.Add("attackAction", attackAction);
         abilites.Add("chaseAction", chaseAction);
         abilites.Add("searchAction", searchAction);

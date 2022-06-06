@@ -1,63 +1,167 @@
 fileFormatVersion: 2
 guid: ce43f40fc2027a949a58e385c6a2cd1f
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Armor_L
-    100002: Armor_R
-    100004: //RootNode
-    100006: Foot_L
-    100008: Foot_R
-    100010: Hand_L
-    100012: Hand_R
-    100014: Head
-    100016: Hips
-    100018: Index_Proximal_L
-    100020: Index_Proximal_R
-    100022: LichMesh
-    100024: Lower_Arm_L
-    100026: Lower_Leg_L
-    100028: Rower_Arm_R
-    100030: Rower_Reg_R
-    100032: Spine
-    100034: Staff
-    100036: Toes_L
-    100038: Toes_R
-    100040: Upper_Arm_L
-    100042: Upper_Arm_R
-    100044: Upper_Leg_L
-    100046: Upper_Reg_R
-    400000: Armor_L
-    400002: Armor_R
-    400004: //RootNode
-    400006: Foot_L
-    400008: Foot_R
-    400010: Hand_L
-    400012: Hand_R
-    400014: Head
-    400016: Hips
-    400018: Index_Proximal_L
-    400020: Index_Proximal_R
-    400022: LichMesh
-    400024: Lower_Arm_L
-    400026: Lower_Leg_L
-    400028: Rower_Arm_R
-    400030: Rower_Reg_R
-    400032: Spine
-    400034: Staff
-    400036: Toes_L
-    400038: Toes_R
-    400040: Upper_Arm_L
-    400042: Upper_Arm_R
-    400044: Upper_Leg_L
-    400046: Upper_Reg_R
-    4300000: LichMesh
-    7400000: attack01
-    9500000: //RootNode
-    13700000: LichMesh
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Armor_L
+  - first:
+      1: 100002
+    second: Armor_R
+  - first:
+      1: 100004
+    second: //RootNode
+  - first:
+      1: 100006
+    second: Foot_L
+  - first:
+      1: 100008
+    second: Foot_R
+  - first:
+      1: 100010
+    second: Hand_L
+  - first:
+      1: 100012
+    second: Hand_R
+  - first:
+      1: 100014
+    second: Head
+  - first:
+      1: 100016
+    second: Hips
+  - first:
+      1: 100018
+    second: Index_Proximal_L
+  - first:
+      1: 100020
+    second: Index_Proximal_R
+  - first:
+      1: 100022
+    second: LichMesh
+  - first:
+      1: 100024
+    second: Lower_Arm_L
+  - first:
+      1: 100026
+    second: Lower_Leg_L
+  - first:
+      1: 100028
+    second: Rower_Arm_R
+  - first:
+      1: 100030
+    second: Rower_Reg_R
+  - first:
+      1: 100032
+    second: Spine
+  - first:
+      1: 100034
+    second: Staff
+  - first:
+      1: 100036
+    second: Toes_L
+  - first:
+      1: 100038
+    second: Toes_R
+  - first:
+      1: 100040
+    second: Upper_Arm_L
+  - first:
+      1: 100042
+    second: Upper_Arm_R
+  - first:
+      1: 100044
+    second: Upper_Leg_L
+  - first:
+      1: 100046
+    second: Upper_Reg_R
+  - first:
+      4: 400000
+    second: Armor_L
+  - first:
+      4: 400002
+    second: Armor_R
+  - first:
+      4: 400004
+    second: //RootNode
+  - first:
+      4: 400006
+    second: Foot_L
+  - first:
+      4: 400008
+    second: Foot_R
+  - first:
+      4: 400010
+    second: Hand_L
+  - first:
+      4: 400012
+    second: Hand_R
+  - first:
+      4: 400014
+    second: Head
+  - first:
+      4: 400016
+    second: Hips
+  - first:
+      4: 400018
+    second: Index_Proximal_L
+  - first:
+      4: 400020
+    second: Index_Proximal_R
+  - first:
+      4: 400022
+    second: LichMesh
+  - first:
+      4: 400024
+    second: Lower_Arm_L
+  - first:
+      4: 400026
+    second: Lower_Leg_L
+  - first:
+      4: 400028
+    second: Rower_Arm_R
+  - first:
+      4: 400030
+    second: Rower_Reg_R
+  - first:
+      4: 400032
+    second: Spine
+  - first:
+      4: 400034
+    second: Staff
+  - first:
+      4: 400036
+    second: Toes_L
+  - first:
+      4: 400038
+    second: Toes_R
+  - first:
+      4: 400040
+    second: Upper_Arm_L
+  - first:
+      4: 400042
+    second: Upper_Arm_R
+  - first:
+      4: 400044
+    second: Upper_Leg_L
+  - first:
+      4: 400046
+    second: Upper_Reg_R
+  - first:
+      43: 4300000
+    second: LichMesh
+  - first:
+      74: 7400000
+    second: attack01
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: LichMesh
   externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 0
@@ -86,6 +190,7 @@ ModelImporter:
     - serializedVersion: 16
       name: attack01
       takeName: Take 001
+      internalID: 0
       firstFrame: 0
       lastFrame: 40
       wrapMode: 0
@@ -106,7 +211,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.8295964
+        functionName: AttackEvent
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 03efd65c398609245b0dc6e09f57d597, type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
@@ -166,25 +278,32 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
     importLights: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 0
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -193,10 +312,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human:
     - boneName: Hips
       humanName: Hips
@@ -462,13 +581,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

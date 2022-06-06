@@ -9,7 +9,17 @@ public class RangedAttackAbility : EnemyAbility
 	public GameObject bulletPrefab;
 	public float bulletForce;
 
-	public override void CancelAbility()
+    private void OnEnable()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        
+    }
+
+    public override void CancelAbility()
 	{
 	}
 

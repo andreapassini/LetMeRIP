@@ -96,6 +96,18 @@ public class EnemyRanged : EnemyForm
         StartCoroutine(Patrol());
     }
 
+    private void OnEnable()
+    {
+        OnEnemyDamaged += TakeDamageEffect;
+        OnEnemyKilled += DieEffect;
+    }
+
+    private void OnDisable()
+    {
+        OnEnemyDamaged -= TakeDamageEffect;
+        OnEnemyKilled -= DieEffect;
+    }
+
     #region Conditions
     // Target Visible
     public bool TargetVisible()
@@ -241,4 +253,16 @@ public class EnemyRanged : EnemyForm
         rb.isKinematic = true;
     }
     #endregion
+
+    public void TakeDamageEffect(EnemyForm e)
+    {
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
+
+    public void DieEffect(EnemyForm e)
+    {
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
 }

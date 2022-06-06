@@ -51,7 +51,7 @@ public class RangedAttackAbility : EnemyAbility
 		// Maybe better to use RigidBody and use Slerp for a smoother rotation
 		enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
 
-		// enemy.CastAbilityDuration(this);
+		enemy.navMeshAgent.isStopped = true;
 
 		base.PerformAbility(enemy);
 

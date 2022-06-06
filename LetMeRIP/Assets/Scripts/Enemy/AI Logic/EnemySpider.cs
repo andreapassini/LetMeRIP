@@ -95,6 +95,7 @@ public class EnemySpider : EnemyForm
     public void Attack()
     {
         animator.SetTrigger("attack");
+        animator.SetFloat("speed", 0);
 
         attackAction.StartAbility(this);
 
@@ -128,7 +129,7 @@ public class EnemySpider : EnemyForm
 
     public bool TargetInRange()
     {
-        float distance = (target.position - transform.position).magnitude;
+        float distance = Vector3.Distance(transform.position, target.position);
         if (distance <= attackRange)
         {
             return true;

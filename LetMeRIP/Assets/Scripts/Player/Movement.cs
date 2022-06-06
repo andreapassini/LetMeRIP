@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,9 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
-	[SerializeField] private float speed = 5f;
+    private PhotonView photonView;
+
+    [SerializeField] private float speed = 5f;
 	private Rigidbody rb;
     private Vector3 direction;
 
@@ -14,6 +17,7 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
+        photonView = GetComponentInParent<PhotonView>();
         rb = GetComponent<Rigidbody>();
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
@@ -24,11 +28,13 @@ public class Movement : MonoBehaviour
 
 	private void Update()
 	{
+        if (!photonView.IsMine) return;
         GatherInputs();
 	}
 
 	private void FixedUpdate()
     {
+        if (!photonView.IsMine) return;
         Move();
     }
 

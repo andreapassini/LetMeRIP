@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerForm : MonoBehaviour
+public class PlayerForm : MonoBehaviourPun
 {
     public string FormName { get => formName; }
     protected string formName;
@@ -17,6 +18,7 @@ public class PlayerForm : MonoBehaviour
     {
         abilities = new Dictionary<string, Ability>();
         playerInputActions = new PlayerInputActions();
+        formModelPrefab = transform.Find(GetType().Name.ToString()).gameObject;
     }
 
     public virtual void Init(PlayerController characterController) 
@@ -26,13 +28,9 @@ public class PlayerForm : MonoBehaviour
 
     public void RemoveComponents()
     {
-        foreach (Ability ability in abilities.Values)
-            Destroy(ability);
+        foreach (Ability ability in abilities.Values) Destroy(ability);
+        if (abilityHandler != null) Destroy(abilityHandler);
 
-        if(abilityHandler != null)
-            Destroy(abilityHandler);
-        GameObject modelToDestroy = transform.Find($"{formModelPrefab.name}(Clone)").gameObject;
-        modelToDestroy.SetActive(false);
-        Destroy(modelToDestroy);
+        formModelPrefab.SetActive(false);
     }
 }

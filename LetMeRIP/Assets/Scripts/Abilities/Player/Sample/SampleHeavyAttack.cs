@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class SampleHeavyAttack : Ability
@@ -34,7 +35,8 @@ public class SampleHeavyAttack : Ability
 
     public override void PerformedAction()
     {
-        // networking to be done here
+        Debug.Log("ciao");
+        
         GameObject bullet = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         bulletRb.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);

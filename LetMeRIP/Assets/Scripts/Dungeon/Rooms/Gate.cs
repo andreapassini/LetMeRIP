@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 // a connection between rooms, its parent must have the Room component
 public class Gate : MonoBehaviour
 {
+    public PhotonView photonView;
     [HideInInspector] public Room room;
     public Gate connection;
     public Transform spawnPoint = null;
@@ -18,6 +20,7 @@ public class Gate : MonoBehaviour
         spawnPoint = transform.Find("spawnPoint"); // default spawn point
         dungeon = FindObjectOfType<Dungeon>();
         room = gameObject.GetComponentInParent<Room>();
+        photonView = GetComponent<PhotonView>();
     }
 
     public void Open() => isOpen = true;
@@ -25,7 +28,13 @@ public class Gate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isOpen && other.CompareTag("Player"))
-            dungeon.Switch(this);
+        if (other.CompareTag("Player") && isOpen)
+            dungeon.Switch(this, other.GetComponent<PlayerController>().photonView.ViewID);
+    }
+
+    [PunRPC]
+    void RpcSendMessage(string msg)
+    {
+        Debug.Log(msg);
     }
 }

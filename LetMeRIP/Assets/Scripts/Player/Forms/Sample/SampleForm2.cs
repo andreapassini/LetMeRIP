@@ -1,20 +1,15 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SampleForm2 : PlayerForm
 {
-    private void Start()
-    {
-        formModelPrefab = Resources.Load<GameObject>("Prefabs/Models/sampleModel2");
-    }
-
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
-        // add model
-        formModelPrefab ??= Resources.Load<GameObject>("Prefabs/Models/sampleModel2");
-        Instantiate(formModelPrefab, transform);
+
+        formModelPrefab.SetActive(true);
 
         // abilities declaration
         SampleLightAttack lightAttack = gameObject.AddComponent<SampleLightAttack>();
@@ -27,6 +22,5 @@ public class SampleForm2 : PlayerForm
         // ability handler initialization
         abilityHandler = gameObject.AddComponent<AbilityHandler>();
         abilityHandler.Init(abilities, characterController);
-
     }
 }

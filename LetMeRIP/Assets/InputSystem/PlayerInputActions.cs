@@ -89,6 +89,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Spirit"",
+                    ""type"": ""Button"",
+                    ""id"": ""ac281565-d83d-4069-8d39-1fd050040b2d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -256,6 +265,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ec8853eb-b091-4caf-8449-d41017e4d877"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Spirit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -271,6 +291,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Transformation1 = m_Player.FindAction("Transformation1", throwIfNotFound: true);
         m_Player_Transformation2 = m_Player.FindAction("Transformation2", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_Spirit = m_Player.FindAction("Spirit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -337,6 +358,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Transformation1;
     private readonly InputAction m_Player_Transformation2;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_Spirit;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -348,6 +370,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Transformation1 => m_Wrapper.m_Player_Transformation1;
         public InputAction @Transformation2 => m_Wrapper.m_Player_Transformation2;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @Spirit => m_Wrapper.m_Player_Spirit;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -378,6 +401,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Spirit.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpirit;
+                @Spirit.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpirit;
+                @Spirit.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpirit;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -403,6 +429,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @Spirit.started += instance.OnSpirit;
+                @Spirit.performed += instance.OnSpirit;
+                @Spirit.canceled += instance.OnSpirit;
             }
         }
     }
@@ -416,5 +445,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnTransformation1(InputAction.CallbackContext context);
         void OnTransformation2(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnSpirit(InputAction.CallbackContext context);
     }
 }

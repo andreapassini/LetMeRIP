@@ -20,7 +20,7 @@ public class EnemyRanged : EnemyForm
     {
         // Gather Stats
         health = enemyStats.maxHealth;
-        Debug.Log("Start Health " + health);
+        // Debug.Log("Start Health " + health);
 
         rb = GetComponent<Rigidbody>();
 

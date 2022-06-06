@@ -32,6 +32,10 @@ public class SimpleAttackAbility : EnemyAbility
 	{
         base.StartAbility(enemy);
 
+        if (previousAbilityTime + coolDown > Time.time) {
+            return;
+        }
+
         // Stop Moving
         enemy.GetComponent<NavMeshAgent>().isStopped = true;
         enemy.animator.SetTrigger("attack");

@@ -8,8 +8,6 @@ public class EnemyDefensive : EnemyForm
     private FSM fsm;
     private FSM fightFSM;
 
-    private float reactionReference;
-
     [SerializeField] private string targetTag = "Player";
 
     public float timeToAttack;

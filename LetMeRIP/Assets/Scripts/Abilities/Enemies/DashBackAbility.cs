@@ -11,7 +11,7 @@ public class DashBackAbility : EnemyAbility
 	{
 	}
 
-	public override void PerformAbility()
+	public override void PerformAbility(EnemyForm enemy)
 	{
 	}
 
@@ -32,6 +32,6 @@ public class DashBackAbility : EnemyAbility
 		// Perform Dash Back
 		enemy.rb.AddForce(dashBackDirection * dashForce, ForceMode.Impulse);
 
-		base.PerformAbility();
+		base.PerformAbility(this.enemy);
 	}
 }

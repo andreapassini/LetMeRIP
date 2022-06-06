@@ -11,7 +11,7 @@ public class ChaseAbility : EnemyAbility
 		throw new System.NotImplementedException();
 	}
 
-	public override void PerformAbility()
+	public override void PerformAbility(EnemyForm enemy)
 	{
 		throw new System.NotImplementedException();
 	}
@@ -23,6 +23,6 @@ public class ChaseAbility : EnemyAbility
 		enemy.GetComponent<NavMeshAgent>().isStopped = false;
 		enemy.GetComponent<NavMeshAgent>().destination = enemy.target.position;
 
-		base.PerformAbility();
+		base.PerformAbility(this.enemy);
 	}
 }

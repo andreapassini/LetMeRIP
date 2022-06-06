@@ -11,7 +11,7 @@ public class SimpleAttackAbility : EnemyAbility
 		throw new System.NotImplementedException();
 	}
 
-	public override void PerformAbility()
+	public override void PerformAbility(EnemyForm enemy)
 	{
         // Create Collider
         Collider[] hitEnemies = Physics.OverlapSphere(enemy.attackPoint.position, enemy.attackRange, enemy.whatIsTarget);
@@ -41,6 +41,6 @@ public class SimpleAttackAbility : EnemyAbility
 
         // Play attack animation
 
-        base.PerformAbility();
+        base.PerformAbility(this.enemy);
     }
 }

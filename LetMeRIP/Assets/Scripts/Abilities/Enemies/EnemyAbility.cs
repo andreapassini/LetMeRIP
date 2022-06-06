@@ -27,7 +27,7 @@ public abstract class EnemyAbility : ScriptableObject
 
 	}
 
-	public virtual void PerformAbility()
+	public virtual void PerformAbility(EnemyForm enemy)
     {
 		enemy.CastAbilityDuration(this);
 		previousAbilityTime = Time.time;

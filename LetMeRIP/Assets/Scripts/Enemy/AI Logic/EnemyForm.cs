@@ -9,6 +9,7 @@ public class EnemyForm : MonoBehaviour
 {
     public static event Action<EnemyForm> OnEnemyKilled;
     public static event Action<EnemyForm> OnEnemyDamaged;
+    public static event Action<EnemyForm> OnEnemyAttack;
 
     public EnemyStats enemyStats;
 
@@ -53,6 +54,13 @@ public class EnemyForm : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    }
+
+    // This method will cast an event when Attack Anim. Event is cast
+    // Cause anim events are only related to the object attached to the animator
+    public void OnAttack()
+    {
+        OnEnemyAttack?.Invoke(this);
     }
 
     public virtual void TakeDamage(float dmg)

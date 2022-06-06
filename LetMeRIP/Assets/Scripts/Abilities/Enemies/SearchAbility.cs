@@ -33,10 +33,10 @@ public class SearchAbility : EnemyAbility
 			}
 		}
 
-		base.PerformAbility();
+		base.PerformAbility(this.enemy);
 	}
 
-	public override void PerformAbility()
+	public override void PerformAbility(EnemyForm enemy)
 	{
 	}
 

@@ -2,10 +2,11 @@ using UnityEngine;
 using System;
 using UnityEngine.AI;
 using System.Collections;
+using Photon.Pun;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
-public class EnemyForm : MonoBehaviour
+public class EnemyForm : MonoBehaviourPun
 {
     public static event Action<EnemyForm> OnEnemyKilled;
     public static event Action<EnemyForm> OnEnemyDamaged;
@@ -90,7 +91,8 @@ public class EnemyForm : MonoBehaviour
         OnEnemyKilled?.Invoke(this);
 
         // Overwrite
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(photonView);
+        //Destroy(gameObject);
     }
 
     // Wait until the end of the action to update again the FSM

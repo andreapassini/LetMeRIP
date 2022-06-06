@@ -15,7 +15,7 @@ public class SampleHeavyAttack : Ability
     // things that do not change within a change of forms
     private void Start()
     {
-        cooldown = 1f;
+        cooldown = .2f;
         enemyLayer = LayerMask.NameToLayer("Enemy");
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
     }
@@ -35,8 +35,6 @@ public class SampleHeavyAttack : Ability
 
     public override void PerformedAction()
     {
-        Debug.Log("ciao");
-        
         GameObject bullet = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         bulletRb.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);

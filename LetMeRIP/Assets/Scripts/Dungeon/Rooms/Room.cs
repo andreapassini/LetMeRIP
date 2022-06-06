@@ -22,15 +22,14 @@ public class Room : MonoBehaviour
     
     private float timeStep = 0.2f;
     protected float timeSpent = 0f;
-    protected RoomSpawner spawners;
+    //protected RoomSpawner spawners;
 
     #region UI
     [SerializeField] private TextMeshProUGUI timerText;
     #endregion
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        spawners = gameObject.GetComponentInChildren<RoomSpawner>();
         dungeon = gameObject.GetComponentInParent<Dungeon>();
         photonView = GetComponent<PhotonView>();
 
@@ -39,7 +38,7 @@ public class Room : MonoBehaviour
         players = new Dictionary<int, PlayerController>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         foreach(Gate gate in inputGates)
         {
@@ -80,7 +79,6 @@ public class Room : MonoBehaviour
 
         timeSpent = 0f;
         StartCoroutine(Timer());
-        if(spawners != null) spawners.Init(); // there might be rooms without enemies
     }
 
     /**
@@ -91,19 +89,30 @@ public class Room : MonoBehaviour
         if (!PhotonNetwork.IsMasterClient) return; // it just means that this gets executed just once, and it'll be from the master
         Debug.Log($"room {photonView.ViewID} Exit");
 
-        if (spawners != null) spawners.Exit(); // also pretty meh, we should handle multiple players not one so...
         StopAllCoroutines(); // works but it's pretty meh with we have other coroutines
         Debug.Log($"time: {timeSpent}");
     }
 
-    public void CloseGates()
+    public void CloseInnerGates()
     {
         foreach (Gate gate in gates.Values) gate.Close();
+        // TODO: signal closed gates
     }
 
-    public void OpenGates()
+    public void CloseOuterGates()
+    {
+        foreach (Gate gate in gates.Values) gate.connection.Close();
+    }
+
+    public void OpenInnerGates()
     {
         foreach (Gate gate in gates.Values) gate.Open();
+        // TODO: signal opened gates
+    }
+
+    public void OpenOuterGates()
+    {
+        foreach (Gate gate in gates.Values) gate.connection.Open();
     }
 
     private IEnumerator Timer()

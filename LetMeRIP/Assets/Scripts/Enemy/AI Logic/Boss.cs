@@ -5,11 +5,26 @@ using UnityEngine.AI;
 
 public class Boss : EnemyForm
 {
+    private FSM fsmOverlay;
+
     private FSM fsmPhase1;
     private FSM fsmPhase2;
     private FSM fsmPhase3;
 
+    private DecisionTree dt_attackPhase1;
+    private DecisionTree dt_attackPhase3;
+
     public EnemyAbility dashForward;
+    public EnemyAbility heavyAttack;
+    public EnemyAbility lightAttack1;
+    public EnemyAbility lightAttack2;
+    public EnemyAbility summonTentacles;
+    public EnemyAbility fall;
+    public EnemyAbility summonMinions;
+    public EnemyAbility createVulneableSign;
+    public EnemyAbility heavyAttackPhase3;
+    public EnemyAbility lightAttack1Phase3;
+    public EnemyAbility lightAttack2Phase3;
 
     [SerializeField] private string targetTag = "Player";
 
@@ -23,12 +38,17 @@ public class Boss : EnemyForm
     private bool runningForTooLong = false;
     private bool cooldownActionOver = false;
     private bool foundNewTarget = false;
+    private bool isHAinCooldown = false;
+    private bool isLA1Cooldown = false;
+    private bool isCooldwonOver = false;
 
     private float woundLevel;
 
     // Start is called before the first frame update
     void Start()
     {
+        Init();
+
         // Gather Stats
         health = enemyStats.maxHealth;
         woundLevel = enemyStats.maxHealth / 7;
@@ -71,7 +91,7 @@ public class Boss : EnemyForm
         // Phase 2 to 3
         phase3.AddTransition(t3, phase3);
 
-        fsmPhase1 = new FSM(phase1);
+        fsmOverlay = new FSM(phase1);
 
         #endregion
 
@@ -110,13 +130,133 @@ public class Boss : EnemyForm
         repositionPhase1.AddTransition(t7Phase1, attackPhase1);
         repositionPhase1.AddTransition(t8Phase1, searchPhase1);
 
-		#endregion
+        fsmPhase1 = new FSM(searchPhase1);
+        #endregion
 
-		StartCoroutine(PatrolPhase1());
+        #region DT Attack Phase 1
+        DTAction heavyAttack = new DTAction(HeavyAttack);
+        DTAction lightAttack1 = new DTAction(LightAttack1);
+        DTAction lightAttack2 = new DTAction(LightAttack2);
+
+        DTDecision d1AttackPhase1 = new DTDecision(IsHAinCooldown);
+        DTDecision d2AttackPhase1 = new DTDecision(IsLA1inCooldown);
+
+        d1AttackPhase1.AddLink(false, heavyAttack);
+        d1AttackPhase1.AddLink(true, d2AttackPhase1);
+        d2AttackPhase1.AddLink(false, lightAttack1);
+        d2AttackPhase1.AddLink(true, lightAttack2);
+
+        dt_attackPhase1 = new DecisionTree(d1AttackPhase1);
+        #endregion
+
+        #region Phase 2
+        // THE DOWN PHASE
+        FSMState idlePhase2 = new FSMState();
+        idlePhase2.enterActions.Add(Fall);
+        idlePhase2.enterActions.Add(SummonTentacles);
+        idlePhase2.enterActions.Add(SummonMinions);
+        idlePhase2.enterActions.Add(CreateVulnerabilitySign);
+
+        fsmPhase2 = new FSM(idlePhase2);
+        #endregion
+
+        #region Phase 3
+        FSMState searchPhase3 = new FSMState();
+        searchPhase3.stayActions.Add(Search);
+
+        FSMState chasePhase3 = new FSMState();
+        chasePhase3.stayActions.Add(Chase);
+
+        FSMState attackPhase3 = new FSMState();
+        attackPhase3.stayActions.Add(RunAttackTree2);
+
+        FSMState repositionPhase3 = new FSMState();
+        repositionPhase3.enterActions.Add(SummonMinions);
+        repositionPhase3.stayActions.Add(SearchNewTarget);
+        repositionPhase3.exitActions.Add(DashForward);
+
+        FSMTransition t1Phase3 = new FSMTransition(TargetFound);
+        FSMTransition t2Phase3 = new FSMTransition(TargetNotFound);
+        FSMTransition t3Phase3 = new FSMTransition(InRange);
+        FSMTransition t4Phase3 = new FSMTransition(TargetNotInRange);
+        FSMTransition t5Phase3 = new FSMTransition(RunningForTooLong);
+        FSMTransition t6Phase3 = new FSMTransition(CooldownOver);
+        FSMTransition t7Phase3 = new FSMTransition(FoundNewTarget);
+        FSMTransition t8Phase3 = new FSMTransition(CooldownActionOver);
+
+        searchPhase3.AddTransition(t1Phase3, chasePhase3);
+
+        chasePhase3.AddTransition(t2Phase3, searchPhase3);
+        chasePhase3.AddTransition(t3Phase3, attackPhase3);
+        chasePhase3.AddTransition(t5Phase3, repositionPhase3);
+
+        attackPhase3.AddTransition(t6Phase3, repositionPhase3);
+        attackPhase3.AddTransition(t4Phase3, chasePhase3);
+
+        repositionPhase3.AddTransition(t7Phase3, attackPhase3);
+        repositionPhase3.AddTransition(t8Phase3, searchPhase3);
+
+        fsmPhase3 = new FSM(searchPhase3);
+        #endregion
+
+        #region DT Attack 2
+        DTAction heavyAttackPhase3 = new DTAction(HeavyAttackPhase3);
+        DTAction lightAttack1Phase3 = new DTAction(LightAttack1Phase3);
+        DTAction lightAttack2Phase3 = new DTAction(LightAttack2Phase3);
+
+        DTDecision d1AttackPhase3 = new DTDecision(IsHAinCooldown);
+        DTDecision d2AttackPhase3 = new DTDecision(IsLA1inCooldown);
+
+        d1AttackPhase3.AddLink(false, heavyAttackPhase3);
+        d1AttackPhase3.AddLink(true, d2AttackPhase3);
+        d2AttackPhase3.AddLink(false, lightAttack1Phase3);
+        d2AttackPhase3.AddLink(true, lightAttack2Phase3);
+
+        dt_attackPhase3 = new DecisionTree(d1AttackPhase3);
+        #endregion
+
+        StartCoroutine(PatrolOverlay());
     }
 
-	#region Conditions
-	public bool After3WoundRecevied()
+    #region Conditions
+    public bool CooldownOver()
+    {
+        if (!isCooldwonOver)
+        {
+            isCooldwonOver = true;
+            StartCoroutine(RepositionCooldown());
+            return false;
+        }
+
+        return true;
+    }
+
+    public object IsHAinCooldown(object o)
+    {
+        if (!isHAinCooldown)
+        {
+            isHAinCooldown = true;
+            StartCoroutine(HACooldown());
+            return false;
+        }
+
+        return true;
+    }
+
+    public object IsLA1inCooldown(object o)
+    {
+        if (!isLA1Cooldown)
+        {
+            isLA1Cooldown = true;
+            StartCoroutine(LA1Cooldown());
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public bool After3WoundRecevied()
 	{
         if(woundCount >= 3) {
             woundCount = 0;
@@ -215,9 +355,66 @@ public class Boss : EnemyForm
 
         return false;
 	}
-	#endregion
+    #endregion
 
-	#region Actions
+    #region Actions
+    public object HeavyAttackPhase3(object o)
+    {
+        heavyAttackPhase3.StartAbility(this);
+        return null;
+    }
+
+    private object LightAttack1Phase3(object o)
+    {
+        lightAttack1Phase3.StartAbility(this);
+        return null;
+    }
+
+    private object LightAttack2Phase3(object o)
+    {
+        lightAttack2Phase3.StartAbility(this);
+        return null;
+    }
+
+    public void CreateVulnerabilitySign()
+    {
+        createVulneableSign.StartAbility(this);
+    }
+
+    public void SummonMinions()
+    {
+        summonMinions.StartAbility(this);
+    }
+
+    public void Fall()
+    {
+        animator.SetFloat("speed", 0);
+        fall.StartAbility(this);
+    }
+
+    public void SummonTentacles()
+    {
+        summonTentacles.StartAbility(this);
+    }
+
+    private object LightAttack2(object o)
+    {
+        lightAttack2.StartAbility(this);
+        return null;
+    }
+
+    private object LightAttack1(object o)
+    {
+        lightAttack1.StartAbility(this);
+        return null;
+    }
+
+    public object HeavyAttack(object o)
+    {
+        heavyAttack.StartAbility(this);
+        return null;
+    }
+
 	public void RunFSMBossPhase1()
 	{
         StartCoroutine(PatrolPhase1());
@@ -253,8 +450,13 @@ public class Boss : EnemyForm
 
     public void RunAttackTree()
 	{
-
+        StartCoroutine(PatrolAttackTree());
 	}
+
+    public void RunAttackTree2()
+    {
+        StartCoroutine(PatrolAttackTree2());
+    }
 
     public void SearchNewTarget()
 	{
@@ -276,6 +478,42 @@ public class Boss : EnemyForm
     #endregion
 
     #region Coroutines
+    public IEnumerator PatrolAttackTree2()
+    {
+        while (true)
+        {
+            dt_attackPhase2.walk();
+            yield return new WaitForSeconds(AiFrameRate);
+        }
+    }
+
+    public IEnumerator RepositionCooldown()
+    {
+        yield return new WaitForSeconds(lightAttack1.abilityDurtation);
+        isHAinCooldown = false;
+    }
+
+    public IEnumerator LA1Cooldown()
+    {
+        yield return new WaitForSeconds(lightAttack1.abilityDurtation);
+        isHAinCooldown = false;
+    }
+
+    public IEnumerator HACooldown()
+    {
+        yield return new WaitForSeconds(heavyAttack.abilityDurtation);
+        isHAinCooldown = false;
+    }
+
+    public IEnumerator PatrolOverlay()
+    {
+        while (true)
+        {
+            fsmOverlay.Update();
+            yield return new WaitForSeconds(AiFrameRate);
+        }
+    }
+
     public IEnumerator PatrolPhase1()
 	{
 		while (!After3WoundRecevied()) 
@@ -324,9 +562,19 @@ public class Boss : EnemyForm
 	{
 		while (true) 
         {
-            // Patrol Attack Tree
+            dt_attackPhase1.walk();
             yield return new WaitForSeconds(AiFrameRate);
 		}
 	}
     #endregion
+
+    public override void Init()
+    {
+        base.Init();
+
+        abilites.Add("dashForward", dashForward);
+        abilites.Add("heavyAttack", heavyAttack);
+        abilites.Add("lightAttack1", lightAttack1);
+        abilites.Add("lightAttack2", lightAttack2);
+    }
 }

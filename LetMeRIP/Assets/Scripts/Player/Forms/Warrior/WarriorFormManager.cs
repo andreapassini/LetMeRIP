@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class WarriorFormManager : FormManager
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Init(PlayerController characterController)
     {
-        
-    }
+        base.Init(characterController);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        forms.Add(gameObject.AddComponent<WarriorBasic>());
+        SwitchForm(0);
+
+        BindAbilities();
     }
 }

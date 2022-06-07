@@ -7,21 +7,22 @@ public class PlayerController : MonoBehaviourPun
     PlayerInputActions playerInputActions;
 
     [SerializeField] private string playerClass; // archer, mage or warrior
-    private FormManager formManager;
+    public FormManager formManager;
 
     public PlayerStats spiritStats;
     public PlayerStats bodyStats;
     [HideInInspector] public PlayerStats currentStats;
 
+    private LookAtMouse lam;
     [HideInInspector] public Movement movement;
+    [HideInInspector] public Rigidbody rb;
 
     [HideInInspector] public HPManager HPManager;
     [HideInInspector] public SGManager SGManager;
 
     // Name of the game object with the virtual camera
-    [SerializeField] private string playerCameraGOName = "PlayerCamera";
     // Name of the game object to follow with the camera
-    [SerializeField] private string followPointGOName = "FollowPoint";
+    [SerializeField] private Transform followPoint;
 
     public int ViewID { get => photonView.ViewID; }
     public bool IsMine { get => photonView.IsMine; }
@@ -29,27 +30,51 @@ public class PlayerController : MonoBehaviourPun
     void Start()
     {
         SetupCamera();
-        
+        lam = GetComponent<LookAtMouse>();
+        rb = GetComponent<Rigidbody>();
         playerInputActions = new PlayerInputActions();
+        
         currentStats = bodyStats;
-        HPManager = gameObject.AddComponent<HPManager>();
-        SGManager = gameObject.AddComponent<SGManager>();
+        HPManager ??= gameObject.AddComponent<HPManager>();
+        SGManager ??= gameObject.AddComponent<SGManager>();
+
         HPManager.Stats = currentStats;
         SGManager.Stats = bodyStats; // we want to keep using the body spirit gauge, since it's always shared, no matter the form
-        
+
         formManager = playerClass.ToLower() switch
         {
+            "spirit" => gameObject.AddComponent<SpiritFormManager>(),
             "archer" => gameObject.AddComponent<ArcherFormManager>(),
             "warrior" => gameObject.AddComponent<WarriorFormManager>(),
             "mage" => gameObject.AddComponent<MageFormManager>(),
             _ => gameObject.AddComponent<SampleFormManager>()
         };
-        
+
         formManager.Init(this);
 
-        movement = gameObject.AddComponent<Movement>();
+        movement ??= gameObject.AddComponent<Movement>();
         playerInputActions.Player.Enable();
         playerInputActions.Player.Movement.Enable();
+    }
+
+    public void Init() 
+    {
+        SetupCamera();
+
+        movement ??= gameObject.AddComponent<Movement>();
+
+        lam.enabled = true;
+        movement.enabled = true;
+        formManager.BindAbilities();
+        formManager.EnableAbilities();
+    }
+
+    public void Exit()
+    {
+        lam.enabled = false;
+        movement.enabled = false;
+        formManager.UnbindAbilities();
+        formManager.DisableAbilities();
     }
 
     // Set up the local virtual camera to follow this player character 
@@ -57,13 +82,9 @@ public class PlayerController : MonoBehaviourPun
     {
         if (!photonView.IsMine) return;
         
-        Transform thisPlayerTransform = this.transform;
-        
-        GameObject vCam = GameObject.Find(playerCameraGOName);
-        vCam.SetActive(true);
+        CinemachineVirtualCamera vCam = FindObjectOfType<CinemachineVirtualCamera>();
 
-        var vCamComponent = vCam.GetComponent<CinemachineVirtualCamera>();
-        vCamComponent.Follow = thisPlayerTransform.Find(followPointGOName).transform;
-        vCamComponent.LookAt = thisPlayerTransform.transform;
+        vCam.Follow = followPoint;
+        vCam.LookAt = transform;
     }
 }

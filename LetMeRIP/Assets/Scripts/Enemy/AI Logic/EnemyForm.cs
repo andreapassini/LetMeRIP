@@ -69,7 +69,7 @@ public class EnemyForm : MonoBehaviourPun
         animator.SetTrigger("damage");      
 
         // Calcolate defense reduction
-        dmg -= enemyStats.defense;
+        dmg = dmg - (dmg * enemyStats.defense * 0.01f);
         dmg = Mathf.Clamp(dmg, 0, float.MaxValue);
         Debug.Log("Health " + health);
         Debug.Log("dmg " + dmg);

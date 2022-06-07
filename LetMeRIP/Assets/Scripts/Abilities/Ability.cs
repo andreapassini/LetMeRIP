@@ -7,12 +7,13 @@ using UnityEngine.InputSystem;
 public class Ability : MonoBehaviourPun
 {
     protected float cooldown;
+    public float SPCost = 0f;
     protected bool isReady = true;
     public virtual bool IsReady { get => isReady; }
-
+    protected PlayerController characterController;
     // ability instance startup, treat it like an OnEnable, useful to retrieve components instantiated at runtime
     public virtual void Init() { }
-    public virtual void Init(PlayerController characterController) { }
+    public virtual void Init(PlayerController characterController) => this.characterController = characterController;
 
     // setup, performed before Perform action, on button down
     // does something and sets isReady to false when it can start successfully

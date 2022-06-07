@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Movement : MonoBehaviour
+public class Movement : MonoBehaviourPun
 {
-    private PhotonView photonView;
-
     [SerializeField] private float speed = 5f;
 	private Rigidbody rb;
     private Vector3 direction;
@@ -17,16 +15,19 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
-        photonView = GetComponentInParent<PhotonView>();
         rb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>(false);
+        
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
-
-        animator = GetComponentInChildren<Animator>(false);
-        FormManager.OnFormChanged += formManager => animator = GetComponentInChildren<Animator>(false);
+        FormManager.OnFormChanged += RefreshAnimator;
+    }
+    private void OnDestroy()
+    {
+        FormManager.OnFormChanged -= RefreshAnimator;
     }
 
-	private void Update()
+    private void Update()
 	{
         if (!photonView.IsMine) return;
         GatherInputs();
@@ -45,13 +46,13 @@ public class Movement : MonoBehaviour
         {
             if (!direction.Equals(Vector3.zero))
             {
-                animator.SetBool("isRunning", true);
-                animator.SetBool("isIdle", false);
+                //animator.SetBool("isRunning", true);
+                //animator.SetBool("isIdle", false);
             }
             else
             {
-                animator.SetBool("isIdle", true);
-                animator.SetBool("isRunning", false);
+                //animator.SetBool("isIdle", true);
+                //animator.SetBool("isRunning", false);
             }
         }
     }
@@ -61,4 +62,8 @@ public class Movement : MonoBehaviour
         rb.MovePosition(transform.position + this.direction.ToIso() * speed * Time.deltaTime);
     }
 
+    private void RefreshAnimator(FormManager fm)
+    {
+        animator = GetComponentInChildren<Animator>(false);
+    }
 }

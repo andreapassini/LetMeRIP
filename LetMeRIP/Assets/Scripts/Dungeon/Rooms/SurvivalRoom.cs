@@ -81,7 +81,6 @@ public class SurvivalRoom : Room
             if(timeToSurvive <= 0)
                 RoomCompletion();
 
-            Debug.Log(timeToSurvive);
             yield return new WaitForSeconds(timeStep);
             timeToSurvive -= timeStep; 
         }

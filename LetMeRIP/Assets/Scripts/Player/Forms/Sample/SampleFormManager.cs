@@ -8,20 +8,19 @@ public class SampleFormManager : FormManager
         forms.Add(gameObject.AddComponent<SampleForm2>());
 
 
-        // 0 => spirit form
-        // 1 => base class form
+        // 0 => base class form
         SwitchForm(0);
 
-        if (currentForm != null) BindAbilities();
+        BindAbilities();
     }
 
-    protected override void BindAbilities()
+    public override void BindAbilities()
     {
         base.BindAbilities();
 
         if (!photonView.IsMine) return;
 
-        playerInputActions.Player.Transformation1.performed += ctx => SwitchForm(1);
-        playerInputActions.Player.Transformation2.performed += ctx => SwitchForm(2);
+        playerInputActions.Player.Transformation1.performed += ctx => SwitchForm(0);
+        playerInputActions.Player.Transformation2.performed += ctx => SwitchForm(1);
     }
 }

@@ -21,7 +21,8 @@ public class HPManager : MonoBehaviour
 
     private PlayerController characterController;
 
-    private float health;
+    private float health { get => stats.health; set => stats.health = value; }
+    public float Health { get => stats.health; }
 
     void Start()
     {
@@ -48,28 +49,30 @@ public class HPManager : MonoBehaviour
     public void Heal(float amount, bool overHeal = false)
     {
         if(amount > 0)
-            health = (health + amount > stats.maxHealth || overHeal) ? stats.maxHealth : health + amount;
+            health = (overHeal || health + amount > stats.maxHealth) ? health + amount : stats.maxHealth;
         OnPlayerHealed?.Invoke(this);
     }
 
-    /**
-     * Tries to consume Spirit points, if it succeeds returns true, false otherwise.
-     * it returns true if the amount of spirit points left is greater or equal than amount
-     * if ignoreMissingPoints is true then any missing points to consume are ignored and true is returned.
-     */
-    //public bool ConsumeSpiritPoints(float amount, bool ignoreMissingPoints = false)
-    //{
-    //    if (spiritGauge >= amount) {
-    //        spiritGauge -= amount;
-    //        return true;
-    //    }
-    //    else if (ignoreMissingPoints) 
-    //    {
-    //        spiritGauge = 0;
-    //        return true;
-    //    }
-    //    return false;
-    //}
+    public void DecayingHeal(float amount, float timeToDecay)
+    {
+        if (amount <= 0) return;
+        StartCoroutine(DecayingHealCo(amount, timeToDecay));
+    }
+
+    private IEnumerator DecayingHealCo(float amount, float timeToDecay)
+    {
+        Heal(amount, true);
+        float timeStep = 0.5f;
+        float healthLossPerTick = amount * timeStep/timeToDecay;
+
+        while(timeToDecay > 0)
+        {
+            health-=healthLossPerTick;
+            if (health <= 0) yield break; // prevents Die() to be called multiple times
+            yield return new WaitForSeconds(timeStep);
+            timeToDecay -= timeStep;
+        }
+    }
 
     public void Die()
     {

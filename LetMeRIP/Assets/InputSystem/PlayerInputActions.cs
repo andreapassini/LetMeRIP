@@ -98,6 +98,24 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability1"",
+                    ""type"": ""Button"",
+                    ""id"": ""e144e0a4-9c36-4d8b-8acd-25f9aa9bb1cc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability2"",
+                    ""type"": ""Button"",
+                    ""id"": ""dbc2445e-51a9-4f0d-9d0b-94e61cee218d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -276,6 +294,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Spirit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""319c5d39-9a1d-4d46-9c10-7a49dce2c708"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d29a74c-c942-4b9d-a5d2-f7cafd7de0d6"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -292,6 +332,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Transformation2 = m_Player.FindAction("Transformation2", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Spirit = m_Player.FindAction("Spirit", throwIfNotFound: true);
+        m_Player_Ability1 = m_Player.FindAction("Ability1", throwIfNotFound: true);
+        m_Player_Ability2 = m_Player.FindAction("Ability2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -359,6 +401,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Transformation2;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Spirit;
+    private readonly InputAction m_Player_Ability1;
+    private readonly InputAction m_Player_Ability2;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -371,6 +415,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Transformation2 => m_Wrapper.m_Player_Transformation2;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Spirit => m_Wrapper.m_Player_Spirit;
+        public InputAction @Ability1 => m_Wrapper.m_Player_Ability1;
+        public InputAction @Ability2 => m_Wrapper.m_Player_Ability2;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -404,6 +450,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Spirit.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpirit;
                 @Spirit.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpirit;
                 @Spirit.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpirit;
+                @Ability1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility1;
+                @Ability1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility1;
+                @Ability1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility1;
+                @Ability2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility2;
+                @Ability2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility2;
+                @Ability2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility2;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -432,6 +484,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Spirit.started += instance.OnSpirit;
                 @Spirit.performed += instance.OnSpirit;
                 @Spirit.canceled += instance.OnSpirit;
+                @Ability1.started += instance.OnAbility1;
+                @Ability1.performed += instance.OnAbility1;
+                @Ability1.canceled += instance.OnAbility1;
+                @Ability2.started += instance.OnAbility2;
+                @Ability2.performed += instance.OnAbility2;
+                @Ability2.canceled += instance.OnAbility2;
             }
         }
     }
@@ -446,5 +504,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnTransformation2(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnSpirit(InputAction.CallbackContext context);
+        void OnAbility1(InputAction.CallbackContext context);
+        void OnAbility2(InputAction.CallbackContext context);
     }
 }

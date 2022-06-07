@@ -11,9 +11,6 @@ public class EnemyForm : MonoBehaviourPun
 {
     public int ViewID { get => photonView.ViewID; }
 
-    [System.NonSerialized]
-    public PhotonView photonView;
-
     public static event Action<EnemyForm> OnEnemyKilled;
     public static event Action<EnemyForm> OnEnemyDamaged;
     public static event Action<EnemyForm> OnEnemyAttack;
@@ -74,27 +71,17 @@ public class EnemyForm : MonoBehaviourPun
 
     public virtual void TakeDamage(float dmg)
     {
-        animator.SetTrigger("damage");      
+        if(!PhotonNetwork.IsMasterClient) return;
 
-        // Calcolate defense reduction
-        dmg -= enemyStats.defense;
-        dmg = Mathf.Clamp(dmg, 0, float.MaxValue);
-        Debug.Log("Health " + health);
-        Debug.Log("dmg " + dmg);
-        health = health - dmg;
-
-        Debug.Log("Health " + health);
-
-        if (health <= 0) {
-            Die();
-        }
-
-        // Take damage Event
-        OnEnemyDamaged?.Invoke(this);
+        photonView.RPC("RpcTakeDamage",
+            RpcTarget.All,
+            dmg);
     }
 
     public virtual void Die()
 	{
+        if (!PhotonNetwork.IsMasterClient) return;
+
         // Die Event 
         OnEnemyKilled?.Invoke(this);
 
@@ -106,6 +93,7 @@ public class EnemyForm : MonoBehaviourPun
     // Wait until the end of the action to update again the FSM
     public virtual void CastAbilityDuration(EnemyAbility ability)
     {
+        
         if (AiFrameRate < ability.abilityDurtation)
         {
             StartCoroutine(AbilityDuration(ability));
@@ -126,23 +114,52 @@ public class EnemyForm : MonoBehaviourPun
 
     public void CastEnemyAbility(EnemyAbility enemyAbility)
 	{
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        Debug.Log(enemyAbility.abilityName);
+
         photonView.RPC("RpcCastEnemyAbility",
             RpcTarget.All,
-            enemyAbility.name);
+            enemyAbility.abilityName);
 	}
 
     [PunRPC]
     public void RpcCastEnemyAbility(string enemyAbilityName)
 	{
+        if (PhotonNetwork.IsMasterClient) return;
+
         abilites.TryGetValue(enemyAbilityName, out EnemyAbility e);
         e.StartAbility(this);
 	}
 
+
+    [PunRPC]
+    public void RpcTakeDamage(float dmg)
+	{
+        animator.SetTrigger("damage");
+
+        // Calcolate defense reduction
+        dmg = dmg - (dmg * enemyStats.defense * 0.01f); ;
+        dmg = Mathf.Clamp(dmg, 0, float.MaxValue);
+        Debug.Log("Health " + health);
+        Debug.Log("dmg " + dmg);
+        health = health - dmg;
+
+        Debug.Log("Health " + health);
+
+        if (health <= 0) {
+            Die();
+        }
+
+        // Take damage Event
+        OnEnemyDamaged?.Invoke(this);
+    }
+
     public virtual void Init()
 	{
         abilites = new Dictionary<string, EnemyAbility>();
-        abilites.Add("attackAction", attackAction);
-        abilites.Add("chaseAction", chaseAction);
-        abilites.Add("searchAction", searchAction);
+        abilites.Add(attackAction.abilityName, attackAction);
+        abilites.Add(chaseAction.abilityName, chaseAction);
+        abilites.Add(searchAction.abilityName, searchAction);
     }
 }

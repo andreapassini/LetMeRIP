@@ -6,10 +6,15 @@ using UnityEngine.AI;
 [CreateAssetMenu(menuName = "EnemyAbilities/SpawnTentacles")]
 public class SpawnTentacles : EnemyAbility
 {
-	public GameObject tentaclePrefab;
+	public string[] tentaclePrefabPath;
+	public int[] numberOfEnemies;
+
+	RoomSpawner r = new RoomSpawner();
 
 	public override void StartAbility(EnemyForm enemy)
 	{
+		r.Init();
+
 		base.StartAbility(enemy);
 
 		Vector3 enemyCenter = new Vector3(
@@ -37,23 +42,28 @@ public class SpawnTentacles : EnemyAbility
 				zOffset += -2f;
 			}
 
-
-
 			Vector3 spawnPoint = new Vector3(
 				enemyCenter.x + xOffset,
 				0,
 				enemyCenter.y + zOffset);
+
+			EnemySpawner toSpawn = new EnemySpawner();
+			toSpawn.enemyPrefabPath = tentaclePrefabPath[i];
+			toSpawn.transform.position = spawnPoint;
+			toSpawn.transform.rotation = Quaternion.identity;
 
 			NavMeshHit hit;
 
 			// Check If the point is inside the Map
 			if (NavMesh.SamplePosition(spawnPoint, out hit, 1f, 1)) {
 				// Spawn Tentacles
-				Instantiate(tentaclePrefab, spawnPoint, Quaternion.identity);
+				r.spawners.Add(toSpawn);
 			}
 
 		}
 
+
+		r.Spawn();
 		// Use an Event to kill them afterwards
 	}
 

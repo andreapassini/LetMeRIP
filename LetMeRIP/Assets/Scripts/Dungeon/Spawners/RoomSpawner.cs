@@ -7,7 +7,7 @@ using UnityEngine;
 public class RoomSpawner : MonoBehaviourPun
 {
     public event Action<RoomSpawner> OnAllEnemiesCleared; 
-    [SerializeField] private List<EnemySpawner> spawners;
+    public List<EnemySpawner> spawners;
     public List<GameObject> currentEnemies;
 
     public void Init()

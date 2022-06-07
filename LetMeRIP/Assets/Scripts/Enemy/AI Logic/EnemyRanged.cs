@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ public class EnemyRanged : EnemyForm
     // Start is called before the first frame update
     void Start()
     {
+        //if (!PhotonNetwork.IsMasterClient) return;
+
         // Gather Stats
         health = enemyStats.maxHealth;
         // Debug.Log("Start Health " + health);
@@ -282,6 +285,6 @@ public class EnemyRanged : EnemyForm
 	{
 		base.Init();
 
-        abilites.Add("dashAction", dashAction);
+        abilites.Add(dashAction.abilityName, dashAction);
     }
 }

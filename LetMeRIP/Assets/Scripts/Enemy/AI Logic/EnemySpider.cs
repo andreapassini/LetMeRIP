@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,8 @@ public class EnemySpider : EnemyForm
 
     private void Start()
     {
-        Init();
+
+        Init();     
 
         // Gather Stats
         health = enemyStats.maxHealth;
@@ -68,6 +70,8 @@ public class EnemySpider : EnemyForm
         // Attack
 
         fsm = new FSM(search);
+
+        if (!PhotonNetwork.IsMasterClient) return;
 
         StartCoroutine(Patrol());
     }

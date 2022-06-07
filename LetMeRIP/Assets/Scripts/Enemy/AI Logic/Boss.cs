@@ -482,7 +482,7 @@ public class Boss : EnemyForm
     {
         while (true)
         {
-            dt_attackPhase2.walk();
+            dt_attackPhase3.walk();
             yield return new WaitForSeconds(AiFrameRate);
         }
     }

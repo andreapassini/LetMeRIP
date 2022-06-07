@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,10 @@ using UnityEngine.AI;
 
 public class Boss : EnemyForm
 {
+    public static event Action<EnemyForm> OnEnemyLightAttack1;
+    public static event Action<EnemyForm> OnEnemyLightAttack2;
+    public static event Action<EnemyForm> OnEnemyHeavyAttack;
+
     private FSM fsmOverlay;
 
     private FSM fsmPhase1;
@@ -44,6 +49,17 @@ public class Boss : EnemyForm
 
     private float woundLevel;
 
+    [HideInInspector]
+    public Animator animatorPhase1;
+
+    [HideInInspector]
+    public Animator animatorPhase2;
+
+    [HideInInspector]
+    public Animator animatorPhase3;
+
+    public GameObject tentaclesSpawnPoints;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,11 +69,11 @@ public class Boss : EnemyForm
         health = enemyStats.maxHealth;
         woundLevel = enemyStats.maxHealth / 7;
 
-        rb = GetComponent<Rigidbody>();
+        rb = transform.GetComponent<Rigidbody>();
 
-        animator = GetComponent<Animator>();
+        animator = animatorPhase1;
 
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = transform.GetComponent<NavMeshAgent>();
 
         reactionReference = AiFrameRate;
 
@@ -70,12 +86,15 @@ public class Boss : EnemyForm
 
 		#region FSM Phase Overlay
 		FSMState phase1 = new FSMState();
+        phase1.enterActions.Add(SwitchAnimatorPhase1);
         phase1.stayActions.Add(RunFSMBossPhase1);
 
         FSMState phase2 = new FSMState();
+        phase2.enterActions.Add(SwitchAnimatorPhase2);
         phase2.stayActions.Add(RunFSMBossPhase2);
 
         FSMState phase3 = new FSMState();
+        phase2.enterActions.Add(SwitchAnimatorPhase3);
         phase3.stayActions.Add(RunFSMBossPhase3);
 
         FSMTransition t1 = new FSMTransition(After3WoundRecevied);
@@ -358,6 +377,21 @@ public class Boss : EnemyForm
     #endregion
 
     #region Actions
+    public void SwitchAnimatorPhase1()
+	{
+        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animators/BossPhase1");
+	}
+
+    public void SwitchAnimatorPhase2()
+    {
+        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animators/BossPhase2");
+    }
+    
+    public void SwitchAnimatorPhase3()
+    {
+        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animators/BossPhase3");
+    }
+
     public object HeavyAttackPhase3(object o)
     {
         heavyAttackPhase3.StartAbility(this);
@@ -461,7 +495,7 @@ public class Boss : EnemyForm
     public void SearchNewTarget()
 	{
 		while (true) {
-			Transform newTarget = targets[Random.Range(0, targets.Length - 1)].transform;
+			Transform newTarget = targets[UnityEngine.Random.Range(0, targets.Length - 1)].transform;
 
 			Vector3 ray = newTarget.position - transform.position;
 			RaycastHit hit;
@@ -576,5 +610,20 @@ public class Boss : EnemyForm
         abilites.Add("heavyAttack", heavyAttack);
         abilites.Add("lightAttack1", lightAttack1);
         abilites.Add("lightAttack2", lightAttack2);
+    }
+
+    public void OnLightAttack1()
+	{
+        OnEnemyLightAttack1?.Invoke(this);
+	}
+
+    public void OnLightAttack2()
+    {
+        OnEnemyLightAttack2?.Invoke(this);
+    }
+
+    public void OnHeavyAttack()
+    {
+        OnEnemyHeavyAttack?.Invoke(this);
     }
 }

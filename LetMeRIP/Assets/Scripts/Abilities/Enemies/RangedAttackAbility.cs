@@ -16,10 +16,10 @@ public class RangedAttackAbility : EnemyAbility
 
     private void OnDisable()
     {
-        
-    }
+		EnemyForm.OnEnemyAttack -= PerformAbility;
+	}
 
-    public override void CancelAbility()
+	public override void CancelAbility()
 	{
 	}
 

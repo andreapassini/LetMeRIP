@@ -46,10 +46,13 @@ public class PlayerController : MonoBehaviourPun
         };
         
         formManager.Init(this);
-
+        
         movement = gameObject.AddComponent<Movement>();
+        movement.Init(formManager);
         playerInputActions.Player.Enable();
         playerInputActions.Player.Movement.Enable();
+        
+        HudController.Instance.Init(playerClass.ToLower(), formManager);
     }
 
     // Set up the local virtual camera to follow this player character 

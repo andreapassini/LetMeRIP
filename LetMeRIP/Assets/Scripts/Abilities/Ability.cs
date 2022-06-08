@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
@@ -8,6 +9,9 @@ public class Ability : MonoBehaviourPun
 {
     protected float cooldown;
     protected bool isReady = true;
+
+    public event Action<float> OnCooldownStart; 
+
     public virtual bool IsReady { get => isReady; }
 
     // ability instance startup, treat it like an OnEnable, useful to retrieve components instantiated at runtime
@@ -28,6 +32,8 @@ public class Ability : MonoBehaviourPun
 
     protected IEnumerator Cooldown()
     {
+        OnCooldownStart?.Invoke(cooldown);
+        
         yield return new WaitForSeconds(cooldown);
         isReady = true;
     }

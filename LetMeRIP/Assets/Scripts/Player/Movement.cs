@@ -14,7 +14,8 @@ public class Movement : MonoBehaviour
 
     private PlayerInputActions playerInputActions;
     private Animator animator;
-
+    
+    
     private void Start()
     {
         photonView = GetComponentInParent<PhotonView>();
@@ -23,7 +24,11 @@ public class Movement : MonoBehaviour
         playerInputActions.Player.Enable();
 
         animator = GetComponentInChildren<Animator>(false);
-        FormManager.OnFormChanged += formManager => animator = GetComponentInChildren<Animator>(false);
+    }
+
+    public void Init(FormManager formManager)
+    {
+        formManager.OnFormChanged += formManager => animator = GetComponentInChildren<Animator>(false);
     }
 
 	private void Update()

@@ -1933,6 +1933,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2486721092944640197, guid: 43b84f0a26d98f24ead301c398076365, type: 3}
+      propertyPath: AiFrameRate
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3968174275451725949, guid: 43b84f0a26d98f24ead301c398076365, type: 3}
+      propertyPath: m_Acceleration
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3968174275451725949, guid: 43b84f0a26d98f24ead301c398076365, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 3968174275451725949, guid: 43b84f0a26d98f24ead301c398076365, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4001263668556567423, guid: 43b84f0a26d98f24ead301c398076365, type: 3}
       propertyPath: sceneViewId
       value: 3

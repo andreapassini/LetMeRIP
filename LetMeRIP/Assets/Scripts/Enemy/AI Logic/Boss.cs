@@ -13,6 +13,7 @@ public class Boss : EnemyForm
     public static event Action<EnemyForm> OnEnemyLightAttack1Phase3;
     public static event Action<EnemyForm> OnEnemyLightAttack2Phase3;
     public static event Action<EnemyForm> OnEnemyHeavyAttackPhase3;
+
     private FSM fsmOverlay;
 
     private FSM fsmPhase1;
@@ -52,12 +53,10 @@ public class Boss : EnemyForm
 
     private float woundLevel;
 
-    public RoomSpawner r;
-
     // Start is called before the first frame update
     void Start()
     {
-        Init();
+        Init(); 
 
         // Gather Stats
         health = enemyStats.maxHealth;
@@ -68,8 +67,6 @@ public class Boss : EnemyForm
         animator = transform.GetComponent<Animator>();
 
         navMeshAgent = transform.GetComponent<NavMeshAgent>();
-
-        r = transform.GetComponent<RoomSpawner>();
 
         reactionReference = AiFrameRate;
 
@@ -544,6 +541,8 @@ public class Boss : EnemyForm
 
     public IEnumerator PatrolPhase1()
 	{
+        Debug.Log("Phase 1");
+
 		while (!After3WoundRecevied()) 
         {
             navMeshAgent.speed = enemyStats.swiftness;
@@ -554,6 +553,8 @@ public class Boss : EnemyForm
 
     public IEnumerator PatrolPhase2()
     {
+        Debug.Log("Phase 2");
+
         while (!BrokenSign() && !HealthUnder50Perc()) {
             navMeshAgent.speed = enemyStats.swiftness;
             fsmPhase2.Update();
@@ -563,6 +564,8 @@ public class Boss : EnemyForm
 
     public IEnumerator PatrolPhase3()
     {
+        Debug.Log("Phase 3");
+
         while (true) {
             navMeshAgent.speed = enemyStats.swiftness;
             fsmPhase3.Update();
@@ -607,10 +610,19 @@ public class Boss : EnemyForm
     {
         base.Init();
 
-        abilites.Add("dashForward", dashForward);
-        abilites.Add("heavyAttack", heavyAttack);
-        abilites.Add("lightAttack1", lightAttack1);
-        abilites.Add("lightAttack2", lightAttack2);
+        abilites.Add(dashForward.abilityName, dashForward);
+        abilites.Add(heavyAttack.abilityName, heavyAttack);
+        abilites.Add(lightAttack1.abilityName, lightAttack1);
+        abilites.Add(lightAttack2.abilityName, lightAttack2);
+
+        abilites.Add(heavyAttackPhase3.abilityName, heavyAttackPhase3);
+        abilites.Add(lightAttack1Phase3.abilityName, lightAttack1Phase3);
+        abilites.Add(lightAttack2Phase3.abilityName, lightAttack2Phase3);
+
+        abilites.Add(summonMinions.abilityName, summonMinions);
+        abilites.Add(summonTentacles.abilityName, summonTentacles);
+        abilites.Add(fall.abilityName, fall);
+        abilites.Add(createVulneableSign.abilityName, createVulneableSign);
     }
 
 	#region Animation Event propagation for Scriptable Objects
@@ -643,10 +655,10 @@ public class Boss : EnemyForm
     {
         OnEnemyHeavyAttackPhase3?.Invoke(this);
     }
-	#endregion
 
 	public void OnBrokeSign(EnemyForm e)
 	{
         signBroken = true;
 	}
+    #endregion
 }

@@ -2139,7 +2139,7 @@ MonoBehaviour:
   attackAction: {fileID: 11400000, guid: 44149625b820b5a4abb30b053e82ff74, type: 2}
   chaseAction: {fileID: 11400000, guid: 11bc26dd1a157a8459c06a21789eda7e, type: 2}
   searchAction: {fileID: 11400000, guid: 2578fd283d54ae24abc0f9d87a44e47d, type: 2}
-  AiFrameRate: 1
+  AiFrameRate: 0.1
   attackPoint: {fileID: 442350262}
   attackRange: 3
   health: 0
@@ -2167,7 +2167,6 @@ MonoBehaviour:
   runningFotTooLongCooldown: 5
   cooldownActionOverTime: 5
   lateStart: 0
-  r: {fileID: 0}
 --- !u!114 &3623375751001968816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2195,10 +2194,10 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 6
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 240
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -2227,7 +2226,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 3623375751001968816}
   - {fileID: 4861177218981452694}
-  sceneViewId: 0
+  sceneViewId: 3
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &4861177218981452694

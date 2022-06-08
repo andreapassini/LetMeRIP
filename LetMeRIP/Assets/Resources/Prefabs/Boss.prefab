@@ -306,6 +306,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 91537696499171573, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 91537696499171573, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -2139,7 +2143,7 @@ MonoBehaviour:
   attackAction: {fileID: 11400000, guid: 44149625b820b5a4abb30b053e82ff74, type: 2}
   chaseAction: {fileID: 11400000, guid: 11bc26dd1a157a8459c06a21789eda7e, type: 2}
   searchAction: {fileID: 11400000, guid: 2578fd283d54ae24abc0f9d87a44e47d, type: 2}
-  AiFrameRate: 0.1
+  AiFrameRate: 1
   attackPoint: {fileID: 442350262}
   attackRange: 3
   health: 0

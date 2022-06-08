@@ -36,7 +36,7 @@ public class EnemyForm : MonoBehaviourPun
     public float health;
 
     public LayerMask whatIsTarget;
-    public LayerMask whatICanSeeThrough;
+    public LayerMask whatRayHit;
 
     public Animator animator;
 

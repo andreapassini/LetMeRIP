@@ -27,11 +27,11 @@ public class EnemyRanged : EnemyForm
         health = enemyStats.maxHealth;
         // Debug.Log("Start Health " + health);
 
-        rb = GetComponent<Rigidbody>();
+        rb = transform.GetComponent<Rigidbody>();
 
-        animator = GetComponent<Animator>();
+        animator = transform.GetComponent<Animator>();
 
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = transform.GetComponent<NavMeshAgent>();
 
         reactionReference = AiFrameRate;
 
@@ -123,7 +123,7 @@ public class EnemyRanged : EnemyForm
     {
         Vector3 ray = target.position - transform.position;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, ray, out hit, whatICanSeeThrough))
+        if (Physics.Raycast(transform.position, ray, out hit, whatRayHit))
         {
             if (hit.transform == target)
             {

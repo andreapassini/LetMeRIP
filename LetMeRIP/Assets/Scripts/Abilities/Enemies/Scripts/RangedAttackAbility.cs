@@ -49,11 +49,14 @@ public class RangedAttackAbility : EnemyAbility
 
 		enemy.animator.SetTrigger("attack");
 
+		enemy.navMeshAgent.velocity = Vector3.zero;
+		enemy.navMeshAgent.isStopped = true;
+
 		// Look at Target
 		// Maybe better to use RigidBody and use Slerp for a smoother rotation
 		enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
 
-		enemy.navMeshAgent.isStopped = true;
+		
 
 		base.PerformAbility(enemy);
 

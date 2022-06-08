@@ -288,15 +288,15 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
-  whatICanSeeThrough:
+  whatRayHit:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 128
   animator: {fileID: 8735932539965035658}
   takeDamageDuration: 0.35
   navMeshAgent: {fileID: 121783232}
   tooNearRange: 3
   targetTag: Player
-  dashAction: {fileID: 11400000, guid: e66e6aa5f0b398443bef8d6d0d764e51, type: 2}
+  dashAction: {fileID: 11400000, guid: 0a2255bf7ac3c244b89645f338bb3fea, type: 2}
   lateStart: 0
 --- !u!65 &6025342368737723912
 BoxCollider:

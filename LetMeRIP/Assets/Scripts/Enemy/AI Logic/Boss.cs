@@ -307,7 +307,7 @@ public class Boss : EnemyForm
 	{
         Vector3 ray = target.position - transform.position;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, ray, out hit, whatICanSeeThrough)) {
+        if (Physics.Raycast(transform.position, ray, out hit, whatRayHit)) {
             if (hit.transform == target) {
                 return true;
             }
@@ -485,7 +485,7 @@ public class Boss : EnemyForm
 
 			Vector3 ray = newTarget.position - transform.position;
 			RaycastHit hit;
-			if (Physics.Raycast(transform.position, ray, out hit, whatICanSeeThrough)) {
+			if (Physics.Raycast(transform.position, ray, out hit, whatRayHit)) {
 				if (hit.transform == newTarget && newTarget != target) {
 					target = newTarget;
                     foundNewTarget = true;

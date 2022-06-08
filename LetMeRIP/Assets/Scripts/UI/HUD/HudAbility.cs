@@ -20,19 +20,24 @@ using UnityEngine.UI;
 
         private void StartCooldown(float cooldown)
         {
-            Debug.Log("Cooldown Started");
+            
 
             StartCoroutine(Cooldown(cooldown));
         }
 
         private void EndCooldown()
         {
-            Debug.Log("Cooldown ended");
         }
 
 
         private IEnumerator Cooldown(float cooldown)
         {
+            Debug.Log("Cooldown Started");
+            
+            iconImage.color = Color.black;
             yield return new WaitForSeconds(cooldown);
+            iconImage.color = Color.white;
+            
+            Debug.Log("Cooldown ended");
         }
     }

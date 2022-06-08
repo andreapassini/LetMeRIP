@@ -14,7 +14,7 @@ using UnityEngine.InputSystem;
         [HideInInspector] public PlayerForm currentForm;
 
         protected PlayerInputActions playerInputActions;
-        protected AbilityHandler sharedAbilityHandler; // handler of shared abilities, like dash and interact
+        public AbilityHandler sharedAbilityHandler; // handler of shared abilities, like dash and interact
         protected PlayerController characterController;
 
         public virtual void Init(PlayerController characterController)

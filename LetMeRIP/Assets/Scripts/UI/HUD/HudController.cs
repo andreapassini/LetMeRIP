@@ -30,19 +30,20 @@ using UnityEngine;
             {
                 _ => gameObject.AddComponent<WarriorStatusController>()
             };
-            
-            
-            
-            
-                
-                
+
             // formManager.OnFormChanged += newFormManager => SwitchAbilities(newFormManager.currentForm.GetType().Name);
             formManager.OnFormChanged += newFormManager =>
             {
+                Form newForm = newFormManager.currentForm.GetType().Name switch
+                {
+                    "SampleForm1" => Form.Trans1,
+                    "SampleForm2" => Form.Trans2,
+                    _ => Form.Trans1
+                };
+                
                 Dictionary<string, Ability> ah = newFormManager.currentForm.abilityHandler.abilities;
+                Dictionary<string, Ability> ah2 = newFormManager.sharedAbilityHandler.abilities;
                 
-                
-
                 Dictionary<EAbility, Ability> abilities = new Dictionary<EAbility, Ability>();
                 foreach (var entry in ah)
                 {
@@ -50,13 +51,12 @@ using UnityEngine;
                     abilities[ability] = entry.Value;
                 }
                 
-                
-                
+                abilities[EAbility.Dash] = ah2["Dash"];
                 
                 var output = String.Join(", ", abilities.Select(res => "Key " + res.Key + ": VAL = " + res.Value));
                 Debug.Log(output);
                 
-                statusController.changeForm(Form.Trans1, abilities);
+                statusController.changeForm(newForm, abilities);
             };
         }
 
@@ -74,45 +74,6 @@ using UnityEngine;
                     break;
             }
         }
-
-
-        // public void SwitchAbilities(string newForm)
-        // {
-        //     disableAbilities();
-        //
-        //     switch (newForm)
-        //     {
-        //         case "SpiritForm":
-        //             Debug.Log("HUD: moving to SpiritForm");
-        //             currentAbilities = baseAbilities;
-        //             baseAbilities.SetActive(true);
-        //             break;
-        //         case "SampleForm1":
-        //             Debug.Log("HUD: moving to SampleForm1");
-        //             currentAbilities = transform1Abilities;
-        //             transform1Abilities.SetActive(true);
-        //             break;
-        //         case "SampleForm2":
-        //             Debug.Log("HUD: moving to SampleForm2");
-        //             currentAbilities = transform2Abilities;
-        //             transform2Abilities.SetActive(true);
-        //             break;
-        //         default:
-        //             Debug.Log("HUD: Unknown Form " + newForm);
-        //             break;
-        //     }
-        // }
-        //
-        // private void disableAbilities()
-        // {
-        //     if (currentAbilities != null) currentAbilities.SetActive(false);
-        //     else
-        //     {
-        //         baseAbilities.SetActive(false);
-        //         transform1Abilities.SetActive(false);
-        //         transform2Abilities.SetActive(false);
-        //     }
-        // }
 
         public void setSpiritMaxHealth(int maxHealth) => spiritHealth.SetMaxValue(maxHealth);
         public void setBodyMaxHealth(int maxHealth) => bodyHealth.SetMaxValue(maxHealth);

@@ -6,10 +6,13 @@ using UnityEngine.AI;
 
 public class Boss : EnemyForm
 {
-    public static event Action<EnemyForm> OnEnemyLightAttack1;
-    public static event Action<EnemyForm> OnEnemyLightAttack2;
-    public static event Action<EnemyForm> OnEnemyHeavyAttack;
+    public static event Action<EnemyForm> OnEnemyLightAttack1Phase1;
+    public static event Action<EnemyForm> OnEnemyLightAttack2Phase1;
+    public static event Action<EnemyForm> OnEnemyHeavyAttackPhase1;
 
+    public static event Action<EnemyForm> OnEnemyLightAttack1Phase3;
+    public static event Action<EnemyForm> OnEnemyLightAttack2Phase3;
+    public static event Action<EnemyForm> OnEnemyHeavyAttackPhase3;
     private FSM fsmOverlay;
 
     private FSM fsmPhase1;
@@ -638,19 +641,34 @@ public class Boss : EnemyForm
         animatorPhase2.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Assets/Resources/Animators/BossPhase2.controller");
     }
 
-    public void OnLightAttack1()
+    public void OnLightAttack1Phase1()
 	{
-        OnEnemyLightAttack1?.Invoke(this);
+        OnEnemyLightAttack1Phase1?.Invoke(this);
 	}
 
-    public void OnLightAttack2()
+    public void OnLightAttack2Phase1()
     {
-        OnEnemyLightAttack2?.Invoke(this);
+        OnEnemyLightAttack2Phase1?.Invoke(this);
     }
 
-    public void OnHeavyAttack()
+    public void OnHeavyAttackPhase1()
     {
-        OnEnemyHeavyAttack?.Invoke(this);
+        OnEnemyHeavyAttackPhase1?.Invoke(this);
+    }
+
+    public void OnLightAttack1Phase3()
+    {
+        OnEnemyLightAttack1Phase3?.Invoke(this);
+    }
+
+    public void OnLightAttack2Phase3()
+    {
+        OnEnemyLightAttack2Phase3?.Invoke(this);
+    }
+
+    public void OnHeavyAttackPhase3()
+    {
+        OnEnemyHeavyAttackPhase3?.Invoke(this);
     }
 
     public void OnBrokeSign(EnemyForm e)

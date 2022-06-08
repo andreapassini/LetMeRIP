@@ -279,6 +279,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 91537696508703369, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 92efc5a6051953a4db45a52f72df44cc, type: 2}
     - target: {fileID: 91537696875061967, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -2006,6 +2010,83 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 91537696499171573, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
   m_PrefabInstance: {fileID: 6032939818505892596}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &8735288144169130935
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5979790477761606145}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &2393374961072274738
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5979790477761606145}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2486721092944640197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5979790477761606145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12002f59755db5e4cad724118ca996f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyStats: {fileID: 0}
+  attackAction: {fileID: 0}
+  chaseAction: {fileID: 0}
+  searchAction: {fileID: 0}
+  AiFrameRate: 1
+  attackPoint: {fileID: 0}
+  attackRange: 3
+  health: 0
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 0
+  whatICanSeeThrough:
+    serializedVersion: 2
+    m_Bits: 0
+  animator: {fileID: 0}
+  takeDamageDuration: 1
+  navMeshAgent: {fileID: 0}
+  dashForward: {fileID: 0}
+  heavyAttack: {fileID: 0}
+  lightAttack1: {fileID: 0}
+  lightAttack2: {fileID: 0}
+  summonTentacles: {fileID: 0}
+  fall: {fileID: 0}
+  summonMinions: {fileID: 0}
+  createVulneableSign: {fileID: 0}
+  heavyAttackPhase3: {fileID: 0}
+  lightAttack1Phase3: {fileID: 0}
+  lightAttack2Phase3: {fileID: 0}
+  targetTag: Player
+  runningFotTooLongCooldown: 5
+  cooldownActionOverTime: 5
+  lateStart: 0
+  animatorPhase1: {fileID: 0}
+  animatorPhase2: {fileID: 0}
+  animatorPhase3: {fileID: 0}
+  tentaclesSpawnPoints: {fileID: 0}
 --- !u!114 &3623375751001968816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2022,6 +2103,28 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!195 &3968174275451725949
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5979790477761606145}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &4001263668556567423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2060,28 +2163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 9
-    SynchronizeType: 1
-    Name: damage
-  - Type: 9
-    SynchronizeType: 1
-    Name: dash
-  - Type: 9
-    SynchronizeType: 1
-    Name: LA1
-  - Type: 9
-    SynchronizeType: 1
-    Name: LA2
-  - Type: 9
-    SynchronizeType: 1
-    Name: HA
-  - Type: 1
-    SynchronizeType: 1
-    Name: speed
-  - Type: 9
-    SynchronizeType: 1
-    Name: fall
+  m_SynchronizeParameters: []
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

@@ -182,6 +182,7 @@ public class EnemySpider : EnemyForm
     public IEnumerator Patrol()
     {
         while (true) {
+            navMeshAgent.speed = enemyStats.swiftness;
             fsm.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
@@ -189,6 +190,7 @@ public class EnemySpider : EnemyForm
 
     public IEnumerator StopAI()
     {
+        navMeshAgent.speed = enemyStats.swiftness;
         float attackDuration = 1f; // Just as an example 
 
         AiFrameRate = attackDuration;
@@ -198,6 +200,7 @@ public class EnemySpider : EnemyForm
 
     public IEnumerator StopAI(float duration)
     {
+        navMeshAgent.speed = enemyStats.swiftness;
         navMeshAgent.velocity = Vector3.zero;
         //navMeshAgent.isStopped = true;
         AiFrameRate = duration;
@@ -211,8 +214,10 @@ public class EnemySpider : EnemyForm
 
     public IEnumerator WaitDieAnimation(float duration)
     {
+        navMeshAgent.speed = enemyStats.swiftness;
         navMeshAgent.enabled = false;
         yield return new WaitForSeconds(duration);
+        navMeshAgent.speed = enemyStats.swiftness;
         Destroy(gameObject);
 
     }
@@ -220,6 +225,7 @@ public class EnemySpider : EnemyForm
     public IEnumerator LateStart()
     {
         yield return new WaitForSeconds(1f);
+        navMeshAgent.speed = enemyStats.swiftness;
         targets = GameObject.FindGameObjectsWithTag(targetTag);
         target = targets[0].transform;
     }

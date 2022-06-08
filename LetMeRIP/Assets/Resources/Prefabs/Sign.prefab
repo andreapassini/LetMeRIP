@@ -19,9 +19,9 @@ GameObject:
   - component: {fileID: 6660028278861298359}
   - component: {fileID: 6660028278861298352}
   - component: {fileID: 6660028278861298353}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sign
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -244,10 +244,10 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: damage
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: die
   m_SynchronizeLayers:
   - SynchronizeType: 0

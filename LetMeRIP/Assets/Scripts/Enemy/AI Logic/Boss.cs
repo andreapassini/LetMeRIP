@@ -240,6 +240,7 @@ public class Boss : EnemyForm
 	private void OnEnable()
 	{
         // Cannot find event WTf
+        Sign.OnSignBroken += OnBrokeSign;
 	}
 
 	#region Conditions
@@ -521,6 +522,7 @@ public class Boss : EnemyForm
     {
         while (true)
         {
+            navMeshAgent.speed = enemyStats.swiftness;
             dt_attackPhase3.walk();
             yield return new WaitForSeconds(AiFrameRate);
         }
@@ -529,18 +531,21 @@ public class Boss : EnemyForm
     public IEnumerator RepositionCooldown()
     {
         yield return new WaitForSeconds(lightAttack1.abilityDurtation);
+        navMeshAgent.speed = enemyStats.swiftness;
         isHAinCooldown = false;
     }
 
     public IEnumerator LA1Cooldown()
     {
         yield return new WaitForSeconds(lightAttack1.abilityDurtation);
+        navMeshAgent.speed = enemyStats.swiftness;
         isHAinCooldown = false;
     }
 
     public IEnumerator HACooldown()
     {
         yield return new WaitForSeconds(heavyAttack.abilityDurtation);
+        navMeshAgent.speed = enemyStats.swiftness;
         isHAinCooldown = false;
     }
 
@@ -548,6 +553,7 @@ public class Boss : EnemyForm
     {
         while (true)
         {
+            navMeshAgent.speed = enemyStats.swiftness;
             fsmOverlay.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
@@ -557,6 +563,7 @@ public class Boss : EnemyForm
 	{
 		while (!After3WoundRecevied()) 
         {
+            navMeshAgent.speed = enemyStats.swiftness;
             fsmPhase1.Update();
             yield return new WaitForSeconds(AiFrameRate);
 		}
@@ -565,6 +572,7 @@ public class Boss : EnemyForm
     public IEnumerator PatrolPhase2()
     {
         while (!BrokenSign() && !HealthUnder50Perc()) {
+            navMeshAgent.speed = enemyStats.swiftness;
             fsmPhase2.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
@@ -573,6 +581,7 @@ public class Boss : EnemyForm
     public IEnumerator PatrolPhase3()
     {
         while (true) {
+            navMeshAgent.speed = enemyStats.swiftness;
             fsmPhase3.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
@@ -581,6 +590,7 @@ public class Boss : EnemyForm
     public IEnumerator LateStart()
     {
         yield return new WaitForSeconds(1f);
+        navMeshAgent.speed = enemyStats.swiftness;
         targets = GameObject.FindGameObjectsWithTag(targetTag);
         target = targets[0].transform;
     }
@@ -588,12 +598,14 @@ public class Boss : EnemyForm
     public IEnumerator runningTimer()
 	{
         yield return new WaitForSeconds(runningFotTooLongCooldown);
+        navMeshAgent.speed = enemyStats.swiftness;
         runningForTooLong = true;
     }
 
     public IEnumerator WaitForCooldownActionOver()
 	{
         yield return new WaitForSeconds(cooldownActionOverTime);
+        navMeshAgent.speed = enemyStats.swiftness;
         cooldownActionOver = true;
 	}
 
@@ -601,6 +613,7 @@ public class Boss : EnemyForm
 	{
 		while (true) 
         {
+            navMeshAgent.speed = enemyStats.swiftness;
             dt_attackPhase1.walk();
             yield return new WaitForSeconds(AiFrameRate);
 		}
@@ -632,7 +645,7 @@ public class Boss : EnemyForm
         OnEnemyHeavyAttack?.Invoke(this);
     }
 
-    public void OnBrokeSign()
+    public void OnBrokeSign(EnemyForm e)
 	{
         signBroken = true;
 	}

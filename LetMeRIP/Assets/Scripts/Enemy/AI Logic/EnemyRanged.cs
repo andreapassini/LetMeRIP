@@ -216,6 +216,7 @@ public class EnemyRanged : EnemyForm
     {
         while (true)
         {
+            navMeshAgent.speed = enemyStats.swiftness;
             fsm.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
@@ -225,6 +226,7 @@ public class EnemyRanged : EnemyForm
     {
         while (TargetVisible())
         {
+            navMeshAgent.speed = enemyStats.swiftness;
             fightFSM.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
@@ -236,6 +238,7 @@ public class EnemyRanged : EnemyForm
 
     public IEnumerator StopAI()
     {
+        navMeshAgent.speed = enemyStats.swiftness;
         float attackDuration = 1f; // Just as an example 
 
         AiFrameRate = attackDuration;
@@ -245,6 +248,7 @@ public class EnemyRanged : EnemyForm
 
     public IEnumerator StopAI(float stopTime)
     {
+        navMeshAgent.speed = enemyStats.swiftness;
         AiFrameRate = stopTime;
         yield return new WaitForSeconds(stopTime);
         AiFrameRate = reactionReference;
@@ -256,7 +260,7 @@ public class EnemyRanged : EnemyForm
 	{
         yield return new WaitForSeconds(dashAction.abilityDurtation);
         navMeshAgent.enabled = true;
-
+        navMeshAgent.speed = enemyStats.swiftness;
         // Enable isKinematic
         rb.isKinematic = true;
     }
@@ -264,6 +268,7 @@ public class EnemyRanged : EnemyForm
     public IEnumerator LateStart()
     {
         yield return new WaitForSeconds(1f);
+        navMeshAgent.speed = enemyStats.swiftness;
         targets = GameObject.FindGameObjectsWithTag(targetTag);
         target = targets[0].transform;
     }

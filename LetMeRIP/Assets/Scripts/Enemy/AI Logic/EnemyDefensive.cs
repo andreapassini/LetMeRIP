@@ -198,6 +198,7 @@ public class EnemyDefensive : EnemyForm
     {
         while (true)
         {
+            navMeshAgent.speed = enemyStats.swiftness;
             fsm.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
@@ -207,6 +208,7 @@ public class EnemyDefensive : EnemyForm
     {
         while (TargetInRange())
         {
+            navMeshAgent.speed = enemyStats.swiftness;
             fightFSM.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
@@ -215,12 +217,14 @@ public class EnemyDefensive : EnemyForm
     public IEnumerator CooldownBLock()
     {
         yield return new WaitForSeconds(timeToBLock);
+        navMeshAgent.speed = enemyStats.swiftness;
         isBlocking = false;
     }
 
     public IEnumerator CooldownAttack()
     {
         yield return new WaitForSeconds(timeToAttack);
+        navMeshAgent.speed = enemyStats.swiftness;
         isBlocking = true;
     }
 
@@ -230,6 +234,7 @@ public class EnemyDefensive : EnemyForm
 
     public IEnumerator StopAI(float stopTime)
     {
+        navMeshAgent.speed = enemyStats.swiftness;
         float attackDuration = stopTime; // Just as an example 
 
         AiFrameRate = attackDuration;

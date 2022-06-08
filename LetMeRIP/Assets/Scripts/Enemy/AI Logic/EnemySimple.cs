@@ -88,6 +88,7 @@ public class EnemySimple : EnemyForm
     public IEnumerator Patrol()
     {
         while (true) {
+            navMeshAgent.speed = enemyStats.swiftness;
             fsm.Update();
             animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
             yield return new WaitForSeconds(AiFrameRate);
@@ -199,6 +200,7 @@ public class EnemySimple : EnemyForm
     {
         navMeshAgent.enabled = false;
         yield return new WaitForSeconds(duration);
+        navMeshAgent.speed = enemyStats.swiftness;
         Destroy(gameObject);
 
     }
@@ -206,6 +208,7 @@ public class EnemySimple : EnemyForm
     public IEnumerator LateStart()
     {
         yield return new WaitForSeconds(1f);
+        navMeshAgent.speed = enemyStats.swiftness;
         targets = GameObject.FindGameObjectsWithTag(targetTag);
         target = targets[0].transform;
     }

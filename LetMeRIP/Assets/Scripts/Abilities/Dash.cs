@@ -88,6 +88,14 @@ public class Dash : Ability
     {
         if(currentTime > 0)
         {
+            if(Physics.Raycast(transform.position + direction*0.1f, direction, out RaycastHit info, 50f)){
+                if (info.collider.CompareTag("Obstacle") && (transform.position - info.transform.position).magnitude < 4f)
+                {
+                    isDashing = false;
+                    CancelAction();
+                    yield break;
+                }
+            }
             currentTime -= Time.deltaTime;
             rb.MovePosition(transform.position + this.direction.ToIso() * speed * Time.deltaTime);
             yield return new WaitForFixedUpdate();

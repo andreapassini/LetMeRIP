@@ -19,7 +19,7 @@ public class FormManager : MonoBehaviourPun
     protected PlayerController characterController;
 
     // units of distance from the player when the spirit spawns
-    [SerializeField] private float spiritForwardOffset = 3f;
+    [SerializeField] private float spiritForwardOffset = 2f;
     [SerializeField] private float spiritReturnRange = 3f;
     protected bool isSpirit = false;
 
@@ -182,7 +182,14 @@ public class FormManager : MonoBehaviourPun
 
     private void ExitBody()
     {
-        GameObject spirit = PhotonNetwork.Instantiate("Prefabs/SpiritCharacter", transform.position + spiritForwardOffset * transform.forward, transform.rotation);
+        float spawnDistance = spiritForwardOffset;
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit info, 50f))
+        {
+            if (info.collider.CompareTag("Obstacle") && (transform.position - info.transform.position).magnitude < 4f)
+                spawnDistance *= -1;
+        }
+
+        GameObject spirit = PhotonNetwork.Instantiate("Prefabs/SpiritCharacter", transform.position + spawnDistance * transform.forward, transform.rotation);
         PlayerController spiritController = spirit.GetComponent<PlayerController>();
         DisableAbilities();
         

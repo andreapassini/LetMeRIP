@@ -237,8 +237,13 @@ public class Boss : EnemyForm
         StartCoroutine(PatrolOverlay());
     }
 
-    #region Conditions
-    public bool CooldownOver()
+	private void OnEnable()
+	{
+        // Cannot find event WTf
+	}
+
+	#region Conditions
+	public bool CooldownOver()
     {
         if (!isCooldwonOver)
         {
@@ -626,4 +631,9 @@ public class Boss : EnemyForm
     {
         OnEnemyHeavyAttack?.Invoke(this);
     }
+
+    public void OnBrokeSign()
+	{
+        signBroken = true;
+	}
 }

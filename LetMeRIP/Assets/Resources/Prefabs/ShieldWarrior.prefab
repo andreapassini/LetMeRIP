@@ -323,6 +323,7 @@ GameObject:
   - component: {fileID: 1836104200714828093}
   - component: {fileID: 2821476675527055680}
   - component: {fileID: 5806617400150259300}
+  - component: {fileID: 9192943971428302057}
   m_Layer: 0
   m_Name: ShieldWarrior
   m_TagString: Untagged
@@ -430,6 +431,7 @@ MonoBehaviour:
   animatorPhase1: {fileID: 0}
   animatorPhase2: {fileID: 0}
   animatorPhase3: {fileID: 0}
+  tentaclesSpawnPoints: {fileID: 1172063413}
 --- !u!195 &5806617400150259300
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -452,6 +454,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &9192943971428302057
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91537696499171573}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.87714595, y: 1.9623573, z: 0.5392972}
+  m_Center: {x: -0.0051189363, y: 0.982833, z: -0.000000059604645}
 --- !u!1 &91537696499171575
 GameObject:
   m_ObjectHideFlags: 0

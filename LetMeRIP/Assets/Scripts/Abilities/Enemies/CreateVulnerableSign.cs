@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[CreateAssetMenu(menuName = "EnemyAbilities/SpawnTentacles")]
-public class SpawnTentacles : EnemyAbility
+[CreateAssetMenu(menuName = "EnemyAbilities/CreateVulnerableSign")]
+public class CreateVulnerableSign : EnemyAbility
 {
-	public string[] tentaclePrefabPath;
-	public int[] numberOfEnemies;
-
+	public string prefabPath;
 	RoomSpawner r = new RoomSpawner();
 
 	public override void StartAbility(EnemyForm enemy)
@@ -23,23 +21,25 @@ public class SpawnTentacles : EnemyAbility
 			enemy.transform.position.z);
 
 		// Generate Spawn Points
-		for(int i=0; i<4; i++) {
-			// Some Randomness
-			float xOffset = Random.Range(0, 0.25f);
-			float zOffset = Random.Range(0, 0.25f);
+		for (int i = 0; i < 4; i++) {
 
-			if (i%2 == 0) 
-			{
-				xOffset += 2f;
-			}
-			else {
-				xOffset += -2f;
-			}
+			float xOffset  = 0 , zOffset = 0;
 
-			if(i/2 < 1) {
-				zOffset += 2f;
-			} else {
-				zOffset += -2f;
+			if (i == 0) {
+				xOffset = 0;
+				zOffset = 1;
+			}
+			else if (i == 1) {
+				xOffset = 1;
+				zOffset = 0;
+			} 
+			else if( i == 2) {
+				xOffset = 0;
+				zOffset = -1;
+			}
+			else if(i == 3) {
+				xOffset = -1;
+				zOffset = 0;
 			}
 
 			Vector3 spawnPoint = new Vector3(
@@ -48,7 +48,7 @@ public class SpawnTentacles : EnemyAbility
 				enemyCenter.y + zOffset);
 
 			EnemySpawner toSpawn = new EnemySpawner();
-			toSpawn.enemyPrefabPath = tentaclePrefabPath[i];
+			toSpawn.enemyPrefabPath = prefabPath;
 			toSpawn.transform.position = spawnPoint;
 			toSpawn.transform.rotation = Quaternion.identity;
 
@@ -58,12 +58,14 @@ public class SpawnTentacles : EnemyAbility
 			if (NavMesh.SamplePosition(spawnPoint, out hit, 1f, 1)) {
 				// Spawn Tentacles
 				r.spawners.Add(toSpawn);
+				r.Spawn();
+				return;
 			}
 
 		}
 
 
-		r.Spawn();
+		
 		// Use an Event to kill them afterwards
 	}
 
@@ -76,4 +78,5 @@ public class SpawnTentacles : EnemyAbility
 	{
 		throw new System.NotImplementedException();
 	}
+
 }

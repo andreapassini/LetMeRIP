@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "EnemyAbilities/Rise")]
 public class Rise : EnemyAbility
 {
 	public override void StartAbility(EnemyForm enemy)

@@ -239,12 +239,16 @@ public class Boss : EnemyForm
 
 	private void OnEnable()
 	{
-        // Cannot find event WTf
         Sign.OnSignBroken += OnBrokeSign;
 	}
 
-	#region Conditions
-	public bool CooldownOver()
+	private void OnDisable()
+	{
+        Sign.OnSignBroken -= OnBrokeSign;
+    }
+
+    #region Conditions
+    public bool CooldownOver()
     {
         if (!isCooldwonOver)
         {
@@ -384,18 +388,18 @@ public class Boss : EnemyForm
 
     #region Actions
     public void SwitchAnimatorPhase1()
-	{
-        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animators/BossPhase1");
-	}
+    {
+        animator = animatorPhase1;
+    }
 
     public void SwitchAnimatorPhase2()
     {
-        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animators/BossPhase2");
+        animator = animatorPhase2;
     }
     
     public void SwitchAnimatorPhase3()
     {
-        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animators/BossPhase3");
+        animator = animatorPhase3;
     }
 
     public object HeavyAttackPhase3(object o)
@@ -628,6 +632,10 @@ public class Boss : EnemyForm
         abilites.Add("heavyAttack", heavyAttack);
         abilites.Add("lightAttack1", lightAttack1);
         abilites.Add("lightAttack2", lightAttack2);
+
+        animatorPhase1.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Assets/Resources/Animators/BossPhase1.controller");
+        animatorPhase2.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Assets/Resources/Animators/BossPhase2.controller");
+        animatorPhase2.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Assets/Resources/Animators/BossPhase2.controller");
     }
 
     public void OnLightAttack1()

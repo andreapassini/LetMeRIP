@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8a97f40cd03392419836da423e53e25, type: 3}
-  m_Name: dashBack
+  m_Script: {fileID: 11500000, guid: e5de65ca5d542634b818945fdc2bc284, type: 3}
+  m_Name: Spider
   m_EditorClassIdentifier: 
-  abilityName: DahsBack
-  coolDown: 2
-  abilityDurtation: 1
-  damage: 0
-  dashForce: 10
-  dashDuration: 1
+  name: spider
+  health: 150
+  maxHealth: 150
+  attack: 10
+  defense: 1
+  swiftness: 20

@@ -210,7 +210,7 @@ public class EnemyRanged : EnemyForm
         StartCoroutine(WaitDashAnimation());
     }
     #endregion
-
+    
     #region Coroutines
     public IEnumerator Patrol()
     {

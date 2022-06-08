@@ -32,6 +32,7 @@ public class RangedAttackAbility : EnemyAbility
 				// Fire Bullet
 				GameObject bulletFired = Instantiate(bulletPrefab, enemy.attackPoint.position, enemy.attackPoint.rotation);
 
+				bulletFired.layer = enemy.gameObject.layer;
 				Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
 				rbBullet.AddForce(enemy.attackPoint.forward * bulletForce, ForceMode.Impulse);
 			}

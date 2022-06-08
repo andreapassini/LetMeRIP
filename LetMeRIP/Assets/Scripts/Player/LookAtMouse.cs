@@ -27,7 +27,7 @@ public class LookAtMouse : MonoBehaviourPun
     {
         if (!photonView.IsMine) return;
         
-        GatherDirectionInput();
+        directionToLook = GatherDirectionInput();
     }
 
 	private void FixedUpdate()
@@ -37,13 +37,15 @@ public class LookAtMouse : MonoBehaviourPun
         Rotate();
 	}
     
-    private void GatherDirectionInput()
+    public Vector3 GatherDirectionInput()
     {
         Ray ray = playerCamera.ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>());
 
-        this.directionToLook = Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask)
+        Vector3 direction = Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask)
             ? hitInfo.point - transform.position
             : Vector3.zero;
+        direction.y = 0;
+        return direction.normalized;
     }
     
     private void Rotate()

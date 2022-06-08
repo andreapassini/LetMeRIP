@@ -57,6 +57,7 @@ public class WarriorBasicHeavyAttack : Ability
 
 
         // dash animation
+        animator.SetTrigger("HeavyAttack");
     }
 
     /**

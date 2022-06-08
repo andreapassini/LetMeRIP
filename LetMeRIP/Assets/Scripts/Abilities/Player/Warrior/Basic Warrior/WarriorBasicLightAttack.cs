@@ -26,7 +26,7 @@ public class WarriorBasicLightAttack : Ability
     public override void StartedAction()
     {
         isReady = false;
-        //animator.SetTrigger("LightAttack");
+        animator.SetTrigger("LightAttack");
     }
 
     public override void PerformedAction()

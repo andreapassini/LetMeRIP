@@ -613,7 +613,8 @@ public class Boss : EnemyForm
         abilites.Add("lightAttack2", lightAttack2);
     }
 
-    public void OnLightAttack1Phase1()
+	#region Animation Event propagation for Scriptable Objects
+	public void OnLightAttack1Phase1()
 	{
         OnEnemyLightAttack1Phase1?.Invoke(this);
 	}
@@ -642,8 +643,9 @@ public class Boss : EnemyForm
     {
         OnEnemyHeavyAttackPhase3?.Invoke(this);
     }
+	#endregion
 
-    public void OnBrokeSign(EnemyForm e)
+	public void OnBrokeSign(EnemyForm e)
 	{
         signBroken = true;
 	}

@@ -12,13 +12,14 @@ public class Movement : MonoBehaviourPun
     private PlayerInputActions playerInputActions;
     private Animator animator;
     private PlayerController characterController;
+    private LookAtMouse lam;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>(false);
         characterController = gameObject.GetComponent<PlayerController>();
-        
+        lam = GetComponent<LookAtMouse>();    
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
         FormManager.OnFormChanged += RefreshAnimator;
@@ -42,7 +43,18 @@ public class Movement : MonoBehaviourPun
 
     public void GatherInputs()
     {
-        this.direction = playerInputActions.Player.Movement.ReadValue<Vector3>();
+        direction = playerInputActions.Player.Movement.ReadValue<Vector3>();
+        
+        Vector3 walkingDirection = playerInputActions.Player.Movement.ReadValue<Vector3>();
+        Debug.Log($"Walking direction {walkingDirection}");
+        Vector3 lookDirection = lam.GatherDirectionInput();
+        Debug.Log($"look direction {lookDirection}");
+        float rotationAngle = Mathf.Acos(Vector3.Dot(walkingDirection, lookDirection));
+        Debug.Log($"rotation angle {rotationAngle}");
+        Vector3 animationDirection = RotateVector(walkingDirection, rotationAngle);
+        Debug.Log($"final direction {animationDirection}");
+        animator.SetFloat("VelocityZ", animationDirection.z);
+        animator.SetFloat("VelocityX", animationDirection.x);
         if (animator != null)
         {
             if (!direction.Equals(Vector3.zero))
@@ -56,6 +68,18 @@ public class Movement : MonoBehaviourPun
                 //animator.SetBool("isRunning", false);
             }
         }
+    }
+
+    private static float DegToRad(float deg) => deg * 0.01745f;
+
+    private static Vector3 RotateVector(Vector3 vec, float rad)
+    {
+        return new Matrix4x4(
+            new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
+            new Vector4(0, 1, 0, 0),
+            new Vector4(-Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+            Vector4.zero
+        ) * vec;
     }
 
     public void Move()

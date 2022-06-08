@@ -33,7 +33,7 @@ public class WarriorBasicAbility1 : Ability
     public override void StartedAction()
     {
         isReady = false;
-        //animator.SetTrigger("LightAttack");
+        animator.SetTrigger("Ability1");
     }
 
     public override void PerformedAction()

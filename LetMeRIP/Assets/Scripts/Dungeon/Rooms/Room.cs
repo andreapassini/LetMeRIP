@@ -56,7 +56,7 @@ public class Room : MonoBehaviour
 
         players[playerViewID] = player;
         if (players.Count == 1) Init();
-        Debug.Log($"{playerViewID} entered room {photonView.ViewID}");
+        //Debug.Log($"{playerViewID} entered room {photonView.ViewID}");
     }
 
     public void ExitPlayer(PlayerController player)
@@ -66,7 +66,7 @@ public class Room : MonoBehaviour
 
         players.Remove(playerViewID);
         if (players.Count == 0) Exit();
-        Debug.Log($"{playerViewID} exited room {photonView.ViewID}");
+        //Debug.Log($"{playerViewID} exited room {photonView.ViewID}");
     }
 
     /**
@@ -75,7 +75,7 @@ public class Room : MonoBehaviour
     protected virtual void Init() 
     {
         if (!PhotonNetwork.IsMasterClient) return; // it just means that this gets executed just once, and it'll be from the master
-        Debug.Log($"room {photonView.ViewID} Init");
+        //Debug.Log($"room {photonView.ViewID} Init");
 
         timeSpent = 0f;
         timerCoroutine = Timer();

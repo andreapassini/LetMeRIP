@@ -139,7 +139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 91537696499146005, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.38
+      value: 0.708
       objectReference: {fileID: 0}
     - target: {fileID: 91537696499146005, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
       propertyPath: m_LocalPosition.z
@@ -171,6 +171,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 91537696499146005, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 91537696499146007, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 91537696499146007, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 91537696499146025, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
@@ -320,6 +328,30 @@ PrefabInstance:
     - target: {fileID: 91537696499171657, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 91537696504450121, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 91537696504450121, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 91537696504450121, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 91537696504450121, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 91537696504450121, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 91537696504450121, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 91537696508703369, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
       propertyPath: m_Controller
@@ -2089,8 +2121,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.8968735, z: 1}
+  m_Center: {x: 0, y: 0.78230906, z: 0}
 --- !u!114 &2486721092944640197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2135,7 +2167,7 @@ MonoBehaviour:
   runningFotTooLongCooldown: 5
   cooldownActionOverTime: 5
   lateStart: 0
-  tentaclesSpawnPoints: {fileID: 0}
+  r: {fileID: 0}
 --- !u!114 &3623375751001968816
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ public class WarriorBasicAbility1 : Ability
 
     private void Start()
     {
-        cooldown = .1f;
+        cooldown = 6f;
     }
 
     public override void Init(PlayerController characterController)
@@ -45,7 +45,7 @@ public class WarriorBasicAbility1 : Ability
                 new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
                 new Vector4(0, 1, 0, 0),
                 new Vector4(-Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
-                new Vector4(0, 0, 0, 0)
+                Vector4.zero
             ) * transform.forward;
 
         Vector3 lbound = new Matrix4x4(
@@ -72,7 +72,6 @@ public class WarriorBasicAbility1 : Ability
         }
 
         if (hits > 0 && photonView.IsMine) characterController.HPManager.DecayingHeal(heal * hits, healDecayTime);
-        Debug.Log($"Health: {characterController.HPManager.Health}");
         StartCoroutine(Cooldown());
     }
 

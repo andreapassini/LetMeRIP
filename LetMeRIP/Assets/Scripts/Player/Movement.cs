@@ -6,17 +6,18 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviourPun
 {
-    [SerializeField] private float speed = 5f;
 	private Rigidbody rb;
     private Vector3 direction;
 
     private PlayerInputActions playerInputActions;
     private Animator animator;
+    private PlayerController characterController;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>(false);
+        characterController = gameObject.GetComponent<PlayerController>();
         
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
@@ -59,7 +60,7 @@ public class Movement : MonoBehaviourPun
 
     public void Move()
     {
-        rb.MovePosition(transform.position + this.direction.ToIso() * speed * Time.deltaTime);
+        rb.MovePosition(transform.position + this.direction.ToIso() * characterController.currentStats.swiftness * Time.deltaTime);
     }
 
     private void RefreshAnimator(FormManager fm)

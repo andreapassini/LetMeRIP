@@ -13,39 +13,41 @@ public class WarriorBasic : PlayerForm
 
         WarriorBasicLightAttack lightAttack = gameObject.AddComponent<WarriorBasicLightAttack>();
         WarriorBasicHeavyAttack heavyAttack = gameObject.AddComponent<WarriorBasicHeavyAttack>();
-        WarriorBasicAbility1 ability1 = gameObject.AddComponent<WarriorBasicAbility1>(); 
+        WarriorBasicAbility1 ability1 = gameObject.AddComponent<WarriorBasicAbility1>();
+        WarriorBasicAbility2 ability2 = gameObject.AddComponent<WarriorBasicAbility2>();
 
         abilities[playerInputActions.Player.LightAttack.name] = lightAttack;
         abilities[playerInputActions.Player.HeavyAttack.name] = heavyAttack;
         abilities[playerInputActions.Player.Ability1.name] = ability1;
-        
+        abilities[playerInputActions.Player.Ability2.name] = ability2;
+
         abilityHandler = gameObject.AddComponent<AbilityHandler>();
         abilityHandler.Init(abilities, characterController);
     }
 
-    private void OnDrawGizmos()
-    {
-        float alpha = 35f;
-        float rad = alpha * Mathf.PI / 180;
-        Gizmos.DrawRay(new Ray(transform.position, transform.forward));
-        Gizmos.color = Color.yellow;
+    //private void OnDrawGizmos()
+    //{
+    //    float alpha = 35f;
+    //    float rad = alpha * Mathf.PI / 180;
+    //    Gizmos.DrawRay(new Ray(transform.position, transform.forward));
+    //    Gizmos.color = Color.yellow;
 
-        Vector3 rbound = new Matrix4x4(
-                new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
-                new Vector4(0, 1, 0, 0),
-                new Vector4(-Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
-                new Vector4(0, 0, 0, 0)
-            ) * transform.forward;
+    //    Vector3 rbound = new Matrix4x4(
+    //            new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
+    //            new Vector4(0, 1, 0, 0),
+    //            new Vector4(-Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+    //            new Vector4(0, 0, 0, 0)
+    //        ) * transform.forward;
         
-        Vector3 lbound = new Matrix4x4(
-                new Vector4(Mathf.Cos(rad), 0, -Mathf.Sin(rad), 0),
-                new Vector4(0, 1, 0, 0),
-                new Vector4(Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
-                Vector4.zero
-            ) * transform.forward;
+    //    Vector3 lbound = new Matrix4x4(
+    //            new Vector4(Mathf.Cos(rad), 0, -Mathf.Sin(rad), 0),
+    //            new Vector4(0, 1, 0, 0),
+    //            new Vector4(Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+    //            Vector4.zero
+    //        ) * transform.forward;
 
-        Gizmos.DrawRay(new Ray(transform.position, rbound));
-        Gizmos.DrawRay(new Ray(transform.position, lbound));
-    }
+    //    Gizmos.DrawRay(new Ray(transform.position, rbound));
+    //    Gizmos.DrawRay(new Ray(transform.position, lbound));
+    //}
 
 }

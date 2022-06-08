@@ -39,9 +39,11 @@ public class SimpleAttackAbility : EnemyAbility
             return;
         }
 
-        // Stop Moving
-        enemy.GetComponent<NavMeshAgent>().isStopped = true;
         enemy.animator.SetTrigger("attack");
+
+        // Stop Moving  
+        enemy.navMeshAgent.velocity = Vector3.zero;
+        enemy.navMeshAgent.isStopped = true;
 
         // Look at Target
         enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);

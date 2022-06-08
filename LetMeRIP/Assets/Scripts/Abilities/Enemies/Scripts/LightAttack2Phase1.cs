@@ -27,6 +27,9 @@ public class LightAttack2Phase1 : EnemyAbility
 
 		enemy.animator.SetTrigger("LA2Phase1");
 
+		enemy.navMeshAgent.velocity = Vector3.zero;
+		enemy.navMeshAgent.isStopped = true;
+
 		base.PerformAbility(enemy);
 	}
 

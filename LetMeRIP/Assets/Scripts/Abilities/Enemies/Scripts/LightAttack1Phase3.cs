@@ -21,13 +21,14 @@ public class LightAttack1Phase3 : EnemyAbility
 	{
 		base.StartAbility(enemy);
 
-		base.StartAbility(enemy);
-
 		if (previousAbilityTime + coolDown > Time.time) {
 			return;
 		}
 
 		enemy.animator.SetTrigger("LA1Phase3");
+
+		enemy.navMeshAgent.velocity = Vector3.zero;
+		enemy.navMeshAgent.isStopped = true;
 
 		base.PerformAbility(enemy);
 	}

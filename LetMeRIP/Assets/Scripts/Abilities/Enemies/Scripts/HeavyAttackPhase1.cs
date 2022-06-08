@@ -21,13 +21,14 @@ public class HeavyAttackPhase1 : EnemyAbility
 	{
 		base.StartAbility(enemy);
 
-		base.StartAbility(enemy);
-
 		if (previousAbilityTime + coolDown > Time.time) {
 			return;
 		}
 
 		enemy.animator.SetTrigger("HAPhase1");
+
+		enemy.navMeshAgent.velocity = Vector3.zero;
+		enemy.navMeshAgent.isStopped = true;
 
 		base.PerformAbility(enemy);
 	}

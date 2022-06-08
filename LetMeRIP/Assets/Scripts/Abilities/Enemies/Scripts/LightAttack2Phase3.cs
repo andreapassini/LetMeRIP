@@ -21,11 +21,12 @@ public class LightAttack2Phase3 : EnemyAbility
 	{
 		base.StartAbility(enemy);
 
-		base.StartAbility(enemy);
-
 		if (previousAbilityTime + coolDown > Time.time) {
 			return;
 		}
+
+		enemy.navMeshAgent.velocity = Vector3.zero;
+		enemy.navMeshAgent.isStopped = true;
 
 		enemy.animator.SetTrigger("LA2Phase3");
 

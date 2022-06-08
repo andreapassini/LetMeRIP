@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "EnemyAbilities/LightAttack1Phase3")]
-public class LightAttackPhase3 : EnemyAbility
+public class LightAttack1Phase3 : EnemyAbility
 {
 	public float range = 2f;
 

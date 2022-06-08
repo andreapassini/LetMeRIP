@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81181dec16095d749940986432593dab, type: 3}
-  m_Name: CreatesVulneableSign
+  m_Script: {fileID: 11500000, guid: 9e8dda6039ba89342ae5a991e5353d6b, type: 3}
+  m_Name: LightAttack2Phase3
   m_EditorClassIdentifier: 
-  abilityName: 
-  coolDown: 0
-  abilityDurtation: 0
-  damage: 0
-  prefab: {fileID: 6660028278861298346, guid: b1ef67de972a0fa4ba543f2eb0eb43fc, type: 3}
+  abilityName: lightAttack2Phase3
+  coolDown: 2
+  abilityDurtation: 2
+  damage: 2
+  range: 2

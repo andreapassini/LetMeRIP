@@ -16,8 +16,7 @@ MonoBehaviour:
   coolDown: 0
   abilityDurtation: 0
   damage: 0
-  tentaclePrefabPath:
-  - Assets/Resources/Prefabs/RangedEnemy.prefab
-  - Assets/Resources/Prefabs/SimpleEnemySkeleton.prefab
-  - Assets/Resources/Prefabs/spider_pref Variant.prefab
-  numberOfEnemies: 010000000300000005000000
+  prefabs:
+  - {fileID: 7954997921229432877, guid: c2f1405df2dca13449c6e472259e69ee, type: 3}
+  - {fileID: 1805265623673178751, guid: 82ffdf9f0d3e20e478add2c23c36daf6, type: 3}
+  numberOfEnemies: 0100000003000000

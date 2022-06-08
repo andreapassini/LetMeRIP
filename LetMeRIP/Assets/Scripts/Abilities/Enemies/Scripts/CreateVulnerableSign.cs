@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,13 +7,10 @@ using UnityEngine.AI;
 [CreateAssetMenu(menuName = "EnemyAbilities/CreateVulnerableSign")]
 public class CreateVulnerableSign : EnemyAbility
 {
-	public string prefabPath;
-	RoomSpawner r = new RoomSpawner();
+	public GameObject prefab;
 
 	public override void StartAbility(EnemyForm enemy)
 	{
-		r.Init();
-
 		base.StartAbility(enemy);
 
 		Vector3 enemyCenter = new Vector3(
@@ -47,8 +45,7 @@ public class CreateVulnerableSign : EnemyAbility
 				0,
 				enemyCenter.y + zOffset);
 
-			EnemySpawner toSpawn = new EnemySpawner();
-			toSpawn.enemyPrefabPath = prefabPath;
+			GameObject toSpawn = prefab;
 			toSpawn.transform.position = spawnPoint;
 			toSpawn.transform.rotation = Quaternion.identity;
 
@@ -57,8 +54,7 @@ public class CreateVulnerableSign : EnemyAbility
 			// Check If the point is inside the Map
 			if (NavMesh.SamplePosition(spawnPoint, out hit, 1f, 1)) {
 				// Spawn Tentacles
-				r.spawners.Add(toSpawn);
-				r.Spawn();
+				PhotonView.Instantiate(toSpawn);
 				return;
 			}
 

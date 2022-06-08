@@ -52,16 +52,7 @@ public class Boss : EnemyForm
 
     private float woundLevel;
 
-    [HideInInspector]
-    public Animator animatorPhase1;
-
-    [HideInInspector]
-    public Animator animatorPhase2;
-
-    [HideInInspector]
-    public Animator animatorPhase3;
-
-    public GameObject tentaclesSpawnPoints;
+    public RoomSpawner r;
 
     // Start is called before the first frame update
     void Start()
@@ -74,9 +65,11 @@ public class Boss : EnemyForm
 
         rb = transform.GetComponent<Rigidbody>();
 
-        animator = animatorPhase1;
+        animator = transform.GetComponent<Animator>();
 
         navMeshAgent = transform.GetComponent<NavMeshAgent>();
+
+        r = transform.GetComponent<RoomSpawner>();
 
         reactionReference = AiFrameRate;
 
@@ -89,15 +82,12 @@ public class Boss : EnemyForm
 
 		#region FSM Phase Overlay
 		FSMState phase1 = new FSMState();
-        phase1.enterActions.Add(SwitchAnimatorPhase1);
         phase1.stayActions.Add(RunFSMBossPhase1);
 
         FSMState phase2 = new FSMState();
-        phase2.enterActions.Add(SwitchAnimatorPhase2);
         phase2.stayActions.Add(RunFSMBossPhase2);
 
         FSMState phase3 = new FSMState();
-        phase2.enterActions.Add(SwitchAnimatorPhase3);
         phase3.stayActions.Add(RunFSMBossPhase3);
 
         FSMTransition t1 = new FSMTransition(After3WoundRecevied);
@@ -390,20 +380,6 @@ public class Boss : EnemyForm
     #endregion
 
     #region Actions
-    public void SwitchAnimatorPhase1()
-    {
-        animator = animatorPhase1;
-    }
-
-    public void SwitchAnimatorPhase2()
-    {
-        animator = animatorPhase2;
-    }
-    
-    public void SwitchAnimatorPhase3()
-    {
-        animator = animatorPhase3;
-    }
 
     public object HeavyAttackPhase3(object o)
     {
@@ -635,10 +611,6 @@ public class Boss : EnemyForm
         abilites.Add("heavyAttack", heavyAttack);
         abilites.Add("lightAttack1", lightAttack1);
         abilites.Add("lightAttack2", lightAttack2);
-
-        animatorPhase1.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Assets/Resources/Animators/BossPhase1.controller");
-        animatorPhase2.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Assets/Resources/Animators/BossPhase2.controller");
-        animatorPhase2.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Assets/Resources/Animators/BossPhase2.controller");
     }
 
     public void OnLightAttack1Phase1()

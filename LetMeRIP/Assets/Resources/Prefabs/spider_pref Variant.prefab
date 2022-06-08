@@ -9,15 +9,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5259418798505237582, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: sceneViewId
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 322886706, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: enemyStats
       value: 
       objectReference: {fileID: 11400000, guid: b1e4ae79f4f6a854196ccef2c490aa43, type: 2}
+    - target: {fileID: 322886706, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
+      propertyPath: whatRayHit.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 1715103906888602, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: m_Name
-      value: spider_pref Variant
+      value: spider_pref Variant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715103906888602, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4251409082942358, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: m_RootOrder
@@ -25,7 +33,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4251409082942358, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.7917073
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 4251409082942358, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: m_LocalPosition.y

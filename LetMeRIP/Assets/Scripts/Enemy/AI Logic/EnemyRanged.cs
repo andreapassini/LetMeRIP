@@ -123,7 +123,7 @@ public class EnemyRanged : EnemyForm
     {
         Vector3 ray = target.position - transform.position;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, ray, out hit, whatRayHit))
+        if (Physics.Raycast(transform.position, ray, out hit, Mathf.Infinity, ~whatRayHit))
         {
             if (hit.transform == target)
             {

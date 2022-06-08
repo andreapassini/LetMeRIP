@@ -1874,6 +1874,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1804677249327312343, guid: 82ffdf9f0d3e20e478add2c23c36daf6, type: 3}
+      propertyPath: whatRayHit.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 1805265623673178751, guid: 82ffdf9f0d3e20e478add2c23c36daf6, type: 3}
       propertyPath: m_Name
       value: spider_pref Variant (1)
@@ -1993,10 +1997,6 @@ PrefabInstance:
     - target: {fileID: 8405638912642602471, guid: 8e89edb675683ac40836d84eb3bf7faa, type: 3}
       propertyPath: m_Name
       value: Skeleton Variant - No shield
-      objectReference: {fileID: 0}
-    - target: {fileID: 8405638912642602471, guid: 8e89edb675683ac40836d84eb3bf7faa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9218029109365641053, guid: 8e89edb675683ac40836d84eb3bf7faa, type: 3}
       propertyPath: m_RootOrder
@@ -2321,10 +2321,6 @@ PrefabInstance:
     - target: {fileID: 7954997921229432877, guid: c2f1405df2dca13449c6e472259e69ee, type: 3}
       propertyPath: m_Name
       value: RangedEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 7954997921229432877, guid: c2f1405df2dca13449c6e472259e69ee, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2f1405df2dca13449c6e472259e69ee, type: 3}

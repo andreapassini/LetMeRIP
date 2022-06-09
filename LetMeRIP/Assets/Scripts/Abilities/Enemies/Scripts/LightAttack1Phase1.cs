@@ -27,8 +27,15 @@ public class LightAttack1Phase1 : EnemyAbility
 
 		enemy.animator.SetTrigger("LA1Phase1");
 
-		enemy.navMeshAgent.velocity = Vector3.zero;
-		enemy.navMeshAgent.isStopped = true;
+		//enemy.navMeshAgent.velocity = Vector3.zero;
+		//enemy.animator.SetFloat("speed", enemy.rb.velocity.magnitude);
+		//enemy.navMeshAgent.isStopped = true;
+		//Vector3 v = new Vector3(enemy.transform.position.x,
+		//	enemy.transform.position.y,
+		//	enemy.transform.position.z);
+
+		//enemy.navMeshAgent.destination = v.normalized;
+		//enemy.navMeshAgent.enabled = false;
 
 		// Look at target
 		LookAtTarget();

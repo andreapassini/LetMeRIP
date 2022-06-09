@@ -24,16 +24,20 @@ public class Boss : EnemyForm
     private DecisionTree dt_attackPhase3;
 
     public EnemyAbility dashForward;
-    public EnemyAbility heavyAttack;
-    public EnemyAbility lightAttack1;
-    public EnemyAbility lightAttack2;
+
+    public EnemyAbility heavyAttackPhase1;
+    public EnemyAbility lightAttack1Phase1;
+    public EnemyAbility lightAttack2Phase1;
+
     public EnemyAbility summonTentacles;
     public EnemyAbility fall;
     public EnemyAbility summonMinions;
     public EnemyAbility createVulneableSign;
+
     public EnemyAbility heavyAttackPhase3;
     public EnemyAbility lightAttack1Phase3;
     public EnemyAbility lightAttack2Phase3;
+
     public EnemyAbility riseUp;
 
     [SerializeField] private string targetTag = "Player";
@@ -57,11 +61,11 @@ public class Boss : EnemyForm
 
     private float woundLevel;
 
-
     protected override void Awake()
     {
         base.Awake();
     }
+
 
     void Start()
     {
@@ -155,9 +159,9 @@ public class Boss : EnemyForm
         #endregion
 
         #region DT Attack Phase 1
-        DTAction heavyAttack = new DTAction(HeavyAttack);
-        DTAction lightAttack1 = new DTAction(LightAttack1);
-        DTAction lightAttack2 = new DTAction(LightAttack2);
+        DTAction heavyAttack = new DTAction(HeavyAttackPhase1);
+        DTAction lightAttack1 = new DTAction(LightAttack1Phase1);
+        DTAction lightAttack2 = new DTAction(LightAttack2Phase1);
 
         DTDecision d1AttackPhase1 = new DTDecision(IsHAPhase1inCooldown);
         DTDecision d2AttackPhase1 = new DTDecision(IsLA1Phase1inCooldown);
@@ -238,7 +242,18 @@ public class Boss : EnemyForm
         #endregion
 
         StartCoroutine(PatrolOverlay());
+
+        // They should all be in FALSE at start
+        //StartCoroutine(HAPhase1Cooldown());
+        //StartCoroutine(LA1Phase1Cooldown());
+
+        //StartCoroutine(HAPhase1Cooldown());
+        //StartCoroutine(LA1Phase3Cooldown());
     }
+
+	private void Update()
+	{
+	}
 
 	private void OnEnable()
 	{
@@ -267,8 +282,6 @@ public class Boss : EnemyForm
     {
         if (!isHAinCooldown)
         {
-            isHAinCooldown = true;
-            StartCoroutine(HACooldown());
             return false;
         }
 
@@ -279,8 +292,6 @@ public class Boss : EnemyForm
     {
         if (!isLA1Cooldown)
         {
-            isLA1Cooldown = true;
-            StartCoroutine(LA1Cooldown());
             return false;
         }
 
@@ -291,7 +302,7 @@ public class Boss : EnemyForm
     {
         if (!isHAinCooldown) {
             isHAinCooldown = true;
-            StartCoroutine(HACooldown());
+            StartCoroutine(HAPhase3Cooldown());
             return false;
         }
 
@@ -302,7 +313,7 @@ public class Boss : EnemyForm
     {
         if (!isLA1Cooldown) {
             isLA1Cooldown = true;
-            StartCoroutine(LA1Cooldown());
+            StartCoroutine(LA1Phase3Cooldown());
             return false;
         }
 
@@ -464,21 +475,27 @@ public class Boss : EnemyForm
             summonTentacles.StartAbility(this);
     }
 
-    private object LightAttack2(object o)
+    private object LightAttack2Phase1(object o)
     {
-        lightAttack2.StartAbility(this);
+        lightAttack2Phase1.StartAbility(this);
         return null;
     }
 
-    private object LightAttack1(object o)
+    private object LightAttack1Phase1(object o)
     {
-        lightAttack1.StartAbility(this);
+        lightAttack1Phase1.StartAbility(this);
+        isLA1Cooldown = true;
+        StartCoroutine(LA1Phase1Cooldown());
         return null;
     }
 
-    public object HeavyAttack(object o)
+    public object HeavyAttackPhase1(object o)
     {
-        heavyAttack.StartAbility(this);
+        heavyAttackPhase1.StartAbility(this);
+
+        isHAinCooldown = true;
+        StartCoroutine(HAPhase1Cooldown());
+
         return null;
     }
 
@@ -547,7 +564,7 @@ public class Boss : EnemyForm
     #region Coroutines
     public IEnumerator PatrolAttackTree()
 	{
-		while (!TargetNotInRange() || !Wound()) 
+		while (!TargetNotInRange() || !Wound() || !stopAI) 
         {
             navMeshAgent.speed = enemyStats.swiftness;
             dt_attackPhase1.walk();
@@ -557,7 +574,7 @@ public class Boss : EnemyForm
 
     public IEnumerator PatrolAttackTree2()
     {
-        while (!CooldownOver() || !TargetNotInRange())
+        while (!CooldownOver() || !TargetNotInRange() || !stopAI)
         {
             navMeshAgent.speed = enemyStats.swiftness;
             dt_attackPhase3.walk();
@@ -567,28 +584,43 @@ public class Boss : EnemyForm
 
     public IEnumerator RepositionCooldown()
     {
-        yield return new WaitForSeconds(lightAttack1.abilityDurtation);
+        yield return new WaitForSeconds(lightAttack1Phase1.abilityDurtation);
         navMeshAgent.speed = enemyStats.swiftness;
         isHAinCooldown = false;
     }
 
-    public IEnumerator LA1Cooldown()
+    public IEnumerator HAPhase1Cooldown()
     {
-        yield return new WaitForSeconds(lightAttack1.abilityDurtation);
+        yield return new WaitForSeconds(heavyAttackPhase1.coolDown);
+        
         navMeshAgent.speed = enemyStats.swiftness;
         isHAinCooldown = false;
     }
 
-    public IEnumerator HACooldown()
+    public IEnumerator LA1Phase1Cooldown()
     {
-        yield return new WaitForSeconds(heavyAttack.abilityDurtation);
+        yield return new WaitForSeconds(lightAttack1Phase1.coolDown);
+        navMeshAgent.speed = enemyStats.swiftness;
+        isHAinCooldown = false;
+    }
+
+    public IEnumerator HAPhase3Cooldown()
+    {
+        yield return new WaitForSeconds(heavyAttackPhase3.coolDown);
+        navMeshAgent.speed = enemyStats.swiftness;
+        isHAinCooldown = false;
+    }
+
+    public IEnumerator LA1Phase3Cooldown()
+    {
+        yield return new WaitForSeconds(lightAttack1Phase3.coolDown);
         navMeshAgent.speed = enemyStats.swiftness;
         isHAinCooldown = false;
     }
 
     public IEnumerator PatrolOverlay()
     {
-        while (true)
+        while (!stopAI)
         {
             navMeshAgent.speed = enemyStats.swiftness;
             fsmOverlay.Update();
@@ -600,7 +632,7 @@ public class Boss : EnemyForm
 	{
         Debug.Log("Phase 1");
 
-		while (!After3WoundRecevied()) 
+		while (!After3WoundRecevied() || !stopAI) 
         {
             navMeshAgent.speed = enemyStats.swiftness;
             fsmPhase1.Update();
@@ -612,7 +644,7 @@ public class Boss : EnemyForm
     {
         Debug.Log("Phase 2");
 
-        while (!BrokenSign() && !HealthUnder50Perc()) {
+        while (!BrokenSign() && !HealthUnder50Perc() || !stopAI) {
             navMeshAgent.speed = enemyStats.swiftness;
             fsmPhase2.Update();
             yield return new WaitForSeconds(AiFrameRate);
@@ -623,7 +655,7 @@ public class Boss : EnemyForm
     {
         Debug.Log("Phase 3");
 
-        while (true) {
+        while (!stopAI) {
             navMeshAgent.speed = enemyStats.swiftness;
             fsmPhase3.Update();
             yield return new WaitForSeconds(AiFrameRate);
@@ -659,9 +691,9 @@ public class Boss : EnemyForm
         base.Init();
 
         abilites.Add(dashForward.abilityName, dashForward);
-        abilites.Add(heavyAttack.abilityName, heavyAttack);
-        abilites.Add(lightAttack1.abilityName, lightAttack1);
-        abilites.Add(lightAttack2.abilityName, lightAttack2);
+        abilites.Add(heavyAttackPhase1.abilityName, heavyAttackPhase1);
+        abilites.Add(lightAttack1Phase1.abilityName, lightAttack1Phase1);
+        abilites.Add(lightAttack2Phase1.abilityName, lightAttack2Phase1);
 
         abilites.Add(heavyAttackPhase3.abilityName, heavyAttackPhase3);
         abilites.Add(lightAttack1Phase3.abilityName, lightAttack1Phase3);

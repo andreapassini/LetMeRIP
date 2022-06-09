@@ -71,6 +71,8 @@ public class EnemyForm : MonoBehaviourPun
     [System.NonSerialized]
     public float reactionReference;
 
+    public bool stopAI = false;
+
     protected virtual void Awake()
     {
         enemyStats = new Stats();
@@ -113,22 +115,32 @@ public class EnemyForm : MonoBehaviourPun
     public virtual void CastAbilityDuration(EnemyAbility ability)
     {
         
-        if (AiFrameRate < ability.abilityDurtation)
-        {
-            StartCoroutine(AbilityDuration(ability));
-        }
+        //if (AiFrameRate < ability.abilityDurtation)
+        //{
+        //}
+
+        StartCoroutine(AbilityDuration(ability));
+
     }
 
     private IEnumerator AbilityDuration(EnemyAbility ability)
     {
-        // Stop FSM
-        reactionReference = AiFrameRate;
-        AiFrameRate = ability.abilityDurtation;
+        if (ability.abilityDurtation > AiFrameRate) {
+            // Stop FSM
+            //reactionReference = AiFrameRate;
+            //AiFrameRate = ability.abilityDurtation;
+            stopAI = true;
+            animator.SetFloat("speed", 0);
+            Debug.Log(ability.abilityName + " stop " + ability.abilityDurtation);
+            //StopEverythingForAbilityExecution();
 
-        yield return new WaitForSeconds(ability.abilityDurtation);
+            yield return new WaitForSeconds(ability.abilityDurtation);
 
-        AiFrameRate = reactionReference;
-        
+            stopAI = false;
+            Debug.Log(ability.abilityName + " restart");
+            //RestartAI();
+            //AiFrameRate = reactionReference;
+        }
     }
 
     public void CastEnemyAbility(EnemyAbility enemyAbility)
@@ -181,4 +193,14 @@ public class EnemyForm : MonoBehaviourPun
         abilites.Add(chaseAction.abilityName, chaseAction);
         abilites.Add(searchAction.abilityName, searchAction);
     }
+
+    public virtual void StopEverythingForAbilityExecution()
+	{
+
+	}
+
+    public virtual void RestartAI()
+	{
+
+	}
 }

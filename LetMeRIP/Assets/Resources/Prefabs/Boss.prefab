@@ -361,6 +361,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 92efc5a6051953a4db45a52f72df44cc, type: 2}
+    - target: {fileID: 91537696508703369, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 91537696875061967, guid: 8526fc62d267e704aabe14dd3ca9d7ed, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -2156,10 +2160,11 @@ MonoBehaviour:
   animator: {fileID: 5979790477768982653}
   takeDamageDuration: 1
   navMeshAgent: {fileID: 3968174275451725949}
+  stopAI: 0
   dashForward: {fileID: 11400000, guid: f8aa5b903452ea244b6f801b8850250f, type: 2}
-  heavyAttack: {fileID: 11400000, guid: d56860d7ffa32fb429e9e646f036c52b, type: 2}
-  lightAttack1: {fileID: 11400000, guid: c5085f100164cc74f90f442d8d287fe3, type: 2}
-  lightAttack2: {fileID: 11400000, guid: cc787d4fc76b67148be7f2c74902db7e, type: 2}
+  heavyAttackPhase1: {fileID: 11400000, guid: d56860d7ffa32fb429e9e646f036c52b, type: 2}
+  lightAttack1Phase1: {fileID: 11400000, guid: c5085f100164cc74f90f442d8d287fe3, type: 2}
+  lightAttack2Phase1: {fileID: 11400000, guid: cc787d4fc76b67148be7f2c74902db7e, type: 2}
   summonTentacles: {fileID: 11400000, guid: 76f28b2ed71a9ef4ba607014794a8f63, type: 2}
   fall: {fileID: 11400000, guid: d03a62049a3d4e746af5b0fbf72f4777, type: 2}
   summonMinions: {fileID: 11400000, guid: 0372a171224381d48bc87e9c85cee14c, type: 2}

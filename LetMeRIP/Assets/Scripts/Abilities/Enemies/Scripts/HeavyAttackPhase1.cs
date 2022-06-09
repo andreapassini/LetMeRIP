@@ -39,7 +39,7 @@ public class HeavyAttackPhase1 : EnemyAbility
 
 	public override void PerformAbility(EnemyForm enemy)
 	{
-		base.PerformAbility(enemy);
+		//base.PerformAbility(enemy);
 
 		// Creates overlap sphere
 		Collider[] hitEnemies = Physics.OverlapSphere(enemy.attackPoint.position, range, enemy.whatIsTarget);

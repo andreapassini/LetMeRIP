@@ -215,8 +215,6 @@ public class EnemySpider : EnemyForm
         //navMeshAgent.isStopped = false;
     }
 
-
-
     public IEnumerator WaitDieAnimation(float duration)
     {
         navMeshAgent.speed = enemyStats.swiftness;

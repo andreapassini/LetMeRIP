@@ -10,8 +10,12 @@ public class EnemySimple : EnemyForm
 
     [SerializeField]private string targetTag = "Player";
 
-	private void Start()
+    public bool lateStart = false;
+
+    private void Start()
 	{
+        Init();
+
         // Gather Stats
         health = enemyStats.maxHealth;
         // Debug.Log("Start Health " + health);
@@ -24,8 +28,12 @@ public class EnemySimple : EnemyForm
 
         reactionReference = AiFrameRate;
 
-        targets = GameObject.FindGameObjectsWithTag(targetTag);
-        target = targets[0].transform;
+        if (lateStart) {
+            StartCoroutine(LateStart());
+        } else {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }
 
         FSMState search = new FSMState();
 		search.stayActions.Add(Search);
@@ -80,6 +88,7 @@ public class EnemySimple : EnemyForm
     public IEnumerator Patrol()
     {
         while (true) {
+            navMeshAgent.speed = enemyStats.swiftness;
             fsm.Update();
             animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
             yield return new WaitForSeconds(AiFrameRate);
@@ -125,7 +134,7 @@ public class EnemySimple : EnemyForm
     {
         Vector3 ray = target.position - transform.position;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, ray, out hit, whatICanSeeThrough)) {
+        if (Physics.Raycast(transform.position, ray, out hit, Mathf.Infinity, ~whatRayHit)) {
             if (hit.transform == target) {
                 return true;
             }
@@ -166,10 +175,7 @@ public class EnemySimple : EnemyForm
         }
     }
 
-    // To manage getting Hit:
-    //  => Event when something hit an enemy
-    //  => The enemy hit by it will resolve the event
-
+    #region Coroutines
     public IEnumerator StopAI()
     {
         float attackDuration = 1f; // Just as an example 
@@ -190,8 +196,25 @@ public class EnemySimple : EnemyForm
         //navMeshAgent.isStopped = false;
     }
 
-    
+    public IEnumerator WaitDieAnimation(float duration)
+    {
+        navMeshAgent.enabled = false;
+        yield return new WaitForSeconds(duration);
+        navMeshAgent.speed = enemyStats.swiftness;
+        Destroy(gameObject);
 
+    }
+
+    public IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(1f);
+        navMeshAgent.speed = enemyStats.swiftness;
+        targets = GameObject.FindGameObjectsWithTag(targetTag);
+        target = targets[0].transform;
+    }
+    #endregion
+
+    #region Effects
     public void TakeDamageEffect(EnemyForm e)
     {
         if (this == e)
@@ -199,16 +222,10 @@ public class EnemySimple : EnemyForm
     }
 
     public void DieEffect(EnemyForm e)
-	{
+    {
         if (this == e)
             StartCoroutine(StopAI(takeDamageDuration));
     }
+    #endregion
 
-    public IEnumerator WaitDieAnimation(float duration)
-    {
-        navMeshAgent.enabled = false;
-        yield return new WaitForSeconds(duration);
-        Destroy(gameObject);
-
-    }
 }

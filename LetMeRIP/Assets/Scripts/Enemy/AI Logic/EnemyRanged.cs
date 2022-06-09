@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,25 +16,33 @@ public class EnemyRanged : EnemyForm
 
     public EnemyAbility dashAction;
 
+    public bool lateStart = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        //if (!PhotonNetwork.IsMasterClient) return;
+
         // Gather Stats
         health = enemyStats.maxHealth;
         // Debug.Log("Start Health " + health);
 
-        rb = GetComponent<Rigidbody>();
+        rb = transform.GetComponent<Rigidbody>();
 
-        animator = GetComponent<Animator>();
+        animator = transform.GetComponent<Animator>();
 
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = transform.GetComponent<NavMeshAgent>();
 
         reactionReference = AiFrameRate;
 
-        targets = GameObject.FindGameObjectsWithTag(targetTag);
-        target = targets[0].transform;
+        if (lateStart) {
+            StartCoroutine(LateStart());
+        } else {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }
 
-		navMeshAgent = transform.GetComponent<NavMeshAgent>();
+        navMeshAgent = transform.GetComponent<NavMeshAgent>();
 
         FSMState search = new FSMState();
         search.stayActions.Add(Search);
@@ -114,7 +123,7 @@ public class EnemyRanged : EnemyForm
     {
         Vector3 ray = target.position - transform.position;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, ray, out hit, whatICanSeeThrough))
+        if (Physics.Raycast(transform.position, ray, out hit, Mathf.Infinity, ~whatRayHit))
         {
             if (hit.transform == target)
             {
@@ -127,6 +136,7 @@ public class EnemyRanged : EnemyForm
     public bool TargetInRange()
     {
         float distance = (target.position - transform.position).magnitude;
+        //Debug.Log("Ref " + attackRange + " - " + distance);
         if (distance <= attackRange)
         {
             return true;
@@ -175,7 +185,6 @@ public class EnemyRanged : EnemyForm
 
     public void Attack()
     {
-        animator.SetTrigger("attack");
         animator.SetFloat("speed", 0);
 
         attackAction.StartAbility(this);
@@ -202,12 +211,13 @@ public class EnemyRanged : EnemyForm
         StartCoroutine(WaitDashAnimation());
     }
     #endregion
-
+    
     #region Coroutines
     public IEnumerator Patrol()
     {
         while (true)
         {
+            navMeshAgent.speed = enemyStats.swiftness;
             fsm.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
@@ -217,6 +227,7 @@ public class EnemyRanged : EnemyForm
     {
         while (TargetVisible())
         {
+            navMeshAgent.speed = enemyStats.swiftness;
             fightFSM.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
@@ -228,6 +239,7 @@ public class EnemyRanged : EnemyForm
 
     public IEnumerator StopAI()
     {
+        navMeshAgent.speed = enemyStats.swiftness;
         float attackDuration = 1f; // Just as an example 
 
         AiFrameRate = attackDuration;
@@ -237,6 +249,7 @@ public class EnemyRanged : EnemyForm
 
     public IEnumerator StopAI(float stopTime)
     {
+        navMeshAgent.speed = enemyStats.swiftness;
         AiFrameRate = stopTime;
         yield return new WaitForSeconds(stopTime);
         AiFrameRate = reactionReference;
@@ -248,9 +261,17 @@ public class EnemyRanged : EnemyForm
 	{
         yield return new WaitForSeconds(dashAction.abilityDurtation);
         navMeshAgent.enabled = true;
-
+        navMeshAgent.speed = enemyStats.swiftness;
         // Enable isKinematic
         rb.isKinematic = true;
+    }
+
+    public IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(1f);
+        navMeshAgent.speed = enemyStats.swiftness;
+        targets = GameObject.FindGameObjectsWithTag(targetTag);
+        target = targets[0].transform;
     }
     #endregion
 
@@ -265,4 +286,18 @@ public class EnemyRanged : EnemyForm
         if (this == e)
             StartCoroutine(StopAI(takeDamageDuration));
     }
+
+	public override void Init()
+	{
+		base.Init();
+
+        abilites.Add(dashAction.abilityName, dashAction);
+    }
+
+	private void OnDrawGizmosSelected()
+	{
+        Gizmos.color = Color.yellow;
+
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+	}
 }

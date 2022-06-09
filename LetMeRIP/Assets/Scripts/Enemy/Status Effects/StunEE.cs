@@ -14,6 +14,11 @@ public class StunEE : EnemyEffect
         base.Start();
     }
 
+    public void Init(float duration)
+    {
+        this.duration = duration;
+    }
+
     public override void StartEffect()
     {
         base.StartEffect();

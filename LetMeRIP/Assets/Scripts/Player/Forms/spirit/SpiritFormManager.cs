@@ -11,5 +11,7 @@ public class SpiritFormManager : FormManager
 
         forms.Add(gameObject.AddComponent<SpiritForm>());
         SwitchForm(0); //?
+
+        BindAbilities();
     }
 }

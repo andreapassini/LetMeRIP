@@ -71,9 +71,8 @@ public class EnemyForm : MonoBehaviourPun
         // Calcolate defense reduction
         dmg = dmg - (dmg * enemyStats.defense * 0.01f);
         dmg = Mathf.Clamp(dmg, 0, float.MaxValue);
-        //Debug.Log("Health " + health);
-        //Debug.Log("dmg " + dmg);
         health = health - dmg;
+        Debug.Log($"{name} took {dmg} damage => {health}HP");
 
         //Debug.Log("Health " + health);
 

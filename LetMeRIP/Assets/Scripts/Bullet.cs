@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] GameObject hitDmgEffect;
     [SerializeField] float destroyAfterTime = 5f;
-    [SerializeField] float damage = 10f;
+    [SerializeField] public float damage = 10f;
 
 
     void Start()

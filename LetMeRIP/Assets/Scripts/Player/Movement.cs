@@ -33,6 +33,7 @@ public class Movement : MonoBehaviourPun
 	{
         if (!photonView.IsMine) return;
         GatherInputs();
+        
 	}
 
 	private void FixedUpdate()
@@ -44,17 +45,17 @@ public class Movement : MonoBehaviourPun
     public void GatherInputs()
     {
         direction = playerInputActions.Player.Movement.ReadValue<Vector3>();
-        
-        Vector3 walkingDirection = playerInputActions.Player.Movement.ReadValue<Vector3>();
-        Debug.Log($"Walking direction {walkingDirection}");
-        Vector3 lookDirection = lam.GatherDirectionInput();
-        Debug.Log($"look direction {lookDirection}");
-        float rotationAngle = Mathf.Acos(Vector3.Dot(walkingDirection, lookDirection));
-        Debug.Log($"rotation angle {rotationAngle}");
-        Vector3 animationDirection = RotateVector(walkingDirection, rotationAngle);
-        Debug.Log($"final direction {animationDirection}");
-        animator.SetFloat("VelocityZ", animationDirection.z);
-        animator.SetFloat("VelocityX", animationDirection.x);
+        //Vector3 walkingDirection = playerInputActions.Player.Movement.ReadValue<Vector3>();
+        //Debug.Log($"Walking direction {walkingDirection}");
+        //Vector3 lookDirection = lam.GatherDirectionInput();
+        //Debug.Log($"look direction {lookDirection}");
+        //float rotationAngle = Mathf.Acos(Vector3.Dot(walkingDirection, lookDirection));
+        //Debug.Log($"rotation angle {rotationAngle}");
+        //Vector3 animationDirection = RotateVector(walkingDirection, rotationAngle);
+        //Debug.Log($"final direction {animationDirection}");
+        //animator.SetFloat("VelocityZ", animationDirection.z);
+        //animator.SetFloat("VelocityX", animationDirection.x);
+
         if (animator != null)
         {
             if (!direction.Equals(Vector3.zero))
@@ -84,7 +85,7 @@ public class Movement : MonoBehaviourPun
 
     public void Move()
     {
-        rb.MovePosition(transform.position + this.direction.ToIso() * characterController.currentStats.swiftness * Time.deltaTime);
+        rb.MovePosition(transform.position + direction.ToIso() * characterController.currentStats.swiftness * Time.deltaTime);
     }
 
     private void RefreshAnimator(FormManager fm)

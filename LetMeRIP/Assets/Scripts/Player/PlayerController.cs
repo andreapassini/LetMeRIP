@@ -62,11 +62,14 @@ public class PlayerController : MonoBehaviourPun
         SetupCamera();
 
         movement ??= gameObject.AddComponent<Movement>();
-
+        lam ??= GetComponent<LookAtMouse>();
         lam.enabled = true;
         movement.enabled = true;
-        formManager.BindAbilities();
-        formManager.EnableAbilities();
+        if (formManager != null)
+        {
+            formManager.BindAbilities();
+            formManager.EnableAbilities();
+        }
     }
 
     public void Exit()

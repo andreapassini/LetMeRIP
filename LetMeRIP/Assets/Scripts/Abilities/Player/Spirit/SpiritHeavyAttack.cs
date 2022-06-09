@@ -1,0 +1,128 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SpiritHeavyAttack : Ability
+{
+    private Animator animator;
+    private Transform attackPoint;
+
+    private float attackRange = 6f;
+    private float damage;
+    private float coneAngle = 100f; // in degrees
+    private float stunDistance = 3.5f;
+    private bool isCharged = false;
+    private float timeToCharge = 1.5f;
+
+    private float DegToRad(float deg) => deg * 0.01745f;
+
+    private void Start()
+    {
+        cooldown = 4f;
+    }
+
+    public override void Init(PlayerController characterController)
+    {
+        base.Init(characterController);
+        attackPoint = transform.Find("AttackPoint");
+        animator = GetComponentInChildren<Animator>(false);
+        damage = 15 + characterController.spiritStats.intelligence * 0.2f + characterController.spiritStats.strength * 0.1f;
+    }
+
+    public override void StartedAction()
+    {
+        isReady = false;
+    }
+
+    public override void PerformedAction()
+    {
+        //disable movement while charging
+        characterController.movement.enabled = false;
+        
+        //animator.SetTrigger("StartChargeHeavyAttack");
+        //animator.SetTrigger("Charge");
+        
+        StartCoroutine(Charge());
+        StartCoroutine(Cooldown());
+    }
+
+    public override void CancelAction()
+    {
+        if (isCharged)
+        {
+            isCharged = false;
+            //animator.SetTrigger("HeavyAttack");
+            float rad = DegToRad(coneAngle) * .5f;
+
+            Vector3 rbound = new Matrix4x4(
+                    new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
+                    new Vector4(0, 1, 0, 0),
+                    new Vector4(-Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+                    Vector4.zero
+                ) * transform.forward;
+
+            Vector3 lbound = new Matrix4x4(
+                    new Vector4(Mathf.Cos(rad), 0, -Mathf.Sin(rad), 0),
+                    new Vector4(0, 1, 0, 0),
+                    new Vector4(Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+                    Vector4.zero
+                ) * transform.forward;
+
+            Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange);
+            foreach (Collider enemyHit in hitEnemies)
+            {
+                if (enemyHit.CompareTag("Enemy"))
+                {
+                    Vector3 enemyDirection = enemyHit.transform.position - transform.position;
+                    if (Vector3.Dot(enemyDirection, lbound) > 0 && Vector3.Dot(enemyDirection, rbound) > 0)
+                    {
+                        EnemyForm eform = enemyHit.GetComponent<EnemyForm>();
+                        eform.TakeDamage(damage);
+
+                        StunEE stunEffect = eform.gameObject.AddComponent<StunEE>();
+                        stunEffect.StartEffect();
+                        Debug.Log($"{enemyHit.name} stunned");
+                    }
+                }
+            }
+
+            // enable movement
+            characterController.movement.enabled = true;
+        }
+    }
+
+    private IEnumerator Charge()
+    {
+        yield return new WaitForSeconds(timeToCharge);
+        isCharged = true;
+        CancelAction();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        float rad = DegToRad(coneAngle) * .5f;
+
+        Vector3 rbound = new Matrix4x4(
+                new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
+                new Vector4(0, 1, 0, 0),
+                new Vector4(-Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+                Vector4.zero
+            ) * transform.forward;
+
+        Vector3 lbound = new Matrix4x4(
+                new Vector4(Mathf.Cos(rad), 0, -Mathf.Sin(rad), 0),
+                new Vector4(0, 1, 0, 0),
+                new Vector4(Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+                Vector4.zero
+            ) * transform.forward;
+
+        Gizmos.DrawRay(transform.position, lbound);
+        Gizmos.DrawRay(transform.position, rbound);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, stunDistance);
+    }
+}

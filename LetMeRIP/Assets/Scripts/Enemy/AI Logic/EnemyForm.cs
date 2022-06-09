@@ -9,13 +9,27 @@ using Photon.Pun;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyForm : MonoBehaviourPun
 {
+    [Serializable]
+    public class Stats
+    {
+        public string enemyName;
+        public float health;
+        public float maxHealth;
+
+        public float attack;
+        public float defense;
+
+        public float swiftness;
+    }
+
     public int ViewID { get => photonView.ViewID; }
 
     public static event Action<EnemyForm> OnEnemyKilled;
     public static event Action<EnemyForm> OnEnemyDamaged;
     public static event Action<EnemyForm> OnEnemyAttack;
 
-    public EnemyStats enemyStats;
+    public EnemyStats enemyStatsSrc;
+    public Stats enemyStats;
 
     public Dictionary<string, EnemyAbility> abilites;
 
@@ -57,11 +71,16 @@ public class EnemyForm : MonoBehaviourPun
     [System.NonSerialized]
     public float reactionReference;
 
-    // Start is called before the first frame update
-    void Start()
+    protected virtual void Awake()
     {
+        enemyStats = new Stats();
+        enemyStats.enemyName = enemyStatsSrc.enemyName;
+        enemyStats.maxHealth = enemyStatsSrc.maxHealth;
+        enemyStats.health = enemyStatsSrc.health;
+        enemyStats.attack = enemyStatsSrc.attack;
+        enemyStats.defense = enemyStatsSrc.defense;
+        enemyStats.swiftness = enemyStatsSrc.swiftness;
     }
-
     // This method will cast an event when Attack Anim. Event is cast
     // Cause anim events are only related to the object attached to the animator
     public void OnAttack()

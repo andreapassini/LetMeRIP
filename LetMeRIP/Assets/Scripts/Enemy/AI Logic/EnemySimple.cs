@@ -12,6 +12,11 @@ public class EnemySimple : EnemyForm
 
     public bool lateStart = false;
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     private void Start()
 	{
         Init();

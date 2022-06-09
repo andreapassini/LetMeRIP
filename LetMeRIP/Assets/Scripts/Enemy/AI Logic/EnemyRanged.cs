@@ -18,6 +18,11 @@ public class EnemyRanged : EnemyForm
 
     public bool lateStart = false;
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

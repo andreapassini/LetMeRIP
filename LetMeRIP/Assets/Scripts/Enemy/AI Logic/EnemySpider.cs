@@ -13,6 +13,11 @@ public class EnemySpider : EnemyForm
 
     private bool lateStart = false;
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     private void Start()
     {
 

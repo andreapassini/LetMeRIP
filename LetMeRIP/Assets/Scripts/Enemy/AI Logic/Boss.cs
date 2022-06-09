@@ -57,6 +57,12 @@ public class Boss : EnemyForm
 
     private float woundLevel;
 
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     void Start()
     {
         Init(); 

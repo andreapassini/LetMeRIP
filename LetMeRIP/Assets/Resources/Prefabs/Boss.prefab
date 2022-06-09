@@ -2167,6 +2167,7 @@ MonoBehaviour:
   heavyAttackPhase3: {fileID: 11400000, guid: 100a88d642ef0604ba85c9af8978b3fa, type: 2}
   lightAttack1Phase3: {fileID: 11400000, guid: eb778c40310f69045bc04a141fc826a8, type: 2}
   lightAttack2Phase3: {fileID: 11400000, guid: 29fc44cf2de6615498e792a659e4890f, type: 2}
+  riseUp: {fileID: 11400000, guid: 6c9ea0f70227caf42b28d42919797fbf, type: 2}
   targetTag: Player
   runningFotTooLongCooldown: 5
   cooldownActionOverTime: 5
@@ -2200,8 +2201,8 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 6
   avoidancePriority: 50
-  m_AngularSpeed: 240
-  m_StoppingDistance: 0.5
+  m_AngularSpeed: 300
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -2247,7 +2248,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters: []
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 1
+    Name: damage
+  - Type: 9
+    SynchronizeType: 1
+    Name: dash
+  - Type: 9
+    SynchronizeType: 1
+    Name: LA1Phase1
+  - Type: 9
+    SynchronizeType: 1
+    Name: LA2Phase1
+  - Type: 9
+    SynchronizeType: 1
+    Name: HAPhase1
+  - Type: 1
+    SynchronizeType: 1
+    Name: speed
+  - Type: 9
+    SynchronizeType: 1
+    Name: fall
+  - Type: 9
+    SynchronizeType: 1
+    Name: LA1Phase3
+  - Type: 9
+    SynchronizeType: 1
+    Name: LA2Phase3
+  - Type: 9
+    SynchronizeType: 1
+    Name: HAPhsae3
+  - Type: 9
+    SynchronizeType: 1
+    Name: rise
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

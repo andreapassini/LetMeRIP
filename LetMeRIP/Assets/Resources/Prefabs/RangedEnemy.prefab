@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7954997921229432877}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.235194, y: 0, z: 2.08957}
+  m_LocalPosition: {x: 2.168616, y: 0, z: 2.2154381}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6782907022412992942}
@@ -41,6 +41,14 @@ PrefabInstance:
     - target: {fileID: 121783230, guid: cc2904f8420d54e45b80616562ff859c, type: 3}
       propertyPath: whatRayHit.m_Bits
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 121783232, guid: cc2904f8420d54e45b80616562ff859c, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 121783232, guid: cc2904f8420d54e45b80616562ff859c, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1839304754744059133, guid: cc2904f8420d54e45b80616562ff859c, type: 3}
       propertyPath: m_Name

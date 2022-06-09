@@ -34,6 +34,7 @@ public class Boss : EnemyForm
     public EnemyAbility heavyAttackPhase3;
     public EnemyAbility lightAttack1Phase3;
     public EnemyAbility lightAttack2Phase3;
+    public EnemyAbility riseUp;
 
     [SerializeField] private string targetTag = "Player";
 
@@ -50,6 +51,7 @@ public class Boss : EnemyForm
     private bool isHAinCooldown = false;
     private bool isLA1Cooldown = false;
     private bool isCooldwonOver = false;
+    private bool isInPhase2 = false;
 
     private float woundLevel;
 
@@ -98,7 +100,7 @@ public class Boss : EnemyForm
         phase2.AddTransition(t2, phase1);
 
         // Phase 2 to 3
-        phase3.AddTransition(t3, phase3);
+        phase2.AddTransition(t3, phase3);
 
         fsmOverlay = new FSM(phase1);
 
@@ -147,8 +149,8 @@ public class Boss : EnemyForm
         DTAction lightAttack1 = new DTAction(LightAttack1);
         DTAction lightAttack2 = new DTAction(LightAttack2);
 
-        DTDecision d1AttackPhase1 = new DTDecision(IsHAinCooldown);
-        DTDecision d2AttackPhase1 = new DTDecision(IsLA1inCooldown);
+        DTDecision d1AttackPhase1 = new DTDecision(IsHAPhase1inCooldown);
+        DTDecision d2AttackPhase1 = new DTDecision(IsLA1Phase1inCooldown);
 
         d1AttackPhase1.AddLink(false, heavyAttack);
         d1AttackPhase1.AddLink(true, d2AttackPhase1);
@@ -165,6 +167,7 @@ public class Boss : EnemyForm
         idlePhase2.enterActions.Add(SummonTentacles);
         idlePhase2.enterActions.Add(SummonMinions);
         idlePhase2.enterActions.Add(CreateVulnerabilitySign);
+        idlePhase2.exitActions.Add(RiseUp);
 
         fsmPhase2 = new FSM(idlePhase2);
         #endregion
@@ -213,8 +216,8 @@ public class Boss : EnemyForm
         DTAction lightAttack1Phase3 = new DTAction(LightAttack1Phase3);
         DTAction lightAttack2Phase3 = new DTAction(LightAttack2Phase3);
 
-        DTDecision d1AttackPhase3 = new DTDecision(IsHAinCooldown);
-        DTDecision d2AttackPhase3 = new DTDecision(IsLA1inCooldown);
+        DTDecision d1AttackPhase3 = new DTDecision(IsHAPhase1inCooldown);
+        DTDecision d2AttackPhase3 = new DTDecision(IsLA1Phase1inCooldown);
 
         d1AttackPhase3.AddLink(false, heavyAttackPhase3);
         d1AttackPhase3.AddLink(true, d2AttackPhase3);
@@ -250,7 +253,7 @@ public class Boss : EnemyForm
         return true;
     }
 
-    public object IsHAinCooldown(object o)
+    public object IsHAPhase1inCooldown(object o)
     {
         if (!isHAinCooldown)
         {
@@ -262,7 +265,7 @@ public class Boss : EnemyForm
         return true;
     }
 
-    public object IsLA1inCooldown(object o)
+    public object IsLA1Phase1inCooldown(object o)
     {
         if (!isLA1Cooldown)
         {
@@ -274,11 +277,33 @@ public class Boss : EnemyForm
         return true;
     }
 
+    public object IsHAPhase3inCooldown(object o)
+    {
+        if (!isHAinCooldown) {
+            isHAinCooldown = true;
+            StartCoroutine(HACooldown());
+            return false;
+        }
+
+        return true;
+    }
+
+    public object IsLA1Phase3inCooldown(object o)
+    {
+        if (!isLA1Cooldown) {
+            isLA1Cooldown = true;
+            StartCoroutine(LA1Cooldown());
+            return false;
+        }
+
+        return true;
+    }
 
     public bool After3WoundRecevied()
 	{
         if(woundCount >= 3) {
             woundCount = 0;
+            isInPhase2 = true;
             return true;
 		}
         return false;
@@ -297,6 +322,7 @@ public class Boss : EnemyForm
     public bool HealthUnder50Perc()
 	{
         if(health < (enemyStats.maxHealth / 2)) {
+            isInPhase2 = false;
             return true;
 		}
 
@@ -378,6 +404,11 @@ public class Boss : EnemyForm
 
     #region Actions
 
+    public void RiseUp()
+	{
+        riseUp.StartAbility(this);
+	}
+
     public object HeavyAttackPhase3(object o)
     {
         heavyAttackPhase3.StartAbility(this);
@@ -398,12 +429,14 @@ public class Boss : EnemyForm
 
     public void CreateVulnerabilitySign()
     {
-        createVulneableSign.StartAbility(this);
+        if(isInPhase2)
+            createVulneableSign.StartAbility(this);
     }
 
     public void SummonMinions()
     {
-        summonMinions.StartAbility(this);
+        if(isInPhase2)
+            summonMinions.StartAbility(this);
     }
 
     public void Fall()
@@ -414,7 +447,8 @@ public class Boss : EnemyForm
 
     public void SummonTentacles()
     {
-        summonTentacles.StartAbility(this);
+        if(isInPhase2)
+            summonTentacles.StartAbility(this);
     }
 
     private object LightAttack2(object o)
@@ -623,6 +657,8 @@ public class Boss : EnemyForm
         abilites.Add(summonTentacles.abilityName, summonTentacles);
         abilites.Add(fall.abilityName, fall);
         abilites.Add(createVulneableSign.abilityName, createVulneableSign);
+
+        abilites.Add(riseUp.abilityName, riseUp);
     }
 
 	#region Animation Event propagation for Scriptable Objects

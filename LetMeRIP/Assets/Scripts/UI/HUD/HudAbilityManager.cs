@@ -29,11 +29,6 @@ public class HudAbilityManager : MonoBehaviour
         Dictionary<EAbility, Ability> initialAbilities)
     {
         this.sprites = sprites;
-
-        // Debug.Log("Initial Form " + initialForm);
-        // Debug.Log("Sprites for form: " + String.Join(", ", sprites[initialForm].Select(res => "Key " + res.Key + ": VAL = " + res.Value)));
-
-        // Debug.Log(String.Join(", ", initialAbilities.Select(res => "Key " + res.Key + ": VAL = " + res.Value)));
         setAbilities(initialForm, initialAbilities);
     }
 

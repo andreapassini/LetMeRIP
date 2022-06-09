@@ -4,36 +4,54 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HudFormManager: MonoBehaviour
+public class HudFormManager : MonoBehaviour
+{
+    // sprites of the transformations
+    // private Dictionary<Form, Sprite> sprites;
+    private Dictionary<Form, GameObject> hudFormsGO;
+
+    private Form currentForm;
+
+
+    private Image currentBorder;
+
+    private void Awake()
     {
-        // sprites of the transformations
-        private Dictionary<Form, Sprite> sprites;
-        private Dictionary<Form, GameObject> hudFormsGO;
-        
-        private void Awake()
+        hudFormsGO = new Dictionary<Form, GameObject>();
+        foreach (Form form in EnumUtils.GetValues<Form>())
         {
-            // populate abilities
-            hudFormsGO = new Dictionary<Form, GameObject>();
+            Transform formTransform = transform.Find(form.ToString())?.Find("Skill");
 
-            foreach (string formName in Enum.GetNames(typeof(Form)))
-            {
-                Enum.TryParse(formName, out Form ability);
-                Transform formTransform = transform.Find(formName)?.Find("Skill");
+            if (formTransform == null) throw new Exception("The form " + form + " is not available");
 
-                if (formTransform == null) throw new Exception("The form " + formName + " is not available");
-            
-                hudFormsGO[ability] = formTransform.gameObject;
-            }
-            
-            
-            Debug.Log(String.Join(", ", hudFormsGO.Select(res => "Key " + res.Key + ": VAL = " + res.Value)));
+            hudFormsGO[form] = formTransform.gameObject;
         }
-
-        public void Init(Form initialForm, Dictionary<Form, Sprite> sprites)
-        {
-            this.sprites = sprites;
-            changeForm(initialForm);
-        }
-
-        public void changeForm(Form newForm) => hudFormsGO[newForm].GetComponent<Image>().sprite = sprites[newForm];
     }
+
+    public void Init(Form initialForm, Dictionary<Form, Sprite> sprites)
+    {
+        // this.sprites = sprites;
+
+        foreach (var sprite in sprites)
+            if (hudFormsGO.ContainsKey(sprite.Key))
+                hudFormsGO[sprite.Key].GetComponent<Image>().sprite = sprite.Value;
+
+        //TODO temporary
+        currentForm = Form.Base;
+        changeForm(initialForm);
+    }
+
+    public void changeForm(Form newForm)
+    {
+        if (currentForm != newForm)
+        {
+            hudFormsGO[currentForm].transform.parent.transform.localPosition += new Vector3(0, -15, 0);
+            hudFormsGO[currentForm].GetComponent<Image>().color = Color.cyan;
+        }
+        hudFormsGO[newForm].transform.parent.transform.localPosition += new Vector3(0, 15, 0);
+        hudFormsGO[newForm].GetComponent<Image>().color = Color.white;
+
+        
+        currentForm = newForm;
+    }
+}

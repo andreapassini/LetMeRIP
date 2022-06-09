@@ -35,4 +35,13 @@ public abstract class EnemyAbility : ScriptableObject
 	}
 
 	public abstract void CancelAbility();
+
+	public virtual void LookAtTarget()
+	{
+		// Look at the target
+		Vector3 direction = (enemy.target.position - enemy.transform.position).normalized;
+		Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+		enemy.rb.rotation = Quaternion.Slerp(enemy.rb.rotation, lookRotation, Time.deltaTime * 20f);
+
+	}
 }

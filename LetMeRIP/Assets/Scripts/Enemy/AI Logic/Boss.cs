@@ -136,8 +136,8 @@ public class Boss : EnemyForm
         chasePhase1.AddTransition(t3Phase1, attackPhase1);
         chasePhase1.AddTransition(t5Phase1, repositionPhase1);
 
-        attackPhase1.AddTransition(t6Phase1, repositionPhase1);
         attackPhase1.AddTransition(t4Phase1, chasePhase1);
+        attackPhase1.AddTransition(t6Phase1, repositionPhase1);
 
         repositionPhase1.AddTransition(t7Phase1, attackPhase1);
         repositionPhase1.AddTransition(t8Phase1, searchPhase1);

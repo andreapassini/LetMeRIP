@@ -25,10 +25,14 @@ public class LightAttack2Phase3 : EnemyAbility
 			return;
 		}
 
+		enemy.animator.SetTrigger("LA2Phase3");
+
 		enemy.navMeshAgent.velocity = Vector3.zero;
 		enemy.navMeshAgent.isStopped = true;
 
-		enemy.animator.SetTrigger("LA2Phase3");
+		// Look at target
+		LookAtTarget();
+
 
 		base.PerformAbility(enemy);
 	}

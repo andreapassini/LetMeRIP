@@ -27,8 +27,12 @@ public class HeavyAttackPhase1 : EnemyAbility
 
 		enemy.animator.SetTrigger("HAPhase1");
 
+		// Stop Moving
 		enemy.navMeshAgent.velocity = Vector3.zero;
 		enemy.navMeshAgent.isStopped = true;
+
+		// Look at target
+		LookAtTarget();
 
 		base.PerformAbility(enemy);
 	}

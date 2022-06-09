@@ -30,6 +30,9 @@ public class HeavyAttackPhase3 : EnemyAbility
 		enemy.navMeshAgent.velocity = Vector3.zero;
 		enemy.navMeshAgent.isStopped = true;
 
+		// Look at target
+		LookAtTarget();
+
 		base.PerformAbility(enemy);
 	}
 

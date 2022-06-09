@@ -13,7 +13,6 @@ public class PlayerEffect : MonoBehaviour
         /* nothing to see here yet */
     }
 
-
     public virtual void StartEffect()
     {
         StartCoroutine(Effect(GetComponent<PlayerController>()));

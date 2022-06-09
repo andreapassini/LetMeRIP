@@ -14,5 +14,5 @@ public class EnemyStats : ScriptableObject
 	public float defense;
 
 	public float swiftness;
-
+	public float rewardSp;
 }

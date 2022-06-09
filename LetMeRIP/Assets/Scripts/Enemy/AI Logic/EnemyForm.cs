@@ -20,6 +20,7 @@ public class EnemyForm : MonoBehaviourPun
         public float defense;
 
         public float swiftness;
+        public float rewardSp;
     }
 
     public int ViewID { get => photonView.ViewID; }
@@ -71,6 +72,8 @@ public class EnemyForm : MonoBehaviourPun
     [System.NonSerialized]
     public float reactionReference;
 
+    GameObject spPool;
+
     protected virtual void Awake()
     {
         enemyStats = new Stats();
@@ -80,6 +83,10 @@ public class EnemyForm : MonoBehaviourPun
         enemyStats.attack = enemyStatsSrc.attack;
         enemyStats.defense = enemyStatsSrc.defense;
         enemyStats.swiftness = enemyStatsSrc.swiftness;
+        enemyStats.rewardSp = enemyStatsSrc.rewardSp;
+
+        spPool = transform.Find("SpPool").gameObject;
+        spPool.SetActive(false);
     }
     // This method will cast an event when Attack Anim. Event is cast
     // Cause anim events are only related to the object attached to the animator
@@ -99,6 +106,8 @@ public class EnemyForm : MonoBehaviourPun
 
     public virtual void Die()
 	{
+        spPool.transform.SetParent(transform.parent);
+        spPool.SetActive(true);
         if (!PhotonNetwork.IsMasterClient) return;
 
         // Die Event 
@@ -160,13 +169,11 @@ public class EnemyForm : MonoBehaviourPun
         // Calcolate defense reduction
         dmg = dmg - (dmg * enemyStats.defense * 0.01f); ;
         dmg = Mathf.Clamp(dmg, 0, float.MaxValue);
-        Debug.Log("Health " + health);
+        Debug.Log("Health " + enemyStats.health);
         Debug.Log("dmg " + dmg);
-        health = health - dmg;
+        enemyStats.health = enemyStats.health - dmg;
 
-        Debug.Log("Health " + health);
-
-        if (health <= 0) {
+        if (enemyStats.health <= 0) {
             Die();
         }
 

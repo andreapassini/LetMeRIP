@@ -8,20 +8,12 @@ public class SGManager : MonoBehaviour
     public static event Action<SGManager> OnSPConsumed;
     public static event Action<SGManager> OnSPUnavailable;
 
-    private PlayerStats stats;
-    public PlayerStats Stats
-    {
-        get => stats;
-        set
-        {
-            stats = value;
-            spiritGauge = value.spiritGauge;
-        }
-    }
+    public PlayerStats stats;
 
     private PlayerController characterController;
 
-    private float spiritGauge;
+    public float SpiritGauge { get => stats.spiritGauge; }
+    public float MaxSpiritGauge { get => stats.maxSpiritGauge; }
 
     void Start()
     {
@@ -35,19 +27,24 @@ public class SGManager : MonoBehaviour
      */
     public bool ConsumeSP(float amount, bool ignoreMissingPoints = false)
     {
-        if (spiritGauge >= amount)
+        if (stats.spiritGauge >= amount)
         {
-            spiritGauge -= amount;
+            stats.spiritGauge -= amount;
             OnSPConsumed?.Invoke(this);
             return true;
         }
         else if (ignoreMissingPoints)
         {
-            spiritGauge = 0;
+            stats.spiritGauge = 0;
             OnSPConsumed?.Invoke(this);
             return true;
         }
         OnSPUnavailable?.Invoke(this);
         return false;
+    }
+
+    public void AddSP(float amount)
+    {
+        stats.spiritGauge = Mathf.Clamp(stats.spiritGauge + amount, 0, stats.maxSpiritGauge);
     }
 }

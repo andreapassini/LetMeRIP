@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviourPun
         SGManager ??= gameObject.AddComponent<SGManager>();
 
         HPManager.Stats = currentStats;
-        SGManager.Stats = bodyStats; // we want to keep using the body spirit gauge, since it's always shared, no matter the form
+        SGManager.stats = bodyStats; // we want to keep using the body spirit gauge, since it's always shared, no matter the form
 
         formManager = playerClass.ToLower() switch
         {

@@ -13,7 +13,11 @@ public class Ability : MonoBehaviourPun
     protected PlayerController characterController;
     // ability instance startup, treat it like an OnEnable, useful to retrieve components instantiated at runtime
     public virtual void Init() { }
-    public virtual void Init(PlayerController characterController) => this.characterController = characterController;
+    public virtual void Init(PlayerController characterController)
+    {
+        this.characterController = characterController;
+        if (cooldown <= 0.3f) Debug.Log($"{this.GetType().Name} DOES NOT YET HAVE A COOLDOWN");
+    }
 
     // setup, performed before Perform action, on button down
     // does something and sets isReady to false when it can start successfully

@@ -56,7 +56,6 @@ public class Boss : EnemyForm
 
     private float woundLevel;
 
-    // Start is called before the first frame update
     void Start()
     {
         Init(); 
@@ -536,6 +535,16 @@ public class Boss : EnemyForm
     #endregion
 
     #region Coroutines
+    public IEnumerator PatrolAttackTree()
+	{
+		while (!TargetNotInRange() || !Wound()) 
+        {
+            navMeshAgent.speed = enemyStats.swiftness;
+            dt_attackPhase1.walk();
+            yield return new WaitForSeconds(AiFrameRate);
+		}
+	}
+
     public IEnumerator PatrolAttackTree2()
     {
         while (!CooldownOver() || !TargetNotInRange())
@@ -633,15 +642,6 @@ public class Boss : EnemyForm
         cooldownActionOver = true;
 	}
 
-    public IEnumerator PatrolAttackTree()
-	{
-		while (!TargetNotInRange() || !Wound()) 
-        {
-            navMeshAgent.speed = enemyStats.swiftness;
-            dt_attackPhase1.walk();
-            yield return new WaitForSeconds(AiFrameRate);
-		}
-	}
     #endregion
 
     public override void Init()

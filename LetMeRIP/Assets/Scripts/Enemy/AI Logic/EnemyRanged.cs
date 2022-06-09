@@ -136,7 +136,7 @@ public class EnemyRanged : EnemyForm
     public bool TargetInRange()
     {
         float distance = (target.position - transform.position).magnitude;
-        Debug.Log("Ref " + attackRange + " - " + distance);
+        //Debug.Log("Ref " + attackRange + " - " + distance);
         if (distance <= attackRange)
         {
             return true;

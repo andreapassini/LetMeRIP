@@ -352,6 +352,7 @@ public class Boss : EnemyForm
     public bool InRange()
 	{
         float distance = Vector3.Distance(transform.position, target.position);
+        Debug.Log("Ref " + attackRange + " - " + distance);
         if (distance <= attackRange) {
             return true;
         }
@@ -537,7 +538,7 @@ public class Boss : EnemyForm
     #region Coroutines
     public IEnumerator PatrolAttackTree2()
     {
-        while (true)
+        while (!CooldownOver() || !TargetNotInRange())
         {
             navMeshAgent.speed = enemyStats.swiftness;
             dt_attackPhase3.walk();
@@ -634,7 +635,7 @@ public class Boss : EnemyForm
 
     public IEnumerator PatrolAttackTree()
 	{
-		while (true) 
+		while (!TargetNotInRange() || !Wound()) 
         {
             navMeshAgent.speed = enemyStats.swiftness;
             dt_attackPhase1.walk();

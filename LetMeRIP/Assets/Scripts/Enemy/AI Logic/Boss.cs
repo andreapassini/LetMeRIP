@@ -751,18 +751,4 @@ public class Boss : EnemyForm
         //health = (health / 2) - 25;
         woundCount = 3;
     }
-
-	public override void StopEverythingForAbilityExecution()
-	{
-		base.StopEverythingForAbilityExecution();
-
-        StopAllCoroutines();
-	}
-
-	public override void RestartAI()
-	{
-		base.RestartAI();
-
-        
-	}
 }

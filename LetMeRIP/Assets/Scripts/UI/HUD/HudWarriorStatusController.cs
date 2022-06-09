@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class WarriorStatusController : StatusController
+public class HudWarriorStatusController : HudStatusController
 {
     private void Start()
     {

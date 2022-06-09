@@ -183,7 +183,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 88060406}
   m_LocalRotation: {x: 0.2546557, y: 0.36785895, z: -0.10548183, w: 0.8880901}
-  m_LocalPosition: {x: -5.996607, y: 7.299193, z: -12.666606}
+  m_LocalPosition: {x: -5.9966063, y: 5.2991924, z: -5.9966054}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1466167198}
@@ -207,6 +207,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e255b9c0dc885424d918793d5042545b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerClass: 
+  spiritStats: {fileID: 0}
+  bodyStats: {fileID: 0}
+  currentStats: {fileID: 0}
+  movement: {fileID: 0}
+  HPManager: {fileID: 0}
+  SGManager: {fileID: 0}
+  playerCameraGOName: PlayerCamera
+  followPointGOName: FollowPoint
 --- !u!4 &130894972 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2855400974291697193, guid: 9b67b9079b12490478792c4f72719c7f, type: 3}
@@ -219,6 +228,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2652796758672869878, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
+      propertyPath: sceneViewId
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8607900224311430706, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: m_Name
       value: SimpleEnemy (3)
@@ -367,7 +380,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 403702100}
   m_LocalRotation: {x: 0.2546557, y: 0.36785895, z: -0.10548183, w: 0.8880901}
-  m_LocalPosition: {x: -5.996607, y: 7.299193, z: -12.666606}
+  m_LocalPosition: {x: -5.9966063, y: 5.2991924, z: -5.9966054}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -723,6 +736,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2652796758672869878, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
+      propertyPath: sceneViewId
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8607900224311430706, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: m_Name
       value: SimpleEnemy (1)
@@ -821,7 +838,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &975950033 stripped
 Transform:
@@ -1468,6 +1485,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2652796758672869878, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8607900224311430706, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: m_Name
       value: SimpleEnemy
@@ -1675,6 +1696,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2652796758672869878, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8607900224311430706, guid: ca7481d29c067aa4389d5c13b8658554, type: 3}
       propertyPath: m_Name
       value: SimpleEnemy (2)
@@ -1816,6 +1841,14 @@ PrefabInstance:
     - target: {fileID: 275727460348433325, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
       propertyPath: m_Name
       value: RangedEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3425458556903353237, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5421361351284706917, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
+      propertyPath: sceneViewId
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}

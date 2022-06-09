@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class StatusController : MonoBehaviour
+public abstract class HudStatusController : MonoBehaviour
 {
     protected Dictionary<Form, Dictionary<EAbility, Sprite>> abilitiesSprites;
     protected Dictionary<Form, Sprite> formsSprites;

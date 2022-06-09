@@ -17,7 +17,7 @@ using UnityEngine;
         [SerializeField] protected GameObject transform1Abilities;
         [SerializeField] protected GameObject transform2Abilities;
 
-        private StatusController statusController;
+        private HudStatusController statusController;
         
         private void Awake()
         {
@@ -28,7 +28,7 @@ using UnityEngine;
         {
             statusController = playerClass switch
             {
-                _ => gameObject.AddComponent<WarriorStatusController>()
+                _ => gameObject.AddComponent<HudWarriorStatusController>()
             };
 
             // formManager.OnFormChanged += newFormManager => SwitchAbilities(newFormManager.currentForm.GetType().Name);

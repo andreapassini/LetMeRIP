@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class HudWarriorStatusController : HudStatusController
 {
-    private void Start()
+    /*
+     * Load all the sprites needed for the current player's class
+     */
+    private new void Awake()
     {
+        base.Awake();    
+        
+        //holds the sprites of the abilities of each form
         abilitiesSprites = new Dictionary<Form, Dictionary<EAbility, Sprite>>
         {
             [Form.Spirit] = new Dictionary<EAbility, Sprite>()
@@ -42,8 +48,7 @@ public class HudWarriorStatusController : HudStatusController
             }
         };
         
-        Debug.Log("DIC " + abilitiesSprites);
-
+        //Holds the sprites for all the forms
         formsSprites = new Dictionary<Form, Sprite>
         {
             [Form.Spirit] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
@@ -51,10 +56,5 @@ public class HudWarriorStatusController : HudStatusController
             [Form.Trans1] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
             [Form.Trans2] = Resources.Load<Sprite>("Sprites/Abilities/Charge")
         };
-        
-        Debug.Log("FORMS " + abilitiesSprites);
-        
-        formManager.Init(formsSprites, Form.Base);
-
     }
 }

@@ -2,24 +2,24 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityManager : MonoBehaviour
+public class HudAbilityManager : MonoBehaviour
 {
+    //holds the gameobject for each ability
     private Dictionary<EAbility, GameObject> hudAbilitiesGO;
-    // private Dictionary<EAbility, (Sprite sprite, Ability ability)> sprites;
 
     private void Awake()
     {
-        // populate abilities
+        //init the dictionary with all the abilities' gameobjects
         hudAbilitiesGO = new Dictionary<EAbility, GameObject>();
 
         foreach (string abilityName in Enum.GetNames(typeof(EAbility)))
         {
             Enum.TryParse(abilityName, out EAbility ability);
-            GameObject abilityGO = transform.Find(abilityName).gameObject;
+            Transform abilityTransform = transform.Find(abilityName);
 
-            if (abilityGO == null) throw new Exception("The ability " + abilityName + " is not available");
+            if (abilityTransform == null) throw new Exception("The ability " + abilityName + " is not available");
 
-            hudAbilitiesGO[ability] = abilityGO;
+            hudAbilitiesGO[ability] = abilityTransform.gameObject;
         }
     }
 

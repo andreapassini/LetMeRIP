@@ -12,23 +12,20 @@ public class HudFormManager: MonoBehaviour
         
         private void Awake()
         {
-            Debug.Log("This is the form manager");
-            Debug.Log("GO: ", transform);
-            
-            
             // populate abilities
             hudFormsGO = new Dictionary<Form, GameObject>();
 
             foreach (string formName in Enum.GetNames(typeof(Form)))
             {
                 Enum.TryParse(formName, out Form ability);
-                Transform formGO = transform.Find(formName).Find("Skill");
+                Transform formTransform = transform.Find(formName)?.Find("Skill");
 
-                if (formGO == null) throw new Exception("The form " + formName + " is not available");
+                if (formTransform == null) throw new Exception("The form " + formName + " is not available");
             
-                hudFormsGO[ability] = formGO.gameObject;
+                hudFormsGO[ability] = formTransform.gameObject;
             }
             
+            // print the dictionary
             var output = String.Join(", ", hudFormsGO.Select(res => "Key " + res.Key + ": VAL = " + res.Value));
             Debug.Log(output);
         }

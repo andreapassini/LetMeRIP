@@ -17,12 +17,14 @@ public class DashForward : EnemyAbility
 			return;
 		}
 
-		enemy.animator.SetTrigger("dash");
-
+		enemy.navMeshAgent.isStopped = true;
+		enemy.navMeshAgent.velocity = Vector3.zero;
 		// Disable Navmesh
 		enemy.navMeshAgent.enabled = false;
 		// Disable isKinematic
 		enemy.rb.isKinematic = false;
+
+		enemy.animator.SetTrigger("dash");
 
 		// Perform Dash Back
 		enemy.rb.AddForce(enemy.transform.forward * dashForce, ForceMode.Impulse);

@@ -43,6 +43,7 @@ public class Boss : EnemyForm
 
     public bool lateStart = false;
 
+    [SerializeField]
     private int woundCount = 0;
     private bool signBroken = false;
     private bool runningForTooLong = false;
@@ -62,6 +63,7 @@ public class Boss : EnemyForm
 
         // Gather Stats
         health = enemyStats.maxHealth;
+
         woundLevel = enemyStats.maxHealth / 7;
 
         rb = transform.GetComponent<Rigidbody>();
@@ -78,6 +80,8 @@ public class Boss : EnemyForm
             targets = GameObject.FindGameObjectsWithTag(targetTag);
             target = targets[0].transform;
         }
+
+        //TestPhases();
 
 		#region FSM Phase Overlay
 		FSMState phase1 = new FSMState();
@@ -701,4 +705,10 @@ public class Boss : EnemyForm
         signBroken = true;
 	}
     #endregion
+
+    public void TestPhases()
+	{
+        //health = (health / 2) - 25;
+        woundCount = 3;
+    }
 }

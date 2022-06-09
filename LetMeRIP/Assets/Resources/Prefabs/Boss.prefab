@@ -2172,6 +2172,7 @@ MonoBehaviour:
   runningFotTooLongCooldown: 5
   cooldownActionOverTime: 5
   lateStart: 0
+  woundCount: 0
 --- !u!114 &3623375751001968816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2199,10 +2200,10 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 4
+  m_Acceleration: 900
   avoidancePriority: 50
-  m_AngularSpeed: 360
-  m_StoppingDistance: 1
+  m_AngularSpeed: 900
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -2231,7 +2232,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 3623375751001968816}
   - {fileID: 4861177218981452694}
-  sceneViewId: 0
+  sceneViewId: 3
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &4861177218981452694

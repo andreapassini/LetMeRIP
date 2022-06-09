@@ -21,7 +21,7 @@ public abstract class EnemyAbility : ScriptableObject
 
 	public virtual void StartAbility(EnemyForm enemy) 
 	{
-		//Debug.Log(this);
+		Debug.Log(this);
 		//if (!PhotonNetwork.IsMasterClient) return;
 		this.enemy = enemy;
 		enemy.CastEnemyAbility(this);

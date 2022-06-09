@@ -355,7 +355,7 @@ public class Boss : EnemyForm
     public bool InRange()
 	{
         float distance = Vector3.Distance(transform.position, target.position);
-        Debug.Log("Ref " + attackRange + " - " + distance);
+        // Debug.Log("Ref " + attackRange + " - " + distance);
         if (distance <= attackRange) {
             return true;
         }

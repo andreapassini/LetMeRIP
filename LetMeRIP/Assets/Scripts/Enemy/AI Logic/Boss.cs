@@ -52,6 +52,7 @@ public class Boss : EnemyForm
     private bool isLA1Cooldown = false;
     private bool isCooldwonOver = false;
     private bool isInPhase2 = false;
+    private bool isInPhase3 = false;
 
     private float woundLevel;
 
@@ -322,6 +323,7 @@ public class Boss : EnemyForm
     public bool HealthUnder50Perc()
 	{
         if(health < (enemyStats.maxHealth / 2)) {
+            isInPhase3 = true;
             isInPhase2 = false;
             return true;
 		}
@@ -411,6 +413,7 @@ public class Boss : EnemyForm
 
     public object HeavyAttackPhase3(object o)
     {
+        summonMinions.StartAbility(this);
         heavyAttackPhase3.StartAbility(this);
         return null;
     }
@@ -435,7 +438,7 @@ public class Boss : EnemyForm
 
     public void SummonMinions()
     {
-        if(isInPhase2)
+        if(isInPhase2 || isInPhase3)
             summonMinions.StartAbility(this);
     }
 
@@ -447,7 +450,7 @@ public class Boss : EnemyForm
 
     public void SummonTentacles()
     {
-        if(isInPhase2)
+        if(isInPhase2 || isInPhase3)
             summonTentacles.StartAbility(this);
     }
 

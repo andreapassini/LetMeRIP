@@ -25,12 +25,11 @@ public class HudFormManager: MonoBehaviour
                 hudFormsGO[ability] = formTransform.gameObject;
             }
             
-            // print the dictionary
-            var output = String.Join(", ", hudFormsGO.Select(res => "Key " + res.Key + ": VAL = " + res.Value));
-            Debug.Log(output);
+            
+            Debug.Log(String.Join(", ", hudFormsGO.Select(res => "Key " + res.Key + ": VAL = " + res.Value)));
         }
 
-        public void Init(Dictionary<Form, Sprite> sprites, Form initialForm)
+        public void Init(Form initialForm, Dictionary<Form, Sprite> sprites)
         {
             this.sprites = sprites;
             changeForm(initialForm);

@@ -16,19 +16,19 @@ public class HudWarriorStatusController : HudStatusController
         {
             [Form.Spirit] = new Dictionary<EAbility, Sprite>()
             {
-                [EAbility.LightAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge.png"),
-                [EAbility.HeavyAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge.png"),
-                [EAbility.Attack1] = Resources.Load<Sprite>("Sprites/Abilities/Charge.png"),
-                [EAbility.Attack2] = Resources.Load<Sprite>("Sprites/Abilities/Charge.png"),
-                [EAbility.Dash] = Resources.Load<Sprite>("Sprites/Abilities/Charge.png"),
+                [EAbility.LightAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [EAbility.HeavyAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [EAbility.Attack1] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [EAbility.Attack2] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [EAbility.Dash] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
             },
             [Form.Base] = new Dictionary<EAbility, Sprite>()
             {
-                [EAbility.LightAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge.png"),
-                [EAbility.HeavyAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge.png"),
-                [EAbility.Attack1] = Resources.Load<Sprite>("Sprites/Abilities/Charge.png"),
-                [EAbility.Attack2] = Resources.Load<Sprite>("Sprites/Abilities/Charge.png"),
-                [EAbility.Dash] = Resources.Load<Sprite>("Sprites/Abilities/Charge.png"),
+                [EAbility.LightAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [EAbility.HeavyAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [EAbility.Attack1] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [EAbility.Attack2] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [EAbility.Dash] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
             },
             [Form.Trans1] = new Dictionary<EAbility, Sprite>()
             {
@@ -40,11 +40,11 @@ public class HudWarriorStatusController : HudStatusController
             },
             [Form.Trans2] = new Dictionary<EAbility, Sprite>()
             {
-                [EAbility.LightAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge.png"),
-                [EAbility.HeavyAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge.png"),
-                [EAbility.Attack1] = Resources.Load<Sprite>("Sprites/Abilities/Charge.png"),
-                [EAbility.Attack2] = Resources.Load<Sprite>("Sprites/Abilities/Charge.png"),
-                [EAbility.Dash] = Resources.Load<Sprite>("Sprites/Abilities/Charge.png"),
+                [EAbility.LightAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [EAbility.HeavyAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [EAbility.Attack1] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [EAbility.Attack2] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [EAbility.Dash] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
             }
         };
         

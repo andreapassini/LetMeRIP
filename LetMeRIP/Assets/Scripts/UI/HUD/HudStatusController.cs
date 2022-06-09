@@ -16,40 +16,19 @@ public abstract class HudStatusController : MonoBehaviour
         abilityManager = GetComponentInChildren<HudAbilityManager>();
         formManager = GetComponentInChildren<HudFormManager>();
     }
-    
+
     // initialize the abilities shown and the selected form
-    public void Init(Form form, Dictionary<EAbility, Ability> abilities)
+    public void Init(Form initialForm, Dictionary<EAbility, Ability> abilities)
     {
-        abilityManager.Init(createDictionaryForAbilityManager(form, abilities));
-        formManager.Init(formsSprites, Form.Base);
+        abilityManager.Init(initialForm, abilitiesSprites, abilities);
+        formManager.Init(initialForm, formsSprites);
     }
-    
-    
+
+
     // deals with changing the current form selected and the shown abilities 
     public void changeForm(Form newForm, Dictionary<EAbility, Ability> abilities)
     {
-        abilityManager.changeAbilities(createDictionaryForAbilityManager(newForm, abilities));
+        abilityManager.changeAbilities(newForm, abilities);
         formManager.changeForm(newForm);
     }
-
-    private Dictionary<EAbility, (Sprite sprite, Ability ability)> createDictionaryForAbilityManager(Form form, Dictionary<EAbility, Ability> abilities)
-    {
-        var result = new Dictionary<EAbility, (Sprite sprite, Ability ability)>();
-
-        var spritesForNewForm = abilitiesSprites[form];
-
-        foreach (var sprite in spritesForNewForm)
-        {
-            // the ability associated to the sprite
-            var eAbility = sprite.Key;
-            // check if an ability with the same name was passed, if not we skip the sprite
-            if(!abilities.ContainsKey(eAbility)) continue;
-            
-            result[eAbility] = (sprite.Value, abilities[eAbility]);
-        }
-        
-        return result;
-    }
-    
-    
 }

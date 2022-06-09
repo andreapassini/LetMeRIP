@@ -1,47 +1,62 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class HudAbilityManager : MonoBehaviour
 {
     //holds the gameobject for each ability
+    private Dictionary<Form, Dictionary<EAbility, Sprite>> sprites;
     private Dictionary<EAbility, GameObject> hudAbilitiesGO;
 
     private void Awake()
     {
         //init the dictionary with all the abilities' gameobjects
         hudAbilitiesGO = new Dictionary<EAbility, GameObject>();
-
-        foreach (string abilityName in Enum.GetNames(typeof(EAbility)))
+        
+        foreach (EAbility ability in EnumUtils.GetValues<EAbility>())
         {
-            Enum.TryParse(abilityName, out EAbility ability);
-            Transform abilityTransform = transform.Find(abilityName);
+            Transform abilityTransform = transform.Find(ability.ToString());
 
-            if (abilityTransform == null) throw new Exception("The ability " + abilityName + " is not available");
+            if (abilityTransform == null) throw new Exception("The ability " + ability + " is not available");
 
             hudAbilitiesGO[ability] = abilityTransform.gameObject;
         }
     }
 
-    public void Init(Dictionary<EAbility, (Sprite sprite, Ability ability)> sprites)
+    public void Init(Form initialForm,
+        Dictionary<Form, Dictionary<EAbility, Sprite>> sprites,
+        Dictionary<EAbility, Ability> initialAbilities)
     {
-        setAbilities(sprites);
+        this.sprites = sprites;
+
+        // Debug.Log("Initial Form " + initialForm);
+        // Debug.Log("Sprites for form: " + String.Join(", ", sprites[initialForm].Select(res => "Key " + res.Key + ": VAL = " + res.Value)));
+
+        // Debug.Log(String.Join(", ", initialAbilities.Select(res => "Key " + res.Key + ": VAL = " + res.Value)));
+        setAbilities(initialForm, initialAbilities);
     }
 
-    public void changeAbilities(Dictionary<EAbility, (Sprite sprite, Ability ability)> sprites)
+    public void changeAbilities(Form newForm, Dictionary<EAbility, Ability> newAbilities)
     {
         foreach (var ability in hudAbilitiesGO.Values)
             Destroy(ability.GetComponent<HudAbility>());
 
-        setAbilities(sprites);
+        setAbilities(newForm, newAbilities);
     }
 
-
-    private void setAbilities(Dictionary<EAbility, (Sprite sprite, Ability ability)> sprites)
+    private void setAbilities(Form form, Dictionary<EAbility, Ability> abilities)
     {
-        foreach (var ability in sprites)
-            hudAbilitiesGO[ability.Key]
-                .AddComponent<HudAbility>()
-                .Init(ability.Value.sprite, ability.Value.ability);
+        var formSprites = sprites[form];
+
+        foreach (EAbility ability in EnumUtils.GetValues<EAbility>())
+            if (hudAbilitiesGO.ContainsKey(ability) &&
+                formSprites.ContainsKey(ability) &&
+                abilities.ContainsKey(ability))
+            {
+                hudAbilitiesGO[ability]
+                    .AddComponent<HudAbility>()
+                    .Init(formSprites[ability], abilities[ability]);
+            }
     }
 }

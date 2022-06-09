@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,23 +11,32 @@ public class EnemySpider : EnemyForm
 
     [SerializeField] private string targetTag = "Player";
 
+    private bool lateStart = false;
+
     private void Start()
     {
+
+        Init();
 
         // Gather Stats
         health = enemyStats.maxHealth;
         // Debug.Log("Start Health " + health);
 
-        rb = GetComponent<Rigidbody>();
+        rb = transform.GetComponent<Rigidbody>();
 
-        animator = GetComponent<Animator>();
+        animator = transform.GetComponent<Animator>();
 
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = transform.GetComponent<NavMeshAgent>();
 
         reactionReference = AiFrameRate;
 
-        targets = GameObject.FindGameObjectsWithTag(targetTag);
-        target = targets[0].transform;
+		if (lateStart) {
+            StartCoroutine(LateStart());
+		} else {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }        
+        
 
         FSMState search = new FSMState();
         search.stayActions.Add(Search);
@@ -60,6 +70,8 @@ public class EnemySpider : EnemyForm
         // Attack
 
         fsm = new FSM(search);
+
+        if (!PhotonNetwork.IsMasterClient) return;
 
         StartCoroutine(Patrol());
     }
@@ -106,7 +118,7 @@ public class EnemySpider : EnemyForm
     public void GoToLastSeenPos()
     {
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
-        GetComponent<NavMeshAgent>().destination = lastSeenPos;
+        navMeshAgent.destination = lastSeenPos;
         animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
     #endregion
@@ -117,7 +129,7 @@ public class EnemySpider : EnemyForm
     {
         Vector3 ray = target.position - transform.position;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, ray, out hit, whatICanSeeThrough))
+        if (Physics.Raycast(transform.position, ray, out hit, Mathf.Infinity, ~whatRayHit))
         {
             if (hit.transform == target)
             {
@@ -164,12 +176,13 @@ public class EnemySpider : EnemyForm
     }
 
 
+    #region Coroutines
     // Patrol coroutine
     // Periodic update, run forever
     public IEnumerator Patrol()
     {
-        while (true)
-        {
+        while (true) {
+            navMeshAgent.speed = enemyStats.swiftness;
             fsm.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
@@ -177,6 +190,7 @@ public class EnemySpider : EnemyForm
 
     public IEnumerator StopAI()
     {
+        navMeshAgent.speed = enemyStats.swiftness;
         float attackDuration = 1f; // Just as an example 
 
         AiFrameRate = attackDuration;
@@ -186,6 +200,7 @@ public class EnemySpider : EnemyForm
 
     public IEnumerator StopAI(float duration)
     {
+        navMeshAgent.speed = enemyStats.swiftness;
         navMeshAgent.velocity = Vector3.zero;
         //navMeshAgent.isStopped = true;
         AiFrameRate = duration;
@@ -195,9 +210,31 @@ public class EnemySpider : EnemyForm
         //navMeshAgent.isStopped = false;
     }
 
+
+
+    public IEnumerator WaitDieAnimation(float duration)
+    {
+        navMeshAgent.speed = enemyStats.swiftness;
+        navMeshAgent.enabled = false;
+        yield return new WaitForSeconds(duration);
+        navMeshAgent.speed = enemyStats.swiftness;
+        Destroy(gameObject);
+
+    }
+
+    public IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(1f);
+        navMeshAgent.speed = enemyStats.swiftness;
+        targets = GameObject.FindGameObjectsWithTag(targetTag);
+        target = targets[0].transform;
+    }
+    #endregion
+
+    #region effects
     public void TakeDamageEffect(EnemyForm e)
     {
-        if(this == e)
+        if (this == e)
             StartCoroutine(StopAI(takeDamageDuration));
     }
 
@@ -206,13 +243,5 @@ public class EnemySpider : EnemyForm
         if (this == e)
             StartCoroutine(StopAI(takeDamageDuration));
     }
-
-    public IEnumerator WaitDieAnimation(float duration)
-    {
-        navMeshAgent.enabled = false;
-        yield return new WaitForSeconds(duration);
-        Destroy(gameObject);
-
-    }
-
+    #endregion
 }

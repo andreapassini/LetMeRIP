@@ -9,13 +9,13 @@ public class FormManager : MonoBehaviourPun
 {
     public int ViewID { get => photonView.ViewID; }
 
-    public static event Action<FormManager> OnFormChanged;
+    public event Action<FormManager> OnFormChanged;
 
     [HideInInspector] public List<PlayerForm> forms;
     [HideInInspector] public PlayerForm currentForm;
 
     protected PlayerInputActions playerInputActions;
-    protected AbilityHandler sharedAbilityHandler; // handler of shared abilities, like dash and interact
+    public AbilityHandler sharedAbilityHandler; // handler of shared abilities, like dash and interact
     protected PlayerController characterController;
 
     // units of distance from the player when the spirit spawns

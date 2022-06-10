@@ -1,3 +1,4 @@
+using System;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ public class Dungeon : MonoBehaviourPun
     [SerializeField] private List<Room> inputRooms;
     [SerializeField] private Gate startGate;
 
+    
     public Dictionary<int, PlayerController> players;
     public Dictionary<int, Room> rooms;
     

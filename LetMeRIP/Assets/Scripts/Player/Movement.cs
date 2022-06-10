@@ -22,11 +22,12 @@ public class Movement : MonoBehaviourPun
         lam = GetComponent<LookAtMouse>();    
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
-        FormManager.OnFormChanged += RefreshAnimator;
+        
+        characterController.formManager.OnFormChanged += RefreshAnimator;
     }
     private void OnDestroy()
     {
-        FormManager.OnFormChanged -= RefreshAnimator;
+        characterController.formManager.OnFormChanged -= RefreshAnimator;
     }
 
     private void Update()

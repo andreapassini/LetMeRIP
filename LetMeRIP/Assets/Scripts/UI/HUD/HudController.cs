@@ -56,6 +56,7 @@ public class HudController : MonoBehaviour
         HudEForm newHudEForm = formManager.currentForm.GetType().Name switch
         {
             "SampleForm1" => HudEForm.Trans1,
+            "Berserker" => HudEForm.Trans1,
             "SampleForm2" => HudEForm.Trans2,
             _ => HudEForm.Trans1
         };

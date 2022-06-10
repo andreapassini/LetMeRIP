@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyForm))]
 public class EnemyEffect : MonoBehaviour
 {
-    public float Duration { get => duration; }
+    public float Duration { get => duration; set => duration = value; }
     protected float duration;
 
     protected virtual void Start()

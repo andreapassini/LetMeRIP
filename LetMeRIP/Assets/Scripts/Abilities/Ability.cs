@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 
 public class Ability : MonoBehaviourPun
 {
-    protected float cooldown;
+    protected PlayerInputActions playerInputActions;
+    public float cooldown;
     public float SPCost = 0f;
     protected bool isReady = true;
     public virtual bool IsReady { get => isReady; }
@@ -15,6 +16,7 @@ public class Ability : MonoBehaviourPun
     public virtual void Init() { }
     public virtual void Init(PlayerController characterController)
     {
+        playerInputActions = new PlayerInputActions();
         this.characterController = characterController;
         if (cooldown <= 0.3f) Debug.Log($"{this.GetType().Name} DOES NOT YET HAVE A COOLDOWN");
     }
@@ -35,5 +37,17 @@ public class Ability : MonoBehaviourPun
     {
         yield return new WaitForSeconds(cooldown);
         isReady = true;
+    }
+
+    protected void DisableActions()
+    {
+        characterController.formManager.DisableAbilities();
+        characterController.movement.playerInputActions.Player.Movement.Disable();
+    }
+
+    protected void EnableActions()
+    {
+        characterController.formManager.EnableAbilities();
+        characterController.movement.playerInputActions.Player.Movement.Enable();
     }
 }

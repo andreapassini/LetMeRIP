@@ -13,8 +13,6 @@ public class WarriorBasicAbility2 : Ability
     private float slowFactor = .65f;
     private float stunDistance = 3.5f;
 
-    private float DegToRad(float deg) => deg * 0.01745f;
-
     private void Start()
     {
         SPCost = 10f;
@@ -37,8 +35,23 @@ public class WarriorBasicAbility2 : Ability
 
     public override void PerformedAction()
     {
+
+        StartCoroutine(PerformCoroutine(.4f));
+        StartCoroutine(Cooldown());
+    }
+
+    public override void CancelAction()
+    {
+        /* nothing to see here */
+    }
+
+    private IEnumerator PerformCoroutine(float castingTime)
+    {
+        DisableActions();
+        yield return new WaitForSeconds(castingTime / 2);
+
         // Cone shape (it's more like a sphere sector)
-        float rad = DegToRad(coneAngle) * .5f;
+        float rad = Utilities.DegToRad(coneAngle) * .5f;
 
         Vector3 rbound = new Matrix4x4(
                 new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
@@ -81,40 +94,35 @@ public class WarriorBasicAbility2 : Ability
                 }
             }
         }
-
-        StartCoroutine(Cooldown());
+        yield return new WaitForSeconds(castingTime / 2);
+        EnableActions();
     }
 
-    public override void CancelAction()
-    {
-        /* nothing to see here */
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, attackRange);
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+    //    float rad = Utilities.DegToRad(coneAngle) * .5f;
 
-        float rad = DegToRad(coneAngle) * .5f;
+    //    Vector3 rbound = new Matrix4x4(
+    //            new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
+    //            new Vector4(0, 1, 0, 0),
+    //            new Vector4(-Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+    //            Vector4.zero
+    //        ) * transform.forward;
 
-        Vector3 rbound = new Matrix4x4(
-                new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
-                new Vector4(0, 1, 0, 0),
-                new Vector4(-Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
-                Vector4.zero
-            ) * transform.forward;
+    //    Vector3 lbound = new Matrix4x4(
+    //            new Vector4(Mathf.Cos(rad), 0, -Mathf.Sin(rad), 0),
+    //            new Vector4(0, 1, 0, 0),
+    //            new Vector4(Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+    //            Vector4.zero
+    //        ) * transform.forward;
 
-        Vector3 lbound = new Matrix4x4(
-                new Vector4(Mathf.Cos(rad), 0, -Mathf.Sin(rad), 0),
-                new Vector4(0, 1, 0, 0),
-                new Vector4(Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
-                Vector4.zero
-            ) * transform.forward;
+    //    Gizmos.DrawRay(transform.position, lbound);
+    //    Gizmos.DrawRay(transform.position, rbound);
 
-        Gizmos.DrawRay(transform.position, lbound);
-        Gizmos.DrawRay(transform.position, rbound);
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, stunDistance);
-    }
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawWireSphere(transform.position, stunDistance);
+    //}
 }

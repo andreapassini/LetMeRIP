@@ -9,7 +9,7 @@ public class Movement : MonoBehaviourPun
 	private Rigidbody rb;
     private Vector3 direction;
 
-    private PlayerInputActions playerInputActions;
+    public PlayerInputActions playerInputActions;
     private Animator animator;
     private PlayerController characterController;
     private LookAtMouse lam;
@@ -60,18 +60,17 @@ public class Movement : MonoBehaviourPun
         {
             if (!direction.Equals(Vector3.zero))
             {
-                //animator.SetBool("isRunning", true);
+                animator.SetBool("isRunning", true);
                 //animator.SetBool("isIdle", false);
             }
             else
             {
+
                 //animator.SetBool("isIdle", true);
-                //animator.SetBool("isRunning", false);
+                animator.SetBool("isRunning", false);
             }
         }
     }
-
-    private static float DegToRad(float deg) => deg * 0.01745f;
 
     private static Vector3 RotateVector(Vector3 vec, float rad)
     {

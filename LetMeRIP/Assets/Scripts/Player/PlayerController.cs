@@ -2,7 +2,7 @@ using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviourPun
+public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback
 {
     PlayerInputActions playerInputActions;
 
@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviourPun
         movement ??= gameObject.AddComponent<Movement>();
         playerInputActions.Player.Enable();
         playerInputActions.Player.Movement.Enable();
+
+        // hud subscription
     }
 
     public void Init() 
@@ -89,5 +91,10 @@ public class PlayerController : MonoBehaviourPun
 
         vCam.Follow = followPoint;
         vCam.LookAt = transform;
+    }
+
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+
     }
 }

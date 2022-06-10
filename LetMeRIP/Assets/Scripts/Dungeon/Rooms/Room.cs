@@ -79,7 +79,7 @@ public class Room : MonoBehaviour
 
         timeSpent = 0f;
         timerCoroutine = Timer();
-        StartCoroutine(timerCoroutine);
+        //StartCoroutine(timerCoroutine);
     }
 
     /**

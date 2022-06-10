@@ -156,7 +156,7 @@ public class EnemyForm : MonoBehaviourPun
 	{
         if (!PhotonNetwork.IsMasterClient) return;
 
-        Debug.Log(enemyAbility.abilityName);
+        //Debug.Log(enemyAbility.abilityName);
 
         photonView.RPC("RpcCastEnemyAbility",
             RpcTarget.All,
@@ -181,9 +181,9 @@ public class EnemyForm : MonoBehaviourPun
         // Calcolate defense reduction
         dmg = dmg - (dmg * enemyStats.defense * 0.01f); ;
         dmg = Mathf.Clamp(dmg, 0, float.MaxValue);
-        Debug.Log("Health " + enemyStats.health);
-        Debug.Log("dmg " + dmg);
         enemyStats.health = enemyStats.health - dmg;
+
+        Debug.Log($"{enemyStats.enemyName} took {dmg} => {enemyStats.health}HP");
 
         if (enemyStats.health <= 0) {
             Die();

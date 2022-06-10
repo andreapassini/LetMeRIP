@@ -9,8 +9,19 @@ public class WarriorFormManager : FormManager
         base.Init(characterController);
 
         forms.Add(gameObject.AddComponent<WarriorBasic>());
+        forms.Add(gameObject.AddComponent<Berserker>());
         SwitchForm(0);
 
         BindAbilities();
+    }
+
+    public override void BindAbilities()
+    {
+        base.BindAbilities();
+
+        if (!photonView.IsMine) return;
+
+        playerInputActions.Player.Transformation1.performed += ctx => SwitchForm(0);
+        playerInputActions.Player.Transformation2.performed += ctx => SwitchForm(1);
     }
 }

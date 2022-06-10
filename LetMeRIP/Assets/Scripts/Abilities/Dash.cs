@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Dash : Ability
 {
-    private PlayerInputActions playerInputActions;
+    private Transform attackPoint;
     [SerializeField]
     private Animator animator;
     private Rigidbody rb;
@@ -27,6 +27,8 @@ public class Dash : Ability
     {
         base.Init(characterController);
         animator = GetComponentInChildren<Animator>(false);
+        attackPoint = transform.Find("AttackPoint");
+
     }
 
     /**
@@ -38,7 +40,7 @@ public class Dash : Ability
         Debug.Log("Dash starting");
         isReady = false;
 
-        direction = playerInputActions.Player.Movement.ReadValue<Vector3>();
+        direction = direction = attackPoint.forward;
 
         // you can't move while dashing
         if (!direction.Equals(Vector3.zero)) // prevents unresponsive movement if the player tries to dash when standing and moving right after
@@ -86,9 +88,11 @@ public class Dash : Ability
      */
     private IEnumerator DashAction()
     {
-        if(currentTime > 0)
+        DisableActions();
+        while (currentTime > 0)
         {
-            if(Physics.Raycast(transform.position + direction*0.1f, direction, out RaycastHit info, 50f)){
+            if (Physics.Raycast(transform.position + direction * 0.1f, direction, out RaycastHit info, 50f))
+            {
                 if (info.collider.CompareTag("Obstacle") && (transform.position - info.transform.position).magnitude < 4f)
                 {
                     isDashing = false;
@@ -97,13 +101,12 @@ public class Dash : Ability
                 }
             }
             currentTime -= Time.deltaTime;
-            rb.MovePosition(transform.position + this.direction.ToIso() * speed * Time.deltaTime);
+            rb.MovePosition(transform.position + this.direction * speed * Time.deltaTime);
             yield return new WaitForFixedUpdate();
-            StartCoroutine(DashAction());
-        } else
-        {
-            isDashing = false;
-            CancelAction();
         }
+        EnableActions();
+
+        isDashing = false;
+        CancelAction();
     }
 }

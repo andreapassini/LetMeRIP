@@ -45,7 +45,7 @@ public class SpiritAbility2 : Ability
 
         StartCoroutine(Cooldown());
     }
-
+    
     public override void CancelAction()
     {
         /* nothing to see here */

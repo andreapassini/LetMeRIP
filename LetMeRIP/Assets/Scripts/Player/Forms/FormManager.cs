@@ -22,6 +22,7 @@ public class FormManager : MonoBehaviourPun
     [SerializeField] private float spiritForwardOffset = 2f;
     [SerializeField] private float spiritReturnRange = 3f;
     protected bool isSpirit = false;
+    public bool IsSpirit { get { return isSpirit; } }
 
     public virtual void Init(PlayerController characterController)
     {
@@ -117,6 +118,7 @@ public class FormManager : MonoBehaviourPun
     {
         if (!photonView.IsMine) return;
 
+        playerInputActions.Player.Disable();
         playerInputActions.Player.LightAttack.Disable();
         playerInputActions.Player.HeavyAttack.Disable();
         playerInputActions.Player.Dash.Disable();
@@ -196,7 +198,7 @@ public class FormManager : MonoBehaviourPun
         
         characterController.Exit();
         StartCoroutine(LateInit(spiritController));
-        spiritController.Init();
+        //spiritController.Init();
     }
 
     private void EnterBody()

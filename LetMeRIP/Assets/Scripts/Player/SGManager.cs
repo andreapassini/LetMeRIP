@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class SGManager : MonoBehaviour
 {
-    public static event Action<SGManager> OnSPConsumed;
-    public static event Action<SGManager> OnSPUnavailable;
+    public event Action<SGManager> OnSPGained;
+    public event Action<SGManager> OnSPConsumed;
+    public event Action<SGManager> OnSPUnavailable;
 
     public PlayerStats stats;
 
@@ -46,5 +47,6 @@ public class SGManager : MonoBehaviour
     public void AddSP(float amount)
     {
         stats.spiritGauge = Mathf.Clamp(stats.spiritGauge + amount, 0, stats.maxSpiritGauge);
+        OnSPGained?.Invoke(this);
     }
 }

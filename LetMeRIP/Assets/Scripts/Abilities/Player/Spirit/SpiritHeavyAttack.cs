@@ -14,8 +14,6 @@ public class SpiritHeavyAttack : Ability
     private bool isCharged = false;
     private float timeToCharge = 1.5f;
 
-    private float DegToRad(float deg) => deg * 0.01745f;
-
     private void Start()
     {
         cooldown = 4f;
@@ -37,11 +35,10 @@ public class SpiritHeavyAttack : Ability
     public override void PerformedAction()
     {
         //disable movement while charging
-        characterController.movement.enabled = false;
+        //characterController.movement.enabled = false;
         
         //animator.SetTrigger("StartChargeHeavyAttack");
         //animator.SetTrigger("Charge");
-        
         StartCoroutine(Charge());
         StartCoroutine(Cooldown());
     }
@@ -52,7 +49,7 @@ public class SpiritHeavyAttack : Ability
         {
             isCharged = false;
             //animator.SetTrigger("HeavyAttack");
-            float rad = DegToRad(coneAngle) * .5f;
+            float rad = Utilities.DegToRad(coneAngle) * .5f;
 
             Vector3 rbound = new Matrix4x4(
                     new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
@@ -87,13 +84,18 @@ public class SpiritHeavyAttack : Ability
             }
 
             // enable movement
-            characterController.movement.enabled = true;
+            //characterController.movement.enabled = true;
         }
     }
 
     private IEnumerator Charge()
     {
+        DisableActions();
+
         yield return new WaitForSeconds(timeToCharge);
+        
+        EnableActions();
+
         isCharged = true;
         CancelAction();
     }
@@ -103,7 +105,7 @@ public class SpiritHeavyAttack : Ability
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
 
-        float rad = DegToRad(coneAngle) * .5f;
+        float rad = Utilities.DegToRad(coneAngle) * .5f;
 
         Vector3 rbound = new Matrix4x4(
                 new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),

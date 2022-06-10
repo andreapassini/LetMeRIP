@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class HPManager : MonoBehaviour
 {
-    public static event Action<HPManager> OnPlayerKilled;
-    public static event Action<HPManager> OnPlayerDamaged;
-    public static event Action<HPManager> OnPlayerHealed;
+    public event Action<HPManager> OnPlayerKilled;
+    public event Action<HPManager> OnPlayerDamaged;
+    public event Action<HPManager> OnPlayerHealed;
     private PlayerStats stats;
     public PlayerStats Stats
     {

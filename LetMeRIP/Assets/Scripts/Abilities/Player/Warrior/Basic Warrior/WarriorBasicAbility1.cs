@@ -39,7 +39,22 @@ public class WarriorBasicAbility1 : Ability
     public override void PerformedAction()
     {
         // Create Collider
-        float rad = DegToRad(coneAngle)*.5f;
+        PerformCoroutine(0.4f);
+        StartCoroutine(Cooldown());
+    }
+
+    public override void CancelAction()
+    {
+        /* nothing to see here */
+    }
+
+    private IEnumerator PerformCoroutine(float castingTime)
+    {
+        //animation
+        DisableActions();
+        yield return new WaitForSeconds(castingTime / 2);
+
+        float rad = DegToRad(coneAngle) * .5f;
 
         Vector3 rbound = new Matrix4x4(
                 new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
@@ -62,7 +77,7 @@ public class WarriorBasicAbility1 : Ability
             if (enemyHit.CompareTag("Enemy"))
             {
                 Vector3 enemyDirection = enemyHit.transform.position - transform.position;
-                if(Vector3.Dot(enemyDirection, lbound) > 0 && Vector3.Dot(enemyDirection, rbound) > 0)
+                if (Vector3.Dot(enemyDirection, lbound) > 0 && Vector3.Dot(enemyDirection, rbound) > 0)
                 {
                     EnemyForm eform = enemyHit.GetComponent<EnemyForm>();
                     eform.TakeDamage(damage);
@@ -72,12 +87,8 @@ public class WarriorBasicAbility1 : Ability
         }
 
         if (hits > 0 && photonView.IsMine) characterController.HPManager.DecayingHeal(heal * hits, healDecayTime);
-        StartCoroutine(Cooldown());
+        
+        yield return new WaitForSeconds(castingTime / 2);
+        EnableActions();
     }
-
-    public override void CancelAction()
-    {
-        /* nothing to see here */
-    }
-
 }

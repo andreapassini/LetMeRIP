@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WarriorBasicHeavyAttack : Ability
 {
-    private PlayerInputActions playerInputActions;
     [SerializeField]
     private Animator animator;
     private Rigidbody rb;
@@ -20,12 +19,12 @@ public class WarriorBasicHeavyAttack : Ability
     private float damage;
 
     private Coroutine damageCoroutine;
-    private float tickRate = .25f;
+    private float tickRate = .1f;
+
     private void Start()
     {
         cooldown = 3f;
         rb = GetComponent<Rigidbody>();
-        playerInputActions = new PlayerInputActions();
     }
 
     public override void Init(PlayerController characterController)
@@ -50,7 +49,6 @@ public class WarriorBasicHeavyAttack : Ability
         // you can't move while dashing
         if (!direction.Equals(Vector3.zero))
         {
-            playerInputActions.Player.Movement.Disable();
             currentTime = time;
             isDashing = true;
         } // prevents unresponsive movement if the player tries to dash when standing and moving right after
@@ -88,7 +86,6 @@ public class WarriorBasicHeavyAttack : Ability
         if (!isDashing)
         {
             Debug.Log("Dash finished");
-            playerInputActions.Player.Movement.Enable(); // you can't move while dashing
         }
     }
 
@@ -97,7 +94,8 @@ public class WarriorBasicHeavyAttack : Ability
      */
     private IEnumerator DashAction()
     {
-        if (currentTime > 0)
+        DisableActions();
+        while (currentTime > 0)
         {
             if (Physics.Raycast(transform.position + direction * 0.1f, direction, out RaycastHit info, 50f))
             {
@@ -109,22 +107,21 @@ public class WarriorBasicHeavyAttack : Ability
                 }
             }
             currentTime -= Time.deltaTime;
-            rb.MovePosition(transform.position + this.direction.ToIso() * speed * Time.deltaTime);
+            rb.MovePosition(transform.position + this.direction * speed * Time.deltaTime);
             yield return new WaitForFixedUpdate();
-            StartCoroutine(DashAction());
         }
-        else
-        {
-            isDashing = false;
-            StopCoroutine(damageCoroutine);
-            CancelAction();
-        }
+        isDashing = false;
+
+        EnableActions();
+        StopCoroutine(damageCoroutine);
+        CancelAction();
     }
 
     private IEnumerator Damage()
     {
         for (;;)
         {
+            Utilities.SpawnHitSphere(attackRange, transform.position, 3f);
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange);
             foreach (Collider enemyHit in hitEnemies)
             {
@@ -137,4 +134,6 @@ public class WarriorBasicHeavyAttack : Ability
             yield return new WaitForSeconds(tickRate);
         }
     }
+
+
 }

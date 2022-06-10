@@ -5,7 +5,7 @@ using UnityEngine;
 
     public class Test : MonoBehaviour
     {
-        public FillingBar healthBar;
+        public HudFillingBar healthBar;
     
         void Start()
         {

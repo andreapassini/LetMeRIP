@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
@@ -6,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class Ability : MonoBehaviourPun
 {
+    public event Action<float> OnCooldownStart; 
+    
     protected PlayerInputActions playerInputActions;
     public float cooldown;
     public float SPCost = 0f;
@@ -35,6 +38,8 @@ public class Ability : MonoBehaviourPun
 
     protected IEnumerator Cooldown()
     {
+        OnCooldownStart?.Invoke(cooldown);
+        
         yield return new WaitForSeconds(cooldown);
         isReady = true;
     }

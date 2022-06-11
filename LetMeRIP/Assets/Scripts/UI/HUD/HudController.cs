@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Photon.Realtime;
 using UnityEngine;
 
 public class HudController : MonoBehaviour
@@ -25,43 +27,85 @@ public class HudController : MonoBehaviour
         Instance = this;
     }
 
+    
+    // private IEnumerator Wait(string playerClass, FormManager formManager)
+    // {
+    //     // some vfx to cover this late init
+    //     yield return new WaitForSeconds(5f);
+    //     LInit( playerClass, formManager);
+    // }
+    //
+    //
+    // public void Init(string playerClass, FormManager formManager)
+    // {
+    //     StartCoroutine(Wait(playerClass, formManager));
+    //     
+    // }
+    
     public void Init(string playerClass, FormManager formManager)
+    {
+        if (statusController is null) InitStatusController(playerClass);
+        
+        // funziona solo se lo spirit non può essere la prima forma 
+        if (!formManager.IsSpirit)
+        {
+            // Debug.LogError("Initializing ...");
+
+            // Debug.Log("ELO");
+            // Debug.Log("form manager " + formManager);
+            
+            (HudEForm initialForm, Dictionary<HudEAbility, Ability> initialAbilities) = PrepareAbilities(formManager);
+            statusController.Init(initialForm, initialAbilities);
+            
+            
+            
+            formManager.OnFormChanged += newFormManager =>
+            {
+                (HudEForm form, Dictionary<HudEAbility, Ability> abilities) = PrepareAbilities(newFormManager);
+
+                // if (firstFormChange)
+                // {
+                //     firstFormChange = false;
+                //     return;
+                //     statusController.Init(form, abilities);
+                //     // Debug.Log("WORKINGGG ");
+                //     firstFormChange = false;a
+                // }
+                // else statusController.changeForm(form, abilities);
+                statusController.changeForm(form, abilities);
+            };
+        }
+        else
+        {
+            // Debug.LogError("Initializing spirit ... ...");
+            
+            (HudEForm form, Dictionary<HudEAbility, Ability> abilities) = PrepareAbilities(formManager);
+            statusController.changeForm(form, abilities);
+        }
+    }
+
+    private void InitStatusController(string playerClass)
     {
         statusController = playerClass switch
         {
             _ => gameObject.AddComponent<HudWarriorStatusController>()
         };
-
-        // Debug.Log("ELO");
-        // Debug.Log("form manager " + formManager);
-
-        // (HudEForm initialForm, Dictionary<HudEAbility, Ability> initialAbilities) = PrepareAbilities(formManager);
-
-        // statusController.Init(initialForm, initialAbilities);
-
-        // formManager.OnFormChanged += newFormManager => SwitchAbilities(newFormManager.currentForm.GetType().Name);
-        formManager.OnFormChanged += newFormManager =>
-        {
-            (HudEForm form, Dictionary<HudEAbility, Ability> abilities) = PrepareAbilities(newFormManager);
-
-            if (firstFormChange)
-            {
-                statusController.Init(form, abilities);
-                // Debug.Log("WORKINGGG ");
-                firstFormChange = false;
-            }
-            else statusController.changeForm(form, abilities);
-        };
     }
+    
+    
 
     private (HudEForm form, Dictionary<HudEAbility, Ability> abilities) PrepareAbilities(FormManager formManager)
     {
+        // Debug.LogError("Initializing form: " +  formManager.currentForm.GetType().Name);
+        
         HudEForm newHudEForm = formManager.currentForm.GetType().Name switch
         {
             "SampleForm1" => HudEForm.Trans1,
             "SampleForm2" => HudEForm.Trans2,
             "WarriorBasic" => HudEForm.Trans1,
             "Berserker" => HudEForm.Trans2,
+            "SpiritForm" => HudEForm.Spirit,
+            // ""
             _ => HudEForm.Trans1
         };
 

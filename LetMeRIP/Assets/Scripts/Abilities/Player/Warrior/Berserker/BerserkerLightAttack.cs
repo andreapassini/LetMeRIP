@@ -19,7 +19,7 @@ public class BerserkerLightAttack : Ability
         base.Init(characterController);
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
-        damage = 10 + characterController.bodyStats.strength * 0.35f + characterController.bodyStats.dexterity * 0.1f;
+        damage = 10 + characterController.currentStats.strength * 0.35f + characterController.currentStats.dexterity * 0.1f;
     }
 
     public override void StartedAction()

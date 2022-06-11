@@ -36,7 +36,7 @@ public class BerserkerAbility2 : Ability
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
 
-        damage = 40 + characterController.bodyStats.strength * 0.7f;
+        damage = 40 + characterController.currentStats.strength * 0.7f;
     }
 
     /**

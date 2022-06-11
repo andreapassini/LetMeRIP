@@ -6,6 +6,7 @@ public class WarriorFormManager : FormManager
 {
     public override void Init(PlayerController characterController)
     {
+        isSpirit = false;
         base.Init(characterController);
 
         forms.Add(gameObject.AddComponent<WarriorBasic>());

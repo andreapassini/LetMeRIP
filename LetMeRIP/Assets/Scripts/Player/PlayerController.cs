@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
 
     public PlayerStats spiritStats;
     public PlayerStats bodyStats;
-    [HideInInspector] public PlayerStats currentStats;
-
+    public PlayerStats currentStats;
+    public PlayerStats wtf;
     private LookAtMouse lam;
     [HideInInspector] public Movement movement;
     [HideInInspector] public Rigidbody rb;
@@ -29,17 +29,16 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
 
     void Start()
     {
+        currentStats = playerClass.ToLower().Equals("spirit") ? spiritStats : bodyStats;
+
         SetupCamera();
         lam = GetComponent<LookAtMouse>();
         rb = GetComponent<Rigidbody>();
         playerInputActions = new PlayerInputActions();
         
-        currentStats = bodyStats;
         HPManager ??= gameObject.AddComponent<HPManager>();
         SGManager ??= gameObject.AddComponent<SGManager>();
 
-        HPManager.Stats = currentStats;
-        SGManager.stats = bodyStats; // we want to keep using the body spirit gauge, since it's always shared, no matter the form
 
         formManager = playerClass.ToLower() switch
         {
@@ -51,6 +50,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
         };
 
         formManager.Init(this);
+
+        HPManager.Stats = currentStats;
+        SGManager.stats = bodyStats; // we want to keep using the body spirit gauge, since it's always shared, no matter the form
 
         movement ??= gameObject.AddComponent<Movement>();
         playerInputActions.Player.Enable();

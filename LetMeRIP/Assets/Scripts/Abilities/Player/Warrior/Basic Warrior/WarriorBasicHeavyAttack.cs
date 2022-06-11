@@ -33,7 +33,7 @@ public class WarriorBasicHeavyAttack : Ability
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
 
-        damage = 15 + characterController.bodyStats.strength * 0.4f;
+        damage = 15 + characterController.currentStats.strength * 0.4f;
     }
 
     /**

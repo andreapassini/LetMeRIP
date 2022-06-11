@@ -6,16 +6,17 @@ using UnityEngine;
 public class HudController : MonoBehaviour
 {
     public static HudController Instance;
-    
+
     private HudStatusController statusController;
-    
+
     [SerializeField] private HudMessageManager messageManager;
-    
+
     [SerializeField] private HudFillingBar spiritHealth;
     [SerializeField] private HudFillingBar bodyHealth;
     [SerializeField] private HudFillingBar spiritGauge;
-    
+
     [SerializeField] private HudRoomTimer roomTimer;
+    [SerializeField] private HudBossHealthBar bossHealth;
 
     private void Awake() => Instance = this;
 
@@ -56,10 +57,18 @@ public class HudController : MonoBehaviour
     public void InitRoomTimer(float time) => roomTimer.Init(time);
     public void HideTimer() => roomTimer.Hide();
 
-    // temporary, to attack the button
-    public void PostMessage(string text) => messageManager.PostMessage(text, 2f); 
-    public void PostMessage(string text, float ttl = 2f) => messageManager.PostMessage(text, ttl); 
-    
+    public void InitBossHealth(EnemyForm enemyForm)
+    {
+        bossHealth.Init(enemyForm.enemyStats.maxHealth);
+        enemyForm.OnEnemyDamaged += form => bossHealth.SetValue(form.enemyStats.health);
+    }
+
+    public void HideBossHealth() => bossHealth.Hide();
+
+    // temporary, to attach to the button
+    public void PostMessage(string text) => messageManager.PostMessage(text, 2f);
+    public void PostMessage(string text, float ttl = 2f) => messageManager.PostMessage(text, ttl);
+
     private void InitStatusController(string playerClass)
     {
         statusController = playerClass switch
@@ -94,7 +103,7 @@ public class HudController : MonoBehaviour
         var abilities = new Dictionary<HudEAbility, Ability>();
         foreach (var entry in formAbilities) abilities[EnumUtils.FromString<HudEAbility>(entry.Key)] = entry.Value;
         abilities[HudEAbility.Dash] = sharedAbilities["Dash"];
-        
+
         Debug.Log(String.Join(", ", abilities.Select(res => "Key " + res.Key + ": VAL = " + res.Value)));
 
         return (newHudEForm, abilities);

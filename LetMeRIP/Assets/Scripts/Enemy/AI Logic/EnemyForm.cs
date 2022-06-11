@@ -26,7 +26,7 @@ public class EnemyForm : MonoBehaviourPun
     public int ViewID { get => photonView.ViewID; }
 
     public static event Action<EnemyForm> OnEnemyKilled;
-    public static event Action<EnemyForm> OnEnemyDamaged;
+    public event Action<EnemyForm> OnEnemyDamaged;
     public static event Action<EnemyForm> OnEnemyAttack;
 
     public EnemyStats enemyStatsSrc;
@@ -74,6 +74,9 @@ public class EnemyForm : MonoBehaviourPun
 
     public bool stopAI = false;
 
+
+    private Billboard healthBar;
+    
     void Start()
     {
     }
@@ -93,6 +96,8 @@ public class EnemyForm : MonoBehaviourPun
 
         spPool = transform.Find("SpPool").gameObject;
         spPool.SetActive(false);
+
+        healthBar = this.GetComponentInChildren<Billboard>();
     }
     // This method will cast an event when Attack Anim. Event is cast
     // Cause anim events are only related to the object attached to the animator
@@ -200,6 +205,8 @@ public class EnemyForm : MonoBehaviourPun
         abilites.Add(attackAction.abilityName, attackAction);
         abilites.Add(chaseAction.abilityName, chaseAction);
         abilites.Add(searchAction.abilityName, searchAction);
+        
+        healthBar.Init(this);
     }
 
     public virtual void StopEverythingForAbilityExecution()

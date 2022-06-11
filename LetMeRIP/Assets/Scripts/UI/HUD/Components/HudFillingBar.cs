@@ -7,7 +7,7 @@ public class HudFillingBar : MonoBehaviour
     [SerializeField] private Gradient gradiant;
     [SerializeField] private Image fill;
 
-    public void Start()
+    public void Awake()
     {
         slider = gameObject.GetComponent<Slider>();
         fill = gameObject.transform.Find("Mask").Find("Fill").gameObject.GetComponent<Image>();

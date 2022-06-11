@@ -34,6 +34,8 @@ public class HudController : MonoBehaviour
 
             hpManager.OnPlayerDamaged += manager => spiritHealth.SetValue(manager.Health);
             hpManager.OnPlayerHealed += manager => spiritHealth.SetValue(manager.Health);
+            sgManager.OnSPGained += manager => spiritGauge.SetValue(manager.SpiritGauge);
+            sgManager.OnSPConsumed += manager => spiritGauge.SetValue(manager.SpiritGauge);
             return;
         }
 
@@ -48,7 +50,6 @@ public class HudController : MonoBehaviour
         formManager.OnFormChanged += ChangeForm;
         hpManager.OnPlayerDamaged += manager => bodyHealth.SetValue(manager.Health);
         hpManager.OnPlayerHealed += manager => bodyHealth.SetValue(manager.Health);
-        sgManager.OnSPGained += manager => spiritGauge.SetValue(manager.SpiritGauge);
         sgManager.OnSPConsumed += manager => spiritGauge.SetValue(manager.SpiritGauge);
     }
 

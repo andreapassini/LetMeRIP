@@ -1,90 +1,50 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Photon.Realtime;
 using UnityEngine;
 
 public class HudController : MonoBehaviour
 {
     public static HudController Instance;
+    private HudStatusController statusController;
 
     [SerializeField] private HudFillingBar spiritHealth;
     [SerializeField] private HudFillingBar bodyHealth;
     [SerializeField] private HudFillingBar spiritGauge;
 
-    private GameObject currentAbilities;
-    [SerializeField] protected GameObject baseAbilities;
-    [SerializeField] protected GameObject transform1Abilities;
-    [SerializeField] protected GameObject transform2Abilities;
+    private void Awake() => Instance = this;
 
-    private HudStatusController statusController;
-
-    private bool firstFormChange = true;
-
-    private void Awake()
+    public void Init(string playerClass, PlayerController pc)
     {
-        Instance = this;
-    }
+        var formManager = pc.formManager;
+        var hpManager = pc.HPManager;
+        var sgManager = pc.SGManager;
 
-    
-    // private IEnumerator Wait(string playerClass, FormManager formManager)
-    // {
-    //     // some vfx to cover this late init
-    //     yield return new WaitForSeconds(5f);
-    //     LInit( playerClass, formManager);
-    // }
-    //
-    //
-    // public void Init(string playerClass, FormManager formManager)
-    // {
-    //     StartCoroutine(Wait(playerClass, formManager));
-    //     
-    // }
-    
-    public void Init(string playerClass, FormManager formManager)
-    {
         if (statusController is null) InitStatusController(playerClass);
-        
-        // funziona solo se lo spirit non può essere la prima forma 
-        if (!formManager.IsSpirit)
-        {
-            Debug.Log("Init non spirit");
-            
-            // Debug.LogError("Initializing ...");
 
-            // Debug.Log("ELO");
-            // Debug.Log("form manager " + formManager);
-            
-            (HudEForm initialForm, Dictionary<HudEAbility, Ability> initialAbilities) = PrepareAbilities(formManager);
-            statusController.Init(initialForm, initialAbilities);
-            
-            
-            
-            formManager.OnFormChanged += newFormManager =>
-            {
-                Debug.Log("Form changed");
-                (HudEForm form, Dictionary<HudEAbility, Ability> abilities) = PrepareAbilities(newFormManager);
-
-                // if (firstFormChange)
-                // {
-                //     firstFormChange = false;
-                //     return;
-                //     statusController.Init(form, abilities);
-                //     // Debug.Log("WORKINGGG ");
-                //     firstFormChange = false;a
-                // }
-                // else statusController.changeForm(form, abilities);
-                statusController.changeForm(form, abilities);
-            };
-        }
-        else
+        // Only spirit
+        if (formManager.IsSpirit)
         {
-            // Debug.LogError("Initializing spirit ... ...");
-            
-            (HudEForm form, Dictionary<HudEAbility, Ability> abilities) = PrepareAbilities(formManager);
-            statusController.changeForm(form, abilities);
+            ChangeForm(formManager);
+
+            hpManager.OnPlayerDamaged += manager => spiritHealth.SetValue(manager.Health);
+            hpManager.OnPlayerHealed += manager => spiritHealth.SetValue(manager.Health);
+            return;
         }
+
+        // Only Body
+        (HudEForm initialForm, Dictionary<HudEAbility, Ability> initialAbilities) = PrepareAbilities(formManager);
+        statusController.Init(initialForm, initialAbilities);
+
+        spiritHealth.SetMaxValue(pc.spiritStats.maxHealth);
+        bodyHealth.SetMaxValue(pc.bodyStats.maxHealth);
+        spiritGauge.SetMaxValue(pc.bodyStats.maxSpiritGauge);
+
+        formManager.OnFormChanged += ChangeForm;
+        hpManager.OnPlayerDamaged += manager => bodyHealth.SetValue(manager.Health);
+        hpManager.OnPlayerHealed += manager => bodyHealth.SetValue(manager.Health);
+        sgManager.OnSPGained += manager => spiritGauge.SetValue(manager.SpiritGauge);
+        sgManager.OnSPConsumed += manager => spiritGauge.SetValue(manager.SpiritGauge);
     }
 
     private void InitStatusController(string playerClass)
@@ -94,21 +54,22 @@ public class HudController : MonoBehaviour
             _ => gameObject.AddComponent<HudWarriorStatusController>()
         };
     }
-    
-    
+
+    private void ChangeForm(FormManager formManager)
+    {
+        (HudEForm form, Dictionary<HudEAbility, Ability> abilities) = PrepareAbilities(formManager);
+        statusController.changeForm(form, abilities);
+    }
 
     private (HudEForm form, Dictionary<HudEAbility, Ability> abilities) PrepareAbilities(FormManager formManager)
     {
-        // Debug.LogError("Initializing form: " +  formManager.currentForm.GetType().Name);
-        
         HudEForm newHudEForm = formManager.currentForm.GetType().Name switch
         {
             "SampleForm1" => HudEForm.Trans1,
             "SampleForm2" => HudEForm.Trans2,
-            "WarriorBasic" => HudEForm.Trans1,
-            "Berserker" => HudEForm.Trans2,
+            "WarriorBasic" => HudEForm.Base,
+            "Berserker" => HudEForm.Trans1,
             "SpiritForm" => HudEForm.Spirit,
-            // ""
             _ => HudEForm.Trans1
         };
 
@@ -121,16 +82,8 @@ public class HudController : MonoBehaviour
         foreach (var entry in formAbilities) abilities[EnumUtils.FromString<HudEAbility>(entry.Key)] = entry.Value;
         foreach (var entry in sharedAbilities) abilities[EnumUtils.FromString<HudEAbility>(entry.Key)] = entry.Value;
 
-        Debug.Log( String.Join(", ", abilities.Select(res => "Key " + res.Key + ": VAL = " + res.Value)));
-        
+        Debug.Log(String.Join(", ", abilities.Select(res => "Key " + res.Key + ": VAL = " + res.Value)));
+
         return (newHudEForm, abilities);
     }
-
-    public void setSpiritMaxHealth(int maxHealth) => spiritHealth.SetMaxValue(maxHealth);
-    public void setBodyMaxHealth(int maxHealth) => bodyHealth.SetMaxValue(maxHealth);
-    public void setMaxSpiritGauge(int maxSpirits) => spiritGauge.SetMaxValue(maxSpirits);
-
-    public void setSpiritHealth(int health) => spiritHealth.SetValue(health);
-    public void setBodyHealth(int health) => spiritHealth.SetValue(health);
-    public void setSpiritGauge(int spirits) => spiritHealth.SetValue(spirits);
 }

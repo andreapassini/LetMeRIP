@@ -58,11 +58,9 @@ public class HudAbility : MonoBehaviour
 
     private void Update()
     {
-        if (coolingDown)
-        {
-            //Reduce fill amount over 30 seconds
-            cooldownIndicatorImage.fillAmount -= 1.0f / cooldown * Time.deltaTime;
-        }
+        if (!coolingDown) return; 
+            
+        cooldownIndicatorImage.fillAmount -= 1.0f / cooldown * Time.deltaTime;
     }
     
     private IEnumerator Cooldown()

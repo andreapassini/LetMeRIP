@@ -14,15 +14,15 @@ public class HudFillingBar : MonoBehaviour
     }
 
 
-    public void SetMaxValue(int health)
+    public void SetMaxValue(float health)
     {
         slider.maxValue = health;
-        slider.value = health; //??
+        slider.value = health;
 
         fill.color = gradiant.Evaluate(1f);
     }
 
-    public void SetValue(int health)
+    public void SetValue(float health)
     {
         slider.value = health;
         fill.color = gradiant.Evaluate(slider.normalizedValue);

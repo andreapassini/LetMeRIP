@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -225,14 +224,7 @@ public class FormManager : MonoBehaviourPun
         characterController.Exit();
         PhotonNetwork.Destroy(gameObject); // exit not needed since i'm destroying this go
     }
-
-    //private IEnumerator LateInit(PlayerController pc)
-    //{
-    //    // some vfx to cover this late init
-    //    yield return new WaitForSeconds(1f);
-    //    //pc.Init();
-    //}
-
+    
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, 3f);

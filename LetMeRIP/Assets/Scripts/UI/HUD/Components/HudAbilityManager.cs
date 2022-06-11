@@ -35,7 +35,6 @@ public class HudAbilityManager : MonoBehaviour
     public void changeAbilities(HudEForm newHudEForm, Dictionary<HudEAbility, Ability> newAbilities)
     {
         foreach (var ability in hudAbilitiesGO.Values)
-            // Destroy(ability.GetComponent<HudAbility>());
             ability.GetComponent<HudAbility>().Destroy();
 
         setAbilities(newHudEForm, newAbilities);

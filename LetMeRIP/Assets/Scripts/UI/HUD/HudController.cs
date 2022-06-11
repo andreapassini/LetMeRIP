@@ -80,8 +80,8 @@ public class HudController : MonoBehaviour
 
         var abilities = new Dictionary<HudEAbility, Ability>();
         foreach (var entry in formAbilities) abilities[EnumUtils.FromString<HudEAbility>(entry.Key)] = entry.Value;
-        foreach (var entry in sharedAbilities) abilities[EnumUtils.FromString<HudEAbility>(entry.Key)] = entry.Value;
-
+        abilities[HudEAbility.Dash] = sharedAbilities["Dash"];
+        
         Debug.Log(String.Join(", ", abilities.Select(res => "Key " + res.Key + ": VAL = " + res.Value)));
 
         return (newHudEForm, abilities);

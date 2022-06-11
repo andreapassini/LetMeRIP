@@ -102,6 +102,8 @@ public class WarriorBasicHeavyAttack : Ability
                 if (info.collider.CompareTag("Obstacle") && (transform.position - info.transform.position).magnitude < 4f)
                 {
                     isDashing = false;
+                    EnableActions();
+
                     CancelAction();
                     yield break;
                 }

@@ -1,4 +1,3 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +8,7 @@ public class HudRoomTimer : MonoBehaviour
     private bool timerIsRunning;
 
     private void Awake() => gameObject.SetActive(false);
+    public void Hide() => gameObject.SetActive(false);
 
 
     void Update()
@@ -22,7 +22,6 @@ public class HudRoomTimer : MonoBehaviour
         }
         else
         {
-            Debug.Log("Time has run out");
             remainingTime = 0;
             timerIsRunning = false;
         }

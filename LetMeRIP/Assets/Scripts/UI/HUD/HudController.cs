@@ -6,12 +6,15 @@ using UnityEngine;
 public class HudController : MonoBehaviour
 {
     public static HudController Instance;
+    
     private HudStatusController statusController;
-
+    
+    [SerializeField] private HudMessageManager messageManager;
+    
     [SerializeField] private HudFillingBar spiritHealth;
     [SerializeField] private HudFillingBar bodyHealth;
     [SerializeField] private HudFillingBar spiritGauge;
-
+    
     [SerializeField] private HudRoomTimer roomTimer;
 
     private void Awake() => Instance = this;
@@ -50,6 +53,11 @@ public class HudController : MonoBehaviour
     }
 
     public void InitRoomTimer(float time) => roomTimer.Init(time);
+    public void HideTimer() => roomTimer.Hide();
+
+    // temporary, to attack the button
+    public void PostMessage(string text) => messageManager.PostMessage(text, 2f); 
+    public void PostMessage(string text, float ttl = 2f) => messageManager.PostMessage(text, ttl); 
     
     private void InitStatusController(string playerClass)
     {

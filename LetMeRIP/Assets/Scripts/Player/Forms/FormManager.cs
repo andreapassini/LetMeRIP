@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class FormManager : MonoBehaviourPun
 {
-    public int ViewID { get => photonView.ViewID; }
+    public int ViewID { get => photonView.ViewID; } 
 
     public event Action<FormManager> OnFormChanged;
 
@@ -36,9 +36,13 @@ public class FormManager : MonoBehaviourPun
 
         // adding shared abilities
         Dash dash = gameObject.AddComponent<Dash>();
+        Interact interact = gameObject.AddComponent<Interact>();
+
         Dictionary<string, Ability> sharedAbilities = new Dictionary<string, Ability>();
-        sharedAbilities[playerInputActions.Player.Dash.name] = dash;
         
+        sharedAbilities[playerInputActions.Player.Dash.name] = dash;
+        sharedAbilities[playerInputActions.Player.Interact.name] = interact;
+
         sharedAbilityHandler = gameObject.AddComponent<AbilityHandler>();
         sharedAbilityHandler.Init(sharedAbilities, characterController);
     }
@@ -48,6 +52,10 @@ public class FormManager : MonoBehaviourPun
         if (!photonView.IsMine) return;
         
         playerInputActions.Player.Spirit.performed += ctx => ToggleSpiritForm();
+
+        playerInputActions.Player.Interact.started += CastSharedAbility;
+        playerInputActions.Player.Interact.performed += CastSharedAbility;
+        playerInputActions.Player.Interact.canceled += CastSharedAbility;
 
         playerInputActions.Player.Dash.started += CastSharedAbility;
         playerInputActions.Player.Dash.performed += CastSharedAbility;
@@ -76,6 +84,10 @@ public class FormManager : MonoBehaviourPun
 
         playerInputActions.Player.Spirit.performed -= ctx => ToggleSpiritForm();
 
+        playerInputActions.Player.Interact.started -= CastSharedAbility;
+        playerInputActions.Player.Interact.performed -= CastSharedAbility;
+        playerInputActions.Player.Interact.canceled -= CastSharedAbility;
+
         playerInputActions.Player.Dash.started -= CastSharedAbility;
         playerInputActions.Player.Dash.performed -= CastSharedAbility;
         playerInputActions.Player.Dash.canceled -= CastSharedAbility;
@@ -102,6 +114,7 @@ public class FormManager : MonoBehaviourPun
         if (!photonView.IsMine) return;
 
         playerInputActions.Player.Enable();
+        playerInputActions.Player.Interact.Enable();
         playerInputActions.Player.LightAttack.Enable();
         playerInputActions.Player.HeavyAttack.Enable();
         playerInputActions.Player.Dash.Enable();
@@ -118,6 +131,7 @@ public class FormManager : MonoBehaviourPun
         if (!photonView.IsMine) return;
 
         playerInputActions.Player.Disable();
+        playerInputActions.Player.Interact.Disable();
         playerInputActions.Player.LightAttack.Disable();
         playerInputActions.Player.HeavyAttack.Disable();
         playerInputActions.Player.Dash.Disable();

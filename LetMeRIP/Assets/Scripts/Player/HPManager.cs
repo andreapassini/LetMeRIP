@@ -22,7 +22,10 @@ public class HPManager : MonoBehaviour
     private PlayerController characterController;
 
     private float health { get => stats.health; set => stats.health = value; }
+    private float maxHealth { get => stats.maxHealth; set => stats.maxHealth = value; }
     public float Health { get => stats.health; }
+    public float MaxHealth { get => stats.maxHealth; }
+
 
     void Start()
     {
@@ -49,7 +52,16 @@ public class HPManager : MonoBehaviour
     public void Heal(float amount, bool overHeal = false)
     {
         if(amount > 0)
-            health = (overHeal || health + amount > stats.maxHealth) ? health + amount : stats.maxHealth;
+        {
+            if (overHeal)
+            {
+                health += amount;
+                stats.maxHealth += amount;
+            } else
+            {
+                health = Mathf.Clamp(health + amount, 0, stats.maxHealth);
+            }
+        }
         OnPlayerHealed?.Invoke(this);
     }
 
@@ -68,6 +80,7 @@ public class HPManager : MonoBehaviour
         while(timeToDecay > 0)
         {
             health-=healthLossPerTick;
+            OnPlayerDamaged?.Invoke(this);
             if (health <= 0) yield break; // prevents Die() to be called multiple times
             yield return new WaitForSeconds(timeStep);
             timeToDecay -= timeStep;

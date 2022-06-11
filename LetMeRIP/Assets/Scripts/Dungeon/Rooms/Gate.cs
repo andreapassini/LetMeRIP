@@ -11,9 +11,11 @@ public class Gate : MonoBehaviour
     public Gate connection;
     public Transform spawnPoint = null;
 
-    public bool IsOpen { get => isOpen; }
+    public bool IsOpen { get => isOpen && !isBlocked; }
     private bool isOpen = true;
     private Dungeon dungeon;
+    
+    [SerializeField] public bool isBlocked = false; // a second lock factor that requires another interactio un unlock (eg. a lever)
 
     private void Awake()
     {
@@ -28,7 +30,7 @@ public class Gate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && isOpen)
+        if (other.CompareTag("Player") && isOpen && !isBlocked)
             dungeon.Switch(this, other.GetComponent<PlayerController>().photonView.ViewID);
     }
 

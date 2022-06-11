@@ -9,7 +9,7 @@ public class Dash : Ability
     private Animator animator;
     private Rigidbody rb;
     
-    private readonly float time = 0.2f;
+    private readonly float time = 0.35f;
     private float currentTime;
     private float speed = 12f;
     private Vector3 direction;
@@ -28,7 +28,6 @@ public class Dash : Ability
         base.Init(characterController);
         animator = GetComponentInChildren<Animator>(false);
         attackPoint = transform.Find("AttackPoint");
-
     }
 
     /**
@@ -40,7 +39,7 @@ public class Dash : Ability
         Debug.Log("Dash starting");
         isReady = false;
 
-        direction = direction = attackPoint.forward;
+        direction = playerInputActions.Player.Movement.ReadValue<Vector3>().ToIso();
 
         // you can't move while dashing
         if (!direction.Equals(Vector3.zero)) // prevents unresponsive movement if the player tries to dash when standing and moving right after
@@ -96,6 +95,7 @@ public class Dash : Ability
                 if (info.collider.CompareTag("Obstacle") && (transform.position - info.transform.position).magnitude < 4f)
                 {
                     isDashing = false;
+                    EnableActions();
                     CancelAction();
                     yield break;
                 }

@@ -197,8 +197,6 @@ public class FormManager : MonoBehaviourPun
         DisableAbilities();
         
         characterController.Exit();
-        StartCoroutine(LateInit(spiritController));
-        //spiritController.Init();
     }
 
     private void EnterBody()
@@ -221,17 +219,19 @@ public class FormManager : MonoBehaviourPun
         if (myBody == null) return; // body not found, abort
 
         myBody.Init();
+        myBody.formManager.OnFormChanged?.Invoke(myBody.formManager);
+        
         currentForm.RemoveComponents();
         characterController.Exit();
         PhotonNetwork.Destroy(gameObject); // exit not needed since i'm destroying this go
     }
 
-    private IEnumerator LateInit(PlayerController pc)
-    {
-        // some vfx to cover this late init
-        yield return new WaitForSeconds(1f);
-        pc.Init();
-    }
+    //private IEnumerator LateInit(PlayerController pc)
+    //{
+    //    // some vfx to cover this late init
+    //    yield return new WaitForSeconds(1f);
+    //    //pc.Init();
+    //}
 
     private void OnDrawGizmos()
     {

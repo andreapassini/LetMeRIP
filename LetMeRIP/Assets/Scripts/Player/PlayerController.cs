@@ -96,6 +96,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-
+        Init();
     }
 }

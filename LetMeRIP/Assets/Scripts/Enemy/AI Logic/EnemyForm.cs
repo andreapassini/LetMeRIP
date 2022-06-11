@@ -110,9 +110,7 @@ public class EnemyForm : MonoBehaviourPun
     {
         if(!PhotonNetwork.IsMasterClient) return;
 
-        photonView.RPC("RpcTakeDamage",
-            RpcTarget.All,
-            dmg);
+        photonView.RPC("RpcTakeDamage", RpcTarget.All, dmg);
     }
 
     public virtual void Die()

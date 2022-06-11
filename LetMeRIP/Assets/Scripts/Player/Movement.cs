@@ -12,22 +12,26 @@ public class Movement : MonoBehaviourPun
     public PlayerInputActions playerInputActions;
     private Animator animator;
     private PlayerController characterController;
-    private LookAtMouse lam;
+    FormManager formManager;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>(false);
-        characterController = gameObject.GetComponent<PlayerController>();
-        lam = GetComponent<LookAtMouse>();    
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
-        
-        characterController.formManager.OnFormChanged += RefreshAnimator;
+        characterController = gameObject.GetComponent<PlayerController>();
     }
+
+    public void Init()
+    {
+        formManager = GetComponent<FormManager>();
+        formManager.OnFormChanged += RefreshAnimator;
+    }
+
     private void OnDestroy()
     {
-        characterController.formManager.OnFormChanged -= RefreshAnimator;
+        formManager.OnFormChanged -= RefreshAnimator;
     }
 
     private void Update()
@@ -46,16 +50,6 @@ public class Movement : MonoBehaviourPun
     public void GatherInputs()
     {
         direction = playerInputActions.Player.Movement.ReadValue<Vector3>();
-        //Vector3 walkingDirection = playerInputActions.Player.Movement.ReadValue<Vector3>();
-        //Debug.Log($"Walking direction {walkingDirection}");
-        //Vector3 lookDirection = lam.GatherDirectionInput();
-        //Debug.Log($"look direction {lookDirection}");
-        //float rotationAngle = Mathf.Acos(Vector3.Dot(walkingDirection, lookDirection));
-        //Debug.Log($"rotation angle {rotationAngle}");
-        //Vector3 animationDirection = RotateVector(walkingDirection, rotationAngle);
-        //Debug.Log($"final direction {animationDirection}");
-        //animator.SetFloat("VelocityZ", animationDirection.z);
-        //animator.SetFloat("VelocityX", animationDirection.x);
 
         if (animator != null)
         {
@@ -90,6 +84,7 @@ public class Movement : MonoBehaviourPun
 
     private void RefreshAnimator(FormManager fm)
     {
+        Debug.Log("Refreshing animator");
         animator = GetComponentInChildren<Animator>(false);
     }
 }

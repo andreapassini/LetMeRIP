@@ -55,15 +55,20 @@ public class BerserkerHeavyAttack : Ability
 
     private IEnumerator Charge()
     {
-        DisableActions();
-        yield return new WaitForSeconds(timeToCharge);
-        isCharged = true;
+        if(!gameObject.TryGetComponent<RagePE>(out RagePE rage))
+        {
+            DisableActions();
+            yield return new WaitForSeconds(timeToCharge);
+        }
         EnableActions();
+
+        isCharged = true;
         CancelAction();
     }
 
     private void Hit() 
     {
+        Utilities.SpawnHitSphere(attackRange, transform.position, 3f);
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange);
         foreach (Collider enemyHit in hitEnemies)
         {

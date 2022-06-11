@@ -66,7 +66,6 @@ public class Boss : EnemyForm
         base.Awake();
     }
 
-
     void Start()
     {
         Init(); 

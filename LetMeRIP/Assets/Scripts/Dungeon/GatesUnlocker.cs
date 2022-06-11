@@ -23,7 +23,7 @@ public class GatesUnlocker : Interactable
             animator.SetBool("isLeverPulled", true);
             foreach(Gate gate in gates)
             {
-                gate.isBlocked = false;
+                gate.Unblock();
                 Debug.Log($"Gate {gate.name} unlocked!");
             }
         } else

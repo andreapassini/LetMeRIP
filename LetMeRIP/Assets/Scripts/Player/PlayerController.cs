@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
         lam ??= GetComponent<LookAtMouse>();
         lam.enabled = true;
         movement.enabled = true;
+
         if (formManager != null)
         {
             formManager.BindAbilities();

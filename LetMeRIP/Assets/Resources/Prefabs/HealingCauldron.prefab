@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 625786743331049791}
   - component: {fileID: 625786743329715409}
   - component: {fileID: 625786743328656911}
+  - component: {fileID: 8877176492355141409}
   m_Layer: 0
   m_Name: HealingCauldron
   m_TagString: Untagged
@@ -82,6 +83,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8877176492355141409
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625786743330856995}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8969451, y: 0.56, z: 1.0570629}
+  m_Center: {x: 0, y: 0.39768288, z: 0}
 --- !u!1001 &6229515371819196988
 PrefabInstance:
   m_ObjectHideFlags: 0

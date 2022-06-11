@@ -33,11 +33,18 @@ public class AbilityHandler : MonoBehaviour
     {
         if (abilities.ContainsKey(key) && abilities[key].IsReady && IsReady)
         {
+            if(characterController.SGManager.SpiritGauge < abilities[key].SPCost)
+            {
+                Debug.Log("Not enough SPs");
+                return;
+            }
+
+            characterController.SGManager.ConsumeSP(abilities[key].SPCost);
             abilities[key].StartedAction();
             current = key;
             isReady = false;
 
-            Debug.Log("Started " + current);
+            //Debug.Log("Started " + current);
         } else
         {
             //Debug.Log($"{current ?? "what the fuck"} is getting cast");
@@ -49,7 +56,7 @@ public class AbilityHandler : MonoBehaviour
         if(current != null && key.Equals(current))
         {
             abilities[key].PerformedAction();
-            Debug.Log("Performed " + current);
+            //Debug.Log("Performed " + current);
         }
     }
 
@@ -61,7 +68,7 @@ public class AbilityHandler : MonoBehaviour
             current = null;
             StartCoroutine(Cooldown());
 
-            Debug.Log("Finished " + current);
+            //Debug.Log("Finished " + current);
         }
     }
 

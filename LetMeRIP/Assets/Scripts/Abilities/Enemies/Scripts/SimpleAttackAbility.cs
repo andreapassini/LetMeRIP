@@ -6,7 +6,17 @@ using UnityEngine.AI;
 [CreateAssetMenu(menuName = "EnemyAbilities/SimpleAttack")]
 public class SimpleAttackAbility : EnemyAbility
 {
-	public override void CancelAbility()
+    private void OnEnable()
+    {
+        EnemyForm.OnEnemyAttack += PerformAbility;
+    }
+
+    private void OnDisable()
+    {
+        EnemyForm.OnEnemyAttack -= PerformAbility;
+    }
+
+    public override void CancelAbility()
 	{
 		throw new System.NotImplementedException();
 	}
@@ -14,19 +24,17 @@ public class SimpleAttackAbility : EnemyAbility
 	public override void PerformAbility(EnemyForm enemy)
 	{
         // Create Collider
-        Collider[] hitEnemies = Physics.OverlapSphere(enemy.attackPoint.position, enemy.attackRange, enemy.whatIsTarget);
+        Collider[] hitEnemies = Physics.OverlapSphere(enemy.attackPoint.position, enemy.attackRange);
 
         // Check for collision
         foreach (Collider e in hitEnemies) {
-            Debug.Log("Hit this guy: " + e.name);
+            if (e.CompareTag("Player")) {
 
-            // HPManager
-            // Anche eventi
+                HPManager hpManager = e.transform.GetComponent<HPManager>();
 
-            HPManager hpManager = e.transform.GetComponent<HPManager>();
-
-            if (hpManager != null) {
-                hpManager.TakeDamage(damage, enemy.transform.position);
+                if (hpManager != null) {
+                    hpManager.TakeDamage(damage + enemy.enemyStats.attack, enemy.transform.position);
+                }
             }
         }
     }

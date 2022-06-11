@@ -12,9 +12,11 @@ public class HudController : MonoBehaviour
     [SerializeField] private HudFillingBar bodyHealth;
     [SerializeField] private HudFillingBar spiritGauge;
 
+    [SerializeField] private HudRoomTimer roomTimer;
+
     private void Awake() => Instance = this;
 
-    public void Init(string playerClass, PlayerController pc)
+    public void InitPlayerInfoBar(string playerClass, PlayerController pc)
     {
         var formManager = pc.formManager;
         var hpManager = pc.HPManager;
@@ -47,6 +49,8 @@ public class HudController : MonoBehaviour
         sgManager.OnSPConsumed += manager => spiritGauge.SetValue(manager.SpiritGauge);
     }
 
+    public void InitRoomTimer(float time) => roomTimer.Init(time);
+    
     private void InitStatusController(string playerClass)
     {
         statusController = playerClass switch

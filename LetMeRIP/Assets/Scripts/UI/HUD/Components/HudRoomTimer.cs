@@ -8,12 +8,9 @@ public class HudRoomTimer : MonoBehaviour
     private float remainingTime;
     private bool timerIsRunning;
 
-    private void Awake()
-    {
-        gameObject.SetActive(false);
-        // Init(20);
-    }
-    
+    private void Awake() => gameObject.SetActive(false);
+
+
     void Update()
     {
         if (!timerIsRunning) return;
@@ -34,7 +31,7 @@ public class HudRoomTimer : MonoBehaviour
     public void Init(float totalTime)
     {
         gameObject.SetActive(true);
-        
+
         this.remainingTime = totalTime;
         timerIsRunning = true;
     }

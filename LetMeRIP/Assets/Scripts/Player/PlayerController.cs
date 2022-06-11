@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
         playerInputActions.Player.Movement.Enable();
 
         // hud subscription
-        HudController.Instance.Init(playerClass.ToLower(), this);
+        HudController.Instance.InitPlayerInfoBar(playerClass.ToLower(), this);
     }
 
     public void Init() 

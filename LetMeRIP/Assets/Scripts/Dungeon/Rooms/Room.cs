@@ -75,7 +75,7 @@ public class Room : MonoBehaviour
     protected virtual void Init() 
     {
         if (!PhotonNetwork.IsMasterClient) return; // it just means that this gets executed just once, and it'll be from the master
-        //Debug.Log($"room {photonView.ViewID} Init");
+        //Debug.Log($"room {photonView.ViewID} InitPlayerInfoBar");
 
         timeSpent = 0f;
         timerCoroutine = Timer();

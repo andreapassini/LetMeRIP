@@ -49,6 +49,8 @@ public class HudController : MonoBehaviour
         // funziona solo se lo spirit non può essere la prima forma 
         if (!formManager.IsSpirit)
         {
+            Debug.Log("Init non spirit");
+            
             // Debug.LogError("Initializing ...");
 
             // Debug.Log("ELO");
@@ -61,6 +63,7 @@ public class HudController : MonoBehaviour
             
             formManager.OnFormChanged += newFormManager =>
             {
+                Debug.Log("Form changed");
                 (HudEForm form, Dictionary<HudEAbility, Ability> abilities) = PrepareAbilities(newFormManager);
 
                 // if (firstFormChange)

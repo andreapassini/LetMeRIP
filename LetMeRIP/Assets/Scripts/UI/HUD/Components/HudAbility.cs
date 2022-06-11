@@ -8,6 +8,10 @@ public class HudAbility : MonoBehaviour
     private Image cooldownIndicatorImage;
     private float cooldown;
     private bool coolingDown;
+    private Ability ability;
+    
+    
+    public int id;
 
     private void Awake()
     {
@@ -19,12 +23,27 @@ public class HudAbility : MonoBehaviour
 
     public void Init(Sprite abilityIcon, Ability ability)
     {
+        id = GetInstanceID();
+        this.ability = ability;
+        
+        Debug.LogError($"ID:{this.GetInstanceID()} Reinitializing ability: {ability}");
         iconImage.sprite = abilityIcon;
         ability.OnCooldownStart += StartCooldown;
     }
 
+    public void Destroy()
+    {
+        ability.OnCooldownStart -= StartCooldown;
+        Destroy(this);
+    }
+
     private void StartCooldown(float cooldown)
     {
+        Debug.LogError($"ID:{this.GetInstanceID()} Starting Cooldown");
+        Debug.LogError(
+            $"cooldown {this.cooldown}, fillAmount {cooldownIndicatorImage.fillAmount}, coolingdown {this.coolingDown}");
+        
+        
         this.cooldown = cooldown;
 
         cooldownIndicatorImage.fillAmount = 1;
@@ -49,6 +68,8 @@ public class HudAbility : MonoBehaviour
     private IEnumerator Cooldown()
     {
         yield return new WaitForSeconds(cooldown);
+        Debug.LogError("CIAO DAL COOL");
+        
         EndCooldown();
     }
 }

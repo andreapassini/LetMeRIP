@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
     // Name of the game object to follow with the camera
     [SerializeField] private Transform followPoint;
     
-    private Billboard healthBar;
+    private PlayerBillboard healthBar;
 
 
     public int ViewID { get => photonView.ViewID; }
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
         playerInputActions.Player.Movement.Enable();
 
         // hud subscription
-        healthBar = this.GetComponentInChildren<Billboard>();
+        healthBar = this.GetComponentInChildren<PlayerBillboard>();
         healthBar.Init(this);
 
         HudController.Instance.InitPlayerInfoBar(playerClass.ToLower(), this);

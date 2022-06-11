@@ -75,7 +75,7 @@ public class EnemyForm : MonoBehaviourPun
     public bool stopAI = false;
 
 
-    private Billboard healthBar;
+    private EnemyBillboard healthBar;
     
     void Start()
     {
@@ -97,7 +97,7 @@ public class EnemyForm : MonoBehaviourPun
         spPool = transform.Find("SpPool").gameObject;
         spPool.SetActive(false);
 
-        healthBar = this.GetComponentInChildren<Billboard>();
+        healthBar = this.GetComponentInChildren<EnemyBillboard>();
     }
     // This method will cast an event when Attack Anim. Event is cast
     // Cause anim events are only related to the object attached to the animator

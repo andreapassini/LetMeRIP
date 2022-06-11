@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 258323429617181332}
   - component: {fileID: 8348656836520930519}
   - component: {fileID: 8658193010378770045}
-  - component: {fileID: 6785393214570443822}
+  - component: {fileID: 2200371846951161736}
   m_Layer: 5
   m_Name: BillboardEnemy
   m_TagString: Untagged
@@ -366,7 +366,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &8658193010378770045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,7 +384,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6785393214570443822
+--- !u!114 &2200371846951161736
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -393,7 +393,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7816457529217321129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68844c35a705388408d7e764cae1494c, type: 3}
+  m_Script: {fileID: 11500000, guid: 17c51a5e4e3548009dae00b464dd9a70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8753765504395673085

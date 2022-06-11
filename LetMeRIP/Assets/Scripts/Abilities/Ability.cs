@@ -21,7 +21,6 @@ public class Ability : MonoBehaviourPun
     {
         playerInputActions = new PlayerInputActions();
         this.characterController = characterController;
-        if (cooldown <= 0.3f) Debug.Log($"{this.GetType().Name} DOES NOT YET HAVE A COOLDOWN");
     }
 
     // setup, performed before Perform action, on button down

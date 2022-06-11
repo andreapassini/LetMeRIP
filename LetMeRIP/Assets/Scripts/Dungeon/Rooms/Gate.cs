@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // a connection between rooms, its parent must have the Room component
-public class Gate : MonoBehaviour
+public class Gate : MonoBehaviourPun
 {
-    public PhotonView photonView;
     [HideInInspector] public Room room;
+    private Animator animator;
     public Gate connection;
     public Transform spawnPoint = null;
 
@@ -22,11 +22,35 @@ public class Gate : MonoBehaviour
         spawnPoint = transform.Find("spawnPoint"); // default spawn point
         dungeon = FindObjectOfType<Dungeon>();
         room = gameObject.GetComponentInParent<Room>();
-        photonView = GetComponent<PhotonView>();
+        animator = GetComponentInChildren<Animator>();
+
     }
 
-    public void Open() => isOpen = true;
-    public void Close() => isOpen = false;
+    private void Start()
+    {
+        Debug.Log($"{name}: is open: {isOpen} && !is blocked: {isBlocked} => {IsOpen}");
+        animator.SetBool("isOpen", IsOpen);
+    }
+
+    public void Open()
+    {
+        isOpen = true;
+        Debug.Log($"{name}: is open: {isOpen} && !is blocked: {isBlocked} => {IsOpen}");
+        animator.SetBool("isOpen", IsOpen);
+    }
+    public void Close()
+    {
+        isOpen = false;
+        Debug.Log($"{name}: is open: {isOpen} && !is blocked: {isBlocked} => {IsOpen}");
+        animator.SetBool("isOpen", IsOpen);
+    }
+
+    public void Unblock()
+    {
+        isBlocked = false;
+        Debug.Log($"{name}: is open: {isOpen} && !is blocked: {isBlocked} => {IsOpen}");
+        animator.SetBool("isOpen", IsOpen);
+    }
 
     private void OnTriggerEnter(Collider other)
     {

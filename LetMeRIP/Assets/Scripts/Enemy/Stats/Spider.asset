@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5de65ca5d542634b818945fdc2bc284, type: 3}
   m_Name: Spider
   m_EditorClassIdentifier: 
-  name: spider
+  enemyName: 
   health: 150
   maxHealth: 150
-  attack: 10
+  attack: 100
   defense: 1
   swiftness: 20
+  rewardSp: 0

@@ -123,7 +123,6 @@ public class FormManager : MonoBehaviourPun
         playerInputActions.Player.Spirit.Enable();
         playerInputActions.Player.Ability1.Enable();
         playerInputActions.Player.Ability2.Enable();
-        Debug.Log("abilities enabled");
     }
 
     public virtual void DisableAbilities()
@@ -140,7 +139,6 @@ public class FormManager : MonoBehaviourPun
         playerInputActions.Player.Spirit.Disable();
         playerInputActions.Player.Ability1.Disable();
         playerInputActions.Player.Ability2.Disable();
-        Debug.Log("abilities disabled");
     }
 
     public void SwitchForm(int index, bool enableAbilities = true)

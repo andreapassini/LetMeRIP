@@ -34,7 +34,7 @@ public class HPManager : MonoBehaviour
 
     public void TakeDamage(float dmg, Vector3 positionHit)
     {
-        //Debug.Log("Got HIT");
+        Debug.Log("Got HIT");
 
         // Calculate defense reduction
         if (dmg > 0) 

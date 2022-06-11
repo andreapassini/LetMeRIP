@@ -74,6 +74,10 @@ public class EnemyForm : MonoBehaviourPun
 
     public bool stopAI = false;
 
+    void Start()
+    {
+    }
+
     GameObject spPool;
 
     protected virtual void Awake()
@@ -140,14 +144,11 @@ public class EnemyForm : MonoBehaviourPun
             //AiFrameRate = ability.abilityDurtation;
             stopAI = true;
             animator.SetFloat("speed", 0);
-            Debug.Log(ability.abilityName + " stop " + ability.abilityDurtation);
             //StopEverythingForAbilityExecution();
 
             yield return new WaitForSeconds(ability.abilityDurtation);
 
             stopAI = false;
-            Debug.Log(ability.abilityName + " restart");
-            //RestartAI();
             //AiFrameRate = reactionReference;
         }
     }

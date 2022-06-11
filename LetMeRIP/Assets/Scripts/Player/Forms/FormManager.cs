@@ -45,6 +45,8 @@ public class FormManager : MonoBehaviourPun
 
         sharedAbilityHandler = gameObject.AddComponent<AbilityHandler>();
         sharedAbilityHandler.Init(sharedAbilities, characterController);
+        characterController.movement.Init();
+
     }
 
     public virtual void BindAbilities()

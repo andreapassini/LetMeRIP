@@ -21,6 +21,8 @@ public class mageBasicLightAttack : Ability
     [SerializeField]
     private float bulletForce = 15f;
 
+    private PlayerController p;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +30,17 @@ public class mageBasicLightAttack : Ability
         rb = GetComponent<Rigidbody>();
     }
 
-    public override void Init(PlayerController characterController)
+	private void OnEnable()
+	{
+        MageBasic.lightAttack += Cast;
+	}
+
+	private void OnDisable()
+	{
+        MageBasic.lightAttack -= Cast;
+    }
+
+	public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
         attackPoint = transform.Find("AttackPoint");
@@ -38,6 +50,8 @@ public class mageBasicLightAttack : Ability
 
         // Get the prefab
         bulletPrefab = Resources.Load("Prebas/Bullet") as GameObject;
+
+        p = characterController;
     }
 
     /**
@@ -59,16 +73,38 @@ public class mageBasicLightAttack : Ability
      */
     public override void PerformedAction()
     {
-        Debug.Log("Casting");
-        // Fire Bullet
-        GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
+        
+    }
 
-        bulletFired.GetComponent<Bullet>().damage = damage;
-        bulletFired.layer = gameObject.layer;
-        Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
-        rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
+    public void Cast(MageBasic m)
+	{
+        if(this == m) {
+            Debug.Log("Casting");
+            // Fire Bullet
+            GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
 
-        CancelAction();
+            bulletFired.GetComponent<Bullet>().damage = damage;
+            bulletFired.layer = gameObject.layer;
+            Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
+            rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
+
+            CancelAction();
+        }
+
+        //Maybe not working, try this
+        //if(p.GetComponent<MageBasic>() == m) {
+        //    Debug.Log("Casting");
+        //    // Fire Bullet
+        //    GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
+
+        //    bulletFired.GetComponent<Bullet>().damage = damage;
+        //    bulletFired.layer = gameObject.layer;
+        //    Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
+        //    rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
+
+        //    CancelAction();
+        //}
+        
     }
 
     /**

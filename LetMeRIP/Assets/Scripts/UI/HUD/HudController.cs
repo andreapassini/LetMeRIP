@@ -12,7 +12,7 @@ public class HudController : MonoBehaviour
     [SerializeField] private HudMessageManager messageManager;
 
     [SerializeField] private HudFillingBar spiritHealth;
-    [SerializeField] private HudFillingBar bodyHealth;
+    [SerializeField] private HudOverfillingBarController bodyHealth;
     [SerializeField] private HudFillingBar spiritGauge;
 
     [SerializeField] private HudRoomTimer roomTimer;

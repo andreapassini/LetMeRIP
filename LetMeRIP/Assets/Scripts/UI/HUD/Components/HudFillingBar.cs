@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class HudFillingBar : MonoBehaviour
 {
-    [SerializeField] protected Slider slider;
-    [SerializeField] protected Image fill;
-    [SerializeField] private Gradient gradient;
+    public Slider slider;
+    public Image fill;
+    public Gradient gradient;
 
     protected virtual void Awake()
     {
@@ -13,17 +13,25 @@ public class HudFillingBar : MonoBehaviour
         fill = gameObject.transform.Find("Mask").Find("Fill").gameObject.GetComponent<Image>();
     }
 
+    // public void Init(Slider slider, Image fill, Gradient gradient)
+    // {
+    //     this.slider = slider;
+    //     this.fill = fill;
+    //     this.gradient = gradient;
+    // }
+
+
     public void Init(float maxHealth, float initialHealth)
     {
         SetMaxValue(maxHealth);
         SetValue(initialHealth);
     }
-    
-    
+
+
     public void SetMaxValue(float health, bool setToMax = false)
     {
         slider.maxValue = health;
-        if(setToMax) slider.value = health;
+        if (setToMax) slider.value = health;
 
         fill.color = gradient.Evaluate(1f);
     }

@@ -32,6 +32,16 @@ public class mageBasicAbility1 : Ability
         rb = GetComponent<Rigidbody>();
     }
 
+    private void OnEnable()
+    {
+        MageBasic.ability1 += CastBeam;
+    }
+
+    private void OnDisable()
+    {
+        MageBasic.ability2 -= CastBeam;
+    }
+
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
@@ -59,6 +69,10 @@ public class mageBasicAbility1 : Ability
 
         // charge casting animation
         animator.SetTrigger("Ability1Charge");
+
+        Debug.Log("Casting");
+
+        DisableActions();
     }
 
     /**
@@ -66,9 +80,7 @@ public class mageBasicAbility1 : Ability
      */
     public override void PerformedAction()
     {
-        Debug.Log("Casting");
-
-        DisableActions();
+        
     }
 
     /**
@@ -77,7 +89,7 @@ public class mageBasicAbility1 : Ability
     public override void CancelAction()
     {
         // Shoot
-        CastBeam(Time.time - startTime);
+        
 
         EnableActions();
         isCasting = false;
@@ -85,34 +97,41 @@ public class mageBasicAbility1 : Ability
         StartCoroutine(Cooldown());
     }
 
-    private void CastBeam(float difTime)
+    private void CastBeam(MageBasic mage)
     {
-        // Trigger Casting animation
-        animator.SetTrigger("Ability1Cast");
+        if(this == mage) {
+            float difTime = Time.time - startTime;
 
-        // Damage
-        float damage = Mathf.Clamp(minDamage + difTime, minDamage, maxDamage);
-        
-        float angle = 0f;
-        float angleWork;
+            // Trigger Casting animation
+            animator.SetTrigger("Ability1Cast");
 
-        for (int i = 0; i < 11; i++) {
-            // Calcolate angle
-            angle += i * 2;
-            angleWork = angle;
+            // Damage
+            float damage = Mathf.Clamp(minDamage + difTime, minDamage, maxDamage);
 
-            if (i % 2 < 1) {
-                angleWork = angleWork * -1;
+            float angle = 0f;
+            float angleWork;
+
+            for (int i = 0; i < 11; i++) {
+                // Calcolate angle
+                angle += i * 2;
+                angleWork = angle;
+
+                if (i % 2 < 1) {
+                    angleWork = angleWork * -1;
+                }
+
+                // Instantiate spheres
+                GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation * Quaternion.Euler(0, angleWork, 0));
+
+                bulletFired.GetComponent<BulletTrapassing>().damage = damage;
+                bulletFired.layer = gameObject.layer;
+                Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
+                rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
             }
 
-            // Instantiate spheres
-            GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation * Quaternion.Euler(0, angleWork, 0));
-
-            bulletFired.GetComponent<BulletTrapassing>().damage = damage;
-            bulletFired.layer = gameObject.layer;
-            Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
-            rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
+            CancelAction();
         }
+        
 
     }
 }

@@ -24,7 +24,6 @@ public class mageBasicAbility2 : Ability
     void Start()
     {
         cooldown = 7f;
-        castTime = 4f;
         SPCost = 15f;
         rb = GetComponent<Rigidbody>();
     }
@@ -47,6 +46,8 @@ public class mageBasicAbility2 : Ability
 
         // charge casting animation
         animator.SetTrigger("Ability2");
+
+        
     }
 
     /**
@@ -56,14 +57,14 @@ public class mageBasicAbility2 : Ability
     {
         Debug.Log("Casting");
 
-        // Consume SG
+        DisableActions();
 
         // Summon Healing Pool
+        SummonHealingPool();
 
         // Start Casting 
         StartCoroutine(CastingTime());
-
-        DisableActions();
+        
     }
 
     /**
@@ -93,5 +94,6 @@ public class mageBasicAbility2 : Ability
 
         GameObject healingPool = Instantiate(prefab, v,
             attackPoint.rotation);
+        healingPool.GetComponent<HealingPoolVampire>().Init();
     }
 }

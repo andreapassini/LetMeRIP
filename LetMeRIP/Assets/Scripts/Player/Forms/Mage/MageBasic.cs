@@ -30,4 +30,24 @@ public class MageBasic : PlayerForm
         abilityHandler = gameObject.AddComponent<AbilityHandler>();
         abilityHandler.Init(abilities, characterController);
     }
+
+	public void OnLightAttack()
+	{
+        lightAttack?.Invoke(this);
+	}
+
+    public void OnHeavyAttack()
+    {
+        heavyAttack?.Invoke(this);
+    }
+
+    public void OnAbility1()
+    {
+        ability1?.Invoke(this);
+    }
+
+    public void OnAbility2()
+    {
+        ability2?.Invoke(this);
+    }
 }

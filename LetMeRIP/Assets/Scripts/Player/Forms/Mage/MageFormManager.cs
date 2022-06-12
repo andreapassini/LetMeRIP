@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class MageFormManager : FormManager
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Init(PlayerController characterController)
     {
-        
+        isSpirit = false;
+        base.Init(characterController);
+
+        forms.Add(gameObject.AddComponent<MageBasic>());
+        forms.Add(gameObject.AddComponent<Cleric>());
+        SwitchForm(0);
+
+        BindAbilities();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void BindAbilities()
     {
-        
+        base.BindAbilities();
+
+        if (!photonView.IsMine) return;
+
+        playerInputActions.Player.Transformation1.performed += ctx => SwitchForm(0);
+        playerInputActions.Player.Transformation2.performed += ctx => SwitchForm(1);
     }
 }

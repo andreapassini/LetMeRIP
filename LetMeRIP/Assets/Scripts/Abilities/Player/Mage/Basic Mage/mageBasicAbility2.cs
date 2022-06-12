@@ -60,11 +60,7 @@ public class mageBasicAbility2 : Ability
         DisableActions();
 
         // Summon Healing Pool
-        SummonHealingPool();
-
-        // Start Casting 
-        StartCoroutine(CastingTime());
-        
+        SummonHealingPool();        
     }
 
     /**
@@ -88,12 +84,15 @@ public class mageBasicAbility2 : Ability
     private void SummonHealingPool()
 	{
         // Get the prefab
-        prefab = Resources.Load("Prebas/HealingPoolVampire") as GameObject;
+        prefab = Resources.Load("Prefabs/HealingPoolVampire") as GameObject;
 
         Vector3 v = new Vector3(transform.position.x, 0, transform.position.z);
 
         GameObject healingPool = Instantiate(prefab, v,
             attackPoint.rotation);
         healingPool.GetComponent<HealingPoolVampire>().Init();
+
+
+        CancelAction();
     }
 }

@@ -88,8 +88,7 @@ public class mageBasicLightAttack : Ability
             Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
             rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
 
-            EnableActions();
-            StartCoroutine(Cooldown());
+            
 
             CancelAction();
         }

@@ -271,15 +271,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerClass: mage
   formManager: {fileID: 0}
-  spiritStats: {fileID: 11400000, guid: 914b81d7560a88a408eb0b907232a558, type: 2}
-  bodyStats: {fileID: 11400000, guid: ae4249944e12e734987eb7fd5737ff6e, type: 2}
-  currentStats: {fileID: 0}
+  spiritStatsSrc: {fileID: 11400000, guid: 914b81d7560a88a408eb0b907232a558, type: 2}
+  bodyStatsSrc: {fileID: 11400000, guid: ae4249944e12e734987eb7fd5737ff6e, type: 2}
+  currentStatsSrc: {fileID: 0}
+  stats:
+    formName: 
+    health: 0
+    maxHealth: 0
+    spiritGauge: 0
+    maxSpiritGauge: 0
+    strength: 0
+    dexterity: 0
+    intelligence: 0
+    defense: 0
+    swiftness: 0
+    critDamage: 0
+    critChance: 0
   lam: {fileID: 0}
   movement: {fileID: 0}
   rb: {fileID: 0}
   HPManager: {fileID: 0}
   SGManager: {fileID: 0}
   followPoint: {fileID: 5658009999801955236}
+  playerManager: {fileID: 0}
 --- !u!114 &2789377808705571754
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -47,6 +47,8 @@ public class EnemyRanged : EnemyForm
             target = targets[0].transform;
         }
 
+        Init();
+
         navMeshAgent = transform.GetComponent<NavMeshAgent>();
 
         FSMState search = new FSMState();

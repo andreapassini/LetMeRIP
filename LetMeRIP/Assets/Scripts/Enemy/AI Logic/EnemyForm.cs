@@ -117,10 +117,19 @@ public class EnemyForm : MonoBehaviourPun
 	{
         spPool.transform.SetParent(transform.parent);
         spPool.SetActive(true);
+
+        FormManager f = target.GetComponent<FormManager>();
+        if(f != null) {
+            f.OnBodyExit -= RestTargetAfterSpiritExit;
+        }
+        
+
         if (!PhotonNetwork.IsMasterClient) return;
 
         // Die Event 
         OnEnemyKilled?.Invoke(this);
+
+        // UN-Subscribe to Event Change Spirit Form
 
         // Overwrite
         PhotonNetwork.Destroy(photonView);
@@ -205,6 +214,11 @@ public class EnemyForm : MonoBehaviourPun
         abilites.Add(searchAction.abilityName, searchAction);
         
         healthBar.Init(this);
+
+        FormManager f = target.GetComponent<FormManager>();
+        if (f != null) {
+            f.OnBodyExit += RestTargetAfterSpiritExit;
+        }
     }
 
     public virtual void StopEverythingForAbilityExecution()
@@ -216,4 +230,20 @@ public class EnemyForm : MonoBehaviourPun
 	{
 
 	}
+
+    public virtual void RestTargetAfterSpiritExit(FormManager formManager)
+	{
+        if (formManager != target.GetComponent<FormManager>())
+            return;
+
+        float distance = float.MaxValue;
+
+        foreach (GameObject t in targets) {
+            float calculatedDistance = (t.transform.position - transform.position).magnitude;
+            if (calculatedDistance < distance) {
+                distance = calculatedDistance;
+                target = t.transform;
+            }
+        }
+    }
 }

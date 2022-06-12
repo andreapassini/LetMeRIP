@@ -21,7 +21,7 @@ public class mageBasicHeavyAttack : Ability
     private float bulletForce = 15f;
 
     [SerializeField]
-    private float chargeTime = 0.5f;
+    private float chargeTime = 2f;
 
     void Start()
     {
@@ -37,9 +37,6 @@ public class mageBasicHeavyAttack : Ability
 
         damage = 15 + characterController.currentStats.intelligence * 0.3f +
             characterController.currentStats.dexterity * 0.1f;
-
-        // Get the prefab
-        bulletPrefab = Resources.Load("Prebas/BulletTrapassing") as GameObject;
     }
 
     /**
@@ -54,6 +51,10 @@ public class mageBasicHeavyAttack : Ability
 
         // charge casting animation
         animator.SetTrigger("HeavyAttackCharge");
+
+        isCasting = true;
+
+        StartCoroutine(CastAction());
     }
 
     /**
@@ -61,15 +62,15 @@ public class mageBasicHeavyAttack : Ability
      */
     public override void PerformedAction()
     {
-        Debug.Log("Casting");
+        //Debug.Log("Casting");
 
-        if (isCasting) {
-            //animator.SetTrigger("Dash");
-            StartCoroutine(CastAction());
-        } else {
-            Debug.Log("Missing direction");
-            isReady = true;
-        }
+        //if (isCasting) {
+        //    //animator.SetTrigger("Dash");
+            
+        //} else {
+        //    Debug.Log("Missing direction");
+        //    isReady = true;
+        //}
     }
 
     /**
@@ -77,7 +78,8 @@ public class mageBasicHeavyAttack : Ability
      */
     public override void CancelAction()
     {
-
+        if (!isCasting)
+            return;
     }
 
     private IEnumerator CastAction()
@@ -100,7 +102,10 @@ public class mageBasicHeavyAttack : Ability
         float angle = 0f;
         float angleWork;
 
-        for(int i=0; i<11; i++) 
+        // Get the prefab
+        bulletPrefab = Resources.Load<GameObject>("Prefabs/BulletTrapassing");
+
+        for (int i=0; i<11; i++) 
         {
             // Calcolate angle
             angle += i * 2;
@@ -111,7 +116,7 @@ public class mageBasicHeavyAttack : Ability
 			}
 
             // Instantiate spheres
-            GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation * Quaternion.Euler(0, angleWork, 0));
+            GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation * Quaternion.Euler(angleWork, 0, 0));
 
             bulletFired.GetComponent<BulletTrapassing>().damage = damage;
             bulletFired.layer = gameObject.layer;

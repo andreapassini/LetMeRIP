@@ -1,14 +1,25 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
 
-    [SerializeField] private Menu[] menus;
+    [SerializeField] private List<Menu> menus;
 
     private void Awake()
     {
         Instance = this;
+        
+        menus = new List<Menu>();
+        foreach (Transform child in transform)
+        {
+            var menu = child.GetComponent<Menu>();
+            if(menu is null) continue;
+            menus.Add(menu);
+            menu.gameObject.SetActive(false);
+        }
+        OpenMenu("loading");
     }
 
     public void OpenMenu(string menuName)

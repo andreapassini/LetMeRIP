@@ -2,20 +2,25 @@ using UnityEngine;
 
 public class PlayerBillboard : Billboard
 {
-    private Transform barsContainer;
+    private RectTransform barsContainer;
     private HudFillingBar sgBar;
     private GameObject hidables;
     private RectTransform border;
 
+    // the vertical offset to adjust the bars when the spirit gauge is hidden
+    private float verticalOffset;
+
     protected override void Awake()
     {
         camera = Camera.main.transform;
-        barsContainer = transform.Find("BarsContainer");
+        barsContainer = transform.Find("BarsContainer").GetComponent<RectTransform>();
         
         healthBar = barsContainer.Find("HealthBar").GetComponent<HudFillingBar>();
         hidables = barsContainer.Find("Hidable").gameObject;
         sgBar = hidables.transform.Find("SGBar").GetComponent<HudFillingBar>();
         border = barsContainer.Find("Border").GetComponent<RectTransform>();
+
+        verticalOffset = barsContainer.sizeDelta.y / 2;
     }
     
     public void Init(PlayerController pc)
@@ -26,10 +31,9 @@ public class PlayerBillboard : Billboard
 
         if (pc.formManager.IsSpirit)
         {
-            healthBar.SetMaxValue(pc.spiritStats.maxHealth);
-            healthBar.SetValue(hpManager.Health);
-            sgBar.SetMaxValue(pc.spiritStats.maxSpiritGauge);
-            sgBar.SetValue(sgManager.SpiritGauge);
+            healthBar.Init(pc.spiritStats.maxHealth, hpManager.Health);
+            sgBar.Init(pc.spiritStats.maxSpiritGauge, sgManager.SpiritGauge);
+            
             
             hpManager.OnPlayerDamaged += manager => healthBar.SetValue(manager.Health);
             hpManager.OnPlayerHealed += manager => healthBar.SetValue(manager.Health);
@@ -39,55 +43,50 @@ public class PlayerBillboard : Billboard
             return;
         }
         
-        // healthBar.SetMaxValue(pc.formManager.IsSpirit ? pc.spiritStats.maxHealth : pc.bodyStats.maxHealth);
-        healthBar.SetMaxValue(pc.currentStats.maxHealth);
-        // healthBar.SetValue(hpManager.Health);
-        sgBar.SetMaxValue(pc.currentStats.maxSpiritGauge);
-        ToggleSpiritGauge(formManager);
-        // sgBar.SetValue(sgManager.SpiritGauge);
+        healthBar.Init(pc.currentStats.maxHealth, pc.currentStats.health);
+        sgBar.Init(pc.currentStats.maxSpiritGauge, pc.currentStats.spiritGauge);
         
+        ToggleSpiritGauge(formManager);
+
         hpManager.OnPlayerDamaged += manager => healthBar.SetValue(manager.Health);
         hpManager.OnPlayerHealed += manager => healthBar.SetValue(manager.Health);
         sgManager.OnSPGained += manager => sgBar.SetValue(manager.SpiritGauge);
         sgManager.OnSPConsumed += manager => sgBar.SetValue(manager.SpiritGauge);
         formManager.OnBodyExit += ToggleSpiritGauge;
         
-
-        // if(formManager.IsSpirit)
-        MoveBar(formManager);
-        formManager.OnFormChanged += MoveBar;
+        MoveBars(formManager);
+        formManager.OnFormChanged += MoveBars;
     }
 
     private void ToggleSpiritGauge(FormManager formManager)
     {
-        Debug.LogError($"IS OUT: {formManager.IsOut}");
         if (formManager.IsOut)
-        {
+        { // Hide spirit gauge
             hidables.SetActive(false);
-            border.offsetMin = new Vector2(border.offsetMin.x, 17.5f);
-            barsContainer.localPosition -= new Vector3(0, 17.50f, 0);
+            border.offsetMin = new Vector2(border.offsetMin.x, verticalOffset);
+            barsContainer.localPosition -= new Vector3(0, verticalOffset, 0);
         }
         else
-        {
+        { // Show spirit gauge
             hidables.SetActive(true);
             border.offsetMin = new Vector2(border.offsetMin.x, 0);
-            barsContainer.localPosition += new Vector3(0, 17.50f, 0);
+            barsContainer.localPosition += new Vector3(0, verticalOffset, 0);
             sgBar.SetValue(formManager.GetComponent<PlayerController>().SGManager.SpiritGauge);
         }
     }
 
 
-    private void MoveBar(FormManager formManager)
+    private void MoveBars(FormManager formManager)
     {
+        // TODO change if more forms
         var newY = formManager.currentForm.GetType().Name switch
         {
             "WarriorBasic" => 120,
             "Berserker" => 210,
             _ => 0
         };
+        
         if (newY is 0) return;
-
         barsContainer.localPosition = new Vector3(0, newY, 0);
-        // healthBar.transform.transform.localPosition = new Vector3(0, newY, 0);
     }
 }

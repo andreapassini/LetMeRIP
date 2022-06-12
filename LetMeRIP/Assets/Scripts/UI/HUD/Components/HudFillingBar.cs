@@ -12,11 +12,18 @@ public class HudFillingBar : MonoBehaviour
         slider = gameObject.GetComponent<Slider>();
         fill = gameObject.transform.Find("Mask").Find("Fill").gameObject.GetComponent<Image>();
     }
+
+    public void Init(float maxHealth, float initialHealth)
+    {
+        SetMaxValue(maxHealth);
+        SetValue(initialHealth);
+    }
     
-    public void SetMaxValue(float health)
+    
+    public void SetMaxValue(float health, bool setToMax = false)
     {
         slider.maxValue = health;
-        slider.value = health;
+        if(setToMax) slider.value = health;
 
         fill.color = gradient.Evaluate(1f);
     }

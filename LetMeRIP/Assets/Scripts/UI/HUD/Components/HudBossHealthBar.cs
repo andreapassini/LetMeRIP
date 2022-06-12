@@ -15,7 +15,7 @@ public class HudBossHealthBar : HudFillingBar
 
     public void Init(float maxHealth)
     {
-        this.SetMaxValue(maxHealth);
+        Init(maxHealth, maxHealth);
         gameObject.SetActive(true);
     }
 }

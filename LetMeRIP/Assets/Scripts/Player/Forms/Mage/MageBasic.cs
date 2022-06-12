@@ -5,11 +5,7 @@ using UnityEngine;
 
 public class MageBasic : PlayerForm
 {
-    //Events to broadcast to abilities, animation's events
-    public static event Action<MageBasic> lightAttack;
-    public static event Action<MageBasic> heavyAttack;
-    public static event Action<MageBasic> ability1;
-    public static event Action<MageBasic> ability2;
+    
 
     public override void Init(PlayerController characterController)
     {
@@ -31,23 +27,5 @@ public class MageBasic : PlayerForm
         abilityHandler.Init(abilities, characterController);
     }
 
-	public void OnLightAttack()
-	{
-        lightAttack?.Invoke(this);
-	}
-
-    public void OnHeavyAttack()
-    {
-        heavyAttack?.Invoke(this);
-    }
-
-    public void OnAbility1()
-    {
-        ability1?.Invoke(this);
-    }
-
-    public void OnAbility2()
-    {
-        ability2?.Invoke(this);
-    }
+	
 }

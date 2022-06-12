@@ -30,11 +30,15 @@ public class SimpleAttackAbility : EnemyAbility
         foreach (Collider e in hitEnemies) {
             if (e.CompareTag("Player")) {
 
-                HPManager hpManager = e.gameObject.GetComponent<HPManager>();
+                HPManager hpManager = e.gameObject.GetComponent<PlayerController>().HPManager;
 
-                if (hpManager != null) {
+
+                if (hpManager != null)
+                {
+                    Debug.Log("hp manager is not null");
                     hpManager.TakeDamage(damage + enemy.enemyStats.attack, enemy.transform.position);
                 }
+                else Debug.Log("hpmanager is null!");
             }
         }
     }

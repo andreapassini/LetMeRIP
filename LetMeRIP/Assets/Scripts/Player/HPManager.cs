@@ -27,7 +27,7 @@ public class HPManager : MonoBehaviourPun
 
     public void TakeDamage(float dmg, Vector3 positionHit)
     {
-        if (PhotonNetwork.IsMasterClient && dmg <= 0)
+        if (PhotonNetwork.IsMasterClient && dmg > 0)
             photonView.RPC("RpcTakeDamage", RpcTarget.All, dmg, positionHit);
     }
 

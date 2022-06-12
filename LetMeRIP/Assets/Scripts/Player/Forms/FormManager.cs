@@ -251,16 +251,23 @@ public class FormManager : MonoBehaviourPun
             {
                 PlayerController pc = playerHit.GetComponent<PlayerController>();
                 if (!pc.photonView.IsMine || pc.formManager.isSpirit) continue;
-                myBody = pc;
+                photonView.RPC("RpcAssignBodyToEnter", RpcTarget.All, pc.photonView.ViewID);
                 break;
             }
         }
-        if (myBody == null) return; // body not found, abort
+        
+    }
 
+    [PunRPC]
+    public void RpcAssignBodyToEnter(int bodyViewId)
+    {
+        PlayerController myBody = PhotonView.Find(bodyViewId).GetComponent<PlayerController>();
+        if (myBody == null) return; // body not found, abort
         myBody.Init();
         myBody.formManager.OnFormChanged?.Invoke(myBody.formManager);
         characterController.playerManager.bodyStats.spiritGauge = characterController.SGManager.SpiritGauge; // transfer new value of sg
         isOut = false;
+
         myBody.formManager.OnBodyExit?.Invoke(this);
         OnBodyExitForEnemy?.Invoke(this);
 

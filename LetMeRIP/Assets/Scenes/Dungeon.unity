@@ -790,8 +790,8 @@ MonoBehaviour:
   fill: {fileID: 0}
   gradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
+    key0: {r: 0.3773585, g: 0, b: 0, a: 1}
+    key1: {r: 0.3773585, g: 0, b: 0, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -814,7 +814,7 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 0
+    m_Mode: 1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
 --- !u!114 &84308794
@@ -1389,8 +1389,8 @@ MonoBehaviour:
   fill: {fileID: 0}
   gradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
+    key0: {r: 0.22352943, g: 0.1254902, b: 0.227451, a: 1}
+    key1: {r: 0.22352943, g: 0.1254902, b: 0.227451, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1413,7 +1413,7 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 0
+    m_Mode: 1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
 --- !u!114 &108335582
@@ -16311,8 +16311,8 @@ MonoBehaviour:
   fill: {fileID: 0}
   gradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
+    key0: {r: 0.3773585, g: 0, b: 0, a: 1}
+    key1: {r: 0.3773585, g: 0, b: 0, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -16335,7 +16335,7 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 0
+    m_Mode: 1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
 --- !u!114 &1028178442
@@ -16519,6 +16519,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3529225608118277288, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529225608118277288, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6374838947204721371, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.622
@@ -16529,6 +16537,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6747735155651093806, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8235091550953317792, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8235091550953317792, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8962096826416829948, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}

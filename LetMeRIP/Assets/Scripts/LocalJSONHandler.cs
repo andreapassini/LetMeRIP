@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.IO;
 using System.Reflection;
-using System;
-using System.Collections;
 
 public static class LocalJSONHandler
 {

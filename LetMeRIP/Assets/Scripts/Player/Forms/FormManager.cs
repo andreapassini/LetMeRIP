@@ -9,6 +9,7 @@ public class FormManager : MonoBehaviourPun
     public int ViewID { get => photonView.ViewID; } 
 
     public event Action<FormManager> OnFormChanged;
+    public event Action<FormManager> OnBodyExit;
 
     [HideInInspector] public List<PlayerForm> forms;
     [HideInInspector] public PlayerForm currentForm;
@@ -23,6 +24,9 @@ public class FormManager : MonoBehaviourPun
     protected bool isSpirit = false;
     public bool IsSpirit { get { return isSpirit; } }
 
+    protected bool isOut;
+    public bool IsOut { get { return isOut; } }
+    
     public virtual void Init(PlayerController characterController)
     {
         this.characterController = characterController;
@@ -46,7 +50,6 @@ public class FormManager : MonoBehaviourPun
         sharedAbilityHandler = gameObject.AddComponent<AbilityHandler>();
         sharedAbilityHandler.Init(sharedAbilities, characterController);
         characterController.movement.Init();
-
     }
 
     public virtual void BindAbilities()
@@ -210,6 +213,9 @@ public class FormManager : MonoBehaviourPun
         DisableAbilities();
         
         characterController.Exit();
+
+        isOut = true;
+        OnBodyExit?.Invoke(this);
     }
 
     private void EnterBody()
@@ -233,6 +239,10 @@ public class FormManager : MonoBehaviourPun
 
         myBody.Init();
         myBody.formManager.OnFormChanged?.Invoke(myBody.formManager);
+        
+        isOut = false;
+        myBody.formManager.OnBodyExit?.Invoke(this);
+        
         
         currentForm.RemoveComponents();
         characterController.Exit();

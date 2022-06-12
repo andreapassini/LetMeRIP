@@ -35,8 +35,8 @@ public class mageBasicHeavyAttack : Ability
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
 
-        damage = 15 + characterController.currentStats.intelligence * 0.3f +
-            characterController.currentStats.dexterity * 0.1f;
+        damage = 15 + characterController.stats.intelligence * 0.3f +
+            characterController.stats.dexterity * 0.1f;
     }
 
     /**

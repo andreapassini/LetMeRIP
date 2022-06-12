@@ -32,7 +32,7 @@ public class ClericLightAttack : Ability
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>(false);
 
-        damage = 15 + characterController.currentStats.intelligence * 0.3f;
+        damage = 15 + characterController.stats.intelligence * 0.3f;
 
         // Get the prefab
         bulletPrefab = Resources.Load("Prebas/LightSphere") as GameObject;

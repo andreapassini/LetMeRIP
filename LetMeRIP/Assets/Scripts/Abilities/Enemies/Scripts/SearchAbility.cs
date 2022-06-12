@@ -16,6 +16,10 @@ public class SearchAbility : EnemyAbility
 
 		if(enemy.target == null) {
 			enemy.targets = GameObject.FindGameObjectsWithTag(enemy.targetTag);
+
+			if (enemy.targets.Length < 1)
+				return;
+
 			enemy.target = enemy.targets[0].transform;
 		}
 

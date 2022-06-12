@@ -46,7 +46,7 @@ public class mageBasicLightAttack : Ability
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
 
-        damage = 10 + characterController.currentStats.strength * 0.2f;
+        damage = 10 + characterController.stats.strength * 0.2f;
 
         p = characterController;
     }

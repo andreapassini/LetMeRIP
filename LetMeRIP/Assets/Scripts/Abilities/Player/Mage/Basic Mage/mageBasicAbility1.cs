@@ -48,11 +48,11 @@ public class mageBasicAbility1 : Ability
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
 
-        minDamage = 15 + characterController.currentStats.intelligence * 0.1f +
-            characterController.currentStats.strength * 0.1f;
+        minDamage = 15 + characterController.stats.intelligence * 0.1f +
+            characterController.stats.strength * 0.1f;
 
-        maxDamage = 35 + characterController.currentStats.intelligence * 0.3f +
-            characterController.currentStats.strength * 0.2f;
+        maxDamage = 35 + characterController.stats.intelligence * 0.3f +
+            characterController.stats.strength * 0.2f;
 
         // Get the prefab
         bulletPrefab = Resources.Load("Prebas/BulletTrapassing") as GameObject;

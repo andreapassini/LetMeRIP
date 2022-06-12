@@ -28,7 +28,7 @@ public class HealingPoolVampire : MonoBehaviourPun
       
         if (cc.photonView.IsMine) 
         {
-            float healAmountPerSec = (float)((50 + 0.4 * cc.spiritStats.intelligence) / 4);
+            float healAmountPerSec = (float)((50 + 0.4 * cc.stats.intelligence) / 4);
             cc.HPManager.Heal(healAmountPerSec);
             cc.SGManager.AddSP(-1 * (healAmountPerSec/2));
         }

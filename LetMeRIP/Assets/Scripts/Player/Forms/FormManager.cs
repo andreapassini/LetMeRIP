@@ -22,8 +22,9 @@ public class FormManager : MonoBehaviourPun
     [SerializeField] private float spiritForwardOffset = 2f;
     [SerializeField] private float spiritReturnRange = 3f;
     protected bool isSpirit = false;
-    public bool IsSpirit { get { return isSpirit; } }
 
+    private Rigidbody rb;
+    public bool IsSpirit { get => isSpirit; }
     protected bool isOut;
     public bool IsOut { get { return isOut; } }
     
@@ -31,7 +32,7 @@ public class FormManager : MonoBehaviourPun
     {
         this.characterController = characterController;
         playerInputActions = new PlayerInputActions();
-        
+        rb = GetComponent<Rigidbody>();
         // initialize list form and adding Spirit form as first form available (and shared by every macro class)
         forms = new List<PlayerForm>();
 
@@ -201,6 +202,7 @@ public class FormManager : MonoBehaviourPun
 
     private void ExitBody()
     {
+
         float spawnDistance = spiritForwardOffset;
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit info, 50f))
         {
@@ -209,9 +211,11 @@ public class FormManager : MonoBehaviourPun
         }
 
         GameObject spirit = PhotonNetwork.Instantiate("Prefabs/SpiritCharacter", transform.position + spawnDistance * transform.forward, transform.rotation);
-        PlayerController spiritController = spirit.GetComponent<PlayerController>();
         DisableAbilities();
-        
+        isOut = true;
+        rb.velocity = Vector3.zero;
+        Animator animator = GetComponentInChildren<Animator>();
+        animator.SetBool("isRunning", false);
         characterController.Exit();
 
         isOut = true;

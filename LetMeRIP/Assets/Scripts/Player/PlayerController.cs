@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
 {
     PlayerInputActions playerInputActions;
 
-    [SerializeField] private string playerClass; // archer, mage or warrior
+    [SerializeField] public string playerClass; // archer, mage or warrior
     public FormManager formManager;
 
     public PlayerStats spiritStats;
@@ -29,10 +29,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
 
     public int ViewID { get => photonView.ViewID; }
     public bool IsMine { get => photonView.IsMine; }
-
+    private bool isSpirit;
+    public bool IsSpirit { get => isSpirit; }
     void Start()
     {
-        currentStats = playerClass.ToLower().Equals("spirit") ? spiritStats : bodyStats;
+        isSpirit = playerClass.ToLower().Equals("spirit");
+        currentStats = isSpirit ? spiritStats : bodyStats;
 
         SetupCamera();
         lam = GetComponent<LookAtMouse>();

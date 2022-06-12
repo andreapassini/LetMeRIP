@@ -13,7 +13,7 @@ public class BeaconOfHope : MonoBehaviourPun
 
 	private bool isUp = false;
 
-	private Collider collider;
+	private SphereCollider collider;
 
 	// Player and if it is inside
 	private List<Transform> playersBuffed;
@@ -31,6 +31,7 @@ public class BeaconOfHope : MonoBehaviourPun
 	private void Start()
 	{
 		collider.isTrigger = true;
+		collider.radius = areaOfEffect;
 	}
 
 	private void OnCollisionStay(Collision e)

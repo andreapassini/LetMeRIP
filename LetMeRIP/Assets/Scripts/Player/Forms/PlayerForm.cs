@@ -11,7 +11,7 @@ public class PlayerForm : MonoBehaviourPun
     protected PlayerInputActions playerInputActions;
     public AbilityHandler abilityHandler;
     protected Dictionary<string, Ability> abilities;
-    protected GameObject formModelPrefab; // contains the model and the animator of the transformation
+    public GameObject formModelPrefab; // contains the model and the animator of the transformation
     protected PlayerController characterController;
 
     private void Awake()

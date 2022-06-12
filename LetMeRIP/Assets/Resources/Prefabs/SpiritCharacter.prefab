@@ -2627,12 +2627,24 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: isRunning
-  - Type: 4
-    SynchronizeType: 1
-    Name: isIdle
   - Type: 9
     SynchronizeType: 1
     Name: Dash
+  - Type: 9
+    SynchronizeType: 1
+    Name: HeavyAttack
+  - Type: 9
+    SynchronizeType: 1
+    Name: Ability2
+  - Type: 9
+    SynchronizeType: 1
+    Name: Ability1Start
+  - Type: 9
+    SynchronizeType: 1
+    Name: Ability1Hold
+  - Type: 9
+    SynchronizeType: 1
+    Name: Ability1End
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -2734,6 +2746,7 @@ GameObject:
   - component: {fileID: 4846996737555478889}
   - component: {fileID: 3130964444350689468}
   - component: {fileID: 2783625197527409681}
+  - component: {fileID: -7710990576945519401}
   m_Layer: 3
   m_Name: SpiritCharacter
   m_TagString: Player
@@ -2783,11 +2796,11 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 20
   m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_AngularDrag: 0
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 2
 --- !u!195 &4846996737555478883
 NavMeshAgent:
@@ -2929,7 +2942,7 @@ MonoBehaviour:
   spiritStats: {fileID: 11400000, guid: 914b81d7560a88a408eb0b907232a558, type: 2}
   bodyStats: {fileID: 11400000, guid: 28b2f20975649654da0a432c5fd260b1, type: 2}
   currentStats: {fileID: 0}
-  wtf: {fileID: 0}
+  lam: {fileID: 0}
   movement: {fileID: 0}
   rb: {fileID: 0}
   HPManager: {fileID: 0}
@@ -2971,10 +2984,27 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3130964444350689468}
+  - {fileID: -7710990576945519401}
   - {fileID: 3551788320432185062}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-7710990576945519401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4846996737555478890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &4846996737806289075
 GameObject:
   m_ObjectHideFlags: 0

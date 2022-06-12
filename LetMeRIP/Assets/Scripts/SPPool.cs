@@ -33,8 +33,8 @@ public class SPPool : MonoBehaviourPun
     [PunRPC]
     private void RpcDrainPool(float amount, int playerViewID)
     {
-        PlayerController cc = new List<PlayerController>(FindObjectsOfType<PlayerController>()).Find(player => player.photonView.ViewID == playerViewID); // fuck it seems kinda expensive
-        if(remainingSP <= 0 && PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(gameObject);
+        PlayerController cc = PhotonView.Find(playerViewID).GetComponent<PlayerController>(); // fuck it seems kinda expensive
+        if(remainingSP <= 0) PhotonNetwork.Destroy(gameObject);
         else 
         {
             float finalAmount = amount > remainingSP ? remainingSP : amount;

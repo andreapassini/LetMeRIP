@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class FormManager : MonoBehaviourPun
 {
-    public int ViewID { get => photonView.ViewID; } 
+    public int ViewID { get => photonView.ViewID; }
 
     public event Action<FormManager> OnFormChanged;
     public event Action<FormManager> OnBodyExit;
@@ -22,16 +22,20 @@ public class FormManager : MonoBehaviourPun
     [SerializeField] private float spiritForwardOffset = 2f;
     [SerializeField] private float spiritReturnRange = 3f;
     protected bool isSpirit = false;
-    public bool IsSpirit { get { return isSpirit; } }
 
+    private Rigidbody rb;
+    public bool IsSpirit { get => isSpirit; }
     protected bool isOut;
     public bool IsOut { get { return isOut; } }
-    
+
     public virtual void Init(PlayerController characterController)
     {
         this.characterController = characterController;
+        isSpirit = characterController.playerClass.ToLower().Equals("spirit");
+        isOut = isSpirit;
+
         playerInputActions = new PlayerInputActions();
-        
+        rb = GetComponent<Rigidbody>();
         // initialize list form and adding Spirit form as first form available (and shared by every macro class)
         forms = new List<PlayerForm>();
 
@@ -43,7 +47,7 @@ public class FormManager : MonoBehaviourPun
         Interact interact = gameObject.AddComponent<Interact>();
 
         Dictionary<string, Ability> sharedAbilities = new Dictionary<string, Ability>();
-        
+
         sharedAbilities[playerInputActions.Player.Dash.name] = dash;
         sharedAbilities[playerInputActions.Player.Interact.name] = interact;
 
@@ -55,7 +59,7 @@ public class FormManager : MonoBehaviourPun
     public virtual void BindAbilities()
     {
         if (!photonView.IsMine) return;
-        
+
         playerInputActions.Player.Spirit.performed += ctx => ToggleSpiritForm();
 
         playerInputActions.Player.Interact.started += CastSharedAbility;
@@ -167,12 +171,12 @@ public class FormManager : MonoBehaviourPun
         // switch to new form and add its components
         currentForm = forms[index];
         currentForm.Init(characterController);
-        
+
         EnableAbilities();
- 
+
         OnFormChanged?.Invoke(this);
     }
-    
+
     public void CastAbility(InputAction.CallbackContext context)
     {
         photonView.RPC("RpcCastAbility", RpcTarget.All, false, context.started, context.performed, context.canceled, context.action.name);
@@ -182,12 +186,12 @@ public class FormManager : MonoBehaviourPun
     {
         photonView.RPC("RpcCastAbility", RpcTarget.All, true, context.started, context.performed, context.canceled, context.action.name);
     }
-    
+
     [PunRPC]
     public void RpcCastAbility(bool isSharedAbility, bool isStarted, bool isPerformed, bool isCanceled, string actionName)
     {
         AbilityHandler abilityHandler = isSharedAbility ? sharedAbilityHandler : currentForm.abilityHandler;
-        
+
         if (isStarted) abilityHandler.StartAbility(actionName);
         else if (isPerformed) abilityHandler.PerformAbility(actionName);
         else if (isCanceled) abilityHandler.CancelAbility(actionName);
@@ -201,6 +205,7 @@ public class FormManager : MonoBehaviourPun
 
     private void ExitBody()
     {
+
         float spawnDistance = spiritForwardOffset;
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit info, 50f))
         {
@@ -209,9 +214,11 @@ public class FormManager : MonoBehaviourPun
         }
 
         GameObject spirit = PhotonNetwork.Instantiate("Prefabs/SpiritCharacter", transform.position + spawnDistance * transform.forward, transform.rotation);
-        PlayerController spiritController = spirit.GetComponent<PlayerController>();
         DisableAbilities();
-        
+        isOut = true;
+        rb.velocity = Vector3.zero;
+        Animator animator = GetComponentInChildren<Animator>();
+        if(animator != null) animator.SetBool("isRunning", false);
         characterController.Exit();
 
         isOut = true;
@@ -239,16 +246,16 @@ public class FormManager : MonoBehaviourPun
 
         myBody.Init();
         myBody.formManager.OnFormChanged?.Invoke(myBody.formManager);
-        
+
         isOut = false;
         myBody.formManager.OnBodyExit?.Invoke(this);
-        
-        
+
+
         currentForm.RemoveComponents();
         characterController.Exit();
         PhotonNetwork.Destroy(gameObject); // exit not needed since i'm destroying this go
     }
-    
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, 3f);

@@ -9,14 +9,10 @@ public class LookAtMouse : MonoBehaviourPun
     
     private PlayerInputActions playerInputActions;
     private Camera playerCamera;
-    private Rigidbody rb;
-    
     private Vector3 directionToLook;
     
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
 

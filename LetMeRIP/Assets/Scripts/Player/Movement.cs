@@ -10,7 +10,7 @@ public class Movement : MonoBehaviourPun
     private Vector3 direction;
 
     public PlayerInputActions playerInputActions;
-    private Animator animator;
+    public Animator animator;
     private PlayerController characterController;
     FormManager formManager;
 
@@ -79,7 +79,8 @@ public class Movement : MonoBehaviourPun
 
     public void Move()
     {
-        rb.MovePosition(transform.position + direction.ToIso() * characterController.currentStats.swiftness * Time.deltaTime);
+        //rb.velocity = (transform.position + direction.ToIso() * characterController.currentStats.swiftness/* * Time.deltaTime*/);
+        rb.velocity = direction.ToIso() * characterController.currentStats.swiftness;
     }
 
     private void RefreshAnimator(FormManager fm)

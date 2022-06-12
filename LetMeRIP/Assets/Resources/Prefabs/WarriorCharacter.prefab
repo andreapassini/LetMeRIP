@@ -1270,6 +1270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 221365551348968329}
   - component: {fileID: 221365551341986323}
+  - component: {fileID: 6892768167973303244}
   m_Layer: 0
   m_Name: Berserker
   m_TagString: Untagged
@@ -1312,6 +1313,42 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6892768167973303244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221365551349163755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 1
+    Name: LightAttack
+  - Type: 9
+    SynchronizeType: 1
+    Name: HeavyAttack
+  - Type: 9
+    SynchronizeType: 1
+    Name: Ability1
+  - Type: 9
+    SynchronizeType: 1
+    Name: Ability2
+  - Type: 4
+    SynchronizeType: 1
+    Name: isRunning
+  - Type: 9
+    SynchronizeType: 1
+    Name: Death
+  m_SynchronizeLayers:
+  - SynchronizeType: 1
+    LayerIndex: 0
 --- !u!1 &221365551349164495
 GameObject:
   m_ObjectHideFlags: 0
@@ -2274,6 +2311,7 @@ GameObject:
   - component: {fileID: 1854728853611677828}
   - component: {fileID: 8182411981021446481}
   - component: {fileID: 8962096826416829948}
+  - component: {fileID: 4379680379420823532}
   m_Layer: 7
   m_Name: WarriorCharacter
   m_TagString: Player
@@ -2324,12 +2362,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 20
   m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_AngularDrag: 0
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 112
-  m_CollisionDetection: 2
+  m_Constraints: 116
+  m_CollisionDetection: 3
 --- !u!195 &1854728853611677838
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2468,9 +2506,9 @@ MonoBehaviour:
   playerClass: warrior
   formManager: {fileID: 0}
   spiritStats: {fileID: 11400000, guid: 914b81d7560a88a408eb0b907232a558, type: 2}
-  bodyStats: {fileID: 11400000, guid: 28b2f20975649654da0a432c5fd260b1, type: 2}
+  bodyStats: {fileID: 11400000, guid: ad3cf62d237d7dc49b36882672756872, type: 2}
   currentStats: {fileID: 0}
-  wtf: {fileID: 0}
+  lam: {fileID: 0}
   movement: {fileID: 0}
   rb: {fileID: 0}
   HPManager: {fileID: 0}
@@ -2512,9 +2550,28 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 8182411981021446481}
+  - {fileID: 4379680379420823532}
+  - {fileID: 6312873523318571348}
+  - {fileID: 6892768167973303244}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &4379680379420823532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854728853611677831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1001 &538131678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2968,8 +3025,55 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 21bf804b6ce158447a4d457a77a10ccd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c647a6e9ba715004ebbf4dc6d7bd1e7a, type: 3}
+--- !u!1 &6747735155651093806 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1835885862194036, guid: c647a6e9ba715004ebbf4dc6d7bd1e7a, type: 3}
+  m_PrefabInstance: {fileID: 6747026544085282394}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6749916319690852124 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4158096630655302, guid: c647a6e9ba715004ebbf4dc6d7bd1e7a, type: 3}
   m_PrefabInstance: {fileID: 6747026544085282394}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6312873523318571348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6747735155651093806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 1
+    SynchronizeType: 1
+    Name: VelocityX
+  - Type: 1
+    SynchronizeType: 1
+    Name: VelocityZ
+  - Type: 9
+    SynchronizeType: 1
+    Name: LightAttack
+  - Type: 9
+    SynchronizeType: 1
+    Name: HeavyAttack
+  - Type: 9
+    SynchronizeType: 1
+    Name: Ability1
+  - Type: 9
+    SynchronizeType: 1
+    Name: Ability2
+  - Type: 9
+    SynchronizeType: 1
+    Name: Death
+  - Type: 4
+    SynchronizeType: 1
+    Name: isRunning
+  m_SynchronizeLayers:
+  - SynchronizeType: 1
+    LayerIndex: 0

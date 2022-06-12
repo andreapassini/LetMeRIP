@@ -1,11 +1,12 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HPManager : MonoBehaviour
+public class HPManager : MonoBehaviourPun
 {
-    public event Action<HPManager> OnPlayerKilled;
+    public static event Action<PlayerController> OnPlayerKilled;
     public event Action<HPManager> OnPlayerDamaged;
     public event Action<HPManager> OnPlayerHealed;
     private PlayerStats stats;
@@ -20,6 +21,7 @@ public class HPManager : MonoBehaviour
     }
 
     private PlayerController characterController;
+    private bool isDead = false;
 
     private float health { get => stats.health; set => stats.health = value; }
     private float maxHealth { get => stats.maxHealth; set => stats.maxHealth = value; }
@@ -29,20 +31,22 @@ public class HPManager : MonoBehaviour
 
     void Start()
     {
-        gameObject.GetComponent<PlayerController>();
+        characterController = gameObject.GetComponent<PlayerController>();
     }
 
     public void TakeDamage(float dmg, Vector3 positionHit)
     {
-        Debug.Log("Got HIT");
+        string target = photonView.IsMine ? "I" : "OTHER";
+        Debug.Log($"{target} Got HIT");
 
         // Calculate defense reduction
-        if (dmg > 0) 
+        if (dmg > 0 && photonView.IsMine) 
             health -= dmg - (dmg * (stats.defense * 0.01f));
 
-        if (health <= 0)
+        if (health <= 0 && photonView.IsMine)
         {
-            Die();
+            Debug.Log("calling die");
+            photonView.RPC("RpcDie", RpcTarget.All);
         }
 
         // Take damage Event
@@ -87,11 +91,90 @@ public class HPManager : MonoBehaviour
         }
     }
 
-    public void Die()
+    [PunRPC]
+    public void RpcDie()
     {
-        // Die Event 
-        OnPlayerKilled?.Invoke(this);
+        if (isDead) return;
+        isDead = true;
 
-        // Overwrite
+        Debug.Log("someone died");
+        FormManager formManager = characterController.formManager;
+
+        Debug.Log($"someone died {photonView.ViewID}, is mine: {photonView.IsMine}, was out: {formManager.IsOut}");
+        Animator animator = GetComponentInChildren<Animator>();
+        animator.SetTrigger("Death");
+
+
+        Collider capsuleCollider = GetComponent<Collider>();
+        capsuleCollider.enabled = false;
+        characterController.lam.enabled = false;
+        characterController.movement.playerInputActions.Player.Movement.Disable();
+        formManager.DisableAbilities();
+
+        if (photonView.IsMine) characterController.HPManager.Heal(characterController.HPManager.maxHealth, false);
+
+        if (!formManager.IsSpirit)
+        {
+            int i = 0;
+            Debug.Log(++i);
+            GameObject model = formManager.currentForm.formModelPrefab;
+            Debug.Log(++i);
+            model.GetComponent<PhotonAnimatorView>().enabled = false;
+            Debug.Log(++i);
+            model.transform.SetParent(transform.parent);
+
+            Debug.Log(++i);
+            if (!formManager.IsOut && photonView.IsMine) formManager.ToggleSpiritForm();
+            Debug.Log(++i);
+            if (photonView.IsMine) PhotonNetwork.Destroy(gameObject);
+            Debug.Log(++i);
+            OnPlayerKilled?.Invoke(characterController);
+            Debug.Log(++i);
+        }
+        else if (photonView.IsMine)
+            PhotonNetwork.Instantiate("Prefabs/PlayerTomb", transform.position, Quaternion.identity);
+
+        
+        Debug.Log($"Destroying {name}, may i: {photonView.IsMine}");
+        OnPlayerKilled?.Invoke(characterController);
+        if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
+
+
+        #region fottiti
+        //FormManager formManager = characterController.formManager;
+        //if (!characterController.formManager.IsSpirit)
+        //{
+        //    Debug.Log("Body died");
+        //    Animator animator = GetComponentInChildren<Animator>();
+        //    gameObject.tag = "";
+        //    animator.SetTrigger("Death");
+
+        //    if (!formManager.isOut)
+        //    {
+        //        Debug.Log("Body was in use, spawning spirit");
+        //        formManager.ToggleSpiritForm();
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("Body was NOT in use");
+        //    }
+            
+        //    formManager.currentForm.formModelPrefab.transform.SetParent(transform.parent);
+        //    OnPlayerKilled?.Invoke(this);
+        //    PhotonNetwork.Destroy(gameObject);
+        //}
+        //else
+        //{
+        //    GetComponent<CapsuleCollider>().enabled = false;
+        //    Debug.Log("spirit died");
+        //    if (photonView.IsMine) 
+        //    {
+        //        PhotonNetwork.Instantiate("Prefabs/PlayerTomb", transform.position, Quaternion.identity);
+        //        formManager.DisableAbilities();
+        //        Heal(maxHealth, false); // restore health for eventual revive
+        //        PhotonNetwork.Destroy(gameObject);
+        //    }
+        //}
+        #endregion
     }
 }

@@ -186,12 +186,22 @@ public class EnemyRanged : EnemyForm
 
     public void Chase()
     {
+        if (target == null) {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }
+
         chaseAction.StartAbility(this);
         animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
 
     public void Attack()
     {
+        if (target == null) {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }
+
         animator.SetFloat("speed", 0);
 
         attackAction.StartAbility(this);
@@ -201,6 +211,11 @@ public class EnemyRanged : EnemyForm
 
     public void GoToLastSeenPos()
     {
+        if (target == null) {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }
+
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         GetComponent<NavMeshAgent>().destination = lastSeenPos;
         animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
@@ -214,6 +229,11 @@ public class EnemyRanged : EnemyForm
 
     public void Dash()
     {
+        if (target == null) {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }
+
         dashAction.StartAbility(this);
         StartCoroutine(WaitDashAnimation());
     }

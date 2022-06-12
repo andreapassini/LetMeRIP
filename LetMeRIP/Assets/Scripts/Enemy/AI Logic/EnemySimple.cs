@@ -112,6 +112,11 @@ public class EnemySimple : EnemyForm
     // Chase
     public void Chase()
     {
+        if (target == null) {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }
+
         chaseAction.StartAbility(this);
         animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
@@ -127,6 +132,11 @@ public class EnemySimple : EnemyForm
 
     public void GoToLastSeenPos()
     {
+        if (target == null) {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }
+
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         GetComponent<NavMeshAgent>().destination = lastSeenPos;
         animator.SetFloat("speed", navMeshAgent.velocity.magnitude);

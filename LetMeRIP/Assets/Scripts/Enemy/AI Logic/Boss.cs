@@ -521,6 +521,11 @@ public class Boss : EnemyForm
 
     public void Chase()
     {
+        if (target == null) {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }
+
         chaseAction.StartAbility(this);
         animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }

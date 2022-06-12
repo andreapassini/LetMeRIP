@@ -9,7 +9,6 @@ public class EnemySpider : EnemyForm
 {
     private FSM fsm;
 
-    [SerializeField] private string targetTag = "Player";
 
     private bool lateStart = false;
 
@@ -105,6 +104,11 @@ public class EnemySpider : EnemyForm
     // Chase
     public void Chase()
     {
+        if (target == null) {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }
+
         chaseAction.StartAbility(this);
         animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
@@ -122,6 +126,9 @@ public class EnemySpider : EnemyForm
 
     public void GoToLastSeenPos()
     {
+        if (target == null)
+            return;
+
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         navMeshAgent.destination = lastSeenPos;
         animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
@@ -132,6 +139,9 @@ public class EnemySpider : EnemyForm
     // Target Visible
     public bool TargetVisible()
     {
+        if (target == null)
+            return false;
+
         Vector3 ray = target.position - transform.position;
         RaycastHit hit;
         if (Physics.Raycast(transform.position, ray, out hit, Mathf.Infinity, ~whatRayHit))
@@ -146,6 +156,9 @@ public class EnemySpider : EnemyForm
 
     public bool TargetInRange()
     {
+        if (target == null)
+            return false;
+
         float distance = Vector3.Distance(transform.position, target.position);
         if (distance <= attackRange)
         {

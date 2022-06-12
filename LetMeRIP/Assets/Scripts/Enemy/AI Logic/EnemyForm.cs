@@ -74,6 +74,8 @@ public class EnemyForm : MonoBehaviourPun
 
     public bool stopAI = false;
 
+    public string targetTag = "Player";
+
 
     private EnemyBillboard healthBar;
     
@@ -118,11 +120,9 @@ public class EnemyForm : MonoBehaviourPun
         spPool.transform.SetParent(transform.parent);
         spPool.SetActive(true);
 
-        FormManager f = target.GetComponent<FormManager>();
-        if(f != null) {
-            f.OnBodyExit -= RestTargetAfterSpiritExit;
-        }
-        
+        // UN-Sub
+        FormManager.OnBodyExitForEnemy -= RestTargetAfterSpiritExit;
+        HPManager.OnPlayerKilled -= RestTargetAfterSpiritExit;
 
         if (!PhotonNetwork.IsMasterClient) return;
 
@@ -215,10 +215,8 @@ public class EnemyForm : MonoBehaviourPun
         
         healthBar.Init(this);
 
-        FormManager f = target.GetComponent<FormManager>();
-        if (f != null) {
-            f.OnBodyExit += RestTargetAfterSpiritExit;
-        }
+        FormManager.OnBodyExitForEnemy += RestTargetAfterSpiritExit;
+        HPManager.OnPlayerKilled += RestTargetAfterSpiritExit;
     }
 
     public virtual void StopEverythingForAbilityExecution()
@@ -233,17 +231,54 @@ public class EnemyForm : MonoBehaviourPun
 
     public virtual void RestTargetAfterSpiritExit(FormManager formManager)
 	{
-        if (formManager != target.GetComponent<FormManager>())
-            return;
+        if (target == null) {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }
 
-        float distance = float.MaxValue;
+        FormManager a;
 
-        foreach (GameObject t in targets) {
-            float calculatedDistance = (t.transform.position - transform.position).magnitude;
-            if (calculatedDistance < distance) {
-                distance = calculatedDistance;
-                target = t.transform;
+		if (target.TryGetComponent(out a)) {
+            if (formManager != a)
+                return;
+
+            float distance = float.MaxValue;
+
+            foreach (GameObject t in targets) {
+                float calculatedDistance = (t.transform.position - transform.position).magnitude;
+                if (calculatedDistance < distance) {
+                    distance = calculatedDistance;
+                    target = t.transform;
+                }
             }
         }
+        
     }
+
+    public virtual void RestTargetAfterSpiritExit(PlayerController formManager)
+    {
+        if (target == null) {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            target = targets[0].transform;
+        }
+
+        PlayerController a;
+
+        if (target.TryGetComponent(out a)) {
+            if (formManager != a)
+                return;
+
+            float distance = float.MaxValue;
+
+            foreach (GameObject t in targets) {
+                float calculatedDistance = (t.transform.position - transform.position).magnitude;
+                if (calculatedDistance < distance) {
+                    distance = calculatedDistance;
+                    target = t.transform;
+                }
+            }
+        }
+
+    }
+
 }

@@ -10,6 +10,7 @@ public class FormManager : MonoBehaviourPun
 
     public event Action<FormManager> OnFormChanged;
     public event Action<FormManager> OnBodyExit;
+    public static event Action<FormManager> OnBodyExitForEnemy;
 
     [HideInInspector] public List<PlayerForm> forms;
     [HideInInspector] public PlayerForm currentForm;
@@ -223,6 +224,7 @@ public class FormManager : MonoBehaviourPun
 
         isOut = true;
         OnBodyExit?.Invoke(this);
+        OnBodyExitForEnemy?.Invoke(this);
     }
 
     private void EnterBody()
@@ -249,7 +251,7 @@ public class FormManager : MonoBehaviourPun
         characterController.playerManager.bodyStats.spiritGauge = characterController.SGManager.SpiritGauge; // transfer new value of sg
         isOut = false;
         myBody.formManager.OnBodyExit?.Invoke(this);
-
+        OnBodyExitForEnemy?.Invoke(this);
 
         currentForm.RemoveComponents();
         characterController.Exit();

@@ -14,6 +14,11 @@ public class SearchAbility : EnemyAbility
 
 		enemy.navMeshAgent.isStopped = false;
 
+		if(enemy.target == null) {
+			enemy.targets = GameObject.FindGameObjectsWithTag(enemy.targetTag);
+			enemy.target = enemy.targets[0].transform;
+		}
+
 		if (searchDestination == null 
 			|| Vector3.Distance(enemy.transform.position, searchDestination) < 4)
         {

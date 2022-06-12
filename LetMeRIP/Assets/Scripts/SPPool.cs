@@ -29,7 +29,7 @@ public class SPPool : MonoBehaviourPun
     }
 
     [PunRPC]
-    private void RpcDrainPool(float amount, int playerViewID)
+    public void RpcDrainPool(float amount, int playerViewID)
     {
         PlayerController cc = PhotonView.Find(playerViewID).GetComponent<PlayerController>(); // fuck it seems kinda expensive
         float finalAmount = amount > holdedSp ? holdedSp : amount;

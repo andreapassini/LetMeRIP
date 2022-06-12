@@ -60,7 +60,7 @@ public class SGManager : MonoBehaviourPun
     }
 
     [PunRPC]
-    private void RpcAddSP(float amount)
+    public void RpcAddSP(float amount)
     {
         spiritGauge = Mathf.Clamp(spiritGauge + amount, 0, maxSpiritGauge);
         OnSPGained?.Invoke(this);

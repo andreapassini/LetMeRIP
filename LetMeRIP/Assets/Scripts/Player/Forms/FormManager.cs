@@ -206,7 +206,12 @@ public class FormManager : MonoBehaviourPun
 
     private void ExitBody()
     {
+        photonView.RPC("RpcExitBody", RpcTarget.All);
+    }
 
+    [PunRPC]
+    public void RpcExitBody()
+    {
         float spawnDistance = spiritForwardOffset;
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit info, 50f))
         {
@@ -214,12 +219,12 @@ public class FormManager : MonoBehaviourPun
                 spawnDistance *= -1;
         }
 
-        GameObject spirit = PhotonNetwork.Instantiate("Prefabs/SpiritCharacter", transform.position + spawnDistance * transform.forward, transform.rotation);
+        if(photonView.IsMine) PhotonNetwork.Instantiate("Prefabs/SpiritCharacter", transform.position + spawnDistance * transform.forward, transform.rotation);
         DisableAbilities();
         isOut = true;
         rb.velocity = Vector3.zero;
         Animator animator = GetComponentInChildren<Animator>();
-        if(animator != null) animator.SetBool("isRunning", false);
+        if (animator != null) animator.SetBool("isRunning", false);
         characterController.Exit();
 
         isOut = true;
@@ -228,6 +233,12 @@ public class FormManager : MonoBehaviourPun
     }
 
     private void EnterBody()
+    {
+        photonView.RPC("RpcEnterBody", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void RpcEnterBody()
     {
         Debug.Log("Trying to enter body");
 
@@ -255,7 +266,7 @@ public class FormManager : MonoBehaviourPun
 
         currentForm.RemoveComponents();
         characterController.Exit();
-        PhotonNetwork.Destroy(gameObject); // exit not needed since i'm destroying this go
+        if (photonView.IsMine) PhotonNetwork.Destroy(gameObject); // exit not needed since i'm destroying this go
     }
 
     private void OnDrawGizmos()

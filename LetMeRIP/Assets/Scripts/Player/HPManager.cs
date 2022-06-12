@@ -1,11 +1,12 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HPManager : MonoBehaviour
+public class HPManager : MonoBehaviourPun
 {
-    public event Action<HPManager> OnPlayerKilled;
+    public static event Action<HPManager> OnPlayerKilled;
     public event Action<HPManager> OnPlayerDamaged;
     public event Action<HPManager> OnPlayerHealed;
     private PlayerStats stats;
@@ -29,7 +30,7 @@ public class HPManager : MonoBehaviour
 
     void Start()
     {
-        gameObject.GetComponent<PlayerController>();
+        characterController = gameObject.GetComponent<PlayerController>();
     }
 
     public void TakeDamage(float dmg, Vector3 positionHit)
@@ -42,6 +43,7 @@ public class HPManager : MonoBehaviour
 
         if (health <= 0)
         {
+            Debug.Log("calling die");
             Die();
         }
 
@@ -89,9 +91,40 @@ public class HPManager : MonoBehaviour
 
     public void Die()
     {
-        // Die Event 
-        OnPlayerKilled?.Invoke(this);
+        FormManager formManager = characterController.formManager;
+        if (!characterController.formManager.IsSpirit)
+        {
+            Debug.Log("Body died");
+            Animator animator = GetComponentInChildren<Animator>();
+            gameObject.tag = "";
+            animator.SetTrigger("Death");
 
+            if (!formManager.isOut)
+            {
+                Debug.Log("Body was in use, spawning spirit");
+                formManager.ToggleSpiritForm();
+            }
+            else
+            {
+                Debug.Log("Body was NOT in use");
+            }
+            
+            formManager.currentForm.formModelPrefab.transform.SetParent(transform.parent);
+            OnPlayerKilled?.Invoke(this);
+            PhotonNetwork.Destroy(gameObject);
+        }
+        else
+        {
+            GetComponent<CapsuleCollider>().enabled = false;
+            Debug.Log("spirit died");
+            if (photonView.IsMine) 
+            {
+                PhotonNetwork.Instantiate("Prefabs/PlayerTomb", transform.position, Quaternion.identity);
+                formManager.DisableAbilities();
+                Heal(maxHealth, false); // restore health for eventual revive
+                PhotonNetwork.Destroy(gameObject);
+            }
+        }
         // Overwrite
     }
 }

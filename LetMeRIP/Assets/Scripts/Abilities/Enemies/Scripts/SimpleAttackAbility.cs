@@ -30,7 +30,7 @@ public class SimpleAttackAbility : EnemyAbility
         foreach (Collider e in hitEnemies) {
             if (e.CompareTag("Player")) {
 
-                HPManager hpManager = e.transform.GetComponent<HPManager>();
+                HPManager hpManager = e.gameObject.GetComponent<HPManager>();
 
                 if (hpManager != null) {
                     hpManager.TakeDamage(damage + enemy.enemyStats.attack, enemy.transform.position);

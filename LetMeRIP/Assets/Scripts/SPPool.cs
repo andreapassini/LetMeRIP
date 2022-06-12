@@ -8,7 +8,6 @@ using UnityEngine;
  */
 public class SPPool : MonoBehaviourPun
 {
-    public float remainingSP { get => holdedSp; }
     private float lifeTime;
     [SerializeField] private float holdedSp = 0f;
     
@@ -25,7 +24,6 @@ public class SPPool : MonoBehaviourPun
         if (PhotonNetwork.IsMasterClient)
         {
             if (characterController == null) Debug.Log("cc NULL");
-            Debug.Log($"POOL VIEWID {photonView.ViewID}");
             photonView.RPC("RpcDrainPool", RpcTarget.All, amount, characterController.photonView.ViewID);
         }
     }
@@ -34,13 +32,10 @@ public class SPPool : MonoBehaviourPun
     private void RpcDrainPool(float amount, int playerViewID)
     {
         PlayerController cc = PhotonView.Find(playerViewID).GetComponent<PlayerController>(); // fuck it seems kinda expensive
-        if(remainingSP <= 0) PhotonNetwork.Destroy(gameObject);
-        else 
-        {
-            float finalAmount = amount > remainingSP ? remainingSP : amount;
-            holdedSp -= finalAmount;
-            if (cc.photonView.IsMine) cc.SGManager.AddSP(finalAmount);
-        }
+        float finalAmount = amount > holdedSp ? holdedSp : amount;
+        holdedSp -= finalAmount;
+        cc.SGManager.AddSP(finalAmount);
+        if (holdedSp <= 0f && PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(gameObject); 
     }
 
     private IEnumerator DestroyAfterTime(float lifeTime)

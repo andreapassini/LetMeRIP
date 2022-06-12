@@ -12,8 +12,6 @@ public class EnemyRanged : EnemyForm
 
     public float tooNearRange = 2f;
 
-    [SerializeField] private string targetTag = "Player";
-
     public EnemyAbility dashAction;
 
     public bool lateStart = false;

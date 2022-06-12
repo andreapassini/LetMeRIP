@@ -8,8 +8,6 @@ public class EnemySimple : EnemyForm
 {
 	private FSM fsm;
 
-    [SerializeField]private string targetTag = "Player";
-
     public bool lateStart = false;
 
     protected override void Awake()

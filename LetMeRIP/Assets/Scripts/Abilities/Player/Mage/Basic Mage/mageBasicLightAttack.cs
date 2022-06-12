@@ -48,8 +48,7 @@ public class mageBasicLightAttack : Ability
 
         damage = 10 + characterController.currentStats.strength * 0.2f;
 
-        // Get the prefab
-        bulletPrefab = Resources.Load("Prebas/Bullet") as GameObject;
+        
 
         p = characterController;
     }
@@ -78,8 +77,11 @@ public class mageBasicLightAttack : Ability
 
     public void Cast(MageBasic m)
 	{
-        if(this == m) {
+        if(p == m.GetComponent<PlayerController>()) {
             Debug.Log("Casting");
+            // Get the prefab
+            bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
+
             // Fire Bullet
             GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
 
@@ -87,6 +89,9 @@ public class mageBasicLightAttack : Ability
             bulletFired.layer = gameObject.layer;
             Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
             rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
+
+            EnableActions();
+            StartCoroutine(Cooldown());
 
             CancelAction();
         }

@@ -39,11 +39,11 @@ public class ClericHeavyAttack : Ability
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>(false);
 
-        minDamage = (float)(15 + characterController.currentStats.intelligence * 0.2f +
-            0.1 * characterController.currentStats.strength);
+        minDamage = (float)(15 + characterController.stats.intelligence * 0.2f +
+            0.1 * characterController.stats.strength);
 
-        maxDamage = (float)(40 + characterController.currentStats.intelligence * 0.3f +
-            0.3 * characterController.currentStats.strength);
+        maxDamage = (float)(40 + characterController.stats.intelligence * 0.3f +
+            0.3 * characterController.stats.strength);
     }
 
     /**

@@ -37,9 +37,9 @@ public class ClericAbility1 : Ability
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>(false);
 
-        minHeal = (float)(35 + characterController.currentStats.intelligence * 0.4f);
+        minHeal = (float)(35 + characterController.stats.intelligence * 0.4f);
 
-        maxHeal = (float)(50 + characterController.currentStats.intelligence * 0.8f);
+        maxHeal = (float)(50 + characterController.stats.intelligence * 0.8f);
 
         prefab = Resources.Load("Prebas/Pot") as GameObject;
 

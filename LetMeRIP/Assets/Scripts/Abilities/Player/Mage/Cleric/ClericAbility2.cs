@@ -58,7 +58,7 @@ public class ClericAbility2 : Ability
         Vector3 v = GatherDirectionInput();
 
         GameObject beaconOfHope =  Instantiate(prefab, v, transform.rotation);
-        beaconOfHope.GetComponent<BeaconOfHope>().Init(p.currentStats.intelligence);
+        beaconOfHope.GetComponent<BeaconOfHope>().Init(p.stats.intelligence);
 
         CancelAction();
     }

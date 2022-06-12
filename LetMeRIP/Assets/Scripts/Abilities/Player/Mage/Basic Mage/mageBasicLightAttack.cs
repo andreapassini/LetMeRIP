@@ -48,8 +48,6 @@ public class mageBasicLightAttack : Ability
 
         damage = 10 + characterController.currentStats.strength * 0.2f;
 
-        
-
         p = characterController;
     }
 
@@ -58,13 +56,13 @@ public class mageBasicLightAttack : Ability
      */
     public override void StartedAction()
     {
+        DisableActions();
+
         animator ??= GetComponentInChildren<Animator>(false);
         isReady = false;
 
         // dash animation
         animator.SetTrigger("LightAttack");
-
-        DisableActions();
     }
 
     /**

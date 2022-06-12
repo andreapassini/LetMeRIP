@@ -35,6 +35,7 @@ public class SurvivalRoom : Room
             spawners.Init();
             
             closeGatesCoroutine = StartCoroutine(CloseGates(3f));
+            HudController.Instance.InitRoomTimer(timeToSurvive);
             survivalTimerCoroutine = StartCoroutine(SurvivalTimer());
             respawnEnemiesCoroutine = StartCoroutine(RespawnEnemies(respawnOffset));
         }
@@ -66,7 +67,7 @@ public class SurvivalRoom : Room
 
         OpenInnerGates();
         OpenOuterGates();
-
+        HudController.Instance.HideTimer();
         Debug.Log("ROOM CLEARED");
     }
 

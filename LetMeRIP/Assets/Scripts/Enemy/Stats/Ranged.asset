@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5de65ca5d542634b818945fdc2bc284, type: 3}
   m_Name: Ranged
   m_EditorClassIdentifier: 
-  name: ranged
-  health: 50
-  maxHealth: 50
+  enemyName: RangedEnemy
+  health: 300
+  maxHealth: 300
   attack: 20
   defense: 2
   swiftness: 5
+  rewardSp: 0

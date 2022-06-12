@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5de65ca5d542634b818945fdc2bc284, type: 3}
   m_Name: Simple
   m_EditorClassIdentifier: 
-  name: Simple
-  health: 50
+  enemyName: EnemySimple
+  health: 500
   maxHealth: 500
   attack: 10
-  defense: 10
+  defense: 1
   swiftness: 10
+  rewardSp: 0

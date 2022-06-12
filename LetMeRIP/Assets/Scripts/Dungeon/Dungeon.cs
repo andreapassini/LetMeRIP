@@ -29,7 +29,7 @@ public class Dungeon : MonoBehaviourPun
     }
 
     [PunRPC]
-    private void AddPlayer()
+    private void RpcAddPlayers()
     {
         foreach (PlayerController player in FindObjectsOfType<PlayerController>())
         {
@@ -46,8 +46,8 @@ public class Dungeon : MonoBehaviourPun
      */
     private IEnumerator LateStart()
     {
-        yield return new WaitForSeconds(1f);
-        photonView.RPC("AddPlayer", RpcTarget.All);
+        yield return new WaitForSeconds(.5f);
+        photonView.RPC("RpcAddPlayers", RpcTarget.All);
     }
 
     public void Switch(Gate gate, int playerViewID)

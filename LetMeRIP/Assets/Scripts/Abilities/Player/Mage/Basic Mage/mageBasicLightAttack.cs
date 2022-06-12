@@ -32,12 +32,12 @@ public class mageBasicLightAttack : Ability
 
 	private void OnEnable()
 	{
-        MageBasic.lightAttack += Cast;
+        MageBasicRebroadcastAnimEvent.lightAttack += Cast;
 	}
 
 	private void OnDisable()
 	{
-        MageBasic.lightAttack -= Cast;
+        MageBasicRebroadcastAnimEvent.lightAttack -= Cast;
     }
 
 	public override void Init(PlayerController characterController)

@@ -34,12 +34,12 @@ public class mageBasicAbility1 : Ability
 
     private void OnEnable()
     {
-        MageBasic.ability1 += CastBeam;
+        MageBasicRebroadcastAnimEvent.ability1 += CastBeam;
     }
 
     private void OnDisable()
     {
-        MageBasic.ability2 -= CastBeam;
+        MageBasicRebroadcastAnimEvent.ability2 -= CastBeam;
     }
 
     public override void Init(PlayerController characterController)

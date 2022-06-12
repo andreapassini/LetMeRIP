@@ -11,13 +11,6 @@ public class ClericAbility2 : Ability
 
     // prevents the cancel action to start too soon
     private bool isCasting = false;
-    private float minHeal;
-    private float maxHeal;
-
-    private float maxChargeTime = 3f;
-    private Coroutine chargeCor;
-
-    private float startTime;
 
     private GameObject prefab;
 

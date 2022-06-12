@@ -5,13 +5,15 @@ using UnityEngine;
 public class PhotonLauncher : MonoBehaviourPunCallbacks
 {
     [SerializeField] private TMP_InputField roomNameInputField;
-    
+
     private void Start()
     {
         Debug.Log("Connecting to Master Server");
+
+        if (PhotonNetwork.IsConnected) PhotonNetwork.Disconnect();
         PhotonNetwork.ConnectUsingSettings();
     }
-    
+
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to Master Server");
@@ -28,15 +30,15 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
     {
         if (string.IsNullOrEmpty(roomNameInputField.text)) return;
         PhotonNetwork.CreateRoom(roomNameInputField.text);
-        
+
         MenuManager.Instance.OpenMenu("loading");
     }
-    
+
     public void JoinRoom()
     {
         if (string.IsNullOrEmpty(roomNameInputField.text)) return;
         PhotonNetwork.JoinRoom(roomNameInputField.text);
-        
+
         MenuManager.Instance.OpenMenu("loading");
     }
 

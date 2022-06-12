@@ -44,11 +44,10 @@ public class HudController : MonoBehaviour
         (HudEForm initialForm, Dictionary<HudEAbility, Ability> initialAbilities) = PrepareAbilities(formManager);
         statusController.Init(initialForm, initialAbilities);
 
-        spiritHealth.Init(pc.spiritStatsSrc.maxHealth, pc.spiritStatsSrc.health);
-        bodyHealth.Init(pc.bodyStatsSrc.maxHealth, pc.bodyStatsSrc.health);
-        spiritGauge.Init(pc.bodyStatsSrc.maxSpiritGauge, pc.bodyStatsSrc.spiritGauge);
+        spiritHealth.Init(pc.playerManager.spiritStats.maxHealth, pc.playerManager.spiritStats.health);
+        bodyHealth.Init(pc.playerManager.bodyStats.maxHealth, pc.playerManager.bodyStats.health);
+        spiritGauge.Init(pc.playerManager.bodyStats.maxSpiritGauge, pc.playerManager.bodyStats.spiritGauge);
         
-
         formManager.OnFormChanged += ChangeForm;
         hpManager.OnPlayerDamaged += manager => bodyHealth.SetValue(manager.Health);
         hpManager.OnPlayerHealed += manager => bodyHealth.SetValue(manager.Health);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mageBasicLightAttack : Ability
+public class ClericAbility1 : Ability
 {
     [SerializeField]
     private Animator animator;
@@ -11,33 +11,31 @@ public class mageBasicLightAttack : Ability
 
     // prevents the cancel action to start too soon
     private bool isCasting = false;
-    private float damage;
+    private float minHeal;
+    private float maxHeal;
 
-    private Coroutine damageCoroutine;
-    private float tickRate = .1f;
+    private float maxChargeTime = 3f;
+    private Coroutine chargeCor;
 
-    private GameObject bulletPrefab;
-
-    [SerializeField]
-    private float bulletForce = 15f;
+    private float startTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        cooldown = 1.2f;
-        rb = GetComponent<Rigidbody>();
+        cooldown = 9f;
+        SPCost = 36f;
     }
 
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
         attackPoint = transform.Find("AttackPoint");
+        rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>(false);
 
-        damage = 10 + characterController.currentStats.strength * 0.2f;
+        minHeal = (float)(35 + characterController.currentStats.intelligence * 0.4f);
 
-        // Get the prefab
-        bulletPrefab = Resources.Load("Prebas/Bullet") as GameObject;
+        maxHeal = (float)(50 + characterController.currentStats.intelligence * 0.8f);
     }
 
     /**
@@ -49,9 +47,9 @@ public class mageBasicLightAttack : Ability
         isReady = false;
 
         // dash animation
-        animator.SetTrigger("LightAttack");
+        animator.SetTrigger("HeavyAttack");
 
-        DisableActions();
+
     }
 
     /**
@@ -59,16 +57,9 @@ public class mageBasicLightAttack : Ability
      */
     public override void PerformedAction()
     {
-        Debug.Log("Casting");
-        // Fire Bullet
-        GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
-
-        bulletFired.GetComponent<Bullet>().damage = damage;
-        bulletFired.layer = gameObject.layer;
-        Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
-        rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
-
-        CancelAction();
+        startTime = Time.time;
+        chargeCor = StartCoroutine(ChargeHealingPot());
+        DisableActions();
     }
 
     /**
@@ -76,9 +67,29 @@ public class mageBasicLightAttack : Ability
      */
     public override void CancelAction()
     {
+        StopCoroutine(chargeCor);
+        animator.SetTrigger("HeayAttack");
+        //HammerDown(); Call this from the animation event
+
         EnableActions();
         StartCoroutine(Cooldown());
-
     }
 
+    public void HammerDown()
+    {
+        float difTime = Time.time - startTime;
+
+        // Calculate damage
+        float damage = Mathf.Clamp(minHeal + difTime, minHeal, maxHeal);
+
+        // Calcolate position
+
+        // Create AOE
+    }
+
+    private IEnumerator ChargeHealingPot()
+    {
+        yield return new WaitForSeconds(maxChargeTime);
+        CancelAction();
+    }
 }

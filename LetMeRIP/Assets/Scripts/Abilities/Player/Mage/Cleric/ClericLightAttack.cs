@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mageBasicLightAttack : Ability
+public class ClericLightAttack : Ability
 {
     [SerializeField]
     private Animator animator;
@@ -13,9 +13,6 @@ public class mageBasicLightAttack : Ability
     private bool isCasting = false;
     private float damage;
 
-    private Coroutine damageCoroutine;
-    private float tickRate = .1f;
-
     private GameObject bulletPrefab;
 
     [SerializeField]
@@ -24,20 +21,21 @@ public class mageBasicLightAttack : Ability
     // Start is called before the first frame update
     void Start()
     {
-        cooldown = 1.2f;
-        rb = GetComponent<Rigidbody>();
+        cooldown = 1f;
+        SPCost = 4f;
     }
 
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
         attackPoint = transform.Find("AttackPoint");
+        rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>(false);
 
-        damage = 10 + characterController.currentStats.strength * 0.2f;
+        damage = 15 + characterController.currentStats.intelligence * 0.3f;
 
         // Get the prefab
-        bulletPrefab = Resources.Load("Prebas/Bullet") as GameObject;
+        bulletPrefab = Resources.Load("Prebas/LightSphere") as GameObject;
     }
 
     /**
@@ -50,8 +48,6 @@ public class mageBasicLightAttack : Ability
 
         // dash animation
         animator.SetTrigger("LightAttack");
-
-        DisableActions();
     }
 
     /**
@@ -60,13 +56,21 @@ public class mageBasicLightAttack : Ability
     public override void PerformedAction()
     {
         Debug.Log("Casting");
-        // Fire Bullet
-        GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
 
-        bulletFired.GetComponent<Bullet>().damage = damage;
-        bulletFired.layer = gameObject.layer;
-        Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
-        rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
+        Fire();
+    }
+
+    public void Fire()
+	{
+        for(int i = 0; i<3; i++) {
+            // Fire Bullet
+            GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
+
+            bulletFired.layer = gameObject.layer;
+            bulletFired.GetComponent<LightSphere>().damage = damage;
+            Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
+            rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
+        }
 
         CancelAction();
     }
@@ -76,9 +80,6 @@ public class mageBasicLightAttack : Ability
      */
     public override void CancelAction()
     {
-        EnableActions();
         StartCoroutine(Cooldown());
-
     }
-
 }

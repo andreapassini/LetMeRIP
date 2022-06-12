@@ -31,9 +31,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
     [SerializeField] public string playerClass; // archer, mage or warrior
     public FormManager formManager;
 
-    public PlayerStats spiritStatsSrc;
-    public PlayerStats bodyStatsSrc;
-    public PlayerStats currentStatsSrc;
+    [SerializeField] private PlayerStats spiritStatsSrc;
+    [SerializeField] private PlayerStats bodyStatsSrc;
+    private PlayerStats currentStatsSrc;
 
     public Stats stats;
     public LookAtMouse lam;
@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
         healthBar = this.GetComponentInChildren<PlayerBillboard>();
         healthBar.Init(this);
 
-        HudController.Instance.InitPlayerInfoBar(playerClass.ToLower(), this);
+        if (photonView.IsMine) HudController.Instance.InitPlayerInfoBar(playerClass.ToLower(), this);
     }
 
     /**

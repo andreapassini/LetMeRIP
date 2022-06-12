@@ -31,8 +31,8 @@ public class PlayerBillboard : Billboard
 
         if (pc.formManager.IsSpirit)
         {
-            healthBar.Init(pc.spiritStatsSrc.maxHealth, hpManager.Health);
-            sgBar.Init(pc.spiritStatsSrc.maxSpiritGauge, sgManager.SpiritGauge);
+            healthBar.Init(pc.playerManager.spiritStats.maxHealth, pc.playerManager.spiritStats.health);
+            sgBar.Init(pc.playerManager.spiritStats.maxSpiritGauge, pc.playerManager.spiritStats.spiritGauge);
             
             
             hpManager.OnPlayerDamaged += manager => healthBar.SetValue(manager.Health);
@@ -43,8 +43,8 @@ public class PlayerBillboard : Billboard
             return;
         }
         
-        healthBar.Init(pc.currentStatsSrc.maxHealth, pc.currentStatsSrc.health);
-        sgBar.Init(pc.currentStatsSrc.maxSpiritGauge, pc.currentStatsSrc.spiritGauge);
+        healthBar.Init(pc.playerManager.bodyStats.maxHealth, pc.playerManager.bodyStats.health);
+        sgBar.Init(pc.playerManager.bodyStats.maxSpiritGauge, pc.playerManager.bodyStats.spiritGauge);
         
         ToggleSpiritGauge(formManager);
 
@@ -60,6 +60,8 @@ public class PlayerBillboard : Billboard
 
     private void ToggleSpiritGauge(FormManager formManager)
     {
+        Debug.LogError($"ID: {formManager.ViewID}, IsOut: {formManager.IsOut}");
+        
         if (formManager.IsOut)
         { // Hide spirit gauge
             hidables.SetActive(false);

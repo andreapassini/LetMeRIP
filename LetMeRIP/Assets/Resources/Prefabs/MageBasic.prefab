@@ -1093,14 +1093,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8189546727674670547}
   - component: {fileID: 8141291026801895651}
-  - component: {fileID: 8091988685687415215}
-  - component: {fileID: 8190014203849727937}
-  - component: {fileID: 8190014203849727936}
-  - component: {fileID: 8190014203849727939}
-  - component: {fileID: 8190014203849727938}
-  - component: {fileID: 8190014203849727965}
-  - component: {fileID: 8190014203849727964}
-  - component: {fileID: 8190014203849727967}
+  - component: {fileID: 8190014203849727945}
   m_Layer: 0
   m_Name: MageBasic
   m_TagString: Untagged
@@ -1143,21 +1136,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!136 &8091988685687415215
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8191107969833138123}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.3072609
-  m_Height: 1.882848
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.98, z: 0}
---- !u!114 &8190014203849727937
+--- !u!114 &8190014203849727945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1166,105 +1145,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 8191107969833138123}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a3f8b9fae412be41b85b3511dd5e822, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8190014203849727936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8191107969833138123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd7c28883cec7a14996e3001a3b7a440, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 0
-  SPCost: 0
-  animator: {fileID: 0}
-  bulletForce: 15
-  chargeTime: 0.5
---- !u!114 &8190014203849727939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8191107969833138123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3055d6d9f034efd44b956d8e82cf0a4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 0
-  SPCost: 0
-  animator: {fileID: 0}
-  castTime: 0.5
---- !u!114 &8190014203849727938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8191107969833138123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 456e1549a3bebe84793dbe53dc0e5e73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 0
-  SPCost: 0
-  animator: {fileID: 0}
-  bulletForce: 15
-  chargeTime: 0.5
---- !u!114 &8190014203849727965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8191107969833138123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6035fcc333c8d6941a26bb7733450ed5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 0
-  SPCost: 0
-  animator: {fileID: 0}
-  bulletForce: 15
---- !u!114 &8190014203849727964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8191107969833138123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 262234b77903a164e9b7b400c1770461, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityHandler: {fileID: 8190014203849727937}
---- !u!114 &8190014203849727967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8191107969833138123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bfa1538b2363c941871f692765e339b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forms: []
-  currentForm: {fileID: 0}
-  sharedAbilityHandler: {fileID: 8190014203849727937}
-  spiritForwardOffset: 2
-  spiritReturnRange: 3
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 1
+    Name: LightAttack
+  - Type: 9
+    SynchronizeType: 1
+    Name: HeavyAttackCharge
+  - Type: 9
+    SynchronizeType: 1
+    Name: HeavyAttackCast
+  - Type: 9
+    SynchronizeType: 1
+    Name: Ability1Charge
+  - Type: 9
+    SynchronizeType: 1
+    Name: Ability1Cast
+  - Type: 9
+    SynchronizeType: 1
+    Name: Ability2
+  - Type: 1
+    SynchronizeType: 1
+    Name: speed
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &8191112408283004133
 GameObject:
   m_ObjectHideFlags: 0

@@ -80,7 +80,7 @@ public class Movement : MonoBehaviourPun
     public void Move()
     {
         //rb.velocity = (transform.position + direction.ToIso() * characterController.currentStats.swiftness/* * Time.deltaTime*/);
-        rb.velocity = direction.ToIso() * characterController.currentStats.swiftness;
+        rb.velocity = direction.ToIso() * characterController.stats.swiftness;
     }
 
     private void RefreshAnimator(FormManager fm)

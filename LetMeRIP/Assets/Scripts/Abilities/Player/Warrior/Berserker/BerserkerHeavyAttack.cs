@@ -27,7 +27,7 @@ public class BerserkerHeavyAttack : Ability
         base.Init(characterController);
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
-        damage = 15 + characterController.spiritStats.strength * 0.3f + characterController.spiritStats.dexterity * 0.3f;
+        damage = 15 + characterController.stats.strength * 0.3f + characterController.stats.dexterity * 0.3f;
     }
 
     public override void StartedAction()

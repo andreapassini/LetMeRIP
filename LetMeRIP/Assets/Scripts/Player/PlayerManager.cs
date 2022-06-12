@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviourPun
 {
+    public PlayerController.Stats spiritStats;
+    public PlayerController.Stats bodyStats;
+
+    private void Awake()
+    {
+        spiritStats = new PlayerController.Stats();
+        bodyStats = new PlayerController.Stats();
+        spiritStats.formName = "";
+        bodyStats.formName = "";
+
+    }
+
     private void Start()
     {
         if (!photonView.IsMine) return;
-
         CreateController();
     }
 
@@ -15,4 +26,6 @@ public class PlayerManager : MonoBehaviourPun
     {
         PhotonNetwork.Instantiate(Path.Combine("Prefabs", "WarriorCharacter"), Vector3.zero, Quaternion.identity);
     }
+
+
 }

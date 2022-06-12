@@ -67,7 +67,7 @@ public class SpiritAbility1 : Ability
                     Debug.Log("Pool within angle");
                     pool = hitPool.GetComponent<SPPool>();
                     isDraining = true;
-                    characterController.currentStats.swiftness *= slowFactor; // i'm not using SlowPE since the time of the effect is not fixed
+                    characterController.stats.swiftness *= slowFactor; // i'm not using SlowPE since the time of the effect is not fixed
                     drainPoolCoroutine = StartCoroutine(DrainPool(pool));
                     StartCoroutine(Cooldown());
                     return;
@@ -90,7 +90,7 @@ public class SpiritAbility1 : Ability
         {
             isDraining = false;
             if(drainPoolCoroutine != null) StopCoroutine(drainPoolCoroutine);
-            characterController.currentStats.swiftness /= slowFactor;
+            characterController.stats.swiftness /= slowFactor;
         }
     }
 

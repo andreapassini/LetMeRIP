@@ -24,7 +24,7 @@ public class SpiritHeavyAttack : Ability
         base.Init(characterController);
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
-        damage = 15 + characterController.spiritStats.intelligence * 0.2f + characterController.spiritStats.strength * 0.1f;
+        damage = 15 + characterController.stats.intelligence * 0.2f + characterController.stats.strength * 0.1f;
     }
 
     public override void StartedAction()

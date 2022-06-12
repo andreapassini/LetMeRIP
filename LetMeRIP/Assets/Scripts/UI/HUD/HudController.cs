@@ -44,9 +44,9 @@ public class HudController : MonoBehaviour
         (HudEForm initialForm, Dictionary<HudEAbility, Ability> initialAbilities) = PrepareAbilities(formManager);
         statusController.Init(initialForm, initialAbilities);
 
-        spiritHealth.Init(pc.spiritStats.maxHealth, pc.spiritStats.health);
-        bodyHealth.Init(pc.bodyStats.maxHealth, pc.bodyStats.health);
-        spiritGauge.Init(pc.bodyStats.maxSpiritGauge, pc.bodyStats.spiritGauge);
+        spiritHealth.Init(pc.spiritStatsSrc.maxHealth, pc.spiritStatsSrc.health);
+        bodyHealth.Init(pc.bodyStatsSrc.maxHealth, pc.bodyStatsSrc.health);
+        spiritGauge.Init(pc.bodyStatsSrc.maxSpiritGauge, pc.bodyStatsSrc.spiritGauge);
         
 
         formManager.OnFormChanged += ChangeForm;

@@ -30,9 +30,9 @@ public class SlowPE : PlayerEffect
     {
         // vfx here
 
-        characterController.currentStats.swiftness *= speedMultiplier;
+        characterController.stats.swiftness *= speedMultiplier;
         yield return new WaitForSeconds(duration);
-        characterController.currentStats.swiftness /= speedMultiplier;
+        characterController.stats.swiftness /= speedMultiplier;
         Destroy(this);
     }
 }

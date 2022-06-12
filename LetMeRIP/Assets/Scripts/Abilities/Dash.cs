@@ -36,7 +36,6 @@ public class Dash : Ability
     public override void StartedAction()
     {
         animator ??= GetComponentInChildren<Animator>(false);
-        Debug.Log("Dash starting");
         isReady = false;
 
         direction = playerInputActions.Player.Movement.ReadValue<Vector3>().ToIso();
@@ -56,7 +55,6 @@ public class Dash : Ability
      */
     public override void PerformedAction()
     {
-        Debug.Log("Dashing");
         if (!direction.Equals(Vector3.zero))
         {
             animator.SetTrigger("Dash");
@@ -64,7 +62,6 @@ public class Dash : Ability
             StartCoroutine(Cooldown());
         } else
         {
-            Debug.Log("Missing direction");
             isReady = true;
             isDashing = false;
         }
@@ -77,7 +74,6 @@ public class Dash : Ability
     {
         if (!isDashing)
         {
-            Debug.Log("Dash finished");
             playerInputActions.Player.Movement.Enable(); // you can't move while dashing
         }
     }

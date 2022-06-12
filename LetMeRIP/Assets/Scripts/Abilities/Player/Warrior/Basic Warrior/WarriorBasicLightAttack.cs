@@ -20,7 +20,7 @@ public class WarriorBasicLightAttack : Ability
         base.Init(characterController);
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
-        damage = 10 + characterController.currentStats.strength * 0.1f + characterController.currentStats.dexterity * 0.1f;
+        damage = 10 + characterController.stats.strength * 0.1f + characterController.stats.dexterity * 0.1f;
     }
 
     public override void StartedAction()

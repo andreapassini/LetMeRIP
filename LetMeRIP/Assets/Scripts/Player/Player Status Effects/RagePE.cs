@@ -27,15 +27,15 @@ public class RagePE : PlayerEffect
     {
         // vfx here
 
-        characterController.currentStats.defense *= 1-consumedDefense;
-        characterController.currentStats.strength *= 1 + strengthIncrement;
+        characterController.stats.defense *= 1-consumedDefense;
+        characterController.stats.strength *= 1 + strengthIncrement;
         foreach(Ability ability in characterController.formManager.currentForm.abilityHandler.abilities.Values)
             ability.cooldown *= 1-cooldownReduction;
 
         yield return new WaitForSeconds(duration);
 
-        characterController.currentStats.defense /= 1 - consumedDefense;
-        characterController.currentStats.strength /= 1 + strengthIncrement;
+        characterController.stats.defense /= 1 - consumedDefense;
+        characterController.stats.strength /= 1 + strengthIncrement;
         foreach (Ability ability in characterController.formManager.currentForm.abilityHandler.abilities.Values)
             ability.cooldown /= 1 - cooldownReduction;
 

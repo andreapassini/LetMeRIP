@@ -31,8 +31,8 @@ public class PlayerBillboard : Billboard
 
         if (pc.formManager.IsSpirit)
         {
-            healthBar.Init(pc.spiritStats.maxHealth, hpManager.Health);
-            sgBar.Init(pc.spiritStats.maxSpiritGauge, sgManager.SpiritGauge);
+            healthBar.Init(pc.spiritStatsSrc.maxHealth, hpManager.Health);
+            sgBar.Init(pc.spiritStatsSrc.maxSpiritGauge, sgManager.SpiritGauge);
             
             
             hpManager.OnPlayerDamaged += manager => healthBar.SetValue(manager.Health);
@@ -43,8 +43,8 @@ public class PlayerBillboard : Billboard
             return;
         }
         
-        healthBar.Init(pc.currentStats.maxHealth, pc.currentStats.health);
-        sgBar.Init(pc.currentStats.maxSpiritGauge, pc.currentStats.spiritGauge);
+        healthBar.Init(pc.currentStatsSrc.maxHealth, pc.currentStatsSrc.health);
+        sgBar.Init(pc.currentStatsSrc.maxSpiritGauge, pc.currentStatsSrc.spiritGauge);
         
         ToggleSpiritGauge(formManager);
 

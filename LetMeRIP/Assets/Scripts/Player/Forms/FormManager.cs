@@ -246,7 +246,7 @@ public class FormManager : MonoBehaviourPun
 
         myBody.Init();
         myBody.formManager.OnFormChanged?.Invoke(myBody.formManager);
-
+        characterController.playerManager.bodyStats.spiritGauge = characterController.SGManager.SpiritGauge; // transfer new value of sg
         isOut = false;
         myBody.formManager.OnBodyExit?.Invoke(this);
 

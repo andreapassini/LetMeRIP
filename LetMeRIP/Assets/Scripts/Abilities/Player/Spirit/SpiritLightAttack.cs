@@ -23,7 +23,7 @@ public class SpiritLightAttack : Ability
         base.Init(characterController);
         animator = GetComponentInChildren<Animator>(false);
         attackPoint = transform.Find("AttackPoint");
-        damage = 10 * characterController.spiritStats.intelligence * 0.1f;
+        damage = 10 * characterController.stats.intelligence * 0.1f;
     }
 
     public override void StartedAction()

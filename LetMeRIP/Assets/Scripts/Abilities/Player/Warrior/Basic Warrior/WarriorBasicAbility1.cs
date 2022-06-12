@@ -25,8 +25,8 @@ public class WarriorBasicAbility1 : Ability
         base.Init(characterController);
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
-        damage = 10 + characterController.currentStats.strength * 0.4f;
-        heal = 20 + characterController.currentStats.strength * .3f + characterController.currentStats.intelligence * .2f;
+        damage = 10 + characterController.stats.strength * 0.4f;
+        heal = 20 + characterController.stats.strength * .3f + characterController.stats.intelligence * .2f;
         healDecayTime = 4f;
     }
 

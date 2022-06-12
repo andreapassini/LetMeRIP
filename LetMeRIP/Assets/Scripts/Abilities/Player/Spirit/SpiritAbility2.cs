@@ -17,7 +17,7 @@ public class SpiritAbility2 : Ability
     {
         base.Init(characterController);
         animator = GetComponentInChildren<Animator>(false);
-        damage = 10 + characterController.spiritStats.intelligence * 0.3f;
+        damage = 10 + characterController.stats.intelligence * 0.3f;
     }
 
     public override void StartedAction()

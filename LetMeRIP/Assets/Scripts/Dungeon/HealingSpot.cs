@@ -21,9 +21,9 @@ public class HealingSpot : Interactable
             isUsed = true;
             gameObject.SetActive(false);
             if (characterController is null) Debug.LogError("cc is null");
-            if(characterController.photonView.IsMine) characterController.HPManager.Heal(healAmount, false);
-            //if (PhotonNetwork.IsMasterClient)
-            //    photonView.RPC("RpcHealingSpotHeal", RpcTarget.All, characterController.photonView.ViewID);
+
+            if (PhotonNetwork.IsMasterClient)
+                photonView.RPC("RpcHealingSpotHeal", RpcTarget.All, characterController.photonView.ViewID);
         } else
         {
             Debug.Log("Healing spot already used you greedy bastard");
@@ -34,9 +34,7 @@ public class HealingSpot : Interactable
     [PunRPC]
     private void RpcHealingSpotHeal(int playerViewID)
     {
-        Debug.Log("Hellooo");
         PlayerController cc = PhotonView.Find(playerViewID).GetComponent<PlayerController>();
-        if(cc.IsMine) cc.HPManager.Heal(healAmount, false);
-        Debug.Log($"Healing: {cc.name}");
+        cc.HPManager.Heal(healAmount, false);
     }
 }

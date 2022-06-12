@@ -9,16 +9,7 @@ public class HPManager : MonoBehaviourPun
     public static event Action<PlayerController> OnPlayerKilled;
     public event Action<HPManager> OnPlayerDamaged;
     public event Action<HPManager> OnPlayerHealed;
-    private PlayerStats stats;
-    public PlayerStats Stats
-    {
-        get => stats;
-        set
-        {
-            stats = value;
-            health = value.health;
-        }
-    }
+    public PlayerController.Stats stats;
 
     private PlayerController characterController;
     private bool isDead = false;
@@ -36,43 +27,20 @@ public class HPManager : MonoBehaviourPun
 
     public void TakeDamage(float dmg, Vector3 positionHit)
     {
-        string target = photonView.IsMine ? "I" : "OTHER";
-        Debug.Log($"{target} Got HIT");
-
-        // Calculate defense reduction
-        if (dmg > 0 && photonView.IsMine) 
-            health -= dmg - (dmg * (stats.defense * 0.01f));
-
-        if (health <= 0 && photonView.IsMine)
-        {
-            Debug.Log("calling die");
-            photonView.RPC("RpcDie", RpcTarget.All);
-        }
-
-        // Take damage Event
-        OnPlayerDamaged?.Invoke(this);
+        if (PhotonNetwork.IsMasterClient && dmg <= 0)
+            photonView.RPC("RpcTakeDamage", RpcTarget.All, dmg, positionHit);
     }
 
     public void Heal(float amount, bool overHeal = false)
     {
-        if(amount > 0)
-        {
-            if (overHeal)
-            {
-                health += amount;
-                stats.maxHealth += amount;
-            } else
-            {
-                health = Mathf.Clamp(health + amount, 0, stats.maxHealth);
-            }
-        }
-        OnPlayerHealed?.Invoke(this);
+        if (PhotonNetwork.IsMasterClient && amount > 0)
+            photonView.RPC("RpcHeal", RpcTarget.All, amount, overHeal);
     }
 
     public void DecayingHeal(float amount, float timeToDecay)
     {
-        if (amount <= 0) return;
-        StartCoroutine(DecayingHealCo(amount, timeToDecay));
+        if (PhotonNetwork.IsMasterClient && amount > 0)
+            photonView.RPC("RpcDecayingHeal", RpcTarget.All, amount, timeToDecay);
     }
 
     private IEnumerator DecayingHealCo(float amount, float timeToDecay)
@@ -92,7 +60,52 @@ public class HPManager : MonoBehaviourPun
     }
 
     [PunRPC]
-    public void RpcDie()
+    private void RpcDecayingHeal(float amount, float timeToDecay)
+    {
+        StartCoroutine(DecayingHealCo(amount, timeToDecay));
+
+    }
+
+    [PunRPC]
+    private void RpcHeal(float amount, bool overHeal = false)
+    {
+        if (amount > 0)
+        {
+            if (overHeal)
+            {
+                health += amount;
+                stats.maxHealth += amount;
+            }
+            else
+            {
+                health = Mathf.Clamp(health + amount, 0, stats.maxHealth);
+            }
+        }
+        OnPlayerHealed?.Invoke(this);
+    }
+
+    [PunRPC]
+    private void RpcTakeDamage(float dmg, Vector3 positionHit)
+    {
+        string target = photonView.IsMine ? "I" : "OTHER";
+        Debug.Log($"{target} Got HIT");
+
+        // Calculate defense reduction
+        if (dmg > 0 && photonView.IsMine)
+            health -= dmg - (dmg * (stats.defense * 0.01f));
+
+        if (health <= 0 && photonView.IsMine)
+        {
+            Debug.Log("calling die");
+            photonView.RPC("RpcDie", RpcTarget.All);
+        }
+
+        // Take damage Event
+        OnPlayerDamaged?.Invoke(this);
+    }
+
+    [PunRPC]
+    private void RpcDie()
     {
         if (isDead) return;
         isDead = true;
@@ -116,20 +129,13 @@ public class HPManager : MonoBehaviourPun
         if (!formManager.IsSpirit)
         {
             int i = 0;
-            Debug.Log(++i);
             GameObject model = formManager.currentForm.formModelPrefab;
-            Debug.Log(++i);
             model.GetComponent<PhotonAnimatorView>().enabled = false;
-            Debug.Log(++i);
             model.transform.SetParent(transform.parent);
 
-            Debug.Log(++i);
             if (!formManager.IsOut && photonView.IsMine) formManager.ToggleSpiritForm();
-            Debug.Log(++i);
             if (photonView.IsMine) PhotonNetwork.Destroy(gameObject);
-            Debug.Log(++i);
             OnPlayerKilled?.Invoke(characterController);
-            Debug.Log(++i);
         }
         else if (photonView.IsMine)
             PhotonNetwork.Instantiate("Prefabs/PlayerTomb", transform.position, Quaternion.identity);
@@ -138,43 +144,5 @@ public class HPManager : MonoBehaviourPun
         Debug.Log($"Destroying {name}, may i: {photonView.IsMine}");
         OnPlayerKilled?.Invoke(characterController);
         if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
-
-
-        #region fottiti
-        //FormManager formManager = characterController.formManager;
-        //if (!characterController.formManager.IsSpirit)
-        //{
-        //    Debug.Log("Body died");
-        //    Animator animator = GetComponentInChildren<Animator>();
-        //    gameObject.tag = "";
-        //    animator.SetTrigger("Death");
-
-        //    if (!formManager.isOut)
-        //    {
-        //        Debug.Log("Body was in use, spawning spirit");
-        //        formManager.ToggleSpiritForm();
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("Body was NOT in use");
-        //    }
-            
-        //    formManager.currentForm.formModelPrefab.transform.SetParent(transform.parent);
-        //    OnPlayerKilled?.Invoke(this);
-        //    PhotonNetwork.Destroy(gameObject);
-        //}
-        //else
-        //{
-        //    GetComponent<CapsuleCollider>().enabled = false;
-        //    Debug.Log("spirit died");
-        //    if (photonView.IsMine) 
-        //    {
-        //        PhotonNetwork.Instantiate("Prefabs/PlayerTomb", transform.position, Quaternion.identity);
-        //        formManager.DisableAbilities();
-        //        Heal(maxHealth, false); // restore health for eventual revive
-        //        PhotonNetwork.Destroy(gameObject);
-        //    }
-        //}
-        #endregion
     }
 }

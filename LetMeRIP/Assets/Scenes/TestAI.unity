@@ -1582,6 +1582,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1704590335436109528, guid: 82ffdf9f0d3e20e478add2c23c36daf6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1704590335436109528, guid: 82ffdf9f0d3e20e478add2c23c36daf6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1802735933824692851, guid: 82ffdf9f0d3e20e478add2c23c36daf6, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -1943,6 +1951,87 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &2019010288
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 546875341347581655, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854728853611677824, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854728853611677824, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854728853611677824, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854728853611677824, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854728853611677824, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854728853611677824, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854728853611677824, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854728853611677824, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854728853611677824, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854728853611677824, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854728853611677824, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854728853611677828, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: playerClass
+      value: mage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854728853611677831, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_Name
+      value: MageCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854728853611677831, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6374838947204721371, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6374838947204721371, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962096826416829948, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
+      propertyPath: sceneViewId
+      value: 13
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 33571e08c6606414abdbe1cd92a77ac4, type: 3}
 --- !u!114 &138949573571801422
 MonoBehaviour:
   m_ObjectHideFlags: 0

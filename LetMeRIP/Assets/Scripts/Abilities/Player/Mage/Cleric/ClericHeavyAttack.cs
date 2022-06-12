@@ -14,6 +14,12 @@ public class ClericHeavyAttack : Ability
     private float minDamage;
     private float maxDamage;
 
+    [SerializeField]
+    private float minArea = 2f;
+
+    [SerializeField]
+    private float maxArea = 4f;
+
     private float maxChargeTime = 2.5f;
     private Coroutine chargeCor;
 
@@ -49,9 +55,7 @@ public class ClericHeavyAttack : Ability
         isReady = false;
 
         // dash animation
-        animator.SetTrigger("HeavyAttack");
-
-        
+        animator.SetTrigger("HeavyAttackCharge");
     }
 
     /**
@@ -83,10 +87,28 @@ public class ClericHeavyAttack : Ability
 
         // Calculate damage
         float damage = Mathf.Clamp(minDamage + difTime, minDamage, maxDamage);
+        
 
         // Calcolate position
+        Vector3 pos = new Vector3(transform.position.x, 0, transform.position.y);
 
         // Create AOE
+        float areaOfImpact = Mathf.Clamp(minArea + difTime, minArea, maxArea);
+
+        // Create Collider
+        Collider[] hitEnemies = Physics.OverlapSphere(pos, areaOfImpact);
+
+        // Check for collision
+        foreach (Collider e in hitEnemies) {
+            if (e.CompareTag("Enemy")) {
+
+                EnemyForm enemyForm = e.transform.GetComponent<EnemyForm>();
+
+                if (enemyForm != null) {
+                    enemyForm.TakeDamage(damage);
+                }
+            }
+        }
     }
 
     private IEnumerator ChargeHammer()

@@ -19,6 +19,10 @@ public class ClericAbility1 : Ability
 
     private float startTime;
 
+    private GameObject prefab;
+
+    PlayerController p;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +40,10 @@ public class ClericAbility1 : Ability
         minHeal = (float)(35 + characterController.currentStats.intelligence * 0.4f);
 
         maxHeal = (float)(50 + characterController.currentStats.intelligence * 0.8f);
+
+        prefab = Resources.Load("Prebas/Pot") as GameObject;
+
+        p = characterController;
     }
 
     /**
@@ -47,9 +55,7 @@ public class ClericAbility1 : Ability
         isReady = false;
 
         // dash animation
-        animator.SetTrigger("HeavyAttack");
-
-
+        animator.SetTrigger("Ability1Charge");
     }
 
     /**
@@ -68,28 +74,45 @@ public class ClericAbility1 : Ability
     public override void CancelAction()
     {
         StopCoroutine(chargeCor);
-        animator.SetTrigger("HeayAttack");
-        //HammerDown(); Call this from the animation event
+        animator.SetTrigger("Ability1");
+
+        PotDown();
 
         EnableActions();
         StartCoroutine(Cooldown());
     }
 
-    public void HammerDown()
+    public void PotDown()
     {
         float difTime = Time.time - startTime;
 
         // Calculate damage
-        float damage = Mathf.Clamp(minHeal + difTime, minHeal, maxHeal);
+        float heal = Mathf.Clamp(minHeal + difTime, minHeal, maxHeal);
 
-        // Calcolate position
+        float dim = Mathf.Clamp(3 + difTime, 3, 7);
 
-        // Create AOE
+        // Calcolate position as Look at mouse 
+        Vector3 v = GatherDirectionInput();
+
+        GameObject pool = Instantiate(prefab, v, transform.rotation);
+
+        pool.GetComponent<Pot>().Init(heal, dim);
     }
 
     private IEnumerator ChargeHealingPot()
     {
         yield return new WaitForSeconds(maxChargeTime);
         CancelAction();
+    }
+
+    public Vector3 GatherDirectionInput()
+    {
+        Ray ray = p.GetComponent<Camera>().ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>());
+
+        Vector3 direction = Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, p.GetComponent<LookAtMouse>().groundMask)
+            ? hitInfo.point - transform.position
+            : Vector3.zero;
+        direction.y = 0;
+        return direction.normalized;
     }
 }

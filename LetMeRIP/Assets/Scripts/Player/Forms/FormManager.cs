@@ -28,6 +28,9 @@ public class FormManager : MonoBehaviourPun
     public virtual void Init(PlayerController characterController)
     {
         this.characterController = characterController;
+        isSpirit = characterController.playerClass.ToLower().Equals("spirit");
+        isOut = isSpirit;
+
         playerInputActions = new PlayerInputActions();
         rb = GetComponent<Rigidbody>();
         // initialize list form and adding Spirit form as first form available (and shared by every macro class)
@@ -213,7 +216,7 @@ public class FormManager : MonoBehaviourPun
         isOut = true;
         rb.velocity = Vector3.zero;
         Animator animator = GetComponentInChildren<Animator>();
-        animator.SetBool("isRunning", false);
+        if(animator != null) animator.SetBool("isRunning", false);
         characterController.Exit();
     }
 

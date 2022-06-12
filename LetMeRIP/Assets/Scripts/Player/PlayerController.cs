@@ -12,8 +12,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
     public PlayerStats spiritStats;
     public PlayerStats bodyStats;
     public PlayerStats currentStats;
-    public PlayerStats wtf;
-    private LookAtMouse lam;
+    public LookAtMouse lam;
     [HideInInspector] public Movement movement;
     [HideInInspector] public Rigidbody rb;
 

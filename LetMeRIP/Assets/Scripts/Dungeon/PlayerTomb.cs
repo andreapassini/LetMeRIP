@@ -28,7 +28,7 @@ public class PlayerTomb : Interactable, IOnEventCallback
             {
                 remainingSegments--;
                 Debug.Log("preparing event");
-                object[] content = new object[] { remainingSegments };
+                object[] content = new object[] { remainingSegments, photonView.ViewID };
                 RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
                 PhotonNetwork.RaiseEvent(remainingSegmentsEventCode, content, raiseEventOptions, SendOptions.SendReliable);
             }
@@ -37,14 +37,11 @@ public class PlayerTomb : Interactable, IOnEventCallback
 
     private void ReviveSpirit()
     {
-        float spawnDistance = 0f;
-        //if (Physics.Raycast(transform.position, transform.forward, out RaycastHit info, 50f))
-        //{
-        //    if (info.collider.CompareTag("Obstacle") && (transform.position - info.transform.position).magnitude < 4f)
-        //        spawnDistance *= -1;
-        //}
-        if(!cc.IsMine)
-        PhotonNetwork.Instantiate("Prefabs/SpiritCharacter", transform.position + spawnDistance * transform.forward, transform.rotation);
+        GameObject what = PhotonView.Find(photonView.ViewID).gameObject;
+        Debug.Log(what.name);
+        Debug.Log($"THIS SHIT IS DEFINITELY MINE: {photonView.IsMine} | viewID: {photonView.ViewID}");
+        if(photonView.IsMine) PhotonNetwork.Instantiate("Prefabs/SpiritCharacter", transform.position, transform.rotation);
+        PhotonNetwork.Destroy(gameObject);
     }
 
     [PunRPC]
@@ -70,10 +67,9 @@ public class PlayerTomb : Interactable, IOnEventCallback
             object[] data = (object[])photonEvent.CustomData;
             this.remainingSegments = (int)data[0];
             Debug.Log($"Data: {remainingSegments}");
-            if (this.remainingSegments <= 0 && photonView.IsMine)
+            if (this.remainingSegments <= 0 && photonView.IsMine && photonView.ViewID == (int)data[1])
             {
                 ReviveSpirit();
-                PhotonNetwork.Destroy(gameObject);
             }
         }
     

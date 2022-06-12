@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LookAtMouse : MonoBehaviourPun
 {
-    [SerializeField] private LayerMask groundMask;
+    public LayerMask groundMask;
     
     private PlayerInputActions playerInputActions;
     private Camera playerCamera;

@@ -145,4 +145,19 @@ public class HPManager : MonoBehaviourPun
         OnPlayerKilled?.Invoke(characterController);
         if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
     }
+
+    public IEnumerator BuffStats(float str, float dex, float Int, float duration)
+	{
+        stats.strength *= str;
+        stats.dexterity *= dex;
+        stats.intelligence *= Int;
+
+        yield return new WaitForSeconds(duration);
+
+        stats.strength /= str;
+        stats.dexterity /= dex;
+        stats.intelligence /= Int;
+    }
+
+
 }

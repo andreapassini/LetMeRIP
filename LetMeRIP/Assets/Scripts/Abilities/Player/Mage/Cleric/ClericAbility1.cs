@@ -88,22 +88,22 @@ public class ClericAbility1 : Ability
         EnableMovement();
         StartCoroutine(Cooldown());
 
-        float difTime = Time.time - startTime;
+        //float difTime = Time.time - startTime;
 
-        // Calculate damage
-        float heal = Mathf.Clamp(minHeal + difTime, minHeal, maxHeal);
+        //// Calculate damage
+        //float heal = Mathf.Clamp(minHeal + difTime, minHeal, maxHeal);
 
-        float dim = Mathf.Clamp(3 + difTime, 3, 7);
+        //float dim = Mathf.Clamp(3 + difTime, 3, 7);
 
-        // Calcolate position as Look at mouse 
-        Vector3 v = GatherDirectionInput();
-        v.y = transform.position.y;
+        //// Calcolate position as Look at mouse 
+        //Vector3 v = GatherDirectionInput();
+        //v.y = transform.position.y;
 
-        GameObject pool = PhotonNetwork.Instantiate("Prefabs/Pot", v, transform.rotation);
+        //GameObject pool = PhotonNetwork.Instantiate("Prefabs/Pot", v, transform.rotation);
 
-        if(pool.GetComponent<Pot>() != null){
-            pool.GetComponent<Pot>().Init(heal, dim);
-        }
+        //if(pool.GetComponent<Pot>() != null){
+        //    pool.GetComponent<Pot>().Init(heal, dim);
+        //}
 
     }
 

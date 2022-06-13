@@ -143,7 +143,12 @@ public class HPManager : MonoBehaviourPun
         
         Debug.Log($"Destroying {name}, may i: {photonView.IsMine}");
         OnPlayerKilled?.Invoke(characterController);
-        if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
+        if (photonView.IsMine)
+        {
+            characterController.formManager.UnbindAbilities();
+            characterController.movement.playerInputActions.Player.Movement.Disable();
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 
     public IEnumerator BuffStats(float str, float dex, float Int, float duration)

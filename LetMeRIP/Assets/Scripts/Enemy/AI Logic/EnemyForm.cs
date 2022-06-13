@@ -55,7 +55,7 @@ public class EnemyForm : MonoBehaviourPun
 
     public Animator animator;
 
-    public float takeDamageDuration = 1f;
+    public float takeDamageDuration = 2f;
 
     [System.NonSerialized]
     public Rigidbody rb;
@@ -192,6 +192,8 @@ public class EnemyForm : MonoBehaviourPun
     public void RpcTakeDamage(float dmg)
 	{
         animator.SetTrigger("damage");
+        navMeshAgent.velocity = Vector3.zero;
+        navMeshAgent.isStopped = true;
 
         // Calcolate defense reduction
         dmg = dmg - (dmg * enemyStats.defense * 0.01f); ;

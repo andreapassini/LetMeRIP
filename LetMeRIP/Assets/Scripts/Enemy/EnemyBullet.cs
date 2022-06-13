@@ -13,32 +13,22 @@ public class EnemyBullet : MonoBehaviour
     void Start()
     {
         Destroy(gameObject, destroyAfterTime);
-        //StartCoroutine(DestroyBulletAfterTime());
-
-        Physics.IgnoreLayerCollision(9, 9);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log("HIT: " + collision.gameObject.GetComponent<EnemyHealth>());
 
-        HPManager playerHealth = collision.gameObject.GetComponent<HPManager>();
+		if (collision.transform.tag.Equals("Player")) {
+            //Debug.Log("HIT: " + collision.gameObject.GetComponent<EnemyHealth>());
 
-        if(playerHealth != null)
-        {
-            playerHealth.TakeDamage(damage, transform.position);
+            HPManager playerHealth = collision.gameObject.GetComponent<HPManager>();
+
+            if (playerHealth != null) {
+                playerHealth.TakeDamage(damage, transform.position);
+            }
         }
+        
 
-        // NOT WORKING
-        //if (TryGetComponent (out EnemyHealth h))
-        //{
-        //    h.OnDamage(damage, transform.position);
-        //}
-
-        //GameObject effect = Instantiate(hitDmgEffect, transform.position, Quaternion.identity);
-        //Destroy(effect, 2f);
-
-        //if(collision.collider.CompareTag("Enemy"))
         Destroy(gameObject);
     }
 

@@ -44,8 +44,8 @@ public class EnemySpider : EnemyForm
         }        
         
 
-        FSMState search = new FSMState();
-        search.stayActions.Add(Search);
+        //FSMState search = new FSMState();
+        //search.stayActions.Add(Search);
 
         FSMState chase = new FSMState();
         chase.stayActions.Add(Chase);
@@ -64,9 +64,9 @@ public class EnemySpider : EnemyForm
 
         // Search
         //  out: TargetVisible()
-        search.AddTransition(t1, chase);
+        //search.AddTransition(t1, chase);
         //  in: TargetNotVisible()
-        chase.AddTransition(t3, search);
+        //chase.AddTransition(t3, search);
         //      action: GoTo(lastSeenPos)
         // Chase
         //  out: TargetInRange()
@@ -75,7 +75,7 @@ public class EnemySpider : EnemyForm
         attack.AddTransition(t4, chase);
         // Attack
 
-        fsm = new FSM(search);
+        fsm = new FSM(chase);
 
         if (!PhotonNetwork.IsMasterClient) return;
 
@@ -211,22 +211,25 @@ public class EnemySpider : EnemyForm
 
     public IEnumerator StopAI()
     {
-        navMeshAgent.speed = enemyStats.swiftness;
-        float attackDuration = 1f; // Just as an example 
-
-        AiFrameRate = attackDuration;
-        yield return new WaitForSeconds(attackDuration);
-        AiFrameRate = reactionReference;
+        //float attackDuration = 1f; // Just as an example 
+        navMeshAgent.velocity = Vector3.zero;
+        navMeshAgent.isStopped = true;
+        //AiFrameRate = attackDuration;
+        stopAI = true;
+        yield return new WaitForSeconds(takeDamageDuration);
+        stopAI = false;
+        //AiFrameRate = reactionReference;
     }
 
     public IEnumerator StopAI(float duration)
     {
-        navMeshAgent.speed = enemyStats.swiftness;
         navMeshAgent.velocity = Vector3.zero;
-        //navMeshAgent.isStopped = true;
-        AiFrameRate = duration;
+        navMeshAgent.isStopped = true;
+        stopAI = true;
+        //AiFrameRate = duration;
         yield return new WaitForSeconds(duration);
-        AiFrameRate = reactionReference;
+        stopAI = false;
+        //AiFrameRate = reactionReference;
         //navMeshAgent.isStopped = false;
         //navMeshAgent.isStopped = false;
     }

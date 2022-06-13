@@ -84,7 +84,7 @@ public class SpiritAbility1 : Ability
     public override void CancelAction()
     {
         EnableMovement();
-        if(drainEffect != null) Destroy(drainEffect);
+        if(drainEffect != null && photonView.IsMine) Destroy(drainEffect);
         if (isDraining) // it wont execute twice if the pool finishes and then receives a button up
         {
             isDraining = false;

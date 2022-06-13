@@ -63,7 +63,7 @@ public class SpiritAbility1 : Ability
                 Vector3 poolDirection = hitPool.transform.position - transform.position;
                 pool = hitPool.GetComponent<SPPool>();
                 isDraining = true;
-                DisableActions();
+                DisableMovement();
                 drainEffect = Instantiate(Resources.Load<GameObject>("Particles/Recharge"), transform.position, transform.rotation);
                 drainEffect.GetComponent<ParticleSystem>().Play();
                 drainPoolCoroutine = StartCoroutine(DrainPool(pool));
@@ -83,7 +83,7 @@ public class SpiritAbility1 : Ability
 
     public override void CancelAction()
     {
-        EnableActions();
+        EnableMovement();
         if(drainEffect != null) Destroy(drainEffect);
         if (isDraining) // it wont execute twice if the pool finishes and then receives a button up
         {

@@ -4579,7 +4579,7 @@ PrefabInstance:
     - target: {fileID: 4522958042920473999, guid: f3077e02a26ce614db28d0f930163928, type: 3}
       propertyPath: connection
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1689782499}
     - target: {fileID: 4522958043025074146, guid: f3077e02a26ce614db28d0f930163928, type: 3}
       propertyPath: isBlocked
       value: 0
@@ -4660,6 +4660,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8d975315a185e14083a8df9d0da2859, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1036509489 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4522958042920473999, guid: f3077e02a26ce614db28d0f930163928, type: 3}
+  m_PrefabInstance: {fileID: 1036509486}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ebfe6cf3526541a933958d7cc251d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1036509492 stripped
@@ -6925,7 +6936,7 @@ PrefabInstance:
     - target: {fileID: 318989221646703403, guid: 4f09f3dd94446ee489e23e6cf56a3959, type: 3}
       propertyPath: connection
       value: 
-      objectReference: {fileID: 1248585738}
+      objectReference: {fileID: 1036509489}
     - target: {fileID: 318989222276181486, guid: 4f09f3dd94446ee489e23e6cf56a3959, type: 3}
       propertyPath: isBlocked
       value: 0

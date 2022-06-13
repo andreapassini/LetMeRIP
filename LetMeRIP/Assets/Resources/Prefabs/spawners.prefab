@@ -47,11 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawners:
   - {fileID: 8051873005771083421}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   currentEnemies: []
 --- !u!114 &8593138542452741687
 MonoBehaviour:
@@ -88,7 +83,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4003111891221461454, guid: 97f77aa5d9f9a154ca6e10c49cae4d12, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.99
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4003111891221461454, guid: 97f77aa5d9f9a154ca6e10c49cae4d12, type: 3}
       propertyPath: m_LocalPosition.y
@@ -96,7 +91,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4003111891221461454, guid: 97f77aa5d9f9a154ca6e10c49cae4d12, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.45
+      value: 10.1
       objectReference: {fileID: 0}
     - target: {fileID: 4003111891221461454, guid: 97f77aa5d9f9a154ca6e10c49cae4d12, type: 3}
       propertyPath: m_LocalRotation.w
@@ -132,7 +127,7 @@ PrefabInstance:
       objectReference: {fileID: 275727460348433325, guid: 384c85918797f3842a62fbcc829bb0df, type: 3}
     - target: {fileID: 8051873006196502248, guid: 97f77aa5d9f9a154ca6e10c49cae4d12, type: 3}
       propertyPath: enemyPrefabPath
-      value: Prefab/spider_pref Variant
+      value: Prefab/Boss
       objectReference: {fileID: 0}
     - target: {fileID: 8753539370904352391, guid: 97f77aa5d9f9a154ca6e10c49cae4d12, type: 3}
       propertyPath: m_Icon

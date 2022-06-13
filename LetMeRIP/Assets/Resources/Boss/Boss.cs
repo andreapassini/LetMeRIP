@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ public class Boss : EnemyForm
     public static event Action<EnemyForm> OnEnemyLightAttack1Phase3;
     public static event Action<EnemyForm> OnEnemyLightAttack2Phase3;
     public static event Action<EnemyForm> OnEnemyHeavyAttackPhase3;
-
+    
     private FSM fsmOverlay;
 
     private FSM fsmPhase1;
@@ -65,7 +66,6 @@ public class Boss : EnemyForm
     {
         base.Awake();
     }
-
 
     void Start()
     {
@@ -253,9 +253,19 @@ public class Boss : EnemyForm
 
 	private void Update()
 	{
+        if(enemyStats.health <= enemyStats.maxHealth / 2) {
+            // Spawn
+            Spawn();
+		}
 	}
 
-	private void OnEnable()
+    public void Spawn()
+	{
+        Resources.Load<GameObject>("Prefabs/spawnersBoss").GetComponent<RoomSpawner>().Spawn();
+
+    }
+
+    private void OnEnable()
 	{
         Sign.OnSignBroken += OnBrokeSign;
 	}

@@ -131,7 +131,7 @@ public class EnemyForm : MonoBehaviourPun
             //AiFrameRate = ability.abilityDurtation;
             stopAI = true;
             animator.SetFloat("speed", 0);
-            Debug.Log(ability.abilityName + " stop " + ability.abilityDurtation);
+            //Debug.Log(ability.abilityName + " stop " + ability.abilityDurtation);
             //StopEverythingForAbilityExecution();
 
             yield return new WaitForSeconds(ability.abilityDurtation);

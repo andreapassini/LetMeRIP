@@ -56,7 +56,7 @@ public class Boss : EnemyForm
     private bool isHAinCooldown = false;
     private bool isLA1Cooldown = false;
     private bool isCooldwonOver = false;
-    private bool isInPhase2 = false;
+    public bool isInPhase2 = false;
     private bool isInPhase3 = false;
 
     private float woundLevel;
@@ -322,7 +322,7 @@ public class Boss : EnemyForm
 
     public bool After3WoundRecevied()
 	{
-        if(woundCount >= 3) {
+        if(woundCount >= 3 || isInPhase2) {
             woundCount = 0;
             isInPhase2 = true;
             return true;

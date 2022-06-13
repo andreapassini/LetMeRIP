@@ -16,11 +16,11 @@ public class HudWarriorStatusController : HudStatusController
         {
             [HudEForm.Spirit] = new Dictionary<HudEAbility, Sprite>()
             {
-                [HudEAbility.LightAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-                [HudEAbility.HeavyAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-                [HudEAbility.Ability1] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-                [HudEAbility.Ability2] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-                [HudEAbility.Dash] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [HudEAbility.LightAttack] = Resources.Load<Sprite>("Sprites/Abilities/Spirit/LightAttack"),
+                [HudEAbility.HeavyAttack] = Resources.Load<Sprite>("Sprites/Abilities/Spirit/HeavyAttack"),
+                [HudEAbility.Ability1] = Resources.Load<Sprite>("Sprites/Abilities/Spirit/Ability1"),
+                [HudEAbility.Ability2] = Resources.Load<Sprite>("Sprites/Abilities/Spirit/Ability2"),
+                [HudEAbility.Dash] = Resources.Load<Sprite>("Sprites/Abilities/Dash"),
             },
             [HudEForm.Base] = new Dictionary<HudEAbility, Sprite>()
             {

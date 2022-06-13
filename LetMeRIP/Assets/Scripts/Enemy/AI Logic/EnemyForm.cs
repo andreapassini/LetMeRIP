@@ -250,6 +250,9 @@ public class EnemyForm : MonoBehaviourPun
 
             float distance = float.MaxValue;
 
+            if (targets.Length == 0)
+                return;
+
             foreach (GameObject t in targets) {
                 float calculatedDistance = (t.transform.position - transform.position).magnitude;
                 if (calculatedDistance < distance) {

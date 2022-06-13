@@ -109,37 +109,57 @@ public class HPManager : MonoBehaviourPun
     {
         if (isDead) return;
         isDead = true;
-
+        int i = 0;
+        Debug.Log(++i);
         Debug.Log("someone died");
+        Debug.Log(++i);
         FormManager formManager = characterController.formManager;
+        Debug.Log(++i);
 
         Debug.Log($"someone died {photonView.ViewID}, is mine: {photonView.IsMine}, was out: {formManager.IsOut}");
+        Debug.Log(++i);
         Animator animator = GetComponentInChildren<Animator>();
+        Debug.Log(++i);
         animator.SetTrigger("Death");
+        Debug.Log(++i);
 
 
         Collider capsuleCollider = GetComponent<Collider>();
+        Debug.Log(++i);
         capsuleCollider.enabled = false;
+        Debug.Log(++i);
         characterController.lam.enabled = false;
+        Debug.Log(++i);
         characterController.movement.playerInputActions.Player.Movement.Disable();
+        Debug.Log(++i);
         formManager.DisableAbilities();
+        Debug.Log(++i);
 
         if (photonView.IsMine) characterController.HPManager.Heal(characterController.HPManager.maxHealth, false);
+        Debug.Log(++i);
 
         if (!formManager.IsSpirit)
         {
+        Debug.Log(++i);
             GameObject model = formManager.currentForm.formModelPrefab;
+        Debug.Log(++i);
             model.GetComponent<PhotonAnimatorView>().enabled = false;
+        Debug.Log(++i);
             model.transform.SetParent(transform.parent);
+            Debug.Log(++i);
 
             if (!formManager.IsOut && photonView.IsMine) formManager.ToggleSpiritForm();
+        Debug.Log(++i);
             if (photonView.IsMine) PhotonNetwork.Destroy(gameObject);
+        Debug.Log(++i);
             OnPlayerKilled?.Invoke(characterController);
+        Debug.Log(++i);
         }
         else if (photonView.IsMine)
-            PhotonNetwork.Instantiate("Prefabs/PlayerTomb", transform.position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Prefabs/PlayerTomb", transform.position, Quaternion.identity);
+        Debug.Log(++i);
 
-        
+
         Debug.Log($"Destroying {name}, may i: {photonView.IsMine}");
         OnPlayerKilled?.Invoke(characterController);
         if (photonView.IsMine)

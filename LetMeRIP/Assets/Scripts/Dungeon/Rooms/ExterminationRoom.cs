@@ -28,7 +28,7 @@ public class ExterminationRoom : Room
         {
             spawners.Init();
             spawners.Spawn();
-            //closeGatesCoroutine = CloseGates(3f);
+            closeGatesCoroutine = CloseGates(3f);
             StartCoroutine(closeGatesCoroutine); 
         }
     }
@@ -44,7 +44,7 @@ public class ExterminationRoom : Room
         CloseInnerGates();
         // signal gates that are going to close
         yield return new WaitForSeconds(time);
-        CloseOuterGates();
+        //CloseOuterGates();
     }
 
     private void RoomCompletion(RoomSpawner spawner)

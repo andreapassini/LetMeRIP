@@ -58,7 +58,7 @@ public class SurvivalRoom : Room
         CloseInnerGates();
         // signal gates that are going to close
         yield return new WaitForSeconds(time);
-        CloseOuterGates();
+        //CloseOuterGates();
     }
 
     /**
@@ -68,7 +68,7 @@ public class SurvivalRoom : Room
     {
         StopCoroutine(survivalTimerCoroutine);
         StopCoroutine(respawnEnemiesCoroutine);
-        //StopCoroutine(closeGatesCoroutine);
+        StopCoroutine(closeGatesCoroutine);
         spawners.ClearAllEnemies();
 
         OpenInnerGates();

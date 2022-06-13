@@ -10,14 +10,14 @@ public class SpiritAbility2 : Ability
     private float damage;
     private void Start()
     {
-        cooldown = 0f;
+        cooldown = 8f;
     }
 
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
         animator = GetComponentInChildren<Animator>(false);
-        damage = 10 + characterController.stats.intelligence * 0.3f;
+        damage = 25 + characterController.stats.intelligence * 0.6f;
     }
 
     public override void StartedAction()

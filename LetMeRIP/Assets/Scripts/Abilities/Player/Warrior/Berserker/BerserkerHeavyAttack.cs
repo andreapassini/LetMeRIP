@@ -39,7 +39,7 @@ public class BerserkerHeavyAttack : Ability
     {
         //animator.SetTrigger("StartChargeHeavyAttack");
         //animator.SetTrigger("Charge");
-
+        //animator.SetTrigger("HeavyAttack");
         StartCoroutine(Charge());
         StartCoroutine(Cooldown());
     }

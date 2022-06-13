@@ -35,7 +35,7 @@ public class SurvivalRoom : Room
             spawners.Init();
             
             closeGatesCoroutine = StartCoroutine(CloseGates(3f));
-            HudController.Instance.InitRoomTimer(timeToSurvive);
+            photonView.RPC("RpcStartUITimer", RpcTarget.All);
             survivalTimerCoroutine = StartCoroutine(SurvivalTimer());
             respawnEnemiesCoroutine = StartCoroutine(RespawnEnemies(respawnOffset));
         }
@@ -45,6 +45,12 @@ public class SurvivalRoom : Room
     {
         cleared = true;
         base.Exit();
+    }
+
+    [PunRPC]
+    public void RpcStartUITimer()
+    {
+        HudController.Instance.InitRoomTimer(timeToSurvive);
     }
 
     private IEnumerator CloseGates(float time)
@@ -67,10 +73,14 @@ public class SurvivalRoom : Room
 
         OpenInnerGates();
         OpenOuterGates();
-        HudController.Instance.HideTimer();
+        photonView.RPC("RpcHideUITimer", RpcTarget.All);
         Debug.Log("ROOM CLEARED");
     }
-
+    [PunRPC]
+    private void RpcHideUITimer()
+    {
+        HudController.Instance.HideTimer();
+    }
 
     /**
      * Locks the room for timeToSurvive seconds

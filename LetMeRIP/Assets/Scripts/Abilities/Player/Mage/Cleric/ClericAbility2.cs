@@ -30,7 +30,7 @@ public class ClericAbility2 : Ability
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>(false);
 
-        prefab = Resources.Load("Prebas/BeaconOfHope") as GameObject;
+        prefab = Resources.Load("Prefabs/BeaconOfHope") as GameObject;
 
         p = characterController;
     }

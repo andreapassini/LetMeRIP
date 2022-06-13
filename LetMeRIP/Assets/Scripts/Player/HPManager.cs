@@ -91,7 +91,7 @@ public class HPManager : MonoBehaviourPun
         Debug.Log($"{target} Got HIT");
 
         // Calculate defense reduction
-        if (dmg > 0 && photonView.IsMine)
+        if (dmg > 0)
             health -= dmg - (dmg * (stats.defense * 0.01f));
 
         if (health <= 0 && photonView.IsMine)
@@ -111,7 +111,6 @@ public class HPManager : MonoBehaviourPun
         isDead = true;
 
         Debug.Log("someone died");
-        OnPlayerKilled?.Invoke(characterController);
         FormManager formManager = characterController.formManager;
 
         Debug.Log($"someone died {photonView.ViewID}, is mine: {photonView.IsMine}, was out: {formManager.IsOut}");
@@ -129,13 +128,13 @@ public class HPManager : MonoBehaviourPun
 
         if (!formManager.IsSpirit)
         {
-            int i = 0;
             GameObject model = formManager.currentForm.formModelPrefab;
             model.GetComponent<PhotonAnimatorView>().enabled = false;
             model.transform.SetParent(transform.parent);
 
             if (!formManager.IsOut && photonView.IsMine) formManager.ToggleSpiritForm();
             if (photonView.IsMine) PhotonNetwork.Destroy(gameObject);
+            OnPlayerKilled?.Invoke(characterController);
         }
         else if (photonView.IsMine)
             PhotonNetwork.Instantiate("Prefabs/PlayerTomb", transform.position, Quaternion.identity);

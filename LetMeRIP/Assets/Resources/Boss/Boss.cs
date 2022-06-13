@@ -40,7 +40,7 @@ public class Boss : EnemyForm
 
     public EnemyAbility riseUp;
 
-    [SerializeField] private string targetTag = "Player";
+    //[SerializeField] private string targetTag = "Player";
 
     public float runningFotTooLongCooldown = 5f;
     public float cooldownActionOverTime = 5f;

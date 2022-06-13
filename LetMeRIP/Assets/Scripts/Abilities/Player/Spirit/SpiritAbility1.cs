@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,7 @@ public class SpiritAbility1 : Ability
     private float drainRate = 2f;
     private float timeStep = 0.1f; // 20SP/sec
     private bool isDraining;
-    private float slowFactor = .8f;
-    
+    private GameObject drainEffect;
 
     private void Start()
     {
@@ -37,21 +37,21 @@ public class SpiritAbility1 : Ability
     public override void PerformedAction()
     {
         // Create Collider
-        float rad = Utilities.DegToRad(coneAngle) * .5f;
+        //float rad = Utilities.DegToRad(coneAngle) * .5f;
 
-        Vector3 rbound = new Matrix4x4(
-                new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
-                new Vector4(0, 1, 0, 0),
-                new Vector4(-Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
-                Vector4.zero
-            ) * transform.forward;
+        //Vector3 rbound = new Matrix4x4(
+        //        new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
+        //        new Vector4(0, 1, 0, 0),
+        //        new Vector4(-Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+        //        Vector4.zero
+        //    ) * transform.forward;
 
-        Vector3 lbound = new Matrix4x4(
-                new Vector4(Mathf.Cos(rad), 0, -Mathf.Sin(rad), 0),
-                new Vector4(0, 1, 0, 0),
-                new Vector4(Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
-                Vector4.zero
-            ) * transform.forward;
+        //Vector3 lbound = new Matrix4x4(
+        //        new Vector4(Mathf.Cos(rad), 0, -Mathf.Sin(rad), 0),
+        //        new Vector4(0, 1, 0, 0),
+        //        new Vector4(Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+        //        Vector4.zero
+        //    ) * transform.forward;
 
         SPPool pool = null;
 
@@ -60,18 +60,15 @@ public class SpiritAbility1 : Ability
         {
             if (hitPool.CompareTag("Pool"))
             {
-                Debug.Log($"Hit {hitPool.name}");
                 Vector3 poolDirection = hitPool.transform.position - transform.position;
-                if (Vector3.Dot(poolDirection, lbound) > 0 && Vector3.Dot(poolDirection, rbound) > 0)
-                {
-                    Debug.Log("Pool within angle");
-                    pool = hitPool.GetComponent<SPPool>();
-                    isDraining = true;
-                    characterController.stats.swiftness *= slowFactor; // i'm not using SlowPE since the time of the effect is not fixed
-                    drainPoolCoroutine = StartCoroutine(DrainPool(pool));
-                    StartCoroutine(Cooldown());
-                    return;
-                }
+                pool = hitPool.GetComponent<SPPool>();
+                isDraining = true;
+                DisableActions();
+                drainEffect = Instantiate(Resources.Load<GameObject>("Particles/Recharge"), transform.position, transform.rotation);
+                drainEffect.GetComponent<ParticleSystem>().Play();
+                drainPoolCoroutine = StartCoroutine(DrainPool(pool));
+                StartCoroutine(Cooldown());
+                return;
             }
         }
 
@@ -86,11 +83,12 @@ public class SpiritAbility1 : Ability
 
     public override void CancelAction()
     {
+        EnableActions();
+        if(drainEffect != null) Destroy(drainEffect);
         if (isDraining) // it wont execute twice if the pool finishes and then receives a button up
         {
             isDraining = false;
             if(drainPoolCoroutine != null) StopCoroutine(drainPoolCoroutine);
-            characterController.stats.swiftness /= slowFactor;
         }
     }
 

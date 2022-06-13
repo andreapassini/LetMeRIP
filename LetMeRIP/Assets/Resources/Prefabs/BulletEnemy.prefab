@@ -11,14 +11,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 4043689014094602698, guid: 6b16cca2fb104954caac045fb3d7b95e, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4043689014094602698, guid: 6b16cca2fb104954caac045fb3d7b95e, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 4043689014094602701, guid: 6b16cca2fb104954caac045fb3d7b95e, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -63,30 +55,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4043689014094602703, guid: 6b16cca2fb104954caac045fb3d7b95e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3279137e13e1ffd4791e8ca6a29c75b8, type: 2}
-    m_RemovedComponents:
-    - {fileID: 6681455789294094574, guid: 6b16cca2fb104954caac045fb3d7b95e, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b16cca2fb104954caac045fb3d7b95e, type: 3}
---- !u!1 &677228077099532806 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4043689014094602698, guid: 6b16cca2fb104954caac045fb3d7b95e, type: 3}
-  m_PrefabInstance: {fileID: 3565706188520842188}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6372876074593355303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 677228077099532806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a4bfe76441ac3f4ea55d06039a8ddaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitDmgEffect: {fileID: 0}
-  destroyAfterTime: 5
-  damage: 20

@@ -13,7 +13,7 @@ public class SlowEE : EnemyEffect
 
     private void Awake()
     {
-        duration = 2f; // if set in the start it doesn't work apparently ¯\_(?)_/¯
+        duration = 2f; // if set in the start it doesn't work apparently ï¿½\_(?)_/ï¿½
     }
 
     protected override void Start()

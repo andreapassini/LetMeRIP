@@ -9,6 +9,8 @@ public class RangedAttackAbility : EnemyAbility
 	public GameObject bulletPrefab;
 	public float bulletForce;
 
+	private bool canShoot = true;
+
     private void OnEnable()
     {
 		EnemyForm.OnEnemyAttack += PerformAbility;
@@ -25,10 +27,21 @@ public class RangedAttackAbility : EnemyAbility
 
 	public override void PerformAbility(EnemyForm enemy)
 	{
+		if (!canShoot)
+			return;
+
 		if(this.enemy == enemy)
         {
 			for (int i = 0; i < numberOfBullets; i++)
 			{
+				enemy.navMeshAgent.velocity = Vector3.zero;
+				//enemy.navMeshAgent.isStopped = true;
+
+				// Look at Target
+				// Maybe better to use RigidBody and use Slerp for a smoother rotation
+				enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
+
+
 				// Fire Bullet
 				GameObject bulletFired = Instantiate(bulletPrefab, enemy.attackPoint.position, enemy.attackPoint.rotation);
 
@@ -45,10 +58,11 @@ public class RangedAttackAbility : EnemyAbility
 
 		if (previousAbilityTime + coolDown > Time.time)
 		{
-			return;
+			canShoot = false;
+		} else {
+			canShoot = true;
+			enemy.animator.SetTrigger("attack");
 		}
-
-		enemy.animator.SetTrigger("attack");
 
 		enemy.navMeshAgent.velocity = Vector3.zero;
 		//enemy.navMeshAgent.isStopped = true;
@@ -59,7 +73,7 @@ public class RangedAttackAbility : EnemyAbility
 
 		
 
-		base.PerformAbility(enemy);
+		//base.PerformAbility(enemy);
 
 	}
 }

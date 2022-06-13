@@ -15,13 +15,13 @@ public class mageBasicHeavyAttack : Ability
     private bool isCasting = false;
     private float damage;
 
-    private GameObject bulletPrefab;
+    private GameObject prefab;
 
     [SerializeField]
-    private float bulletForce = 15f;
+    private float bulletForce = 7f;
 
     [SerializeField]
-    private float chargeTime = 2f;
+    private float chargeTime = 1.5f;
 
     void Start()
     {
@@ -62,15 +62,7 @@ public class mageBasicHeavyAttack : Ability
      */
     public override void PerformedAction()
     {
-        //Debug.Log("Casting");
 
-        //if (isCasting) {
-        //    //animator.SetTrigger("Dash");
-            
-        //} else {
-        //    Debug.Log("Missing direction");
-        //    isReady = true;
-        //}
     }
 
     /**
@@ -78,20 +70,14 @@ public class mageBasicHeavyAttack : Ability
      */
     public override void CancelAction()
     {
-        if (!isCasting)
-            return;
     }
 
     private IEnumerator CastAction()
     {
-        DisableActions();
+        DisableMovement();
         yield return new WaitForSeconds(chargeTime);
 
         CastTempest();
-
-        EnableActions();
-        StartCoroutine(Cooldown());
-        isCasting = false;
     }
 
     private void CastTempest()
@@ -99,31 +85,36 @@ public class mageBasicHeavyAttack : Ability
         // Trigger Casting animation
         animator.SetTrigger("HeavyAttackCast");
 
-        float angle = 0f;
-        float angleWork;
+        float offSet = 0f;
+        float offsetWork = 0f;
 
         // Get the prefab
-        bulletPrefab = Resources.Load<GameObject>("Prefabs/BulletTrapassing");
+        prefab = Resources.Load<GameObject>("Prefabs/BulletTrapassing");
 
-        for (int i=0; i<11; i++) 
-        {
-            // Calcolate angle
-            angle += i * 2;
-            angleWork = angle;
+		for (int i = 0; i < 5; i++) {
+			// Calcolate angle
+			offSet += (i * 0.5f);
+			offsetWork = offSet;
 
-            if (i%2 < 1) {
-                angleWork = angleWork * -1;
-			}
+			Vector3 v = new Vector3(attackPoint.position.x + (offsetWork/2), attackPoint.position.y, attackPoint.position.z);
 
-            // Instantiate spheres
-            GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation * Quaternion.Euler(angleWork, 0, 0));
+			// Instantiate spheres
+			GameObject bulletFired = Instantiate(prefab, v, attackPoint.rotation);
 
-            bulletFired.GetComponent<BulletTrapassing>().damage = damage;
-            bulletFired.layer = gameObject.layer;
-            Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
-            rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
+			bulletFired.GetComponent<BulletTrapassing>().damage = damage;
+			bulletFired.layer = gameObject.layer;
+			Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
+			rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
         }
 
+        RestEnable();
+
+    }
+
+    private void RestEnable()
+	{
+        EnableMovement();
+        StartCoroutine(Cooldown());
     }
 
 }

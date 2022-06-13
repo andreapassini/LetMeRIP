@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class ClericLightAttack : Ability
 {
@@ -25,6 +26,16 @@ public class ClericLightAttack : Ability
         SPCost = 4f;
     }
 
+    private void OnEnable()
+    {
+        ClericRebroadcastAnimEvent.lightAttack += Fire;
+    }
+
+    private void OnDisable()
+    {
+        ClericRebroadcastAnimEvent.lightAttack -= Fire;
+    }
+
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
@@ -33,9 +44,6 @@ public class ClericLightAttack : Ability
         animator = GetComponentInChildren<Animator>(false);
 
         damage = 15 + characterController.stats.intelligence * 0.3f;
-
-        // Get the prefab
-        bulletPrefab = Resources.Load("Prebas/LightSphere") as GameObject;
     }
 
     /**
@@ -48,6 +56,8 @@ public class ClericLightAttack : Ability
 
         // dash animation
         animator.SetTrigger("LightAttack");
+
+        DisableMovement();
     }
 
     /**
@@ -55,24 +65,30 @@ public class ClericLightAttack : Ability
      */
     public override void PerformedAction()
     {
-        Debug.Log("Casting");
-
-        Fire();
     }
 
-    public void Fire()
+    public void Fire(Cleric c)
 	{
-        for(int i = 0; i<3; i++) {
-            // Fire Bullet
-            GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
+        if (photonView.GetComponent<Cleric>() != c)
+            return;
 
-            bulletFired.layer = gameObject.layer;
-            bulletFired.GetComponent<LightSphere>().damage = damage;
-            Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
-            rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
-        }
+        GameObject bulletFired = PhotonNetwork.Instantiate("Prefabs/LightSphere", attackPoint.position, attackPoint.rotation);
 
-        CancelAction();
+        // Fire Bullet
+        bulletFired.layer = gameObject.layer;
+        bulletFired.GetComponent<LightSphere>().damage = damage;
+        Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
+        rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
+
+        RestEnable();
+    }
+
+    private void RestEnable()
+	{
+        isCasting = false;
+        EnableMovement();
+        StartCoroutine(Cooldown());
+
     }
 
     /**
@@ -80,6 +96,5 @@ public class ClericLightAttack : Ability
      */
     public override void CancelAction()
     {
-        StartCoroutine(Cooldown());
     }
 }

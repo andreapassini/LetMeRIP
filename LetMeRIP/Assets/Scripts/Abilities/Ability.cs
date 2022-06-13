@@ -43,6 +43,16 @@ public class Ability : MonoBehaviourPun
         isReady = true;
     }
 
+    protected void DisableMovement()
+	{
+        characterController.movement.playerInputActions.Player.Movement.Disable();
+    }
+
+    protected void EnableMovement()
+    {
+        characterController.movement.playerInputActions.Player.Movement.Enable();
+    }
+
     protected void DisableActions()
     {
         characterController.formManager.DisableAbilities();

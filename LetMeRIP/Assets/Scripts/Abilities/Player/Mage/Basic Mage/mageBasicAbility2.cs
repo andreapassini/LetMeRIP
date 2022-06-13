@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class mageBasicAbility2 : Ability
 {
@@ -47,24 +48,17 @@ public class mageBasicAbility2 : Ability
         // charge casting animation
         animator.SetTrigger("Ability2");
 
-        
+        DisableMovement();
+
+        // Summon Healing Pool
+        SummonHealingPool();
     }
 
     /**
      * Starts dashing if the recorded direction is different from 0
      */
     public override void PerformedAction()
-    {
-        Debug.Log("Casting");
-
-        DisableActions();
-
-        // Summon Healing Pool
-        SummonHealingPool();
-
-        // Start Casting 
-        StartCoroutine(CastingTime());
-        
+    {    
     }
 
     /**
@@ -72,28 +66,25 @@ public class mageBasicAbility2 : Ability
      */
     public override void CancelAction()
     {
-        EnableActions();
-        isCasting = false;
-
-        StartCoroutine(Cooldown());
     }
 
-    private IEnumerator CastingTime()
-	{
-        yield return new WaitForSeconds(castTime);
-
-        CancelAction();
-	}
 
     private void SummonHealingPool()
 	{
-        // Get the prefab
-        prefab = Resources.Load("Prebas/HealingPoolVampire") as GameObject;
+        Transform t = transform.Find("pointToSpawn");
 
-        Vector3 v = new Vector3(transform.position.x, 0, transform.position.z);
+        Vector3 v = new Vector3(t.position.x, t.position.y, t.position.z);
 
-        GameObject healingPool = Instantiate(prefab, v,
+        GameObject healingPool = PhotonNetwork.Instantiate("Prefabs/HealingPoolVampire", v,
             attackPoint.rotation);
         healingPool.GetComponent<HealingPoolVampire>().Init();
+    }
+
+    private void RestEnable()
+	{
+        EnableMovement();
+        isCasting = false;
+
+        StartCoroutine(Cooldown());
     }
 }

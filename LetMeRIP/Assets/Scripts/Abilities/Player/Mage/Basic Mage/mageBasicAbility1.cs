@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,8 @@ public class mageBasicAbility1 : Ability
 
     private float startTime;
 
+    private PlayerController p;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,17 +37,20 @@ public class mageBasicAbility1 : Ability
 
     private void OnEnable()
     {
-        MageBasicRebroadcastAnimEvent.ability1 += CastBeam;
+        //MageBasicRebroadcastAnimEvent.ability1 += CastBeam;
     }
 
     private void OnDisable()
     {
-        MageBasicRebroadcastAnimEvent.ability2 -= CastBeam;
+        //MageBasicRebroadcastAnimEvent.ability2 -= CastBeam;
     }
 
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
+
+        
+
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
 
@@ -54,8 +60,7 @@ public class mageBasicAbility1 : Ability
         maxDamage = 35 + characterController.stats.intelligence * 0.3f +
             characterController.stats.strength * 0.2f;
 
-        // Get the prefab
-        bulletPrefab = Resources.Load("Prebas/BulletTrapassing") as GameObject;
+        p = characterController;
     }
 
     /**
@@ -70,9 +75,9 @@ public class mageBasicAbility1 : Ability
         // charge casting animation
         animator.SetTrigger("Ability1Charge");
 
-        Debug.Log("Casting");
+        Debug.Log("Casting Ability 1");
 
-        DisableActions();
+        DisableMovement();
     }
 
     /**
@@ -80,7 +85,6 @@ public class mageBasicAbility1 : Ability
      */
     public override void PerformedAction()
     {
-        
     }
 
     /**
@@ -88,50 +92,39 @@ public class mageBasicAbility1 : Ability
      */
     public override void CancelAction()
     {
-        // Shoot
-        
+        CastBeam(p.GetComponent<MageBasic>());
 
+        // Shoot
         EnableActions();
         isCasting = false;
+
 
         StartCoroutine(Cooldown());
     }
 
     private void CastBeam(MageBasic mage)
     {
-        if(this == mage) {
-            float difTime = Time.time - startTime;
+        float difTime = Time.time - startTime;
 
-            // Trigger Casting animation
-            animator.SetTrigger("Ability1Cast");
+        // Trigger Casting animation
+        animator.SetTrigger("Ability1Cast");
 
-            // Damage
-            float damage = Mathf.Clamp(minDamage + difTime, minDamage, maxDamage);
+        // Damage
+        float damage = Mathf.Clamp(minDamage + difTime, minDamage, maxDamage);
 
-            float angle = 0f;
-            float angleWork;
-
-            for (int i = 0; i < 11; i++) {
-                // Calcolate angle
-                angle += i * 2;
-                angleWork = angle;
-
-                if (i % 2 < 1) {
-                    angleWork = angleWork * -1;
-                }
-
-                // Instantiate spheres
-                GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation * Quaternion.Euler(0, angleWork, 0));
-
-                bulletFired.GetComponent<BulletTrapassing>().damage = damage;
-                bulletFired.layer = gameObject.layer;
-                Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
-                rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
+        RaycastHit hit;
+        // Cast beam
+        if (Physics.Raycast(attackPoint.position, attackPoint.forward, out hit, 1000)) {
+            if (hit.transform.tag == "Enemy") {
+                hit.transform.GetComponent<EnemyForm>().TakeDamage(damage);
             }
-
-            CancelAction();
         }
-        
+
+        // Instantiate Laser
+        //GameObject prefab = Resources.Load<GameObject>("Prefabs/Laser");
+
+        PhotonNetwork.Instantiate("Prefabs/LaserBeam", attackPoint.position, attackPoint.rotation);
 
     }
+
 }

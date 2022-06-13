@@ -3,16 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SphereCollider))]
 public class Pot : MonoBehaviourPun
 {
-    public float remainingSP { get => holdedSp; }
     private float lifeTime = 4.5f;
-    [SerializeField] private float holdedSp = 0f;
+    private float radius = 3f;
+    private float healing;
 
-    public void Init(float amount, float lifeTime)
+    private SphereCollider s;
+
+    public void Init(float amount, float radius)
     {
-        holdedSp = amount;
-        this.lifeTime = lifeTime;
+        healing = amount;
+        if(radius <= 7) {
+            this.radius = radius;
+        } else {
+            this.radius = 7f;
+		}
+
+        s.radius = this.radius;
 
         if (PhotonNetwork.IsMasterClient) StartCoroutine(DestroyAfterTime(lifeTime));
     }
@@ -34,6 +43,8 @@ public class Pot : MonoBehaviourPun
         if (cc.photonView.IsMine) {
             cc.HPManager.Heal(amount/4.5f);
         }
+
+        // a
     }
 
     private IEnumerator DestroyAfterTime(float lifeTime)

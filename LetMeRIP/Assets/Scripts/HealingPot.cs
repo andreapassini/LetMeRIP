@@ -1,17 +1,27 @@
-using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class HealingPoolVampire : MonoBehaviourPun
+public class HealingPot : MonoBehaviourPun
 {
-    public float destroyAfterTime = 4f;
+    private float destroyAfterTime = 4.5f;
+    private float maxRadius = 7;
+    private float minRadius = 3;
 
-    public void Init()
-	{
+    private float holdenHeal;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    public void Init(float amount)
+    {
+        holdenHeal = amount;
+
         if (PhotonNetwork.IsMasterClient) StartCoroutine(DestroyAfterTime(destroyAfterTime));
-
-        Destroy(gameObject, destroyAfterTime);
     }
 
     public void DrainPool(float amount, PlayerController characterController)
@@ -27,15 +37,10 @@ public class HealingPoolVampire : MonoBehaviourPun
     private void RpcDrainPool(float amount, int playerViewID)
     {
         PlayerController cc = new List<PlayerController>(FindObjectsOfType<PlayerController>()).Find(player => player.photonView.ViewID == playerViewID); // fuck it seems kinda expensive
-      
-        if (cc.photonView.IsMine) 
-        {
-            float healAmountPerSec = (float)((50 + 0.4 * cc.stats.intelligence) / 4);
-            cc.HPManager.Heal(healAmountPerSec);
-            cc.SGManager.AddSP(-1 * (healAmountPerSec/2));
+
+        if (cc.photonView.IsMine) {
+            cc.HPManager.Heal(amount / 4.5f);
         }
-            
-        
     }
 
     private IEnumerator DestroyAfterTime(float lifeTime)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class ClericHeavyAttack : Ability
 {
@@ -8,6 +9,7 @@ public class ClericHeavyAttack : Ability
     private Animator animator;
     private Rigidbody rb;
     private Transform attackPoint;
+    private Transform lightDownPoint;
 
     // prevents the cancel action to start too soon
     private bool isCasting = false;
@@ -36,6 +38,7 @@ public class ClericHeavyAttack : Ability
     {
         base.Init(characterController);
         attackPoint = transform.Find("AttackPoint");
+        lightDownPoint = transform.Find("LightDown");
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>(false);
 
@@ -56,6 +59,10 @@ public class ClericHeavyAttack : Ability
 
         // dash animation
         animator.SetTrigger("HeavyAttackCharge");
+
+        startTime = Time.time;
+        //chargeCor = StartCoroutine(ChargeHammer());
+        DisableMovement();
     }
 
     /**
@@ -63,9 +70,7 @@ public class ClericHeavyAttack : Ability
      */
     public override void PerformedAction()
     {
-        startTime = Time.time;
-        chargeCor = StartCoroutine(ChargeHammer());
-        DisableActions();
+        
     }
 
     /**
@@ -73,11 +78,11 @@ public class ClericHeavyAttack : Ability
      */
     public override void CancelAction()
     {
-        StopCoroutine(chargeCor);
-        animator.SetTrigger("HeayAttack");
+        //StopCoroutine(chargeCor);
+        animator.SetTrigger("HeavyAttackCast");
         //HammerDown(); Call this from the animation event
 
-        EnableActions();
+        EnableMovement();
         StartCoroutine(Cooldown());
     }
 
@@ -87,10 +92,13 @@ public class ClericHeavyAttack : Ability
 
         // Calculate damage
         float damage = Mathf.Clamp(minDamage + difTime, minDamage, maxDamage);
-        
+
+        // Spawn Particellar effects
+        LightDown lightDown = GetComponentInChildren<LightDown>();
+        PhotonNetwork.Instantiate("Prefabs/LightDown", lightDown.transform.position, lightDown.transform.rotation);
 
         // Calcolate position
-        Vector3 pos = new Vector3(transform.position.x, 0, transform.position.y);
+        Vector3 pos = new Vector3(lightDown.transform.position.x, lightDown.transform.position.y, lightDown.transform.position.y);
 
         // Create AOE
         float areaOfImpact = Mathf.Clamp(minArea + difTime, minArea, maxArea);
@@ -111,9 +119,9 @@ public class ClericHeavyAttack : Ability
         }
     }
 
-    private IEnumerator ChargeHammer()
-	{
-        yield return new WaitForSeconds(maxChargeTime);
-        CancelAction();
-	}
+ //   private IEnumerator ChargeHammer()
+	//{
+ //       yield return new WaitForSeconds(maxChargeTime);
+ //       CancelAction();
+	//}
 }

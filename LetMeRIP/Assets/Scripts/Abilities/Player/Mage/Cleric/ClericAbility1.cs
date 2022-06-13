@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class ClericAbility1 : Ability
 {
@@ -41,8 +42,6 @@ public class ClericAbility1 : Ability
 
         maxHeal = (float)(50 + characterController.stats.intelligence * 0.8f);
 
-        prefab = Resources.Load("Prebas/Pot") as GameObject;
-
         p = characterController;
     }
 
@@ -56,6 +55,10 @@ public class ClericAbility1 : Ability
 
         // dash animation
         animator.SetTrigger("Ability1Charge");
+
+        startTime = Time.time;
+        //chargeCor = StartCoroutine(ChargeHealingPot());
+        DisableMovement();
     }
 
     /**
@@ -63,9 +66,6 @@ public class ClericAbility1 : Ability
      */
     public override void PerformedAction()
     {
-        startTime = Time.time;
-        chargeCor = StartCoroutine(ChargeHealingPot());
-        DisableActions();
     }
 
     /**
@@ -73,17 +73,21 @@ public class ClericAbility1 : Ability
      */
     public override void CancelAction()
     {
-        StopCoroutine(chargeCor);
-        animator.SetTrigger("Ability1");
+        //StopCoroutine(chargeCor);
+        animator.SetTrigger("Ability1Cast");
 
         PotDown();
 
-        EnableActions();
+        EnableMovement();
         StartCoroutine(Cooldown());
     }
 
     public void PotDown()
     {
+        // Just to free him
+        EnableMovement();
+        StartCoroutine(Cooldown());
+
         float difTime = Time.time - startTime;
 
         // Calculate damage
@@ -93,21 +97,21 @@ public class ClericAbility1 : Ability
 
         // Calcolate position as Look at mouse 
         Vector3 v = GatherDirectionInput();
+        v.y = transform.position.y;
 
-        GameObject pool = Instantiate(prefab, v, transform.rotation);
+        GameObject pool = PhotonNetwork.Instantiate("Prefabs/Pot", v, transform.rotation);
 
-        pool.GetComponent<Pot>().Init(heal, dim);
-    }
+        if(pool.GetComponent<Pot>() != null){
+            pool.GetComponent<Pot>().Init(heal, dim);
+        }
 
-    private IEnumerator ChargeHealingPot()
-    {
-        yield return new WaitForSeconds(maxChargeTime);
-        CancelAction();
     }
 
     public Vector3 GatherDirectionInput()
     {
-        Ray ray = p.GetComponent<Camera>().ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>());
+        Camera c = FindObjectOfType<Camera>();
+
+        Ray ray = c.ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>());
 
         Vector3 direction = Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, p.GetComponent<LookAtMouse>().groundMask)
             ? hitInfo.point - transform.position

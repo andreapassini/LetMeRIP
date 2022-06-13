@@ -22,6 +22,12 @@ public class MageFormManager : FormManager
 
         if (!photonView.IsMine) return;
 
+        playerInputActions.Player.Enable();
+
+        playerInputActions.Player.Transformation1.Enable();
+        playerInputActions.Player.Transformation2.Enable();
+
+
         playerInputActions.Player.Transformation1.performed += ctx => SwitchForm(0);
         playerInputActions.Player.Transformation2.performed += ctx => SwitchForm(1);
     }

@@ -117,6 +117,7 @@ public class EnemyForm : MonoBehaviourPun
 
     public virtual void Die()
 	{
+        Debug.Log($"{name} died");
         spPool.transform.SetParent(transform.parent);
         spPool.SetActive(true);
 
@@ -127,6 +128,7 @@ public class EnemyForm : MonoBehaviourPun
         if (!PhotonNetwork.IsMasterClient) return;
 
         // Die Event 
+        Debug.Log($"{name} called killed event");
         OnEnemyKilled?.Invoke(this);
 
         // UN-Subscribe to Event Change Spirit Form

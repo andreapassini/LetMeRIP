@@ -10,6 +10,8 @@ public class GameOverManager : MonoBehaviourPun
 
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
+
         StartCoroutine(LateStart());
     }
 

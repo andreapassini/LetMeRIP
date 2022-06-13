@@ -1,7 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class UIGameOverController : MonoBehaviour
+public class UIGameOverController : MonoBehaviourPun
 {
     public static UIGameOverController Instance;
 
@@ -18,8 +18,9 @@ public class UIGameOverController : MonoBehaviour
 
     public void NavigateToTitleMenu()
     {
+        // Time.timeScale = 1;
+        // PhotonNetwork.LeaveRoom();
         PhotonNetwork.LoadLevel(0);
-        PhotonNetwork.LeaveRoom();
     }
 
     public void Quit()
@@ -27,5 +28,4 @@ public class UIGameOverController : MonoBehaviour
         PhotonNetwork.Disconnect();
         Application.Quit();
     }
-    
 }

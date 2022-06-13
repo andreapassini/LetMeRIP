@@ -112,7 +112,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
             currentStatsSrc = spiritStatsSrc;
             if (playerManager.spiritStats.formName != "")
             {
-                Debug.Log("spirit stats not null");
                 currentStatsPM = playerManager.spiritStats;
             }
 
@@ -122,7 +121,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
             currentStatsSrc = bodyStatsSrc;
             if (playerManager.bodyStats.formName != "")
             {
-                Debug.Log("body stats not null");
                 currentStatsPM = playerManager.bodyStats;
             }
 

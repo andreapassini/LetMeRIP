@@ -215,8 +215,6 @@ public class FormManager : MonoBehaviourPun
     [PunRPC]
     public void RpcExitBody()
     {
-        Debug.LogError($"ID: {photonView.ViewID}, Exiting");
-
         float spawnDistance = spiritForwardOffset;
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit info, 50f))
         {
@@ -271,17 +269,12 @@ public class FormManager : MonoBehaviourPun
         PlayerController myBody = PhotonView.Find(bodyViewId).GetComponent<PlayerController>();
         if (myBody == null) return; // body not found, abort
         myBody.Init();
-        Debug.LogError($"ID ciao tesoro1");
         myBody.formManager.OnFormChanged?.Invoke(myBody.formManager);
-        Debug.LogError($"ID ciao tesoro2");
         characterController.playerManager.bodyStats.spiritGauge = characterController.SGManager.SpiritGauge; // transfer new value of sg
-        Debug.LogError($"ID ciao tesoro3");
 
         isOut = false;
 
         myBody.formManager.OnBodyExit?.Invoke(this);
-        Debug.LogError($"ID ciao tesoro4");
-
         OnBodyExitForEnemy?.Invoke(this);
 
         currentForm.RemoveComponents();

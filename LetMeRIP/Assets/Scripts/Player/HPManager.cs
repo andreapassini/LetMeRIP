@@ -111,6 +111,7 @@ public class HPManager : MonoBehaviourPun
         isDead = true;
 
         Debug.Log("someone died");
+        OnPlayerKilled?.Invoke(characterController);
         FormManager formManager = characterController.formManager;
 
         Debug.Log($"someone died {photonView.ViewID}, is mine: {photonView.IsMine}, was out: {formManager.IsOut}");
@@ -135,7 +136,6 @@ public class HPManager : MonoBehaviourPun
 
             if (!formManager.IsOut && photonView.IsMine) formManager.ToggleSpiritForm();
             if (photonView.IsMine) PhotonNetwork.Destroy(gameObject);
-            OnPlayerKilled?.Invoke(characterController);
         }
         else if (photonView.IsMine)
             PhotonNetwork.Instantiate("Prefabs/PlayerTomb", transform.position, Quaternion.identity);
@@ -147,6 +147,7 @@ public class HPManager : MonoBehaviourPun
         {
             characterController.formManager.UnbindAbilities();
             characterController.movement.playerInputActions.Player.Movement.Disable();
+            Debug.Log($"Destroying {name}");
             PhotonNetwork.Destroy(gameObject);
         }
     }

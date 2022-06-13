@@ -28,27 +28,23 @@ public class Gate : MonoBehaviourPun
 
     private void Start()
     {
-        Debug.Log($"{name}: is open: {isOpen} && !is blocked: {isBlocked} => {IsOpen}");
         animator.SetBool("isOpen", IsOpen);
     }
 
     public void Open()
     {
         isOpen = true;
-        Debug.Log($"{name}: is open: {isOpen} && !is blocked: {isBlocked} => {IsOpen}");
         animator.SetBool("isOpen", IsOpen);
     }
     public void Close()
     {
         isOpen = false;
-        Debug.Log($"{name}: is open: {isOpen} && !is blocked: {isBlocked} => {IsOpen}");
         animator.SetBool("isOpen", IsOpen);
     }
 
     public void Unblock()
     {
         isBlocked = false;
-        Debug.Log($"{name}: is open: {isOpen} && !is blocked: {isBlocked} => {IsOpen}");
         animator.SetBool("isOpen", IsOpen);
     }
 

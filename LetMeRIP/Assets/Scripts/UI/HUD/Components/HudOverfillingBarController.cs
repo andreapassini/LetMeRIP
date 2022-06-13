@@ -16,15 +16,12 @@ public class HudOverfillingBarController : MonoBehaviour
     {
         foreach (Transform bar in transform)
         {
-            Debug.Log("CIAAO dal loop");
             bars.Add(bar.GetComponent<HudFillingBar>());
         }
     }
 
     public void Init(float maxValue, float initialValue)
     {
-        Debug.Log($"MaxValue: {maxValue}, Initial Value: {initialValue}");
-        
         this.maxValue = maxValue;
 
         SetMaxValue(maxValue);
@@ -33,20 +30,11 @@ public class HudOverfillingBarController : MonoBehaviour
 
     private void SetMaxValue(float maxValue)
     {
-        foreach (var bar in bars)
-        {
-            Debug.Log($"bar: {bar}");
-        }
-        
-        
         bars.ForEach(_ => _.Init(maxValue, 0));
     }
 
     public void SetValue(float value)
     {
-        Debug.Log($"New Value: {value}");
-
-        
         foreach (var bar in bars)
         {
             if (value >= maxValue)

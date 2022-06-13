@@ -19533,11 +19533,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3419858458628534712, guid: f3077e02a26ce614db28d0f930163928, type: 3}
       propertyPath: respawnOffset
-      value: 2
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3419858458628534712, guid: f3077e02a26ce614db28d0f930163928, type: 3}
       propertyPath: timeToSurvive
-      value: 5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3419858458628534713, guid: f3077e02a26ce614db28d0f930163928, type: 3}
       propertyPath: sceneViewId
@@ -31791,6 +31791,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1640764216}
   - component: {fileID: 1640764215}
+  - component: {fileID: 1640764217}
   m_Layer: 0
   m_Name: GameOverManager
   m_TagString: Untagged
@@ -31807,9 +31808,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1640764214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7714eb9c2e9f3d948becb22065aff255, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a8fcfe3ccca46c449a4b8a4001ad1e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverUI: {fileID: 1521539909}
 --- !u!4 &1640764216
 Transform:
   m_ObjectHideFlags: 0
@@ -31824,6 +31826,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1640764217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640764214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 67
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &1641713694
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -62,15 +62,7 @@ public class mageBasicHeavyAttack : Ability
      */
     public override void PerformedAction()
     {
-        //Debug.Log("Casting");
 
-        //if (isCasting) {
-        //    //animator.SetTrigger("Dash");
-            
-        //} else {
-        //    Debug.Log("Missing direction");
-        //    isReady = true;
-        //}
     }
 
     /**
@@ -78,24 +70,14 @@ public class mageBasicHeavyAttack : Ability
      */
     public override void CancelAction()
     {
-        if (isCasting)
-            return;
-
-        EnableActions();
-        StartCoroutine(Cooldown());
     }
 
     private IEnumerator CastAction()
     {
-        DisableActions();
+        DisableMovement();
         yield return new WaitForSeconds(chargeTime);
 
         CastTempest();
-
-        
-        isCasting = false;
-
-        CancelAction();
     }
 
     private void CastTempest()
@@ -114,10 +96,6 @@ public class mageBasicHeavyAttack : Ability
 			offSet += (i * 0.5f);
 			offsetWork = offSet;
 
-			//         if (i%2 == 0) {
-			//             offsetWork = offsetWork * -1;
-			//}
-
 			Vector3 v = new Vector3(attackPoint.position.x + (offsetWork/2), attackPoint.position.y, attackPoint.position.z);
 
 			// Instantiate spheres
@@ -127,9 +105,16 @@ public class mageBasicHeavyAttack : Ability
 			bulletFired.layer = gameObject.layer;
 			Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
 			rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
-
         }
 
+        RestEnable();
+
+    }
+
+    private void RestEnable()
+	{
+        EnableMovement();
+        StartCoroutine(Cooldown());
     }
 
 }

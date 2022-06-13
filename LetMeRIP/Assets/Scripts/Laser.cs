@@ -8,11 +8,7 @@ public class Laser : MonoBehaviour
 
     void Start()
     {
-        laser = transform.GetComponent<LineRenderer>();
-
-        laser.enabled = true;
-
-        StartCoroutine(stopLaser());
+        Destroy(gameObject, .1f);
     }
 
     public IEnumerator stopLaser()

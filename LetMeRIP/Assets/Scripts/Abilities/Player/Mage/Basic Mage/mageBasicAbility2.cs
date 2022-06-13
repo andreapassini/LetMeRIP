@@ -47,20 +47,17 @@ public class mageBasicAbility2 : Ability
         // charge casting animation
         animator.SetTrigger("Ability2");
 
-        
+        DisableMovement();
+
+        // Summon Healing Pool
+        SummonHealingPool();
     }
 
     /**
      * Starts dashing if the recorded direction is different from 0
      */
     public override void PerformedAction()
-    {
-        Debug.Log("Casting");
-
-        DisableActions();
-
-        // Summon Healing Pool
-        SummonHealingPool();        
+    {    
     }
 
     /**
@@ -68,18 +65,8 @@ public class mageBasicAbility2 : Ability
      */
     public override void CancelAction()
     {
-        EnableActions();
-        isCasting = false;
-
-        StartCoroutine(Cooldown());
     }
 
-    private IEnumerator CastingTime()
-	{
-        yield return new WaitForSeconds(castTime);
-
-        CancelAction();
-	}
 
     private void SummonHealingPool()
 	{
@@ -91,8 +78,13 @@ public class mageBasicAbility2 : Ability
         GameObject healingPool = Instantiate(prefab, v,
             attackPoint.rotation);
         healingPool.GetComponent<HealingPoolVampire>().Init();
+    }
 
+    private void RestEnable()
+	{
+        EnableMovement();
+        isCasting = false;
 
-        CancelAction();
+        StartCoroutine(Cooldown());
     }
 }

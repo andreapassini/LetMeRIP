@@ -43,11 +43,13 @@ public class mageBasicLightAttack : Ability
 	public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
+
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
 
         damage = 10 + characterController.stats.strength * 0.2f;
 
+        
         p = characterController;
     }
 
@@ -56,13 +58,15 @@ public class mageBasicLightAttack : Ability
      */
     public override void StartedAction()
     {
-        DisableActions();
+        DisableMovement();
 
         animator ??= GetComponentInChildren<Animator>(false);
         isReady = false;
 
         // dash animation
         animator.SetTrigger("LightAttack");
+
+        isCasting = true;
     }
 
     /**
@@ -88,25 +92,19 @@ public class mageBasicLightAttack : Ability
             Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
             rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
 
-            
+            // isCasting = false;
 
-            CancelAction();
+            RestEnable();
         }
 
-        //Maybe not working, try this
-        //if(p.GetComponent<MageBasic>() == m) {
-        //    Debug.Log("Casting");
-        //    // Fire Bullet
-        //    GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
+    }
 
-        //    bulletFired.GetComponent<Bullet>().damage = damage;
-        //    bulletFired.layer = gameObject.layer;
-        //    Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
-        //    rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
-
-        //    CancelAction();
-        //}
+    private void RestEnable()
+	{
         
+        EnableMovement();
+        StartCoroutine(Cooldown());
+
     }
 
     /**
@@ -114,9 +112,7 @@ public class mageBasicLightAttack : Ability
      */
     public override void CancelAction()
     {
-        EnableActions();
-        StartCoroutine(Cooldown());
-
+        
     }
 
 }

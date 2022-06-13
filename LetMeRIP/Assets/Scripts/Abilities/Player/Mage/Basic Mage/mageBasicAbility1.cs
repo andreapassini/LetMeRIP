@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,19 +37,19 @@ public class mageBasicAbility1 : Ability
 
     private void OnEnable()
     {
-        
+        //MageBasicRebroadcastAnimEvent.ability1 += CastBeam;
     }
 
     private void OnDisable()
     {
-        
+        //MageBasicRebroadcastAnimEvent.ability2 -= CastBeam;
     }
 
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
 
-        MageBasicRebroadcastAnimEvent.ability1 += CastBeam;
+        
 
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
@@ -76,11 +77,7 @@ public class mageBasicAbility1 : Ability
 
         Debug.Log("Casting Ability 1");
 
-        CastBeam(p.GetComponent<MageBasic>());
-
-        DisableActions();
-
-        
+        DisableMovement();
     }
 
     /**
@@ -88,7 +85,6 @@ public class mageBasicAbility1 : Ability
      */
     public override void PerformedAction()
     {
-        
     }
 
     /**
@@ -96,11 +92,12 @@ public class mageBasicAbility1 : Ability
      */
     public override void CancelAction()
     {
+        CastBeam(p.GetComponent<MageBasic>());
+
         // Shoot
         EnableActions();
         isCasting = false;
 
-        MageBasicRebroadcastAnimEvent.ability2 -= CastBeam;
 
         StartCoroutine(Cooldown());
     }
@@ -124,19 +121,10 @@ public class mageBasicAbility1 : Ability
         }
 
         // Instantiate Laser
-        GameObject prefab = bulletPrefab = Resources.Load<GameObject>("Prefabs/Laser");
+        //GameObject prefab = Resources.Load<GameObject>("Prefabs/Laser");
 
-        Instantiate(prefab, attackPoint.position, attackPoint.rotation);
-
-        CancelAction();
-
-        // Shoot
-        
-
-        //if (this == mage) {
-            
-        //}
-        
+        PhotonNetwork.Instantiate("Prefabs/LaserBeam", attackPoint.position, attackPoint.rotation);
 
     }
+
 }

@@ -268,22 +268,32 @@ public class EnemyForm : MonoBehaviourPun
 
     public virtual void RestTargetAfterSpiritExit(PlayerController formManager)
     {
-        if (target == null) {
+        StartCoroutine(WaitForPlayerDeallocation(formManager));
+    }
+
+    private IEnumerator WaitForPlayerDeallocation(PlayerController formManager)
+    {
+        yield return new WaitForSeconds(.5f);
+        if (target == null)
+        {
             targets = GameObject.FindGameObjectsWithTag(targetTag);
             target = targets[0].transform;
         }
 
         PlayerController a;
 
-        if (target.TryGetComponent(out a)) {
+        if (target.TryGetComponent(out a))
+        {
             if (formManager != a)
-                return;
+                yield break;
 
             float distance = float.MaxValue;
 
-            foreach (GameObject t in targets) {
+            foreach (GameObject t in targets)
+            {
                 float calculatedDistance = (t.transform.position - transform.position).magnitude;
-                if (calculatedDistance < distance) {
+                if (calculatedDistance < distance)
+                {
                     distance = calculatedDistance;
                     target = t.transform;
                 }

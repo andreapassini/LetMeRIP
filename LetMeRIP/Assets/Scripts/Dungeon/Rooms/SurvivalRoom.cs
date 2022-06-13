@@ -68,7 +68,6 @@ public class SurvivalRoom : Room
     {
         StopCoroutine(survivalTimerCoroutine);
         StopCoroutine(respawnEnemiesCoroutine);
-        StopCoroutine(closeGatesCoroutine);
         spawners.ClearAllEnemies();
 
         OpenInnerGates();

@@ -16,9 +16,16 @@ public class UIGameOverController : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    public void NavigateToTitleMenu()
+    {
+        PhotonNetwork.LoadLevel(0);
+        PhotonNetwork.LeaveRoom();
+    }
+
     public void Quit()
     {
         PhotonNetwork.Disconnect();
         Application.Quit();
     }
+    
 }

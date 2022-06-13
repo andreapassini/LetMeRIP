@@ -36,7 +36,7 @@ public class FormManager : MonoBehaviourPun
     {
         this.characterController = characterController;
         isSpirit = characterController.playerClass.ToLower().Equals("spirit");
-        isOut = isSpirit;
+        isOut = isSpirit || true;
 
         playerInputActions = new PlayerInputActions();
         rb = GetComponent<Rigidbody>();

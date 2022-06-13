@@ -163,11 +163,16 @@ public class HPManager : MonoBehaviourPun, IOnPhotonViewPreNetDestroy
         Debug.Log($"Destroying {name}, may i: {photonView.IsMine}");
         if (photonView.IsMine)
         {
+        Debug.Log(++i);
             characterController.formManager.UnbindAbilities();
+        Debug.Log(++i);
             characterController.movement.playerInputActions.Player.Movement.Disable();
+        Debug.Log(++i);
             Debug.Log($"Destroying {name}");
         }
+        Debug.Log(++i);
         PhotonNetwork.Destroy(gameObject);
+        Debug.Log(++i);
     }
 
     public IEnumerator BuffStats(float str, float dex, float Int, float duration)

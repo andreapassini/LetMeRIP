@@ -29,11 +29,15 @@ public class GameOverManager : MonoBehaviourPun
     {
         List<PlayerController> players = new List<PlayerController>(FindObjectsOfType<PlayerController>());
         PlayerController playerDied = PhotonView.Find(playerViewId).GetComponent<PlayerController>();
-        players.Remove(playerDied);
+        if(playerDied != null)
+            players.Remove(playerDied);
         Debug.Log($"Players count: {players.Count}");
         if(players.Count <= 0)
         {
+            Debug.Log("enabling gameover ui");
             gameOverUI.SetActive(true);
+
+            Debug.Log("gameover ui enabled");
         }
     }
 }

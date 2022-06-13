@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightSphere : MonoBehaviour
+public class LightSphere : MonoBehaviourPun
 {
     [SerializeField] GameObject hitDmgEffect;
     [SerializeField] float destroyAfterTime = 5f;
@@ -10,8 +11,9 @@ public class LightSphere : MonoBehaviour
 
     void Start()
     {
-        Destroy(gameObject, destroyAfterTime);
-        //StartCoroutine(DestroyBulletAfterTime());
+        // if is master
+        if(PhotonNetwork.IsMasterClient)
+        StartCoroutine(DestroyBulletAfterTime());
 
         Physics.IgnoreLayerCollision(9, 9);
     }
@@ -27,12 +29,14 @@ public class LightSphere : MonoBehaviour
             enemyHealth.enemyStats.defense *= 0.1f;
         }
 
+        PhotonNetwork.Destroy(photonView);
         Destroy(gameObject);
     }
 
     public IEnumerator DestroyBulletAfterTime()
     {
         yield return new WaitForSeconds(destroyAfterTime);
+        PhotonNetwork.Destroy(photonView);
         Destroy(gameObject);
     }
 }

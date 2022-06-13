@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -82,11 +83,9 @@ public class mageBasicLightAttack : Ability
         if(p == m.GetComponent<PlayerController>()) {
             Debug.Log("Casting");
             // Get the prefab
-            bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
+            GameObject bulletFired = PhotonNetwork.Instantiate("Prefabs/Bullet", attackPoint.position, attackPoint.rotation);
 
             // Fire Bullet
-            GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
-
             bulletFired.GetComponent<Bullet>().damage = damage;
             bulletFired.layer = gameObject.layer;
             Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();

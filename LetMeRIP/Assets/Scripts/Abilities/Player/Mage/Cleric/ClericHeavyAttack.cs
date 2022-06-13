@@ -56,6 +56,10 @@ public class ClericHeavyAttack : Ability
 
         // dash animation
         animator.SetTrigger("HeavyAttackCharge");
+
+        startTime = Time.time;
+        //chargeCor = StartCoroutine(ChargeHammer());
+        DisableActions();
     }
 
     /**
@@ -63,9 +67,7 @@ public class ClericHeavyAttack : Ability
      */
     public override void PerformedAction()
     {
-        startTime = Time.time;
-        chargeCor = StartCoroutine(ChargeHammer());
-        DisableActions();
+        
     }
 
     /**
@@ -73,7 +75,7 @@ public class ClericHeavyAttack : Ability
      */
     public override void CancelAction()
     {
-        StopCoroutine(chargeCor);
+        //StopCoroutine(chargeCor);
         animator.SetTrigger("HeayAttack");
         //HammerDown(); Call this from the animation event
 
@@ -90,7 +92,7 @@ public class ClericHeavyAttack : Ability
         
 
         // Calcolate position
-        Vector3 pos = new Vector3(transform.position.x, 0, transform.position.y);
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.y);
 
         // Create AOE
         float areaOfImpact = Mathf.Clamp(minArea + difTime, minArea, maxArea);
@@ -111,9 +113,9 @@ public class ClericHeavyAttack : Ability
         }
     }
 
-    private IEnumerator ChargeHammer()
-	{
-        yield return new WaitForSeconds(maxChargeTime);
-        CancelAction();
-	}
+ //   private IEnumerator ChargeHammer()
+	//{
+ //       yield return new WaitForSeconds(maxChargeTime);
+ //       CancelAction();
+	//}
 }

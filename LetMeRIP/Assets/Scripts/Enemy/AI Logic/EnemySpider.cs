@@ -38,7 +38,9 @@ public class EnemySpider : EnemyForm
             StartCoroutine(LateStart());
 		} else {
             targets = GameObject.FindGameObjectsWithTag(targetTag);
-            target = targets[0].transform;
+            if(targets.Length != 0)
+                target = targets[0].transform;
+                
         }        
         
 
@@ -106,7 +108,8 @@ public class EnemySpider : EnemyForm
     {
         if (target == null) {
             targets = GameObject.FindGameObjectsWithTag(targetTag);
-            target = targets[0].transform;
+            if (targets.Length != 0)
+                target = targets[0].transform;
         }
 
         chaseAction.StartAbility(this);

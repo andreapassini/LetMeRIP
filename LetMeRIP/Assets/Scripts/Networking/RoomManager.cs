@@ -7,8 +7,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 {
     public static RoomManager Instance;
     [SerializeField] private int gameSceneIndex;
-
-
+    
     private void Awake()
     {
         if (Instance) // check if there's already another room manager
@@ -17,8 +16,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
             Destroy(gameObject);
             return;
         }
-
+        
         // make this non-destroyable when scene is switched
+        gameObject.AddComponent<PhotonView>();
         DontDestroyOnLoad(gameObject);
         Instance = this;
     }

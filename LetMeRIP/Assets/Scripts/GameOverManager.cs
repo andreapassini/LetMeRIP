@@ -11,6 +11,7 @@ public class GameOverManager : MonoBehaviourPun
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+
         StartCoroutine(LateStart());
     }
 
@@ -29,31 +30,16 @@ public class GameOverManager : MonoBehaviourPun
     public void RpcGameOverCheck(int playerViewId)
     {
         List<PlayerController> players = new List<PlayerController>(FindObjectsOfType<PlayerController>());
-
-        PhotonView playerDied = PhotonView.Find(playerViewId);
+        PlayerController playerDied = PhotonView.Find(playerViewId).GetComponent<PlayerController>();
         if(playerDied != null)
-            players.Remove(playerDied.GetComponent<PlayerController>());
-
+            players.Remove(playerDied);
         Debug.Log($"Players count: {players.Count}");
         if(players.Count <= 0)
         {
             Debug.Log("enabling gameover ui");
             gameOverUI.SetActive(true);
-            return;
-        }
 
-        byte remainingPlayingCharacters = 0;
-        foreach(PlayerController player in players)
-        {
-            if (!(player.formManager.IsOut || player.IsSpirit)) remainingPlayingCharacters++;
-            if (player.IsSpirit) remainingPlayingCharacters++;
-        }
-
-        if(remainingPlayingCharacters == 0)
-        {
-            Debug.Log("enabling gameover ui");
-            gameOverUI.SetActive(true);
-            return;
+            Debug.Log("gameover ui enabled");
         }
     }
 }

@@ -36,6 +36,8 @@ public class EnemySimple : EnemyForm
         } else {
             targets = GameObject.FindGameObjectsWithTag(targetTag);
             target = targets[0].transform;
+            if (targets.Length != 0)
+                target = targets[0].transform;
         }
 
         FSMState search = new FSMState();
@@ -112,7 +114,8 @@ public class EnemySimple : EnemyForm
     {
         if (target == null) {
             targets = GameObject.FindGameObjectsWithTag(targetTag);
-            target = targets[0].transform;
+            if(targets.Length != 0)
+                target = targets[0].transform;
         }
 
         chaseAction.StartAbility(this);
@@ -132,7 +135,8 @@ public class EnemySimple : EnemyForm
     {
         if (target == null) {
             targets = GameObject.FindGameObjectsWithTag(targetTag);
-            target = targets[0].transform;
+            if(targets.Length != 0)
+                target = targets[0].transform;
         }
 
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);

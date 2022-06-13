@@ -22,6 +22,8 @@ public class HudController : MonoBehaviour
 
     public void InitPlayerInfoBar(string playerClass, PlayerController pc)
     {
+        //return;
+
         var formManager = pc.formManager;
         var hpManager = pc.HPManager;
         var sgManager = pc.SGManager;

@@ -10,6 +10,8 @@ public class HealingPoolVampire : MonoBehaviourPun
     public void Init()
 	{
         if (PhotonNetwork.IsMasterClient) StartCoroutine(DestroyAfterTime(destroyAfterTime));
+
+        Destroy(gameObject, destroyAfterTime);
     }
 
     public void DrainPool(float amount, PlayerController characterController)

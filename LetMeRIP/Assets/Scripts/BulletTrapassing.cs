@@ -7,7 +7,7 @@ using UnityEngine;
 public class BulletTrapassing : MonoBehaviour
 {
     [SerializeField] GameObject hitDmgEffect;
-    [SerializeField] float destroyAfterTime = 1.5f;
+    [SerializeField] float destroyAfterTime = 1.25f;
     [SerializeField] public float damage = 10f;
 
     private Rigidbody rb;

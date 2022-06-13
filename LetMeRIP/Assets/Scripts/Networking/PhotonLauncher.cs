@@ -23,6 +23,9 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        if (PhotonNetwork.IsConnected) PhotonNetwork.Disconnect();
+            
+            
         Debug.Log("Connecting to Master Server");
         PhotonNetwork.ConnectUsingSettings();
     }

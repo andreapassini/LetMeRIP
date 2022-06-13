@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HPManager : MonoBehaviourPun
+public class HPManager : MonoBehaviourPun, IOnPhotonViewPreNetDestroy
 {
     public static event Action<PlayerController> OnPlayerKilled;
     public event Action<HPManager> OnPlayerDamaged;
@@ -168,7 +168,6 @@ public class HPManager : MonoBehaviourPun
             Debug.Log($"Destroying {name}");
             PhotonNetwork.Destroy(gameObject);
         }
-        OnPlayerKilled?.Invoke(characterController);
     }
 
     public IEnumerator BuffStats(float str, float dex, float Int, float duration)
@@ -184,5 +183,8 @@ public class HPManager : MonoBehaviourPun
         stats.intelligence /= Int;
     }
 
-
+    public void OnPreNetDestroy(PhotonView rootView)
+    {
+        OnPlayerKilled?.Invoke(characterController);
+    }
 }

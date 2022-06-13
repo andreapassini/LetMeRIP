@@ -131,6 +131,9 @@ public class EnemyRanged : EnemyForm
         RaycastHit hit;
         if (Physics.Raycast(transform.position, ray, out hit, Mathf.Infinity, ~whatRayHit))
         {
+            if (hit.transform == null)
+                return false;
+
             if (hit.transform == target)
             {
                 return true;

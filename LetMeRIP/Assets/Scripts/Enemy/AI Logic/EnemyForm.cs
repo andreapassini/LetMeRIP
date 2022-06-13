@@ -235,6 +235,10 @@ public class EnemyForm : MonoBehaviourPun
 	{
         if (target == null) {
             targets = GameObject.FindGameObjectsWithTag(targetTag);
+
+            if(targets.Length == 0) {
+                return;
+			}
             target = targets[0].transform;
         }
 

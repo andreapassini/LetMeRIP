@@ -215,7 +215,7 @@ public class EnemyForm : MonoBehaviourPun
         abilites.Add(chaseAction.abilityName, chaseAction);
         abilites.Add(searchAction.abilityName, searchAction);
         
-        //healthBar.Init(this);
+        healthBar.Init(this);
 
         FormManager.OnBodyExitForEnemy += RestTargetAfterSpiritExit;
         HPManager.OnPlayerKilled += RestTargetAfterSpiritExit;

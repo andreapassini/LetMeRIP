@@ -1,29 +1,27 @@
-using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-[RequireComponent(typeof(SphereCollider))]
-public class Pot : MonoBehaviourPun
+public class HealingPot : MonoBehaviourPun
 {
-    private float lifeTime = 4.5f;
-    private float radius = 3f;
-    private float healing;
+    private float destroyAfterTime = 4.5f;
+    private float maxRadius = 7;
+    private float minRadius = 3;
 
-    private SphereCollider s;
+    private float holdenHeal;
 
-    public void Init(float amount, float radius)
+    // Start is called before the first frame update
+    void Start()
     {
-        healing = amount;
-        if(radius <= 7) {
-            this.radius = radius;
-        } else {
-            this.radius = 7f;
-		}
+        
+    }
 
-        s.radius = this.radius;
+    public void Init(float amount)
+    {
+        holdenHeal = amount;
 
-        if (PhotonNetwork.IsMasterClient) StartCoroutine(DestroyAfterTime(lifeTime));
+        if (PhotonNetwork.IsMasterClient) StartCoroutine(DestroyAfterTime(destroyAfterTime));
     }
 
     public void DrainPool(float amount, PlayerController characterController)
@@ -39,9 +37,9 @@ public class Pot : MonoBehaviourPun
     private void RpcDrainPool(float amount, int playerViewID)
     {
         PlayerController cc = new List<PlayerController>(FindObjectsOfType<PlayerController>()).Find(player => player.photonView.ViewID == playerViewID); // fuck it seems kinda expensive
-        
+
         if (cc.photonView.IsMine) {
-            cc.HPManager.Heal(amount/4.5f);
+            cc.HPManager.Heal(amount / 4.5f);
         }
     }
 

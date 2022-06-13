@@ -30,6 +30,8 @@ public class BeaconOfHope : MonoBehaviourPun
 
 	private void Start()
 	{
+		collider = GetComponent<SphereCollider>();
+
 		collider.isTrigger = true;
 		collider.radius = areaOfEffect;
 	}

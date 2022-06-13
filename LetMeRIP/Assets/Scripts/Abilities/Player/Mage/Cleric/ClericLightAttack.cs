@@ -72,7 +72,7 @@ public class ClericLightAttack : Ability
         if (photonView.GetComponent<Cleric>() != c)
             return;
 
-        GameObject bulletFired = PhotonNetwork.Instantiate("Prebas/LightSphere", attackPoint.position, attackPoint.rotation);
+        GameObject bulletFired = PhotonNetwork.Instantiate("Prefabs/LightSphere", attackPoint.position, attackPoint.rotation);
 
         // Fire Bullet
         bulletFired.layer = gameObject.layer;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class ClericAbility2 : Ability
 {
@@ -30,8 +31,6 @@ public class ClericAbility2 : Ability
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>(false);
 
-        prefab = Resources.Load("Prebas/BeaconOfHope") as GameObject;
-
         p = characterController;
     }
 
@@ -46,7 +45,9 @@ public class ClericAbility2 : Ability
         // dash animation
         animator.SetTrigger("Ability2");
 
-        DisableActions();
+        DisableMovement();
+
+        Cast();
     }
 
     /**
@@ -54,13 +55,27 @@ public class ClericAbility2 : Ability
      */
     public override void PerformedAction()
     {
+    }
+
+    public void Cast()
+	{
         // Calcolate position as Look at mouse 
         Vector3 v = GatherDirectionInput();
 
-        GameObject beaconOfHope =  Instantiate(prefab, v, transform.rotation);
+        //LightDown lightDown = GetComponentInChildren<LightDown>();
+        v.y = transform.position.y;
+
+        GameObject beaconOfHope = PhotonNetwork.Instantiate("Prefabs/BeaconOfHope", v, transform.rotation);
         beaconOfHope.GetComponent<BeaconOfHope>().Init(p.stats.intelligence);
 
-        CancelAction();
+        RestEnable();
+    }
+
+    private void RestEnable()
+	{
+        EnableMovement();
+        EnableActions();
+        StartCoroutine(Cooldown());
     }
 
     /**
@@ -68,13 +83,13 @@ public class ClericAbility2 : Ability
      */
     public override void CancelAction()
     {
-        EnableActions();
-        StartCoroutine(Cooldown());
     }
 
     public Vector3 GatherDirectionInput()
     {
-        Ray ray = p.GetComponent<Camera>().ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>());
+        Camera c = FindObjectOfType<Camera>();
+
+        Ray ray = c.ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>());
 
         Vector3 direction = Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, p.GetComponent<LookAtMouse>().groundMask)
             ? hitInfo.point - transform.position

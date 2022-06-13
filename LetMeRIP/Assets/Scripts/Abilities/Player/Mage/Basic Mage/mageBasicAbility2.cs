@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class mageBasicAbility2 : Ability
 {
@@ -70,12 +71,11 @@ public class mageBasicAbility2 : Ability
 
     private void SummonHealingPool()
 	{
-        // Get the prefab
-        prefab = Resources.Load("Prefabs/HealingPoolVampire") as GameObject;
+        Transform t = transform.Find("pointToSpawn");
 
-        Vector3 v = new Vector3(transform.position.x, 0, transform.position.z);
+        Vector3 v = new Vector3(t.position.x, t.position.y, t.position.z);
 
-        GameObject healingPool = Instantiate(prefab, v,
+        GameObject healingPool = PhotonNetwork.Instantiate("Prefabs/HealingPoolVampire", v,
             attackPoint.rotation);
         healingPool.GetComponent<HealingPoolVampire>().Init();
     }

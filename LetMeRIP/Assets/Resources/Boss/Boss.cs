@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ public class Boss : EnemyForm
     public static event Action<EnemyForm> OnEnemyLightAttack1Phase3;
     public static event Action<EnemyForm> OnEnemyLightAttack2Phase3;
     public static event Action<EnemyForm> OnEnemyHeavyAttackPhase3;
-
+    
     private FSM fsmOverlay;
 
     private FSM fsmPhase1;
@@ -40,6 +41,8 @@ public class Boss : EnemyForm
 
     public EnemyAbility riseUp;
 
+    //[SerializeField] private string targetTag = "Player";
+
     public float runningFotTooLongCooldown = 5f;
     public float cooldownActionOverTime = 5f;
 
@@ -54,7 +57,7 @@ public class Boss : EnemyForm
     private bool isHAinCooldown = false;
     private bool isLA1Cooldown = false;
     private bool isCooldwonOver = false;
-    private bool isInPhase2 = false;
+    public bool isInPhase2 = false;
     private bool isInPhase3 = false;
 
     private float woundLevel;
@@ -250,9 +253,19 @@ public class Boss : EnemyForm
 
 	private void Update()
 	{
+        if(enemyStats.health <= enemyStats.maxHealth / 2) {
+            // Spawn
+            Spawn();
+		}
 	}
 
-	private void OnEnable()
+    public void Spawn()
+	{
+        Resources.Load<GameObject>("Prefabs/spawnersBoss").GetComponent<RoomSpawner>().Spawn();
+
+    }
+
+    private void OnEnable()
 	{
         Sign.OnSignBroken += OnBrokeSign;
 	}
@@ -319,7 +332,7 @@ public class Boss : EnemyForm
 
     public bool After3WoundRecevied()
 	{
-        if(woundCount >= 3) {
+        if(woundCount >= 3 || isInPhase2) {
             woundCount = 0;
             isInPhase2 = true;
             return true;
@@ -519,11 +532,6 @@ public class Boss : EnemyForm
 
     public void Chase()
     {
-        if (target == null) {
-            targets = GameObject.FindGameObjectsWithTag(targetTag);
-            target = targets[0].transform;
-        }
-
         chaseAction.StartAbility(this);
         animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }

@@ -41,13 +41,9 @@ public class HudFormManager : MonoBehaviour
     public void changeForm(HudEForm newHudEForm)
     {
         if (m_CurrentHudEForm != newHudEForm)
-        {
             hudFormsGO[m_CurrentHudEForm].transform.parent.transform.localPosition += new Vector3(0, -15, 0);
-            hudFormsGO[m_CurrentHudEForm].GetComponent<Image>().color = Color.cyan;
-        }
+        
         hudFormsGO[newHudEForm].transform.parent.transform.localPosition += new Vector3(0, 15, 0);
-        hudFormsGO[newHudEForm].GetComponent<Image>().color = Color.white;
-
         
         m_CurrentHudEForm = newHudEForm;
     }

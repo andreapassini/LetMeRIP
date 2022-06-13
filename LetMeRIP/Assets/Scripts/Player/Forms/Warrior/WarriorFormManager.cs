@@ -22,7 +22,7 @@ public class WarriorFormManager : FormManager
 
         if (!photonView.IsMine) return;
 
-        playerInputActions.Player.Transformation1.performed += ctx => SwitchForm(0);
-        playerInputActions.Player.Transformation2.performed += ctx => SwitchForm(1);
+        playerInputActions.Player.Transformation1.performed += ctx => SwitchForm(1);
+        playerInputActions.Player.Transformation2.performed += ctx => SwitchForm(0);
     }
 }

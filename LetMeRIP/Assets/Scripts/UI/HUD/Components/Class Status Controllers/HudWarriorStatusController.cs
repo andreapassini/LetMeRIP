@@ -24,37 +24,37 @@ public class HudWarriorStatusController : HudStatusController
             },
             [HudEForm.Base] = new Dictionary<HudEAbility, Sprite>()
             {
-                [HudEAbility.LightAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-                [HudEAbility.HeavyAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-                [HudEAbility.Ability1] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-                [HudEAbility.Ability2] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-                [HudEAbility.Dash] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [HudEAbility.LightAttack] = Resources.Load<Sprite>("Sprites/Abilities/Warrior/Base/LightAttack"),
+                [HudEAbility.HeavyAttack] = Resources.Load<Sprite>("Sprites/Abilities/Warrior/Base/HeavyAttack"),
+                [HudEAbility.Ability1] = Resources.Load<Sprite>("Sprites/Abilities/Warrior/Base/Ability1"),
+                [HudEAbility.Ability2] = Resources.Load<Sprite>("Sprites/Abilities/Warrior/Base/Ability2"),
+                [HudEAbility.Dash] = Resources.Load<Sprite>("Sprites/Abilities/Dash"),
             },
             [HudEForm.Trans1] = new Dictionary<HudEAbility, Sprite>()
             {
-                [HudEAbility.LightAttack] = Resources.Load<Sprite>("Sprites/Abilities/Mage/LightAttack"),
-                [HudEAbility.HeavyAttack] = Resources.Load<Sprite>("Sprites/Abilities/Mage/HeavyAttack"),
-                [HudEAbility.Ability1] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-                [HudEAbility.Ability2] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-                [HudEAbility.Dash] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [HudEAbility.LightAttack] = Resources.Load<Sprite>("Sprites/Abilities/Warrior/Berserker/LightAttack"),
+                [HudEAbility.HeavyAttack] = Resources.Load<Sprite>("Sprites/Abilities/Warrior/Berserker/HeavyAttack"),
+                [HudEAbility.Ability1] = Resources.Load<Sprite>("Sprites/Abilities/Warrior/Berserker/Ability1"),
+                [HudEAbility.Ability2] = Resources.Load<Sprite>("Sprites/Abilities/Warrior/Berserker/Ability2"),
+                [HudEAbility.Dash] = Resources.Load<Sprite>("Sprites/Abilities/Dash"),
             },
             [HudEForm.Trans2] = new Dictionary<HudEAbility, Sprite>()
             {
-                [HudEAbility.LightAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-                [HudEAbility.HeavyAttack] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-                [HudEAbility.Ability1] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-                [HudEAbility.Ability2] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-                [HudEAbility.Dash] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
+                [HudEAbility.LightAttack] = Resources.Load<Sprite>("Sprites/Abilities/Warrior/Berserker/LightAttack"),
+                [HudEAbility.HeavyAttack] = Resources.Load<Sprite>("Sprites/Abilities/Warrior/Berserker/HeavyAttack"),
+                [HudEAbility.Ability1] = Resources.Load<Sprite>("Sprites/Abilities/Warrior/Berserker/Ability1"),
+                [HudEAbility.Ability2] = Resources.Load<Sprite>("Sprites/Abilities/Warrior/Berserker/Ability2"),
+                [HudEAbility.Dash] = Resources.Load<Sprite>("Sprites/Abilities/Dash"),
             }
         };
         
         //Holds the sprites for all the forms
         formsSprites = new Dictionary<HudEForm, Sprite>
         {
-            [HudEForm.Spirit] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-            [HudEForm.Base] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-            [HudEForm.Trans1] = Resources.Load<Sprite>("Sprites/Abilities/Charge"),
-            [HudEForm.Trans2] = Resources.Load<Sprite>("Sprites/Abilities/Charge")
+            [HudEForm.Spirit] = Resources.Load<Sprite>("Sprites/Abilities/MissingForm"),
+            [HudEForm.Base] = Resources.Load<Sprite>("Sprites/Abilities/Warrior/Base/Form"),
+            [HudEForm.Trans1] = Resources.Load<Sprite>("Sprites/Abilities/Warrior/Berserker/Form"),
+            [HudEForm.Trans2] = Resources.Load<Sprite>("Sprites/Abilities/MissingForm")
         };
     }
 }

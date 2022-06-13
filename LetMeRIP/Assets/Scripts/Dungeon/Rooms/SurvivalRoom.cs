@@ -34,7 +34,7 @@ public class SurvivalRoom : Room
         {
             spawners.Init();
             
-            closeGatesCoroutine = StartCoroutine(CloseGates(3f));
+            //closeGatesCoroutine = StartCoroutine(CloseGates(3f));
             photonView.RPC("RpcStartUITimer", RpcTarget.All);
             survivalTimerCoroutine = StartCoroutine(SurvivalTimer());
             respawnEnemiesCoroutine = StartCoroutine(RespawnEnemies(respawnOffset));
@@ -68,7 +68,7 @@ public class SurvivalRoom : Room
     {
         StopCoroutine(survivalTimerCoroutine);
         StopCoroutine(respawnEnemiesCoroutine);
-        StopCoroutine(closeGatesCoroutine);
+        //StopCoroutine(closeGatesCoroutine);
         spawners.ClearAllEnemies();
 
         OpenInnerGates();

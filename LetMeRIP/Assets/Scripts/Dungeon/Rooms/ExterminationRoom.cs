@@ -28,7 +28,7 @@ public class ExterminationRoom : Room
         {
             spawners.Init();
             spawners.Spawn();
-            closeGatesCoroutine = CloseGates(3f);
+            //closeGatesCoroutine = CloseGates(3f);
             StartCoroutine(closeGatesCoroutine); 
         }
     }
@@ -49,7 +49,7 @@ public class ExterminationRoom : Room
 
     private void RoomCompletion(RoomSpawner spawner)
     {
-        StopCoroutine(closeGatesCoroutine); // prevents getting stuck in the room if the players are able to clear it within 3 seconds
+        //StopCoroutine(closeGatesCoroutine); // prevents getting stuck in the room if the players are able to clear it within 3 seconds
         OpenInnerGates();
         OpenOuterGates();
         Debug.Log("ROOM CLEARED");

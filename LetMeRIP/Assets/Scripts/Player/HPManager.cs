@@ -166,8 +166,8 @@ public class HPManager : MonoBehaviourPun, IOnPhotonViewPreNetDestroy
             characterController.formManager.UnbindAbilities();
             characterController.movement.playerInputActions.Player.Movement.Disable();
             Debug.Log($"Destroying {name}");
-            PhotonNetwork.Destroy(gameObject);
         }
+        PhotonNetwork.Destroy(gameObject);
     }
 
     public IEnumerator BuffStats(float str, float dex, float Int, float duration)

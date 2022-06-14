@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,8 +15,7 @@ public class SpiritAbility1 : Ability
     private float timeStep = 0.1f; // 20SP/sec
     private bool isDraining;
     private float slowFactor = .8f;
-    
-
+    private GameObject line;
     private void Start()
     {
         cooldown = 0.1f;
@@ -37,21 +37,21 @@ public class SpiritAbility1 : Ability
     public override void PerformedAction()
     {
         // Create Collider
-        float rad = Utilities.DegToRad(coneAngle) * .5f;
+        //float rad = Utilities.DegToRad(coneAngle) * .5f;
 
-        Vector3 rbound = new Matrix4x4(
-                new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
-                new Vector4(0, 1, 0, 0),
-                new Vector4(-Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
-                Vector4.zero
-            ) * transform.forward;
+        //Vector3 rbound = new Matrix4x4(
+        //        new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
+        //        new Vector4(0, 1, 0, 0),
+        //        new Vector4(-Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+        //        Vector4.zero
+        //    ) * transform.forward;
 
-        Vector3 lbound = new Matrix4x4(
-                new Vector4(Mathf.Cos(rad), 0, -Mathf.Sin(rad), 0),
-                new Vector4(0, 1, 0, 0),
-                new Vector4(Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
-                Vector4.zero
-            ) * transform.forward;
+        //Vector3 lbound = new Matrix4x4(
+        //        new Vector4(Mathf.Cos(rad), 0, -Mathf.Sin(rad), 0),
+        //        new Vector4(0, 1, 0, 0),
+        //        new Vector4(Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+        //        Vector4.zero
+        //    ) * transform.forward;
 
         SPPool pool = null;
 
@@ -62,16 +62,25 @@ public class SpiritAbility1 : Ability
             {
                 Debug.Log($"Hit {hitPool.name}");
                 Vector3 poolDirection = hitPool.transform.position - transform.position;
-                if (Vector3.Dot(poolDirection, lbound) > 0 && Vector3.Dot(poolDirection, rbound) > 0)
-                {
-                    Debug.Log("Pool within angle");
-                    pool = hitPool.GetComponent<SPPool>();
-                    isDraining = true;
-                    characterController.stats.swiftness *= slowFactor; // i'm not using SlowPE since the time of the effect is not fixed
-                    drainPoolCoroutine = StartCoroutine(DrainPool(pool));
-                    StartCoroutine(Cooldown());
-                    return;
-                }
+                //if (Vector3.Dot(poolDirection, lbound) > 0 && Vector3.Dot(poolDirection, rbound) > 0)
+                //{
+                //Debug.Log("Pool within angle");
+                //line = PhotonNetwork.Instantiate("Prefabs/LineAbility1", transform.position, transform.rotation);
+                //GameObject p1 = line.transform.Find("p1").gameObject;
+                //GameObject p2 = line.transform.Find("p2").gameObject;
+                //p1.transform.position = transform.position;
+                //p2.transform.position = hitPool.transform.position;
+
+                //LineController lr = line.GetComponent<LineController>();
+                //lr.SetUpLine(new Transform[] { p1.transform, p2.transform });
+
+                pool = hitPool.GetComponent<SPPool>();
+                isDraining = true;
+                characterController.stats.swiftness *= slowFactor; // i'm not using SlowPE since the time of the effect is not fixed
+                drainPoolCoroutine = StartCoroutine(DrainPool(pool));
+                StartCoroutine(Cooldown());
+                return;
+            //}
             }
         }
 
@@ -91,6 +100,7 @@ public class SpiritAbility1 : Ability
             isDraining = false;
             if(drainPoolCoroutine != null) StopCoroutine(drainPoolCoroutine);
             characterController.stats.swiftness /= slowFactor;
+            if (line != null) PhotonNetwork.Destroy(line);
         }
     }
 

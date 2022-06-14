@@ -13,6 +13,7 @@ public class EnemyBulletJuice : MonoBehaviour
     public GameObject shootEffect;
     public GameObject destroyEffect;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,19 +21,21 @@ public class EnemyBulletJuice : MonoBehaviour
         sphereCol = GetComponent<SphereCollider>();
 
         // Shoot Effect
-        Instantiate(shootEffect, transform.position, transform.rotation);
+        // Instantiate(shootEffect, transform.position, transform.rotation);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (TryGetComponent<PlayerHealthJuice>(out PlayerHealthJuice playerHealth))
+
+        if (collision.transform.TryGetComponent<PlayerHealthJuice>(out PlayerHealthJuice playerHealth))
         {
+
             Debug.Log("Hit Hit");
             playerHealth.TakeDamage(damage);
 
             // Destroy Effect
-            Instantiate(destroyEffect, transform);
+            // Instantiate(destroyEffect, transform);
 
             Destroy(gameObject);
         }

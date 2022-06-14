@@ -1,25 +1,15 @@
-Perché avere le abilità MonoBehaviour? 
-Si potrebbero fare Scriptable Objects (limite coroutine cd abilità fatto partire in Handler)
-così da evitare il fatto di doverle associare al Game Object e settare i cd?
+ - Room back to Position.y = 0
+	to make it easire for ability
 
-Gli input li ho solo settati in PLayerInputActions, ma non sono ancora inseriti negli script
-in quanto prima va deciso come procedere con le abilità.
+ - Juice on enemy
+	- On Hit
+		- Stop acting
+		- Hit animation
+		- Knock back
+		- Small freeze like in Fighting games
+		- Change in color
+		- Sound (Ouch!)
 
-1) Player Canvas
-	Light Attack
-	Heavy Attack
-	E
-	Q
-	
-	1 => Spirit (2)
-		Spirit Gauge Suck
-		PickUp Body
-	
-	1 => Class Canvas (3)
-		Transformation E
-		Transformation Q
-		Exit Body
+	- Navmesh
+		- Rotate before starting (may be resolved with a high accel and rot speed)
 		
-		3 => Transformation Canvas
-			Consuming SG as in GDD
-			

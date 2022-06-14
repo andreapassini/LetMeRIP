@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 8097066376853001091}
   - component: {fileID: 8097066376853001090}
   - component: {fileID: 8097066376853001089}
+  - component: {fileID: 38685641}
   m_Layer: 8
-  m_Name: EnemyBullet-JuiceTest
+  m_Name: EnemyBulletJuice
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8097066376853001092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.55, y: 1.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8097066377642145758}
@@ -62,6 +63,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &38685641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097066376853001092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83034545ec415474e9fd14beb96ab753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8097066377642145759
 GameObject:
   m_ObjectHideFlags: 0

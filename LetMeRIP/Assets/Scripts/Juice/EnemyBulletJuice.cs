@@ -23,6 +23,8 @@ public class EnemyBulletJuice : MonoBehaviour
         if(TryGetComponent<PlayerHealthJuice>(out PlayerHealthJuice playerHealth))
         {
             playerHealth.TakeDamage(damage);
+
+            Destroy(gameObject);
         }
     }
 }

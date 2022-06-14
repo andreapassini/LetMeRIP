@@ -8,7 +8,10 @@ public class EnemyBulletJuice : MonoBehaviour
 {
     private Rigidbody rb;
     private SphereCollider sphereCol;
-    private float damage = 10f;
+    public float damage = 10f;
+
+    public GameObject shootEffect;
+    public GameObject destroyEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -16,15 +19,24 @@ public class EnemyBulletJuice : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         sphereCol = GetComponent<SphereCollider>();
 
+        // Shoot Effect
+        Instantiate(shootEffect, transform.position, transform.rotation);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(TryGetComponent<PlayerHealthJuice>(out PlayerHealthJuice playerHealth))
+
+        if (TryGetComponent<PlayerHealthJuice>(out PlayerHealthJuice playerHealth))
         {
+            Debug.Log("Hit Hit");
             playerHealth.TakeDamage(damage);
+
+            // Destroy Effect
+            Instantiate(destroyEffect, transform);
 
             Destroy(gameObject);
         }
+
+        Destroy(gameObject);
     }
 }

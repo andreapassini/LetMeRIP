@@ -63,19 +63,14 @@ public class EnemyRangedJuice : MonoBehaviour
 
     public object Shoot(object o)
     {
-        Debug.Log("attack");
-
         // Look at Target
         // Maybe better to use RigidBody and use Slerp for a smoother rotation
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z), Vector3.up);
 
         if (startTimeAction + coolDown > Time.time)
         {
-            Debug.Log("Cooldown: " + (startTimeAction + coolDown) + " - " + Time.time);
             return null;
         }
-
-        Debug.Log("Cooldown: " + (startTimeAction + coolDown) + " - " + Time.time);
 
         startTimeAction = Time.time;
 

@@ -34,11 +34,11 @@ public class EnemyBulletJuice : MonoBehaviour
             Debug.Log("Hit Hit");
             playerHealth.TakeDamage(damage);
 
-            // Destroy Effect
-            // Instantiate(destroyEffect, transform);
-
             Destroy(gameObject);
         }
+
+        // Destroy Effect
+        Instantiate(destroyEffect, transform);
 
         Destroy(gameObject);
     }

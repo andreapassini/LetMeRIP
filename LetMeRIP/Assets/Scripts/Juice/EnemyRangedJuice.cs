@@ -50,7 +50,7 @@ public class EnemyRangedJuice : MonoBehaviour
         {
             if (!stopAi)
             {
-                Shoot(this);
+                Attack(this);
                 yield return new WaitForSeconds(aiFrameRate);
             }
         }
@@ -61,7 +61,7 @@ public class EnemyRangedJuice : MonoBehaviour
         health -= damageAmount;
     }
 
-    public object Shoot(object o)
+    public object Attack(object o)
     {
         // Look at Target
         // Maybe better to use RigidBody and use Slerp for a smoother rotation
@@ -72,13 +72,19 @@ public class EnemyRangedJuice : MonoBehaviour
             return null;
         }
 
+        animator.SetTrigger("attack");
+        
+        return null;
+    }
+
+    public void Shoot()
+    {
         startTimeAction = Time.time;
 
         GameObject bullet = Instantiate(bulletPrefab, attackPoint.position, transform.rotation);
 
         bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletForce, ForceMode.Impulse);
 
-        return null;
     }
 
 }

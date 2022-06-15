@@ -3,31 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
+[RequireComponent (typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
 public class PlayerHealthJuice : MonoBehaviour
 {
     private Animator animator;
+    private Rigidbody rb;
+    private Collider collider;
 
     private float health;
+
+    public GameObject hitEffect;
 
     // Start is called before the first frame update
     void Start()
     {
+        #region Component's References
         animator = GetComponent<Animator>();
+        collider = GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
+        #endregion
+
 
         health = 100;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        LockCostraints();
     }
 
     public void TakeDamage(float damageAmount)
     {
+        UnLockCostraints();
+
         Debug.Log("Got HIT for: " + damageAmount);
         health -= damageAmount;
 
         animator.SetTrigger("damage");
+
+        Instantiate(hitEffect, transform.position, transform.rotation);
+    }
+
+    public void LockCostraints()
+    {
+        rb.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionY;
+    }
+
+    public void UnLockCostraints()
+    {
+        rb.constraints = RigidbodyConstraints.None;
     }
 }

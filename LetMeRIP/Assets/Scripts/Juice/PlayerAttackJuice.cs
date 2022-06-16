@@ -1,48 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent (typeof(Animator))]
-public class EnemyRangedJuice : MonoBehaviour
+[RequireComponent(typeof(Animator))]
+public class PlayerAttackJuice : MonoBehaviour
 {
-    private NavMeshAgent navMeshAgent;
     private Animator animator;
     private Transform attackPoint;
 
-    private bool stopAi = false;
+    private float health = 100;
+    private float bulletForce = 10f;
+
+    private bool stopAi;
     [SerializeField] private float aiFrameRate = .1f;
 
-    private float health = 100f;
-    private float bulletForce = 10f;
     private GameObject bulletPrefab;
     public Transform target;
-    public GameObject hitEffect;
 
-    private DecisionTree dt;
     public float coolDown;
-
     private float startTimeAction;
 
-    // Start is called before the first frame update
     void Start()
     {
-        #region SetUp
-        navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
-        bulletPrefab = Resources.Load<GameObject>("Prefabs/Juice/EnemyBulletJuice");
-        attackPoint = transform.Find("Hips").Find("Staff").Find("attackPoint").transform;
-        #endregion
+        bulletPrefab = Resources.Load<GameObject>("Prefabs/Juice/PlayerBulletJuice");
+        attackPoint = transform.Find("attackPoint").transform;
 
-        startTimeAction = 0;
-
-        //DTAction dTAction = new DTAction(Shoot);
-
-        //dt = new DecisionTree(dTAction);
+        startTimeAction = Time.time;
 
         StartCoroutine(Patrol());
+
     }
 
     public IEnumerator Patrol()
@@ -69,8 +57,10 @@ public class EnemyRangedJuice : MonoBehaviour
             return null;
         }
 
+        Shoot();
+
         animator.SetTrigger("attack");
-        
+
         return null;
     }
 
@@ -81,26 +71,16 @@ public class EnemyRangedJuice : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, attackPoint.position, transform.rotation);
 
         bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletForce, ForceMode.Impulse);
+
     }
 
-    public void TakeDamage(float damageAmount)
-    {
-        StopAIEnemy();
-
-        health -= damageAmount;
-
-        animator.SetTrigger("damage");
-
-        Instantiate(hitEffect, transform.position, transform.rotation);
-    }
-
-    public void StopAIEnemy()
+    public void StopAIPlayer()
     {
         stopAi = true;
     }
 
     // This will be called by the animation Event
-    public void RestartAIEnemy()
+    public void RestartAIPlayer()
     {
         stopAi = false;
     }

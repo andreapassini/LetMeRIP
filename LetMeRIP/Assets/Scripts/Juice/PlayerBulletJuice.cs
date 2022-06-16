@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof (SphereCollider))]
-public class EnemyBulletJuice : MonoBehaviour
+[RequireComponent(typeof(SphereCollider))]
+public class PlayerBulletJuice : MonoBehaviour
 {
     private Rigidbody rb;
     private SphereCollider sphereCol;
@@ -13,8 +13,6 @@ public class EnemyBulletJuice : MonoBehaviour
     public GameObject shootEffect;
     public GameObject destroyEffect;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -26,11 +24,12 @@ public class EnemyBulletJuice : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.TryGetComponent<PlayerHealthJuice>(out PlayerHealthJuice playerHealth))
+
+        if (collision.transform.TryGetComponent<EnemyRangedJuice>(out EnemyRangedJuice enemyRangedJuice))
         {
 
             Debug.Log("Hit Hit");
-            playerHealth.TakeDamage(damage);
+            enemyRangedJuice.TakeDamage(damage);
 
             Destroy(gameObject);
         }

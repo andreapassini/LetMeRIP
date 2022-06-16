@@ -10,6 +10,7 @@ public class PlayerHealthJuice : MonoBehaviour
     private Animator animator;
     private Rigidbody rb;
     private Collider collider;
+    private PlayerAttackJuice playerAttackJuice;
 
     private float health;
 
@@ -22,6 +23,7 @@ public class PlayerHealthJuice : MonoBehaviour
         animator = GetComponent<Animator>();
         collider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
+        playerAttackJuice = GetComponent<PlayerAttackJuice>();
         #endregion
 
 
@@ -32,6 +34,7 @@ public class PlayerHealthJuice : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
+        playerAttackJuice.StopAIPlayer();
         UnLockCostraints();
 
         Debug.Log("Got HIT for: " + damageAmount);

@@ -21,7 +21,8 @@ public class EnemyBulletJuice : MonoBehaviour
         sphereCol = GetComponent<SphereCollider>();
 
         // Shoot Effect
-        // Instantiate(shootEffect, transform.position, transform.rotation);
+        GameObject h = Instantiate(shootEffect, transform.position, transform.rotation);
+        Destroy(h, 3f);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -36,7 +37,8 @@ public class EnemyBulletJuice : MonoBehaviour
         }
 
         // Destroy Effect
-        // Instantiate(destroyEffect, transform);
+        GameObject h = Instantiate(destroyEffect, transform);
+        Destroy(h, 3f);
 
         Destroy(gameObject);
     }

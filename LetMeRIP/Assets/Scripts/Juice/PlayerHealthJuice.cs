@@ -42,7 +42,8 @@ public class PlayerHealthJuice : MonoBehaviour
 
         animator.SetTrigger("damage");
 
-        Instantiate(hitEffect, transform.position, transform.rotation);
+        GameObject h = Instantiate(hitEffect, transform.position, transform.rotation);
+        Destroy(h, 3f);
     }
 
     public void LockCostraints()

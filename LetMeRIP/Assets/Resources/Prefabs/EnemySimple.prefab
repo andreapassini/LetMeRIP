@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1137954875289490151, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
+      propertyPath: sceneViewId
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2803820806472684270, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
       propertyPath: m_Name
       value: EnemySimple
@@ -63,6 +67,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3905508844711230769, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905508844711230769, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[4].Name
+      value: run
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905508844711230769, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[4].Type
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4754081271081580906, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
       propertyPath: m_Acceleration
       value: 900
@@ -74,6 +90,10 @@ PrefabInstance:
     - target: {fileID: 4754081271081580906, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
       propertyPath: m_StoppingDistance
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5257146287242849728, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
+      propertyPath: sceneViewId
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}

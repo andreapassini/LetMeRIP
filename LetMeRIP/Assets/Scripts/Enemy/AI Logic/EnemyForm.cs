@@ -76,6 +76,7 @@ public class EnemyForm : MonoBehaviourPun
 
     public string targetTag = "Player";
 
+    public GameObject hitEffect;
 
     private EnemyBillboard healthBar;
     
@@ -189,6 +190,9 @@ public class EnemyForm : MonoBehaviourPun
     public void RpcTakeDamage(float dmg)
 	{
         StopAIForAnimation();
+
+        GameObject h = Instantiate(hitEffect, transform.position, transform.rotation);
+        Destroy(h, 3f);
 
         animator.SetTrigger("damage");
         navMeshAgent.velocity = Vector3.zero;

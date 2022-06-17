@@ -2730,6 +2730,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ef35fa36e3a65043b2d800600204bdd, type: 3}
+--- !u!1 &1202634175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8443315704496310910, guid: 6ef35fa36e3a65043b2d800600204bdd, type: 3}
+  m_PrefabInstance: {fileID: 1202634174}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1238020908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3478025250975259355, guid: cc2904f8420d54e45b80616562ff859c, type: 3}
@@ -4119,6 +4124,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1420353102225325665, guid: 8e89edb675683ac40836d84eb3bf7faa, type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 1202634175}
     - target: {fileID: 1926092122037660361, guid: 8e89edb675683ac40836d84eb3bf7faa, type: 3}
       propertyPath: sceneViewId
       value: 2
@@ -4138,10 +4147,6 @@ PrefabInstance:
     - target: {fileID: 8405638912642602471, guid: 8e89edb675683ac40836d84eb3bf7faa, type: 3}
       propertyPath: m_Name
       value: EnemySimple
-      objectReference: {fileID: 0}
-    - target: {fileID: 8405638912642602471, guid: 8e89edb675683ac40836d84eb3bf7faa, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9218029109365641053, guid: 8e89edb675683ac40836d84eb3bf7faa, type: 3}
       propertyPath: m_RootOrder
@@ -4406,6 +4411,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 121783230, guid: cc2904f8420d54e45b80616562ff859c, type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 1202634175}
     - target: {fileID: 1839304754744059133, guid: cc2904f8420d54e45b80616562ff859c, type: 3}
       propertyPath: m_Name
       value: EnemyRanged

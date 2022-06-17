@@ -306,6 +306,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 121783232}
   stopAI: 0
   targetTag: Player
+  hitEffect: {fileID: 0}
   tooNearRange: 3
   dashAction: {fileID: 11400000, guid: 0a2255bf7ac3c244b89645f338bb3fea, type: 2}
   lateStart: 0
@@ -377,9 +378,6 @@ MonoBehaviour:
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
   m_SynchronizeParameters:
-  - Type: 1
-    SynchronizeType: 1
-    Name: speed
   - Type: 9
     SynchronizeType: 1
     Name: attack
@@ -389,6 +387,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 1
     Name: die
+  - Type: 4
+    SynchronizeType: 0
+    Name: run
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

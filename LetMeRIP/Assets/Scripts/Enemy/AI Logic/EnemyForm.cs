@@ -141,25 +141,26 @@ public class EnemyForm : MonoBehaviourPun
     // Wait until the end of the action to update again the FSM
     public virtual void CastAbilityDuration(EnemyAbility ability)
     {
-        
+
         //if (AiFrameRate < ability.abilityDurtation)
         //{
         //}
 
-        StartCoroutine(AbilityDuration(ability));
+        //StartCoroutine(AbilityDuration(ability));
 
+        if(ability.abilityDurtation > AiFrameRate)
+            StopAIForAnimation();
+
+        // Restart will be callaed by the animation event of that action
     }
 
-    private IEnumerator AbilityDuration(EnemyAbility ability)
+    public IEnumerator AbilityDuration(EnemyAbility ability)
     {
         if (ability.abilityDurtation > AiFrameRate) {
             // Stop FSM
-            //reactionReference = AiFrameRate;
-            //AiFrameRate = ability.abilityDurtation;
             stopAI = true;
             animator.SetFloat("speed", 0);
-            //StopEverythingForAbilityExecution();
-
+    
             yield return new WaitForSeconds(ability.abilityDurtation);
 
             stopAI = false;
@@ -187,10 +188,11 @@ public class EnemyForm : MonoBehaviourPun
         e.StartAbility(this);
 	}
 
-
     [PunRPC]
     public void RpcTakeDamage(float dmg)
 	{
+        StopAIForAnimation();
+
         animator.SetTrigger("damage");
         navMeshAgent.velocity = Vector3.zero;
         navMeshAgent.isStopped = true;
@@ -222,16 +224,6 @@ public class EnemyForm : MonoBehaviourPun
         FormManager.OnBodyExitForEnemy += RestTargetAfterSpiritExit;
         HPManager.OnPlayerKilled += RestTargetAfterSpiritExit;
     }
-
-    public virtual void StopEverythingForAbilityExecution()
-	{
-
-	}
-
-    public virtual void RestartAI()
-	{
-
-	}
 
     public virtual void RestTargetAfterSpiritExit(FormManager formManager)
 	{
@@ -302,4 +294,14 @@ public class EnemyForm : MonoBehaviourPun
 
     }
 
+    public void StopAIForAnimation()
+    {
+        stopAI = true;
+    }
+
+    // This will be called by the animation event
+    public void RestartAIAfterAnimation()
+    {
+        stopAI = false;
+    }
 }

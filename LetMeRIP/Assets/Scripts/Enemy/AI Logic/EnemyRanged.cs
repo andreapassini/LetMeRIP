@@ -21,7 +21,6 @@ public class EnemyRanged : EnemyForm
         base.Awake();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         //if (!PhotonNetwork.IsMasterClient) return;
@@ -31,9 +30,7 @@ public class EnemyRanged : EnemyForm
         // Debug.Log("Start Health " + health);
 
         rb = transform.GetComponent<Rigidbody>();
-
         animator = transform.GetComponent<Animator>();
-
         navMeshAgent = transform.GetComponent<NavMeshAgent>();
 
         reactionReference = AiFrameRate;
@@ -48,65 +45,63 @@ public class EnemyRanged : EnemyForm
 
         Init();
 
-        navMeshAgent = transform.GetComponent<NavMeshAgent>();
+        FSMState search = new FSMState();
+        search.stayActions.Add(Search);
 
-        //FSMState search = new FSMState();
-        //search.stayActions.Add(Search);
+        List<FSMAction> listActions = new List<FSMAction>();
+        FSMAction a1 = new FSMAction(GoToLastSeenPos);
+        listActions.Add(a1);
 
-        //List<FSMAction> listActions = new List<FSMAction>();
-        //FSMAction a1 = new FSMAction(GoToLastSeenPos);
-        //listActions.Add(a1);
+        FSMState fight = new FSMState();
+        fight.stayActions.Add(RunFightFSM);
 
-        //FSMState fight = new FSMState();
-        //fight.stayActions.Add(RunFightFSM);
+        // FIGHT FSM
 
-        //// FIGHT FSM
-
-        //FSMState chase = new FSMState();
-        //chase.stayActions.Add(Chase);
+        FSMState chase = new FSMState();
+        chase.stayActions.Add(Chase);
 
         FSMState attack = new FSMState();
         attack.stayActions.Add(Attack);
 
-        //FSMState escape = new FSMState();
-        //escape.stayActions.Add(Dash);
+        FSMState escape = new FSMState();
+        escape.stayActions.Add(Dash);
 
-        //FSMTransition t1 = new FSMTransition(TargetVisible);
-        //FSMTransition t2 = new FSMTransition(TargetInRange);
-        //FSMTransition t3 = new FSMTransition(TargetNotVisible, listActions.ToArray());
-        //FSMTransition t4 = new FSMTransition(TargetNotInRange);
-        //FSMTransition t5 = new FSMTransition(TargetTooNear);
-        //FSMTransition t6 = new FSMTransition(TargetNotTooNear);
+        FSMTransition t1 = new FSMTransition(TargetVisible);
+        FSMTransition t2 = new FSMTransition(TargetInRange);
+        FSMTransition t3 = new FSMTransition(TargetNotVisible, listActions.ToArray());
+        FSMTransition t4 = new FSMTransition(TargetNotInRange);
+        FSMTransition t5 = new FSMTransition(TargetTooNear);
+        FSMTransition t6 = new FSMTransition(TargetNotTooNear);
 
-        //// Search
-        ////  out: TargetVisible()
-        //search.AddTransition(t1, fight);
-        ////  in: TargetNotVisible()
-        //fight.AddTransition(t3, search);
-        ////      action: GoTo(lastSeenPos)
+        // Search
+        //  out: TargetVisible()
+        search.AddTransition(t1, fight);
+        //  in: TargetNotVisible()
+        fight.AddTransition(t3, search);
+        //      action: GoTo(lastSeenPos)
 
-        //// Fight
-        //// out: TargetNotVisible()
+        // Fight
+        // out: TargetNotVisible()
 
-        //// Chase
-        ////  out: TargetInRange
-        //chase.AddTransition(t2, attack);
-        
-        //// Attack
-        //// out: TargetTooNear
-        //attack.AddTransition(t5, escape);
-        ////  in: TargetInRange()
-        ////  in: TargetTargetNotTooNear()
+        // Chase
+        //  out: TargetInRange
+        chase.AddTransition(t2, attack);
 
-        //// Escape
-        //// out: TargetNotInRange()
-        //escape.AddTransition(t4, chase);
-        //// out: TargetTargetNotTooNear()
-        //escape.AddTransition(t6, attack);
+        // Attack
+        // out: TargetTooNear
+        attack.AddTransition(t5, escape);
+        //  in: TargetInRange()
+        //  in: TargetTargetNotTooNear()
+
+        // Escape
+        // out: TargetNotInRange()
+        escape.AddTransition(t4, chase);
+        // out: TargetTargetNotTooNear()
+        escape.AddTransition(t6, attack);
 
         fsm = new FSM(attack);
 
-        //fightFSM = new FSM(chase);
+        fightFSM = new FSM(chase);
 
         StartCoroutine(Patrol());
     }
@@ -241,7 +236,7 @@ public class EnemyRanged : EnemyForm
         }
 
         dashAction.StartAbility(this);
-        StartCoroutine(WaitDashAnimation());
+        //StartCoroutine(WaitDashAnimation());
     }
     #endregion
     
@@ -250,6 +245,9 @@ public class EnemyRanged : EnemyForm
     {
         while (true)
         {
+            if (stopAI)
+                continue;
+
             navMeshAgent.speed = enemyStats.swiftness;
             fsm.Update();
             yield return new WaitForSeconds(AiFrameRate);
@@ -260,64 +258,84 @@ public class EnemyRanged : EnemyForm
     {
         while (TargetVisible())
         {
+            if (stopAI)
+                continue;
+
             navMeshAgent.speed = enemyStats.swiftness;
             fightFSM.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
     }
 
-    // To manage getting Hit:
-    //  => Event when something hit an enemy
-    //  => The enemy hit by it will resolve the event
-
-    public IEnumerator StopAI()
-    {
-        navMeshAgent.speed = enemyStats.swiftness;
-        float attackDuration = 1f; // Just as an example 
-
-        AiFrameRate = attackDuration;
-        yield return new WaitForSeconds(attackDuration);
-        AiFrameRate = reactionReference;
-    }
-
     public IEnumerator StopAI(float stopTime)
     {
+        stopAI = true;
         navMeshAgent.speed = enemyStats.swiftness;
         AiFrameRate = stopTime;
-        yield return new WaitForSeconds(stopTime);
-        AiFrameRate = reactionReference;
 
+        yield return new WaitForSeconds(stopTime);
+
+        stopAI = false;
+        AiFrameRate = reactionReference;
         navMeshAgent.isStopped = false;
+    }
+
+    /*
+    public IEnumerator StopAI()
+    {
+        stopAI = true;
+        navMeshAgent.speed = enemyStats.swiftness;
+        float attackDuration = 1f; // Just as an example 
+        AiFrameRate = attackDuration;
+
+        yield return new WaitForSeconds(attackDuration);
+
+        stopAI = false;
+        AiFrameRate = reactionReference;
     }
 
     public IEnumerator WaitDashAnimation()
 	{
+        stopAI = true;
+
         yield return new WaitForSeconds(dashAction.abilityDurtation);
+
+        stopAI = false;
+
         navMeshAgent.enabled = true;
         navMeshAgent.speed = enemyStats.swiftness;
         // Enable isKinematic
         rb.isKinematic = true;
     }
+    */
 
     public IEnumerator LateStart()
     {
+        stopAI = true;
+
         yield return new WaitForSeconds(1f);
+
+        stopAI = false;
+
         navMeshAgent.speed = enemyStats.swiftness;
         targets = GameObject.FindGameObjectsWithTag(targetTag);
         target = targets[0].transform;
     }
     #endregion
-
     public void TakeDamageEffect(EnemyForm e)
     {
         if (this == e)
-            StartCoroutine(StopAI(takeDamageDuration));
+        {
+
+        }
+            
     }
 
     public void DieEffect(EnemyForm e)
     {
         if (this == e)
-            StartCoroutine(StopAI(takeDamageDuration));
+        { 
+        }
     }
 
 	public override void Init()

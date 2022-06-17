@@ -117,6 +117,8 @@ public class EnemyForm : MonoBehaviourPun
 
     public virtual void Die()
 	{
+        animator.SetTrigger("die");
+
         Debug.Log($"{name} died");
         spPool.transform.SetParent(transform.parent);
         spPool.SetActive(true);
@@ -141,11 +143,6 @@ public class EnemyForm : MonoBehaviourPun
     // Wait until the end of the action to update again the FSM
     public virtual void CastAbilityDuration(EnemyAbility ability)
     {
-
-        //if (AiFrameRate < ability.abilityDurtation)
-        //{
-        //}
-
         //StartCoroutine(AbilityDuration(ability));
 
         if(ability.abilityDurtation > AiFrameRate)

@@ -40,8 +40,8 @@ public class EnemySimple : EnemyForm
                 target = targets[0].transform;
         }
 
-  //      FSMState search = new FSMState();
-		//search.stayActions.Add(Search);
+        FSMState search = new FSMState();
+		search.stayActions.Add(Search);
 
         FSMState chase = new FSMState();
         chase.stayActions.Add(Chase);
@@ -60,9 +60,9 @@ public class EnemySimple : EnemyForm
 
         // Search
         //  out: TargetVisible()
-        //search.AddTransition(t1, chase);
+        search.AddTransition(t1, chase);
         //  in: TargetNotVisible()
-        //chase.AddTransition(t3, search);
+        chase.AddTransition(t3, search);
         //      action: GoTo(lastSeenPos)
         // Chase
         //  out: TargetInRange()
@@ -71,7 +71,7 @@ public class EnemySimple : EnemyForm
         attack.AddTransition(t4, chase);
         // Attack
 
-        fsm = new FSM(chase);
+        fsm = new FSM(search);
 
         StartCoroutine(Patrol());
     }
@@ -93,9 +93,13 @@ public class EnemySimple : EnemyForm
     public IEnumerator Patrol()
     {
         while (true) {
+
+            if (stopAI)
+                continue;
+
             navMeshAgent.speed = enemyStats.swiftness;
             fsm.Update();
-            animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+
             yield return new WaitForSeconds(AiFrameRate);
         }
     }
@@ -106,7 +110,7 @@ public class EnemySimple : EnemyForm
 	public void Search()
 	{
         searchAction.StartAbility(this);
-        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+        animator.SetBool("run", true);
     }
 
     // Chase
@@ -119,16 +123,14 @@ public class EnemySimple : EnemyForm
         }
 
         chaseAction.StartAbility(this);
-        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+        animator.SetBool("run", true);
     }
 
     public void Attack()
     {
-        animator.SetTrigger("attack");
-        attackAction.StartAbility(this);
+        animator.SetBool("run", false);
 
-        // Wait for the end of animation
-        StartCoroutine(StopAI());
+        attackAction.StartAbility(this);
     }
 
     public void GoToLastSeenPos()
@@ -141,7 +143,8 @@ public class EnemySimple : EnemyForm
 
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         GetComponent<NavMeshAgent>().destination = lastSeenPos;
-        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+        animator.SetBool("run", true);
+
     }
     #endregion
 
@@ -242,14 +245,12 @@ public class EnemySimple : EnemyForm
     #region Effects
     public void TakeDamageEffect(EnemyForm e)
     {
-        if (this == e)
-            StartCoroutine(StopAI(takeDamageDuration));
+        if (this == e) { }    
     }
 
     public void DieEffect(EnemyForm e)
     {
-        if (this == e)
-            StartCoroutine(StopAI(takeDamageDuration));
+        if (this == e) { }    
     }
     #endregion
 

@@ -23,6 +23,9 @@ public class SimpleAttackAbility : EnemyAbility
 
 	public override void PerformAbility(EnemyForm enemy)
 	{
+        if (this.enemy == enemy)
+            return;
+
         // Create Collider
         Collider[] hitEnemies = Physics.OverlapSphere(enemy.attackPoint.position, enemy.attackRange);
 

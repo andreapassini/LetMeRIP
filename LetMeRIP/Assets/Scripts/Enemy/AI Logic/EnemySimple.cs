@@ -88,21 +88,6 @@ public class EnemySimple : EnemyForm
         OnEnemyKilled -= DieEffect;
     }
 
-    // Patrol coroutine
-    // Periodic update, run forever
-    public IEnumerator Patrol()
-    {
-        while (true) {
-
-            if (stopAI)
-                continue;
-
-            navMeshAgent.speed = enemyStats.swiftness;
-            fsm.Update();
-
-            yield return new WaitForSeconds(AiFrameRate);
-        }
-    }
 
 
 	#region Actions
@@ -199,38 +184,20 @@ public class EnemySimple : EnemyForm
     }
 
     #region Coroutines
-    public IEnumerator StopAI()
+    // Patrol coroutine
+    // Periodic update, run forever
+    public IEnumerator Patrol()
     {
-        //float attackDuration = 1f; // Just as an example 
-        navMeshAgent.velocity = Vector3.zero;
-        navMeshAgent.isStopped = true;
-        //AiFrameRate = attackDuration;
-        stopAI = true;
-        yield return new WaitForSeconds(takeDamageDuration);
-        stopAI = false;
-        //AiFrameRate = reactionReference;
-    }
+        while (true) {
 
-    public IEnumerator StopAI(float duration)
-    {
-        navMeshAgent.velocity = Vector3.zero;
-        navMeshAgent.isStopped = true;
-        stopAI = true;
-        //AiFrameRate = duration;
-        yield return new WaitForSeconds(duration);
-        stopAI = false;
-        //AiFrameRate = reactionReference;
-        //navMeshAgent.isStopped = false;
-        //navMeshAgent.isStopped = false;
-    }
+            if (stopAI)
+                continue;
 
-    public IEnumerator WaitDieAnimation(float duration)
-    {
-        navMeshAgent.enabled = false;
-        yield return new WaitForSeconds(duration);
-        navMeshAgent.speed = enemyStats.swiftness;
-        Destroy(gameObject);
+            navMeshAgent.speed = enemyStats.swiftness;
+            fsm.Update();
 
+            yield return new WaitForSeconds(AiFrameRate);
+        }
     }
 
     public IEnumerator LateStart()

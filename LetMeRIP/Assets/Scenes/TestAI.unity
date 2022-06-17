@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -410,7 +410,7 @@ PrefabInstance:
     - target: {fileID: 106143224, guid: 1b970f93d3efe5945b75a30e3a1f9f81, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 308955416}
+      objectReference: {fileID: 1238020908}
     - target: {fileID: 106143224, guid: 1b970f93d3efe5945b75a30e3a1f9f81, type: 3}
       propertyPath: coolDown
       value: 7
@@ -2730,6 +2730,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ef35fa36e3a65043b2d800600204bdd, type: 3}
+--- !u!4 &1238020908 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3478025250975259355, guid: cc2904f8420d54e45b80616562ff859c, type: 3}
+  m_PrefabInstance: {fileID: 1730744027}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1256111420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4120,11 +4125,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6565330770801306517, guid: 8e89edb675683ac40836d84eb3bf7faa, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6565330770801306517, guid: 8e89edb675683ac40836d84eb3bf7faa, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6738840569481123310, guid: 8e89edb675683ac40836d84eb3bf7faa, type: 3}
       propertyPath: sceneViewId
@@ -4133,6 +4138,10 @@ PrefabInstance:
     - target: {fileID: 8405638912642602471, guid: 8e89edb675683ac40836d84eb3bf7faa, type: 3}
       propertyPath: m_Name
       value: EnemySimple
+      objectReference: {fileID: 0}
+    - target: {fileID: 8405638912642602471, guid: 8e89edb675683ac40836d84eb3bf7faa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9218029109365641053, guid: 8e89edb675683ac40836d84eb3bf7faa, type: 3}
       propertyPath: m_RootOrder

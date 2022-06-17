@@ -178,7 +178,8 @@ public class EnemyRanged : EnemyForm
     public void Search()
     {
         searchAction.StartAbility(this);
-        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+        // animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+        animator.SetBool("run", true);
     }
 
     public void Chase()
@@ -190,7 +191,8 @@ public class EnemyRanged : EnemyForm
         }
 
         chaseAction.StartAbility(this);
-        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+        // animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+        animator.SetBool("run", true);
     }
 
     public void Attack()
@@ -200,12 +202,10 @@ public class EnemyRanged : EnemyForm
             if (targets.Length != 0)
                 target = targets[0].transform;
         }
-
-        animator.SetFloat("speed", 0);
+        animator.SetBool("run", false);
+        //animator.SetFloat("speed", 0);
 
         attackAction.StartAbility(this);
-
-        //StartCoroutine(StopAI());
     }
 
     public void GoToLastSeenPos()
@@ -218,8 +218,9 @@ public class EnemyRanged : EnemyForm
 
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         GetComponent<NavMeshAgent>().destination = lastSeenPos;
-        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
 
+        //animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+        animator.SetBool("run", true);
     }
 
     public void RunFightFSM()
@@ -265,19 +266,6 @@ public class EnemyRanged : EnemyForm
             fightFSM.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
-    }
-
-    public IEnumerator StopAI(float stopTime)
-    {
-        stopAI = true;
-        navMeshAgent.speed = enemyStats.swiftness;
-        AiFrameRate = stopTime;
-
-        yield return new WaitForSeconds(stopTime);
-
-        stopAI = false;
-        AiFrameRate = reactionReference;
-        navMeshAgent.isStopped = false;
     }
 
     /*

@@ -44,8 +44,8 @@ public class EnemySpider : EnemyForm
         }        
         
 
-        //FSMState search = new FSMState();
-        //search.stayActions.Add(Search);
+        FSMState search = new FSMState();
+        search.stayActions.Add(Search);
 
         FSMState chase = new FSMState();
         chase.stayActions.Add(Chase);
@@ -64,9 +64,9 @@ public class EnemySpider : EnemyForm
 
         // Search
         //  out: TargetVisible()
-        //search.AddTransition(t1, chase);
+        search.AddTransition(t1, chase);
         //  in: TargetNotVisible()
-        //chase.AddTransition(t3, search);
+        chase.AddTransition(t3, search);
         //      action: GoTo(lastSeenPos)
         // Chase
         //  out: TargetInRange()
@@ -84,14 +84,14 @@ public class EnemySpider : EnemyForm
 
     private void OnEnable()
     {
-        OnEnemyDamaged += TakeDamageEffect;
-        OnEnemyKilled += DieEffect;
+        //OnEnemyDamaged += TakeDamageEffect;
+        //OnEnemyKilled += DieEffect;
     }
 
     private void OnDisable()
     {
-        OnEnemyDamaged -= TakeDamageEffect;
-        OnEnemyKilled -= DieEffect;
+        //OnEnemyDamaged -= TakeDamageEffect;
+        //OnEnemyKilled -= DieEffect;
     }
 
 
@@ -100,7 +100,7 @@ public class EnemySpider : EnemyForm
     public void Search()
     {
         searchAction.StartAbility(this);
-        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+        animator.SetBool("run", true);
     }
 
     // Chase
@@ -113,18 +113,15 @@ public class EnemySpider : EnemyForm
         }
 
         chaseAction.StartAbility(this);
-        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+        animator.SetBool("run", true);
     }
 
     public void Attack()
     {
         animator.SetTrigger("attack");
-        animator.SetFloat("speed", 0);
+        animator.SetBool("run", false);
 
         attackAction.StartAbility(this);
-
-        // Wait for the end of animation
-        // StartCoroutine(StopAI());
     }
 
     public void GoToLastSeenPos()
@@ -134,7 +131,7 @@ public class EnemySpider : EnemyForm
 
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         navMeshAgent.destination = lastSeenPos;
-        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+        animator.SetBool("run", true);
     }
     #endregion
 
@@ -203,36 +200,41 @@ public class EnemySpider : EnemyForm
     public IEnumerator Patrol()
     {
         while (true) {
+
+            if (stopAI)
+                continue;
+
             navMeshAgent.speed = enemyStats.swiftness;
             fsm.Update();
+
             yield return new WaitForSeconds(AiFrameRate);
         }
     }
 
-    public IEnumerator StopAI()
-    {
-        //float attackDuration = 1f; // Just as an example 
-        navMeshAgent.velocity = Vector3.zero;
-        navMeshAgent.isStopped = true;
-        //AiFrameRate = attackDuration;
-        stopAI = true;
-        yield return new WaitForSeconds(takeDamageDuration);
-        stopAI = false;
-        //AiFrameRate = reactionReference;
-    }
+    //public IEnumerator StopAI()
+    //{
+    //    //float attackDuration = 1f; // Just as an example 
+    //    navMeshAgent.velocity = Vector3.zero;
+    //    navMeshAgent.isStopped = true;
+    //    //AiFrameRate = attackDuration;
+    //    stopAI = true;
+    //    yield return new WaitForSeconds(takeDamageDuration);
+    //    stopAI = false;
+    //    //AiFrameRate = reactionReference;
+    //}
 
-    public IEnumerator StopAI(float duration)
-    {
-        navMeshAgent.velocity = Vector3.zero;
-        navMeshAgent.isStopped = true;
-        stopAI = true;
-        //AiFrameRate = duration;
-        yield return new WaitForSeconds(duration);
-        stopAI = false;
-        //AiFrameRate = reactionReference;
-        //navMeshAgent.isStopped = false;
-        //navMeshAgent.isStopped = false;
-    }
+    //public IEnumerator StopAI(float duration)
+    //{
+    //    navMeshAgent.velocity = Vector3.zero;
+    //    navMeshAgent.isStopped = true;
+    //    stopAI = true;
+    //    //AiFrameRate = duration;
+    //    yield return new WaitForSeconds(duration);
+    //    stopAI = false;
+    //    //AiFrameRate = reactionReference;
+    //    //navMeshAgent.isStopped = false;
+    //    //navMeshAgent.isStopped = false;
+    //}
 
     public IEnumerator WaitDieAnimation(float duration)
     {
@@ -254,16 +256,16 @@ public class EnemySpider : EnemyForm
     #endregion
 
     #region effects
-    public void TakeDamageEffect(EnemyForm e)
-    {
-        if (this == e)
-            StartCoroutine(StopAI(takeDamageDuration));
-    }
+    //public void TakeDamageEffect(EnemyForm e)
+    //{
+    //    if (this == e)
+    //        StartCoroutine(StopAI(takeDamageDuration));
+    //}
 
-    public void DieEffect(EnemyForm e)
-    {
-        if (this == e)
-            StartCoroutine(StopAI(takeDamageDuration));
-    }
+    //public void DieEffect(EnemyForm e)
+    //{
+    //    if (this == e)
+    //        StartCoroutine(StopAI(takeDamageDuration));
+    //}
     #endregion
 }

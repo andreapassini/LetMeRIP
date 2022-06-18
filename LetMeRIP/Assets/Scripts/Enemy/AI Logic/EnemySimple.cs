@@ -78,14 +78,12 @@ public class EnemySimple : EnemyForm
 
     private void OnEnable()
     {
-        OnEnemyDamaged += TakeDamageEffect;
-        OnEnemyKilled += DieEffect;
+
     }
 
     private void OnDisable()
     {
-        OnEnemyDamaged -= TakeDamageEffect;
-        OnEnemyKilled -= DieEffect;
+
     }
 
 
@@ -210,15 +208,15 @@ public class EnemySimple : EnemyForm
     #endregion
 
     #region Effects
-    public void TakeDamageEffect(EnemyForm e)
-    {
-        if (this == e) { }    
-    }
+    //public void TakeDamageEffect(EnemyForm e)
+    //{
+    //    if (this == e) { }    
+    //}
 
-    public void DieEffect(EnemyForm e)
-    {
-        if (this == e) { }    
-    }
+    //public void DieEffect(EnemyForm e)
+    //{
+    //    if (this == e) { }    
+    //}
     #endregion
 
 }

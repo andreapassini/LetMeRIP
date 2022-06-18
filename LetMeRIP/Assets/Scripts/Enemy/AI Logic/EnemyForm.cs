@@ -191,9 +191,6 @@ public class EnemyForm : MonoBehaviourPun
 	{
         StopAIForAnimation();
 
-        GameObject h = Instantiate(hitEffect, transform.position, transform.rotation);
-        Destroy(h, 3f);
-
         animator.SetTrigger("damage");
         navMeshAgent.velocity = Vector3.zero;
         navMeshAgent.isStopped = true;
@@ -300,9 +297,16 @@ public class EnemyForm : MonoBehaviourPun
         stopAI = true;
     }
 
-    // This will be called by the animation event
+    // This will be called by the animation event to keep the AI going
     public void RestartAIAfterAnimation()
     {
         stopAI = false;
+    }
+
+    // This will be called by the animation event for blood effect
+    public void TakeDamageEffect()
+    {
+        GameObject h = Instantiate(hitEffect, transform.position, transform.rotation);
+        Destroy(h, 3f);
     }
 }

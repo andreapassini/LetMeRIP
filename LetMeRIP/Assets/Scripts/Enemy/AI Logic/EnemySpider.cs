@@ -106,6 +106,8 @@ public class EnemySpider : EnemyForm
     // Chase
     public void Chase()
     {
+        animator.SetBool("run", true);
+
         if (target == null) {
             targets = GameObject.FindGameObjectsWithTag(targetTag);
             if (targets.Length != 0)
@@ -113,12 +115,11 @@ public class EnemySpider : EnemyForm
         }
 
         chaseAction.StartAbility(this);
-        animator.SetBool("run", true);
     }
 
     public void Attack()
     {
-        animator.SetTrigger("attack");
+        //animator.SetTrigger("attack");
         animator.SetBool("run", false);
 
         attackAction.StartAbility(this);

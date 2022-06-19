@@ -55,8 +55,6 @@ public class EnemyForm : MonoBehaviourPun
 
     public Animator animator;
 
-    public float takeDamageDuration = 2f;
-
     [System.NonSerialized]
     public Rigidbody rb;
 
@@ -150,20 +148,6 @@ public class EnemyForm : MonoBehaviourPun
             StopAIForAnimation();
 
         // Restart will be callaed by the animation event of that action
-    }
-
-    public IEnumerator AbilityDuration(EnemyAbility ability)
-    {
-        if (ability.abilityDurtation > AiFrameRate) {
-            // Stop FSM
-            stopAI = true;
-            animator.SetFloat("speed", 0);
-    
-            yield return new WaitForSeconds(ability.abilityDurtation);
-
-            stopAI = false;
-            //AiFrameRate = reactionReference;
-        }
     }
 
     public void CastEnemyAbility(EnemyAbility enemyAbility)

@@ -23,7 +23,7 @@ public class SimpleAttackAbility : EnemyAbility
 
 	public override void PerformAbility(EnemyForm enemy)
 	{
-        if (this.enemy == enemy)
+        if (this.enemy != enemy)
             return;
 
         // Create Collider
@@ -35,13 +35,12 @@ public class SimpleAttackAbility : EnemyAbility
 
                 HPManager hpManager = e.gameObject.GetComponent<PlayerController>().HPManager;
 
-
                 if (hpManager != null)
                 {
                     Debug.Log("hp manager is not null");
                     hpManager.TakeDamage(damage + enemy.enemyStats.attack, enemy.transform.position);
                 }
-                else Debug.Log("hpmanager is null!");
+                else Debug.Log("hp manager is null!");
             }
         }
     }

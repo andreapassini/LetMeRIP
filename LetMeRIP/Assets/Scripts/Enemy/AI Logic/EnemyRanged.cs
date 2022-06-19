@@ -113,12 +113,14 @@ public class EnemyRanged : EnemyForm
 
     private void OnEnable()
     {
-        
+        OnEnemyDamaged += TakeDamageEffect;
+        OnEnemyKilled += DieEffect;
     }
 
     private void OnDisable()
     {
-        
+        OnEnemyDamaged -= TakeDamageEffect;
+        OnEnemyKilled -= DieEffect;
     }
 
     #region Conditions
@@ -181,7 +183,7 @@ public class EnemyRanged : EnemyForm
     public void Search()
     {
         searchAction.StartAbility(this);
-        animator.SetBool("run", true);
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
 
     public void Chase()
@@ -193,7 +195,7 @@ public class EnemyRanged : EnemyForm
         }
 
         chaseAction.StartAbility(this);
-        animator.SetBool("run", true);
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
     }
 
     public void Attack()
@@ -204,7 +206,7 @@ public class EnemyRanged : EnemyForm
                 target = targets[0].transform;
         }
 
-        animator.SetBool("run", false);
+        animator.SetFloat("speed", 0);
 
         attackAction.StartAbility(this);
 
@@ -221,7 +223,8 @@ public class EnemyRanged : EnemyForm
 
         lastSeenPos = new Vector3(target.position.x, target.position.y, target.position.z);
         GetComponent<NavMeshAgent>().destination = lastSeenPos;
-        animator.SetBool("run", true);
+        animator.SetFloat("speed", navMeshAgent.velocity.magnitude);
+
     }
 
     public void RunFightFSM()
@@ -238,7 +241,7 @@ public class EnemyRanged : EnemyForm
         }
 
         dashAction.StartAbility(this);
-        
+        StartCoroutine(WaitDashAnimation());
     }
     #endregion
     
@@ -247,9 +250,6 @@ public class EnemyRanged : EnemyForm
     {
         while (true)
         {
-            if (stopAI)
-                continue;
-
             navMeshAgent.speed = enemyStats.swiftness;
             fsm.Update();
             yield return new WaitForSeconds(AiFrameRate);
@@ -260,13 +260,43 @@ public class EnemyRanged : EnemyForm
     {
         while (TargetVisible())
         {
-            if (stopAI)
-                continue;
-
             navMeshAgent.speed = enemyStats.swiftness;
             fightFSM.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
+    }
+
+    // To manage getting Hit:
+    //  => Event when something hit an enemy
+    //  => The enemy hit by it will resolve the event
+
+    public IEnumerator StopAI()
+    {
+        navMeshAgent.speed = enemyStats.swiftness;
+        float attackDuration = 1f; // Just as an example 
+
+        AiFrameRate = attackDuration;
+        yield return new WaitForSeconds(attackDuration);
+        AiFrameRate = reactionReference;
+    }
+
+    public IEnumerator StopAI(float stopTime)
+    {
+        navMeshAgent.speed = enemyStats.swiftness;
+        AiFrameRate = stopTime;
+        yield return new WaitForSeconds(stopTime);
+        AiFrameRate = reactionReference;
+
+        navMeshAgent.isStopped = false;
+    }
+
+    public IEnumerator WaitDashAnimation()
+	{
+        yield return new WaitForSeconds(dashAction.abilityDurtation);
+        navMeshAgent.enabled = true;
+        navMeshAgent.speed = enemyStats.swiftness;
+        // Enable isKinematic
+        rb.isKinematic = true;
     }
 
     public IEnumerator LateStart()
@@ -277,6 +307,18 @@ public class EnemyRanged : EnemyForm
         target = targets[0].transform;
     }
     #endregion
+
+    public void TakeDamageEffect(EnemyForm e)
+    {
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
+
+    public void DieEffect(EnemyForm e)
+    {
+        if (this == e)
+            StartCoroutine(StopAI(takeDamageDuration));
+    }
 
 	public override void Init()
 	{

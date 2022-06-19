@@ -109,7 +109,7 @@ public class EnemySimple : EnemyForm
 
     public void Attack()
     {
-        animator.SetTrigger("attack");
+        //animator.SetTrigger("attack");
         animator.SetBool("run", false);
         attackAction.StartAbility(this);
     }

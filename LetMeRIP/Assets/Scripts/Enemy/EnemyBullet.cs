@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,29 +13,26 @@ public class EnemyBullet : MonoBehaviour
 
     void Start()
     {
-        Destroy(gameObject, destroyAfterTime);
+        if (PhotonNetwork.IsConnected && PhotonNetwork.IsMasterClient)
+            StartCoroutine(DestroyBulletAfterTime());
+        else Destroy(gameObject, destroyAfterTime);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
 
-		if (collision.transform.tag.Equals("Player")) {
-            //Debug.Log("HIT: " + collision.gameObject.GetComponent<EnemyHealth>());
-
-            HPManager playerHealth = collision.gameObject.GetComponent<HPManager>();
-
-            if (playerHealth != null) {
-                playerHealth.TakeDamage(damage, transform.position);
-            }
+		if (collision.gameObject.CompareTag("Player") && collision.gameObject.TryGetComponent<PlayerController>(out PlayerController player)) {
+            player.HPManager.TakeDamage(damage, transform.position);
         }
-        
 
-        Destroy(gameObject);
+        if (PhotonNetwork.IsConnected && PhotonNetwork.IsMasterClient)
+            PhotonNetwork.Destroy(gameObject);
+        else Destroy(gameObject);
     }
 
     public IEnumerator DestroyBulletAfterTime()
     {
         yield return new WaitForSeconds(destroyAfterTime);
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 }

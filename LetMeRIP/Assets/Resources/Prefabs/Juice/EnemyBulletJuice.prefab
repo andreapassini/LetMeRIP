@@ -326,7 +326,6 @@ GameObject:
   - component: {fileID: 8097066376853001091}
   - component: {fileID: 8097066376853001090}
   - component: {fileID: 8097066376853001089}
-  - component: {fileID: 38685641}
   m_Layer: 8
   m_Name: EnemyBulletJuice
   m_TagString: Enemy
@@ -380,21 +379,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &38685641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8097066376853001092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83034545ec415474e9fd14beb96ab753, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  shootEffect: {fileID: 8443315704496310910, guid: 6ef35fa36e3a65043b2d800600204bdd, type: 3}
-  destroyEffect: {fileID: 4787146697146794734, guid: e9050f838eb01db44b8958e4d8266866, type: 3}
 --- !u!1001 &3475487951501244777
 PrefabInstance:
   m_ObjectHideFlags: 0

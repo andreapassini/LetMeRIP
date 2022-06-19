@@ -13,12 +13,13 @@ public class RagePE : PlayerEffect
     private void Awake()
     {
         duration = 8f; // if set in the start it doesn't work apparently ¯\_(?)_/¯
+        ps = Resources.Load<GameObject>("Particles/BerserkerAbility1");
+
     }
 
     protected override void Start()
     {
         base.Start();
-        ps = Resources.Load<GameObject>("Particles/BerserkerAbility1");
     }
 
     public override void StartEffect()
@@ -29,7 +30,9 @@ public class RagePE : PlayerEffect
     public override IEnumerator Effect(PlayerController characterController)
     {
         // vfx here
-        GameObject psInstance = PhotonNetwork.Instantiate("Particles/BerserkerAbility1", transform.position, transform.rotation);
+        //GameObject psInstance = PhotonNetwork.Instantiate("Particles/BerserkerAbility1", transform.position, transform.rotation);
+        ps ??= Resources.Load<GameObject>("Particles/BerserkerAbility1");
+        GameObject psInstance = Instantiate(ps, transform.position, transform.rotation);
         psInstance.transform.SetParent(transform);
         psInstance.GetComponent<ParticleSystem>().Play();
 
@@ -44,7 +47,7 @@ public class RagePE : PlayerEffect
         characterController.stats.strength /= 1 + strengthIncrement;
         foreach (Ability ability in characterController.formManager.currentForm.abilityHandler.abilities.Values)
             ability.cooldown /= 1 - cooldownReduction;
-        PhotonNetwork.Destroy(psInstance);
+        Destroy(psInstance);
         Destroy(this);
     }
 }

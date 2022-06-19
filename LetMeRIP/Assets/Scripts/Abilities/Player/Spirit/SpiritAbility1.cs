@@ -15,10 +15,15 @@ public class SpiritAbility1 : Ability
     private float timeStep = 0.1f; // 20SP/sec
     private bool isDraining;
     private GameObject drainEffect;
-
+    private GameObject drainInstance;
     private void Start()
     {
         cooldown = 0.1f;
+    }
+
+    private void Awake()
+    {
+        drainEffect = Resources.Load<GameObject>("Particles/Recharge");
     }
 
     public override void Init(PlayerController characterController)
@@ -31,28 +36,11 @@ public class SpiritAbility1 : Ability
     public override void StartedAction()
     {
         isReady = false;
-        //animator.SetTrigger("Ability2");
+        //animator.SetTrigger("Ability1");
     }
 
     public override void PerformedAction()
     {
-        // Create Collider
-        //float rad = Utilities.DegToRad(coneAngle) * .5f;
-
-        //Vector3 rbound = new Matrix4x4(
-        //        new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
-        //        new Vector4(0, 1, 0, 0),
-        //        new Vector4(-Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
-        //        Vector4.zero
-        //    ) * transform.forward;
-
-        //Vector3 lbound = new Matrix4x4(
-        //        new Vector4(Mathf.Cos(rad), 0, -Mathf.Sin(rad), 0),
-        //        new Vector4(0, 1, 0, 0),
-        //        new Vector4(Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
-        //        Vector4.zero
-        //    ) * transform.forward;
-
         SPPool pool = null;
 
         Collider[] hitPools = Physics.OverlapSphere(attackPoint.position, attackRange);
@@ -64,8 +52,12 @@ public class SpiritAbility1 : Ability
                 pool = hitPool.GetComponent<SPPool>();
                 isDraining = true;
                 DisableMovement();
-                drainEffect = Instantiate(Resources.Load<GameObject>("Particles/Recharge"), transform.position, transform.rotation);
-                drainEffect.GetComponent<ParticleSystem>().Play();
+
+                drainEffect ??= Resources.Load<GameObject>("Particles/Recharge");
+                
+                drainInstance = Instantiate(drainEffect, transform.position, transform.rotation);
+                Debug.Log("recharge effect Instantiated");
+
                 drainPoolCoroutine = StartCoroutine(DrainPool(pool));
                 StartCoroutine(Cooldown());
                 return;
@@ -84,7 +76,13 @@ public class SpiritAbility1 : Ability
     public override void CancelAction()
     {
         EnableMovement();
-        if(drainEffect != null && photonView.IsMine) Destroy(drainEffect);
+        if (drainInstance != null)
+        {
+            Destroy(drainInstance);
+            drainInstance = null; // idk just to be sure
+            Debug.Log("Effect destroyed");
+        }
+
         if (isDraining) // it wont execute twice if the pool finishes and then receives a button up
         {
             isDraining = false;

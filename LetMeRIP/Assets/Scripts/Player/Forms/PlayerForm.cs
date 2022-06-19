@@ -21,7 +21,7 @@ public class PlayerForm : MonoBehaviourPun
         formModelPrefab = transform.Find(GetType().Name.ToString()).gameObject;
     }
 
-    public virtual void Init(PlayerController characterController) 
+    public virtual void Init(PlayerController characterController)
     {
         this.characterController = characterController;
     }

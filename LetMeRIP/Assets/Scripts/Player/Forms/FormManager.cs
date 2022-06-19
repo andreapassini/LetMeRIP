@@ -243,10 +243,6 @@ public class FormManager : MonoBehaviourPun
     [PunRPC]
     public void RpcEnterBody()
     {
-        Debug.LogError($"ID: {photonView.ViewID}, Entering");
-
-        Debug.Log("Trying to enter body");
-
         // check if the body is in range
         PlayerController myBody = null;
         Collider[] playersHit = Physics.OverlapSphere(transform.position, spiritReturnRange);

@@ -34,41 +34,32 @@ MonoBehaviour:
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
-  - RpcSwitch
-  - RpcSendMessage
-  - RpcChangeModel
-  - RpcChangeToSample1Model
-  - RpcChangeToSample2Model
-  - RpcChangeToSpiritModel
-  - RpcRemoveComponents
-  - RpcAddSample1Abilities
-  - RpcAddSample2Abilities
-  - RpcAddSpiritAbilities
-  - RpcCastAbility
-  - RpcSwitchForm
-  - AddPlayer
   - ClickRpc
   - DestroyRpc
-  - Spawn
-  - RpcInit
-  - RpcSpawn
-  - RpcCastEnemyAbility
-  - RpcTakeDamage
-  - RpcDrainPool
-  - RpcHealingSpotHeal
-  - RpcSetConsumedSP
-  - RpcDie
-  - RpcSetPlayerManager
-  - RpcHeal
+  - RpcAddPlayers
   - RpcAddSP
+  - RpcAssignBodyToEnter
+  - RpcCastAbility
+  - RpcCastEnemyAbility
   - RpcDecayingHeal
+  - RpcDie
+  - RpcDrainPool
   - RpcEnterBody
   - RpcExitBody
-  - RpcAddPlayers
-  - RpcAssignBodyToEnter
   - RpcGameOverCheck
-  - RpcStartUITimer
+  - RpcHeal
+  - RpcHealingSpotHeal
   - RpcHideUITimer
+  - RpcInit
+  - RpcSendMessage
+  - RpcSetConsumedSP
+  - RpcSetPlayerManager
+  - RpcSpawn
+  - RpcStartUITimer
+  - RpcSwitch
+  - RpcSwitchForm
+  - RpcTakeDamage
+  - StartGameLoadingScreen
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -35,7 +35,7 @@ public class HudFillingBar : MonoBehaviour
         // Debug.LogError($"New value: {health}");
         slider.value = health;
         fill.color = gradient.Evaluate(1f);
-        if (flash) StartCoroutine(Flash());
+        if (this.isActiveAndEnabled && flash) StartCoroutine(Flash());
     }
 
     private IEnumerator Flash()

@@ -127,6 +127,14 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
+        MenuManager.Instance.OpenMenu("loading");
+        photonView.RPC("StartGameLoadingScreen", RpcTarget.Others);
         PhotonNetwork.LoadLevel(1);
+    }
+
+    [PunRPC]
+    public void StartGameLoadingScreen()
+    {
+        MenuManager.Instance.OpenMenu("loading");
     }
 }

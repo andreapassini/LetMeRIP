@@ -124,7 +124,6 @@ GameObject:
   - component: {fileID: 4727071522890166307}
   - component: {fileID: 4727071522890166305}
   - component: {fileID: 4727071522890166306}
-  - component: {fileID: 832056734585718332}
   - component: {fileID: 1551060910672544689}
   m_Layer: 7
   m_Name: BulletTrapassing 1
@@ -192,28 +191,6 @@ MonoBehaviour:
   hitDmgEffect: {fileID: 0}
   destroyAfterTime: 1.5
   damage: 10
---- !u!114 &832056734585718332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4727071522890166309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!96 &1551060910672544689
 TrailRenderer:
   serializedVersion: 2

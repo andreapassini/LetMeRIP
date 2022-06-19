@@ -169,6 +169,8 @@ public class FormManager : MonoBehaviourPun
 
         DisableAbilities();
 
+        Destroy(Instantiate(Resources.Load<GameObject>("Particles/Transformation"), transform), 2.5f);
+
         // clean player from old form components
         if (currentForm != null) currentForm.RemoveComponents();
 

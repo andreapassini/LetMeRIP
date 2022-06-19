@@ -9,9 +9,9 @@ public class Dash : Ability
     private Animator animator;
     private Rigidbody rb;
     
-    private readonly float time = 0.35f;
+    private readonly float time = 0.30f;
     private float currentTime;
-    private float speed = 12f;
+    private float speed = 14f;
     private Vector3 direction;
     // prevents the cancel action to start too soon
     private bool isDashing = false;

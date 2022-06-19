@@ -44,12 +44,12 @@ public class ExterminationRoom : Room
         CloseInnerGates();
         // signal gates that are going to close
         yield return new WaitForSeconds(time);
-        CloseOuterGates();
+        //CloseOuterGates();
     }
 
     private void RoomCompletion(RoomSpawner spawner)
     {
-        StopCoroutine(closeGatesCoroutine); // prevents getting stuck in the room if the players are able to clear it within 3 seconds
+        //StopCoroutine(closeGatesCoroutine); // prevents getting stuck in the room if the players are able to clear it within 3 seconds
         OpenInnerGates();
         OpenOuterGates();
         Debug.Log("ROOM CLEARED");

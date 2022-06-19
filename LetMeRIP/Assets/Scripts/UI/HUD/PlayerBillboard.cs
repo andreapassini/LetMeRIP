@@ -60,6 +60,8 @@ public class PlayerBillboard : Billboard
 
     private void ToggleSpiritGauge(FormManager formManager)
     {
+        Debug.Log($"STATUS {formManager.IsOut}");
+        
         if (formManager.IsOut)
         { // Hide spirit gauge
             hidables.SetActive(false);

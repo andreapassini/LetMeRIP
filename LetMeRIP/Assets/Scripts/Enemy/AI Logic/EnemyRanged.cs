@@ -50,63 +50,63 @@ public class EnemyRanged : EnemyForm
 
         navMeshAgent = transform.GetComponent<NavMeshAgent>();
 
-        FSMState search = new FSMState();
-        search.stayActions.Add(Search);
+        //FSMState search = new FSMState();
+        //search.stayActions.Add(Search);
 
-        List<FSMAction> listActions = new List<FSMAction>();
-        FSMAction a1 = new FSMAction(GoToLastSeenPos);
-        listActions.Add(a1);
+        //List<FSMAction> listActions = new List<FSMAction>();
+        //FSMAction a1 = new FSMAction(GoToLastSeenPos);
+        //listActions.Add(a1);
 
-        FSMState fight = new FSMState();
-        fight.stayActions.Add(RunFightFSM);
+        //FSMState fight = new FSMState();
+        //fight.stayActions.Add(RunFightFSM);
 
-        // FIGHT FSM
+        //// FIGHT FSM
 
-        FSMState chase = new FSMState();
-        chase.stayActions.Add(Chase);
+        //FSMState chase = new FSMState();
+        //chase.stayActions.Add(Chase);
 
         FSMState attack = new FSMState();
         attack.stayActions.Add(Attack);
 
-        FSMState escape = new FSMState();
-        escape.stayActions.Add(Dash);
+        //FSMState escape = new FSMState();
+        //escape.stayActions.Add(Dash);
 
-        FSMTransition t1 = new FSMTransition(TargetVisible);
-        FSMTransition t2 = new FSMTransition(TargetInRange);
-        FSMTransition t3 = new FSMTransition(TargetNotVisible, listActions.ToArray());
-        FSMTransition t4 = new FSMTransition(TargetNotInRange);
-        FSMTransition t5 = new FSMTransition(TargetTooNear);
-        FSMTransition t6 = new FSMTransition(TargetNotTooNear);
+        //FSMTransition t1 = new FSMTransition(TargetVisible);
+        //FSMTransition t2 = new FSMTransition(TargetInRange);
+        //FSMTransition t3 = new FSMTransition(TargetNotVisible, listActions.ToArray());
+        //FSMTransition t4 = new FSMTransition(TargetNotInRange);
+        //FSMTransition t5 = new FSMTransition(TargetTooNear);
+        //FSMTransition t6 = new FSMTransition(TargetNotTooNear);
 
-        // Search
-        //  out: TargetVisible()
-        search.AddTransition(t1, fight);
-        //  in: TargetNotVisible()
-        fight.AddTransition(t3, search);
-        //      action: GoTo(lastSeenPos)
+        //// Search
+        ////  out: TargetVisible()
+        //search.AddTransition(t1, fight);
+        ////  in: TargetNotVisible()
+        //fight.AddTransition(t3, search);
+        ////      action: GoTo(lastSeenPos)
 
-        // Fight
-        // out: TargetNotVisible()
+        //// Fight
+        //// out: TargetNotVisible()
 
-        // Chase
-        //  out: TargetInRange
-        chase.AddTransition(t2, attack);
+        //// Chase
+        ////  out: TargetInRange
+        //chase.AddTransition(t2, attack);
         
-        // Attack
-        // out: TargetTooNear
-        attack.AddTransition(t5, escape);
-        //  in: TargetInRange()
-        //  in: TargetTargetNotTooNear()
+        //// Attack
+        //// out: TargetTooNear
+        //attack.AddTransition(t5, escape);
+        ////  in: TargetInRange()
+        ////  in: TargetTargetNotTooNear()
 
-        // Escape
-        // out: TargetNotInRange()
-        escape.AddTransition(t4, chase);
-        // out: TargetTargetNotTooNear()
-        escape.AddTransition(t6, attack);
+        //// Escape
+        //// out: TargetNotInRange()
+        //escape.AddTransition(t4, chase);
+        //// out: TargetTargetNotTooNear()
+        //escape.AddTransition(t6, attack);
 
-        fsm = new FSM(search);
+        fsm = new FSM(attack);
 
-        fightFSM = new FSM(chase);
+        //fightFSM = new FSM(chase);
 
         StartCoroutine(Patrol());
     }
@@ -131,6 +131,9 @@ public class EnemyRanged : EnemyForm
         RaycastHit hit;
         if (Physics.Raycast(transform.position, ray, out hit, Mathf.Infinity, ~whatRayHit))
         {
+            if (hit.transform == null)
+                return false;
+
             if (hit.transform == target)
             {
                 return true;

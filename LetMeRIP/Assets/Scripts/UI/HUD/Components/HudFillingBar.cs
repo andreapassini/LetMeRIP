@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +18,7 @@ public class HudFillingBar : MonoBehaviour
     public void Init(float maxHealth, float initialHealth)
     {
         SetMaxValue(maxHealth);
-        SetValue(initialHealth);
+        SetValue(initialHealth, false);
     }
 
 
@@ -28,10 +30,18 @@ public class HudFillingBar : MonoBehaviour
         fill.color = gradient.Evaluate(1f);
     }
 
-    public void SetValue(float health)
+    public void SetValue(float health, bool flash = true)
     {
         // Debug.LogError($"New value: {health}");
         slider.value = health;
-        fill.color = gradient.Evaluate(slider.normalizedValue);
+        fill.color = gradient.Evaluate(1f);
+        if (flash) StartCoroutine(Flash());
+    }
+
+    private IEnumerator Flash()
+    {
+        fill.color = gradient.Evaluate(0);
+        yield return new WaitForSeconds(0.15f);
+        fill.color = gradient.Evaluate(1f);
     }
 }

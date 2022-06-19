@@ -14,8 +14,8 @@ public class SpiritAbility1 : Ability
     private float drainRate = 2f;
     private float timeStep = 0.1f; // 20SP/sec
     private bool isDraining;
-    private float slowFactor = .8f;
-    private GameObject line;
+    private GameObject drainEffect;
+
     private void Start()
     {
         cooldown = 0.1f;
@@ -60,27 +60,15 @@ public class SpiritAbility1 : Ability
         {
             if (hitPool.CompareTag("Pool"))
             {
-                Debug.Log($"Hit {hitPool.name}");
                 Vector3 poolDirection = hitPool.transform.position - transform.position;
-                //if (Vector3.Dot(poolDirection, lbound) > 0 && Vector3.Dot(poolDirection, rbound) > 0)
-                //{
-                //Debug.Log("Pool within angle");
-                //line = PhotonNetwork.Instantiate("Prefabs/LineAbility1", transform.position, transform.rotation);
-                //GameObject p1 = line.transform.Find("p1").gameObject;
-                //GameObject p2 = line.transform.Find("p2").gameObject;
-                //p1.transform.position = transform.position;
-                //p2.transform.position = hitPool.transform.position;
-
-                //LineController lr = line.GetComponent<LineController>();
-                //lr.SetUpLine(new Transform[] { p1.transform, p2.transform });
-
                 pool = hitPool.GetComponent<SPPool>();
                 isDraining = true;
-                characterController.stats.swiftness *= slowFactor; // i'm not using SlowPE since the time of the effect is not fixed
+                DisableMovement();
+                drainEffect = Instantiate(Resources.Load<GameObject>("Particles/Recharge"), transform.position, transform.rotation);
+                drainEffect.GetComponent<ParticleSystem>().Play();
                 drainPoolCoroutine = StartCoroutine(DrainPool(pool));
                 StartCoroutine(Cooldown());
                 return;
-            //}
             }
         }
 
@@ -95,12 +83,12 @@ public class SpiritAbility1 : Ability
 
     public override void CancelAction()
     {
+        EnableMovement();
+        if(drainEffect != null && photonView.IsMine) Destroy(drainEffect);
         if (isDraining) // it wont execute twice if the pool finishes and then receives a button up
         {
             isDraining = false;
             if(drainPoolCoroutine != null) StopCoroutine(drainPoolCoroutine);
-            characterController.stats.swiftness /= slowFactor;
-            if (line != null) PhotonNetwork.Destroy(line);
         }
     }
 

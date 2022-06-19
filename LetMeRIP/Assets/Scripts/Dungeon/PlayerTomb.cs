@@ -40,8 +40,19 @@ public class PlayerTomb : Interactable, IOnEventCallback
         GameObject what = PhotonView.Find(photonView.ViewID).gameObject;
         Debug.Log(what.name);
         Debug.Log($"THIS SHIT IS DEFINITELY MINE: {photonView.IsMine} | viewID: {photonView.ViewID}");
-        if(photonView.IsMine) PhotonNetwork.Instantiate("Prefabs/SpiritCharacter", transform.position, transform.rotation);
+        if (photonView.IsMine)
+        {
+            GameObject player = PhotonNetwork.Instantiate("Prefabs/SpiritCharacter", transform.position, transform.rotation);
+            StartCoroutine(LateHeal(player));
+        }
         PhotonNetwork.Destroy(gameObject);
+    }
+
+    private IEnumerator LateHeal(GameObject player)
+    {
+        yield return new WaitForSeconds(0.2f);
+        PlayerController p = player.GetComponent<PlayerController>();
+        p.HPManager.Heal(p.stats.maxHealth);
     }
 
     [PunRPC]

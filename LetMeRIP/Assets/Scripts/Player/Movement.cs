@@ -88,4 +88,14 @@ public class Movement : MonoBehaviourPun
         Debug.Log("Refreshing animator");
         animator = GetComponentInChildren<Animator>(false);
     }
+
+    public void Enable()
+    {
+        playerInputActions.Player.Movement.Enable();
+    }
+
+    public void Disable() 
+    {
+        playerInputActions.Player.Movement.Disable();
+    }
 }

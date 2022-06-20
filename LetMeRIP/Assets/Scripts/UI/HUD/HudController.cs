@@ -110,4 +110,7 @@ public class HudController : MonoBehaviour
 
         return (newHudEForm, abilities);
     }
+
+    public void Hide() => gameObject.SetActive(false);
+    public void Show() => gameObject.SetActive(true);
 }

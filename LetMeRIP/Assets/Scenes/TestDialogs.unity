@@ -306,6 +306,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11426072, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
+      propertyPath: displaySettings.subtitleSettings.showPCSubtitlesDuringLine
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426072, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
       propertyPath: displaySettings.subtitleSettings.showNPCSubtitlesDuringLine
       value: 1
       objectReference: {fileID: 0}
@@ -736,6 +740,7 @@ GameObject:
   - component: {fileID: 2017460092}
   - component: {fileID: 2017460093}
   - component: {fileID: 2017460094}
+  - component: {fileID: 2017460096}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -751,7 +756,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2017460091}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.186876, y: 197.47432, z: -17.437489}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -777,10 +782,10 @@ MonoBehaviour:
   maxSelectionDistance: 30
   runRaycasts: 1
   raycastAll: 0
-  useDefaultGUI: 1
+  useDefaultGUI: 0
   guiSkin: {fileID: 0}
   guiStyleName: label
-  alignment: 1
+  alignment: 4
   textStyle: 1
   textStyleColor: {r: 0, g: 0, b: 0, a: 1}
   inRangeColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -790,12 +795,12 @@ MonoBehaviour:
     outOfRange: {fileID: 0}
     width: 64
     height: 64
-  useKey: 32
+  useKey: 102
   useButton: Fire2
-  defaultUseMessage: (spacebar to interact)
+  defaultUseMessage: Press F to fuck
   broadcastToChildren: 1
   actorTransform: {fileID: 0}
-  tooFarMessage: 
+  tooFarMessage: Get Closer
   onSelectedUsable:
     m_PersistentCalls:
       m_Calls: []
@@ -908,3 +913,17 @@ MonoBehaviour:
     onDialogueSystemUnpause:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &2017460096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017460091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf9481d631e872c45a9f702509a148ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagSpecificElements: []
+  layerSpecificElements: []

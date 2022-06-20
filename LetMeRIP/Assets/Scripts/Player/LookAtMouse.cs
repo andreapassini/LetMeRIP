@@ -53,12 +53,12 @@ public class LookAtMouse : MonoBehaviourPun
         transform.forward = this.directionToLook;
     }
 
-    private void EnableLookAround()
+    public void EnableLookAround()
     {
         isEnabled = true;
     }
 
-    private void DisableLookAround()
+    public void DisableLookAround()
     {
         isEnabled = false;
     }

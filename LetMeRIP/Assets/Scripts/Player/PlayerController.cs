@@ -231,4 +231,18 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
         yield return new WaitForSeconds(0.1f);
         Init();
     }
+
+    public void DisableAll()
+    {
+        lam.DisableLookAround();
+        movement.Disable();
+        formManager.DisableAbilities();
+    }
+
+    public void EnableAll()
+    {
+        lam.EnableLookAround();
+        movement.Enable();
+        formManager.EnableAbilities();
+    }
 }

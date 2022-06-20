@@ -8,7 +8,7 @@ using UnityEngine;
  */
 public class SPPool : MonoBehaviourPun
 {
-    private float lifeTime;
+    private float lifeTime = 0;
     [SerializeField] private float holdedSp = 0f;
     
     public void Init(float amount, float lifeTime) 
@@ -16,27 +16,28 @@ public class SPPool : MonoBehaviourPun
         holdedSp = amount;
         this.lifeTime = lifeTime;
 
-        if (PhotonNetwork.IsMasterClient) StartCoroutine(DestroyAfterTime(lifeTime));
+        if (PhotonNetwork.IsMasterClient && lifeTime > 0) StartCoroutine(DestroyAfterTime(lifeTime));
     }
 
     public void DrainPool(float amount, PlayerController characterController)
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            if (characterController == null) Debug.Log("cc NULL");
-            photonView.RPC("RpcDrainPool", RpcTarget.All, amount, characterController.photonView.ViewID);
-        }
-    }
+        if (characterController == null) Debug.Log("cc NULL");
 
-    [PunRPC]
-    public void RpcDrainPool(float amount, int playerViewID)
-    {
-        PlayerController cc = PhotonView.Find(playerViewID).GetComponent<PlayerController>(); // fuck it seems kinda expensive
         float finalAmount = amount > holdedSp ? holdedSp : amount;
         holdedSp -= finalAmount;
-        cc.SGManager.AddSP(finalAmount);
-        if (holdedSp <= 0f && PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(gameObject); 
+        if(PhotonNetwork.IsMasterClient) characterController.SGManager.AddSP(finalAmount);
+        if (holdedSp <= 0f) Destroy(gameObject);
     }
+
+    //[PunRPC]
+    //public void RpcDrainPool(float amount, int playerViewID)
+    //{
+    //    PlayerController cc = PhotonView.Find(playerViewID).GetComponent<PlayerController>(); // fuck it seems kinda expensive
+    //    float finalAmount = amount > holdedSp ? holdedSp : amount;
+    //    holdedSp -= finalAmount;
+    //    cc.SGManager.AddSP(finalAmount);
+    //    if (holdedSp <= 0f && PhotonNetwork.IsMasterClient) PhotonNetwork.Destroy(gameObject); 
+    //}
 
     private IEnumerator DestroyAfterTime(float lifeTime)
     {

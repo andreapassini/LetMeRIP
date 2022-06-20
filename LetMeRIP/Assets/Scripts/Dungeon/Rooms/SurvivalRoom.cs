@@ -24,6 +24,7 @@ public class SurvivalRoom : Room
     protected override void Start()
     {
         base.Start();
+        timeStep = 1f;
     }
 
     protected override void Init()
@@ -35,7 +36,7 @@ public class SurvivalRoom : Room
             spawners.Init();
             
             //closeGatesCoroutine = StartCoroutine(CloseGates(3f));
-            photonView.RPC("RpcStartUITimer", RpcTarget.All);
+            photonView.RPC(nameof(RpcStartUITimer), RpcTarget.All);
             survivalTimerCoroutine = StartCoroutine(SurvivalTimer());
             respawnEnemiesCoroutine = StartCoroutine(RespawnEnemies(respawnOffset));
         }
@@ -66,7 +67,6 @@ public class SurvivalRoom : Room
      */
     private void RoomCompletion()
     {
-        StopCoroutine(survivalTimerCoroutine);
         StopCoroutine(respawnEnemiesCoroutine);
         spawners.ClearAllEnemies();
 
@@ -86,14 +86,8 @@ public class SurvivalRoom : Room
      */
     private IEnumerator SurvivalTimer()
     {
-        for (;;)
-        {
-            if(timeToSurvive <= 0)
-                RoomCompletion();
-
-            yield return new WaitForSeconds(timeStep);
-            timeToSurvive -= timeStep; 
-        }
+        yield return new WaitForSeconds(timeToSurvive);
+        RoomCompletion();
     }
 
     /**

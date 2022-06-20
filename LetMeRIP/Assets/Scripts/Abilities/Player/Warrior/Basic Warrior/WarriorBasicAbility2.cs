@@ -13,10 +13,13 @@ public class WarriorBasicAbility2 : Ability
     private float slowFactor = .65f;
     private float stunDistance = 3.5f;
 
+    private GameObject vfx;
+
     private void Start()
     {
         SPCost = 10f;
         cooldown = .1f;
+        vfx = Resources.Load<GameObject>($"Particles/{nameof(WarriorBasicAbility2)}");
     }
 
     public override void Init(PlayerController characterController)
@@ -68,6 +71,8 @@ public class WarriorBasicAbility2 : Ability
             ) * transform.forward;
 
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange);
+        vfx ??= Resources.Load<GameObject>($"Particles/{nameof(WarriorBasicAbility2)}");
+        Destroy(Instantiate(vfx, transform.position, transform.rotation), 3f);
         foreach (Collider enemyHit in hitEnemies)
         {
             if (enemyHit.CompareTag("Enemy"))

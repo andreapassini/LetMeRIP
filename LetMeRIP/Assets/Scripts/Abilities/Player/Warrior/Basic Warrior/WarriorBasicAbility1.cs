@@ -14,10 +14,12 @@ public class WarriorBasicAbility1 : Ability
     private float healDecayTime; // in seconds
     private float coneAngle = 70f; // in degrees
     private float DegToRad(float deg) => deg * 0.01745f;
+    private GameObject vfx;
 
     private void Start()
     {
         cooldown = 6f;
+        vfx = Resources.Load<GameObject>($"Particles/{nameof(WarriorBasicAbility1)}");
     }
 
     public override void Init(PlayerController characterController)
@@ -39,7 +41,7 @@ public class WarriorBasicAbility1 : Ability
     public override void PerformedAction()
     {
         // Create Collider
-        PerformCoroutine(0.4f);
+        StartCoroutine(PerformCoroutine(0.4f));
         StartCoroutine(Cooldown());
     }
 
@@ -72,6 +74,9 @@ public class WarriorBasicAbility1 : Ability
 
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange);
         int hits = 0;
+        vfx ??= Resources.Load<GameObject>($"Particles/{nameof(WarriorBasicAbility1)}");
+        Destroy(Instantiate(vfx, transform.position, transform.rotation), 3f);
+        
         foreach (Collider enemyHit in hitEnemies)
         {
             if (enemyHit.CompareTag("Enemy"))

@@ -10,7 +10,7 @@ public class WarriorBasicHeavyAttack : Ability
     private Transform attackPoint;
 
     private float attackRange = 1f;
-    private readonly float time = 0.25f;
+    private readonly float time = 0.35f;
     private float currentTime;
     private float speed = 13f;
     private Vector3 direction;
@@ -20,11 +20,13 @@ public class WarriorBasicHeavyAttack : Ability
 
     private Coroutine damageCoroutine;
     private float tickRate = .1f;
-
+    private GameObject vfx;
     private void Start()
     {
         cooldown = 3f;
         rb = GetComponent<Rigidbody>();
+        vfx = Resources.Load<GameObject>("Particles/WarriorBasicHeavyAttack");
+
     }
 
     public override void Init(PlayerController characterController)
@@ -95,6 +97,9 @@ public class WarriorBasicHeavyAttack : Ability
     private IEnumerator DashAction()
     {
         DisableActions();
+        vfx ??= Resources.Load<GameObject>("Particles/WarriorBasicHeavyAttack");
+        Destroy(Instantiate(vfx, transform), 3f);
+
         while (currentTime > 0)
         {
             if (Physics.Raycast(transform.position + direction * 0.1f, direction, out RaycastHit info, 50f))

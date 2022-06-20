@@ -8,9 +8,12 @@ public class SpiritAbility2 : Ability
 
     private float attackRange = 4f;
     private float damage;
+    private GameObject vfx;
+
     private void Start()
     {
         cooldown = 8f;
+        vfx = Resources.Load<GameObject>($"Particles/{nameof(SpiritAbility2)}");
     }
 
     public override void Init(PlayerController characterController)
@@ -30,6 +33,9 @@ public class SpiritAbility2 : Ability
     {
         // Create Collider
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange);
+        vfx ??= Resources.Load<GameObject>($"Particles/{nameof(SpiritAbility2)}");
+        Destroy(Instantiate(vfx, transform.position, transform.rotation), 2f);
+        Utilities.SpawnHitSphere(attackRange, transform.position, 3f);
         foreach (Collider enemyHit in hitEnemies)
         {
             if (enemyHit.CompareTag("Enemy"))

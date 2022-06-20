@@ -13,10 +13,12 @@ public class SpiritHeavyAttack : Ability
     private float stunDistance = 3.5f;
     private bool isCharged = false;
     private float timeToCharge = 1.5f;
+    private GameObject vfx;
 
     private void Start()
     {
         cooldown = 4f;
+        vfx = Resources.Load<GameObject>($"Particles/{nameof(SpiritHeavyAttack)}");
     }
 
     public override void Init(PlayerController characterController)
@@ -66,6 +68,9 @@ public class SpiritHeavyAttack : Ability
                 ) * transform.forward;
 
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange);
+            vfx ??= Resources.Load<GameObject>($"Particles/{nameof(SpiritHeavyAttack)}");
+            Destroy(Instantiate(vfx, transform.position, transform.rotation), 2f);
+            Utilities.SpawnHitSphere(attackRange, transform.position, 3f);
             foreach (Collider enemyHit in hitEnemies)
             {
                 if (enemyHit.CompareTag("Enemy"))

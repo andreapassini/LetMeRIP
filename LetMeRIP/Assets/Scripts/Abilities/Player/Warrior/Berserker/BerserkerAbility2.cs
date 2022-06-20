@@ -22,12 +22,15 @@ public class BerserkerAbility2 : Ability
     private Vector3 direction;
     private bool isDashing = false;
 
+    private GameObject vfx;
+
     private void Start()
     {
         cooldown = 0f;
         SPCost = 40f;
 
         rb = GetComponent<Rigidbody>();
+        vfx = Resources.Load<GameObject>("Particles/BerserkerAbility2");
     }
 
     public override void Init(PlayerController characterController)
@@ -125,7 +128,10 @@ public class BerserkerAbility2 : Ability
 
     private void Hit()
     {
-        Utilities.SpawnHitSphere(attackRange, transform.position, 3f);
+        vfx ??= Resources.Load<GameObject>("Particles/BerserkerAbility2");
+        Destroy(Instantiate(vfx, transform.position, Quaternion.identity), 2f);
+
+        //Utilities.SpawnHitSphere(attackRange, transform.position, 3f);
 
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange);
         foreach (Collider enemyHit in hitEnemies)

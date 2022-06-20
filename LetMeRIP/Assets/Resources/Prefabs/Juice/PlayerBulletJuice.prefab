@@ -92,7 +92,6 @@ GameObject:
   - component: {fileID: 7564124541428210194}
   - component: {fileID: 7564124541428210195}
   - component: {fileID: 7564124541428210192}
-  - component: {fileID: 1776570863205845395}
   m_Layer: 7
   m_Name: PlayerBulletJuice
   m_TagString: Player
@@ -146,21 +145,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &1776570863205845395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7564124541428210197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fed2997d695c8f5489afd057c2919742, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  shootEffect: {fileID: 8443315704496310910, guid: 6ef35fa36e3a65043b2d800600204bdd, type: 3}
-  destroyEffect: {fileID: 4787146697146794734, guid: e9050f838eb01db44b8958e4d8266866, type: 3}
 --- !u!1 &7564124542787911246
 GameObject:
   m_ObjectHideFlags: 0

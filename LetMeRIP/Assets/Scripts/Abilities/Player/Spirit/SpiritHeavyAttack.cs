@@ -14,11 +14,12 @@ public class SpiritHeavyAttack : Ability
     private bool isCharged = false;
     private float timeToCharge = 1.5f;
     private GameObject vfx;
-
+    private GameObject vfxCharge;
     private void Start()
     {
         cooldown = 4f;
         vfx = Resources.Load<GameObject>($"Particles/{nameof(SpiritHeavyAttack)}");
+        vfxCharge = Resources.Load<GameObject>($"Particles/{nameof(SpiritHeavyAttack)}Charge");
     }
 
     public override void Init(PlayerController characterController)
@@ -96,6 +97,9 @@ public class SpiritHeavyAttack : Ability
     private IEnumerator Charge()
     {
         DisableActions();
+
+        vfxCharge ??= Resources.Load<GameObject>($"Particles/{nameof(SpiritHeavyAttack)}Charge");
+        Destroy(Instantiate(vfxCharge, transform.position, transform.rotation), 2f);
 
         yield return new WaitForSeconds(timeToCharge);
         

@@ -2059,13 +2059,15 @@ GameObject:
   m_Component:
   - component: {fileID: 4158096630655302}
   - component: {fileID: 95905397883882224}
+  - component: {fileID: 6446917459718681072}
+  - component: {fileID: 6312873523318571348}
   m_Layer: 0
   m_Name: WarriorBasic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4158096630655302
 Transform:
   m_ObjectHideFlags: 0
@@ -2092,7 +2094,7 @@ Animator:
   m_GameObject: {fileID: 1835885862194036}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e4aa31f274820b94eb0d0b764e0f383b, type: 3}
-  m_Controller: {fileID: 9100000, guid: 081111fd1834f42469e07a9a2ce295c6, type: 2}
+  m_Controller: {fileID: 9100000, guid: 21bf804b6ce158447a4d457a77a10ccd, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2101,6 +2103,60 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6446917459718681072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835885862194036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9cf3d7b5393eb343b04b27217cae877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6312873523318571348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835885862194036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 1
+    SynchronizeType: 1
+    Name: VelocityX
+  - Type: 1
+    SynchronizeType: 1
+    Name: VelocityZ
+  - Type: 9
+    SynchronizeType: 1
+    Name: LightAttack
+  - Type: 9
+    SynchronizeType: 1
+    Name: HeavyAttack
+  - Type: 9
+    SynchronizeType: 1
+    Name: Ability1
+  - Type: 9
+    SynchronizeType: 1
+    Name: Ability2
+  - Type: 9
+    SynchronizeType: 1
+    Name: Death
+  - Type: 4
+    SynchronizeType: 1
+    Name: isRunning
+  m_SynchronizeLayers:
+  - SynchronizeType: 1
+    LayerIndex: 0
 --- !u!1 &1907504620384056
 GameObject:
   m_ObjectHideFlags: 0

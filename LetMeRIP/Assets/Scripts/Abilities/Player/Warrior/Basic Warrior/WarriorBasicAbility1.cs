@@ -22,6 +22,18 @@ public class WarriorBasicAbility1 : Ability
         vfx = Resources.Load<GameObject>($"Particles/{nameof(WarriorBasicAbility1)}");
     }
 
+    private void OnEnable()
+    {
+        WarriorBasicRebroadcastAnimEvent.ability1 += PerformedAction;
+        WarriorBasicRebroadcastAnimEvent.ability1End += CancelAction;
+    }
+
+    private void OnDisable()
+    {
+        WarriorBasicRebroadcastAnimEvent.ability1 -= PerformedAction;
+        WarriorBasicRebroadcastAnimEvent.ability1End -= CancelAction;
+    }
+
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
@@ -36,18 +48,125 @@ public class WarriorBasicAbility1 : Ability
     {
         isReady = false;
         animator.SetTrigger("Ability1");
+
+        //animation
+        DisableActions();
     }
 
     public override void PerformedAction()
     {
-        // Create Collider
-        StartCoroutine(PerformCoroutine(0.4f));
-        StartCoroutine(Cooldown());
+        //// Create Collider
+        ////StartCoroutine(PerformCoroutine(0.4f));
+
+        //float rad = DegToRad(coneAngle) * .5f;
+
+        //Vector3 rbound = new Matrix4x4(
+        //        new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
+        //        new Vector4(0, 1, 0, 0),
+        //        new Vector4(-Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+        //        Vector4.zero
+        //    ) * transform.forward;
+
+        //Vector3 lbound = new Matrix4x4(
+        //        new Vector4(Mathf.Cos(rad), 0, -Mathf.Sin(rad), 0),
+        //        new Vector4(0, 1, 0, 0),
+        //        new Vector4(Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+        //        Vector4.zero
+        //    ) * transform.forward;
+
+        //Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange);
+        //int hits = 0;
+        //vfx ??= Resources.Load<GameObject>($"Particles/{nameof(WarriorBasicAbility1)}");
+        //Destroy(Instantiate(vfx, transform.position, transform.rotation), 3f);
+
+        //foreach (Collider enemyHit in hitEnemies)
+        //{
+        //    if (enemyHit.CompareTag("Enemy"))
+        //    {
+        //        Vector3 enemyDirection = enemyHit.transform.position - transform.position;
+        //        if (Vector3.Dot(enemyDirection, lbound) > 0 && Vector3.Dot(enemyDirection, rbound) > 0)
+        //        {
+        //            EnemyForm eform = enemyHit.GetComponent<EnemyForm>();
+        //            eform.TakeDamage(damage);
+        //            hits++;
+        //        }
+        //    }
+        //}
+
+        //if (hits > 0 && photonView.IsMine) characterController.HPManager.DecayingHeal(heal * hits, healDecayTime);        
+    }
+
+    public void PerformedAction(WarriorBasic w)
+    {
+        if (characterController == w.GetComponent<CharacterController>())
+        {
+            // Create Collider
+
+            float rad = DegToRad(coneAngle) * .5f;
+
+            Vector3 rbound = new Matrix4x4(
+                    new Vector4(Mathf.Cos(rad), 0, Mathf.Sin(rad), 0),
+                    new Vector4(0, 1, 0, 0),
+                    new Vector4(-Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+                    Vector4.zero
+                ) * transform.forward;
+
+            Vector3 lbound = new Matrix4x4(
+                    new Vector4(Mathf.Cos(rad), 0, -Mathf.Sin(rad), 0),
+                    new Vector4(0, 1, 0, 0),
+                    new Vector4(Mathf.Sin(rad), 0, Mathf.Cos(rad), 0),
+                    Vector4.zero
+                ) * transform.forward;
+
+            Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange);
+            int hits = 0;
+            vfx ??= Resources.Load<GameObject>($"Particles/{nameof(WarriorBasicAbility1)}");
+            Destroy(Instantiate(vfx, transform.position, transform.rotation), 3f);
+
+            foreach (Collider enemyHit in hitEnemies)
+            {
+                if (enemyHit.CompareTag("Enemy"))
+                {
+                    Vector3 enemyDirection = enemyHit.transform.position - transform.position;
+                    if (Vector3.Dot(enemyDirection, lbound) > 0 && Vector3.Dot(enemyDirection, rbound) > 0)
+                    {
+                        EnemyForm eform = enemyHit.GetComponent<EnemyForm>();
+                        eform.TakeDamage(damage);
+                        hits++;
+                    }
+                }
+            }
+
+            if (hits > 0 && photonView.IsMine) characterController.HPManager.DecayingHeal(heal * hits, healDecayTime);
+
+            StartCoroutine(Cooldown());
+        }
+        else
+        {
+            Debug.Log("Not me");
+        }
     }
 
     public override void CancelAction()
     {
-        /* nothing to see here */
+        //StartCoroutine(Cooldown());
+
+        //// Re-enable actions after animation end
+        //EnableActions();
+    }
+
+    public void CancelAction(WarriorBasic w)
+    {
+        if(characterController == w.GetComponent<CharacterController>())
+        {
+
+            // Re-enable actions after animation end
+            EnableActions();
+        }
+        else
+        {
+            Debug.Log("Not me");
+        }
     }
 
     private IEnumerator PerformCoroutine(float castingTime)

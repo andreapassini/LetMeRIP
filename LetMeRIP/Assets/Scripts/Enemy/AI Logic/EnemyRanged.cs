@@ -247,11 +247,12 @@ public class EnemyRanged : EnemyForm
     {
         while (true)
         {
-            if (stopAI)
-                continue;
+            if (!stopAI)
+            {
+                navMeshAgent.speed = enemyStats.swiftness;
+                fsm.Update();
+            }
 
-            navMeshAgent.speed = enemyStats.swiftness;
-            fsm.Update();
             yield return new WaitForSeconds(AiFrameRate);
         }
     }
@@ -260,11 +261,12 @@ public class EnemyRanged : EnemyForm
     {
         while (TargetVisible())
         {
-            if (stopAI)
-                continue;
-
-            navMeshAgent.speed = enemyStats.swiftness;
-            fightFSM.Update();
+            if (!stopAI)
+            {
+                navMeshAgent.speed = enemyStats.swiftness;
+                fightFSM.Update();
+            }
+            
             yield return new WaitForSeconds(AiFrameRate);
         }
     }

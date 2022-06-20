@@ -201,11 +201,12 @@ public class EnemySpider : EnemyForm
     public IEnumerator Patrol()
     {
         while (true) {
-            if (stopAI)
-                continue;
-
-            navMeshAgent.speed = enemyStats.swiftness;
-            fsm.Update();
+            if (!stopAI)
+            {
+                navMeshAgent.speed = enemyStats.swiftness;
+                fsm.Update();
+            }
+                
             yield return new WaitForSeconds(AiFrameRate);
         }
     }

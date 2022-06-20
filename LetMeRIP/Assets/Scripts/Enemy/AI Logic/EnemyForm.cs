@@ -76,6 +76,8 @@ public class EnemyForm : MonoBehaviourPun
 
     public string targetTag = "Player";
 
+    public GameObject hitEffect;
+
 
     private EnemyBillboard healthBar;
     
@@ -141,30 +143,9 @@ public class EnemyForm : MonoBehaviourPun
     // Wait until the end of the action to update again the FSM
     public virtual void CastAbilityDuration(EnemyAbility ability)
     {
-        
-        //if (AiFrameRate < ability.abilityDurtation)
-        //{
-        //}
 
-        StartCoroutine(AbilityDuration(ability));
-
-    }
-
-    private IEnumerator AbilityDuration(EnemyAbility ability)
-    {
-        if (ability.abilityDurtation > AiFrameRate) {
-            // Stop FSM
-            //reactionReference = AiFrameRate;
-            //AiFrameRate = ability.abilityDurtation;
-            stopAI = true;
-            animator.SetFloat("speed", 0);
-            //StopEverythingForAbilityExecution();
-
-            yield return new WaitForSeconds(ability.abilityDurtation);
-
-            stopAI = false;
-            //AiFrameRate = reactionReference;
-        }
+        if (AiFrameRate < ability.abilityDurtation)
+            StopAI();
     }
 
     public void CastEnemyAbility(EnemyAbility enemyAbility)
@@ -222,16 +203,6 @@ public class EnemyForm : MonoBehaviourPun
         FormManager.OnBodyExitForEnemy += RestTargetAfterSpiritExit;
         HPManager.OnPlayerKilled += RestTargetAfterSpiritExit;
     }
-
-    public virtual void StopEverythingForAbilityExecution()
-	{
-
-	}
-
-    public virtual void RestartAI()
-	{
-
-	}
 
     public virtual void RestTargetAfterSpiritExit(FormManager formManager)
 	{
@@ -301,5 +272,21 @@ public class EnemyForm : MonoBehaviourPun
         }
 
     }
+
+    public void StopAI()
+	{
+        stopAI = true;
+	}
+
+    public void RestartAI()
+	{
+        stopAI = false;
+	}
+
+    public void TakeDamageEffect()
+	{
+        GameObject a = Instantiate(hitEffect, transform);
+        Destroy(a, 3f);
+	}
 
 }

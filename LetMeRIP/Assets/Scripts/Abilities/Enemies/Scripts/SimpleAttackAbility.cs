@@ -30,15 +30,19 @@ public class SimpleAttackAbility : EnemyAbility
         foreach (Collider e in hitEnemies) {
             if (e.CompareTag("Player")) {
 
-                HPManager hpManager = e.gameObject.GetComponent<PlayerController>().HPManager;
+                //HPManager hpManager = e.gameObject.GetComponent<PlayerController>().HPManager;
 
 
-                if (hpManager != null)
-                {
-                    Debug.Log("hp manager is not null");
-                    hpManager.TakeDamage(damage + enemy.enemyStats.attack, enemy.transform.position);
+                //if (hpManager != null)
+                //{
+                //    Debug.Log("hp manager is not null");
+                //    hpManager.TakeDamage(damage + enemy.enemyStats.attack, enemy.transform.position);
+                //}
+                //else Debug.Log("hpmanager is null!");
+
+                if(e.transform.TryGetComponent<HPManager>(out HPManager h)) {
+                    h.TakeDamage(damage + enemy.enemyStats.attack, enemy.transform.position);
                 }
-                else Debug.Log("hpmanager is null!");
             }
         }
     }
@@ -51,6 +55,7 @@ public class SimpleAttackAbility : EnemyAbility
             return;
         }
 
+        // Play attack animation
         enemy.animator.SetTrigger("attack");
 
         // Stop Moving  
@@ -59,8 +64,6 @@ public class SimpleAttackAbility : EnemyAbility
 
         // Look at Target
         enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
-
-        // Play attack animation
 
         base.PerformAbility(this.enemy);
     }

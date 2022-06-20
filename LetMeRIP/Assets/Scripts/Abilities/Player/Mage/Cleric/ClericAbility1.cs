@@ -20,7 +20,7 @@ public class ClericAbility1 : Ability
 
     private float startTime;
 
-    private GameObject prefab;
+    private GameObject bulletPrefab;
 
     PlayerController p;
 
@@ -29,6 +29,8 @@ public class ClericAbility1 : Ability
     {
         cooldown = 9f;
         SPCost = 36f;
+
+        bulletPrefab = Resources.Load<GameObject>($"Prefabs/{nameof(ClericAbility1)}Bullet");
     }
 
     public override void Init(PlayerController characterController)
@@ -38,9 +40,9 @@ public class ClericAbility1 : Ability
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>(false);
 
-        minHeal = (float)(35 + characterController.stats.intelligence * 0.4f);
+        minHeal = (float)(200 + characterController.stats.intelligence * 0.4f);
 
-        maxHeal = (float)(50 + characterController.stats.intelligence * 0.8f);
+        maxHeal = (float)(500 + characterController.stats.intelligence * 0.8f);
 
         p = characterController;
     }
@@ -75,36 +77,23 @@ public class ClericAbility1 : Ability
     {
         //StopCoroutine(chargeCor);
         animator.SetTrigger("Ability1Cast");
+        EnableMovement();
 
         PotDown();
-
-        EnableMovement();
         StartCoroutine(Cooldown());
     }
 
     public void PotDown()
     {
-        // Just to free him
-        EnableMovement();
         StartCoroutine(Cooldown());
 
-        //float difTime = Time.time - startTime;
+        float difTime = Time.time - startTime;
 
-        //// Calculate damage
-        //float heal = Mathf.Clamp(minHeal + difTime, minHeal, maxHeal);
+        float heal = Mathf.Lerp(minHeal, maxHeal, Mathf.Clamp(difTime, 0, maxChargeTime) / maxChargeTime);
 
-        //float dim = Mathf.Clamp(3 + difTime, 3, 7);
+        bulletPrefab ??= Resources.Load<GameObject>($"Prefabs/{nameof(ClericAbility1)}Bullet"); // safety first :)
 
-        //// Calcolate position as Look at mouse 
-        //Vector3 v = GatherDirectionInput();
-        //v.y = transform.position.y;
-
-        //GameObject pool = PhotonNetwork.Instantiate("Prefabs/Pot", v, transform.rotation);
-
-        //if(pool.GetComponent<Pot>() != null){
-        //    pool.GetComponent<Pot>().Init(heal, dim);
-        //}
-
+        StartCoroutine(HitWait(heal));
     }
 
     public Vector3 GatherDirectionInput()
@@ -118,5 +107,12 @@ public class ClericAbility1 : Ability
             : Vector3.zero;
         direction.y = 0;
         return direction.normalized;
+    }
+
+    private IEnumerator HitWait(float healAmount)
+    {
+        GameObject bulletInstance = Instantiate(bulletPrefab, transform.position, transform.rotation) as GameObject;
+        yield return new WaitForSeconds(0.1f);
+        bulletInstance.GetComponentInChildren<ClericAbility1Bullet>().Init(healAmount);
     }
 }

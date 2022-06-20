@@ -26,12 +26,14 @@ public class ClericHeavyAttack : Ability
     private Coroutine chargeCor;
 
     private float startTime;
-
+    private GameObject vfx;
     // Start is called before the first frame update
     void Start()
     {
         cooldown = 3.5f;
         SPCost = 14f;
+
+        vfx = Resources.Load<GameObject>("Prefabs/LightDown");
     }
 
     public override void Init(PlayerController characterController)
@@ -95,10 +97,12 @@ public class ClericHeavyAttack : Ability
 
         // Spawn Particellar effects
         LightDown lightDown = GetComponentInChildren<LightDown>();
-        PhotonNetwork.Instantiate("Prefabs/LightDown", lightDown.transform.position, lightDown.transform.rotation);
+
+        vfx ??= Resources.Load<GameObject>("Prefabs/LightDown");
+        Instantiate(vfx, transform.position, transform.rotation);
 
         // Calcolate position
-        Vector3 pos = new Vector3(lightDown.transform.position.x, lightDown.transform.position.y, lightDown.transform.position.y);
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.y);
 
         // Create AOE
         float areaOfImpact = Mathf.Clamp(minArea + difTime, minArea, maxArea);

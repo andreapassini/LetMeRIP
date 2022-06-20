@@ -38,13 +38,15 @@ public class SimpleAttackAbility : EnemyAbility
                 //    Debug.Log("hp manager is not null");
                 //    hpManager.TakeDamage(damage + enemy.enemyStats.attack, enemy.transform.position);
                 //}
-                //else Debug.Log("hpmanager is null!");
+                //else Debug.Log("hpmanager is null!")
 
                 if(e.transform.TryGetComponent<HPManager>(out HPManager h)) {
                     h.TakeDamage(damage + enemy.enemyStats.attack, enemy.transform.position);
                 }
             }
         }
+
+        enemy.RestartAI();
     }
 
 	public override void StartAbility(EnemyForm enemy)
@@ -66,5 +68,7 @@ public class SimpleAttackAbility : EnemyAbility
         enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
 
         base.PerformAbility(this.enemy);
+
+        enemy.RestartAI();
     }
 }

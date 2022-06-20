@@ -10,7 +10,8 @@ public class LookAtMouse : MonoBehaviourPun
     private PlayerInputActions playerInputActions;
     private Camera playerCamera;
     private Vector3 directionToLook;
-    
+    private bool isEnabled = true;
+
     private void Start()
     {
         playerInputActions = new PlayerInputActions();
@@ -28,7 +29,7 @@ public class LookAtMouse : MonoBehaviourPun
 
 	private void FixedUpdate()
 	{
-        if (!photonView.IsMine) return;
+        if (!photonView.IsMine || !isEnabled) return;
         
         Rotate();
 	}
@@ -50,5 +51,15 @@ public class LookAtMouse : MonoBehaviourPun
 
         this.directionToLook.y = 0;
         transform.forward = this.directionToLook;
+    }
+
+    private void EnableLookAround()
+    {
+        isEnabled = true;
+    }
+
+    private void DisableLookAround()
+    {
+        isEnabled = false;
     }
 }

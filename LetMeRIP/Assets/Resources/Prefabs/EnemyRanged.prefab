@@ -344,7 +344,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 7008174147738807914}
   - {fileID: 6567016777440626498}
-  sceneViewId: 2
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &7008174147738807914
@@ -1057,6 +1057,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3627110880441670395, guid: da6d6de6c30c174468dab4c1b43c2daa, type: 3}
+      propertyPath: gradient.ctime0
+      value: 32768
+      objectReference: {fileID: 0}
+    - target: {fileID: 3627110880441670395, guid: da6d6de6c30c174468dab4c1b43c2daa, type: 3}
+      propertyPath: gradient.key0.r
+      value: 0.8301887
+      objectReference: {fileID: 0}
+    - target: {fileID: 3627110880441670395, guid: da6d6de6c30c174468dab4c1b43c2daa, type: 3}
+      propertyPath: gradient.key1.b
+      value: 0.011764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 3627110880441670395, guid: da6d6de6c30c174468dab4c1b43c2daa, type: 3}
+      propertyPath: gradient.key1.g
+      value: 0.011764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 3627110880441670395, guid: da6d6de6c30c174468dab4c1b43c2daa, type: 3}
+      propertyPath: gradient.key1.r
+      value: 0.6509804
+      objectReference: {fileID: 0}
     - target: {fileID: 4603715880109616058, guid: da6d6de6c30c174468dab4c1b43c2daa, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1261,7 +1281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7499369617087102617, guid: 46d9797ad92ff4e4c9f60da75aaf9977, type: 3}
       propertyPath: sceneViewId
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46d9797ad92ff4e4c9f60da75aaf9977, type: 3}

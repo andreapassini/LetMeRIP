@@ -154,7 +154,7 @@ public class EnemyForm : MonoBehaviourPun
 
         //Debug.Log(enemyAbility.abilityName);
 
-        photonView.RPC("RpcCastEnemyAbility",
+        photonView.RPC(nameof(RpcCastEnemyAbility),
             RpcTarget.All,
             enemyAbility.abilityName);
 	}
@@ -173,8 +173,11 @@ public class EnemyForm : MonoBehaviourPun
     public void RpcTakeDamage(float dmg)
 	{
         animator.SetTrigger("damage");
+
         navMeshAgent.velocity = Vector3.zero;
         navMeshAgent.isStopped = true;
+
+        //TakeDamageEffect();
 
         // Calcolate defense reduction
         dmg = dmg - (dmg * enemyStats.defense * 0.01f); ;
@@ -285,7 +288,8 @@ public class EnemyForm : MonoBehaviourPun
 
     public void TakeDamageEffect()
 	{
-        GameObject a = Instantiate(hitEffect, transform);
+        // Attach the event to something that will still be alive after eneym death
+        GameObject a = Instantiate(hitEffect, transform.position, transform.rotation, transform.parent);
         Destroy(a, 3f);
 	}
 

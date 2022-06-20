@@ -50,6 +50,8 @@ public class RangedAttackAbility : EnemyAbility
 				rbBullet.AddForce(enemy.attackPoint.forward * bulletForce, ForceMode.Impulse);
 			}
 		}
+
+		enemy.RestartAI();
 	}
 
 	public override void StartAbility(EnemyForm enemy)

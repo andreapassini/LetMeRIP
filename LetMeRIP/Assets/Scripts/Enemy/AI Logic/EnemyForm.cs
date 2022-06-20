@@ -77,6 +77,7 @@ public class EnemyForm : MonoBehaviourPun
     public string targetTag = "Player";
 
     public GameObject hitEffect;
+    public GameObject deathEffect;
 
 
     private EnemyBillboard healthBar;
@@ -114,14 +115,32 @@ public class EnemyForm : MonoBehaviourPun
     {
         if(!PhotonNetwork.IsMasterClient) return;
 
-        photonView.RPC("RpcTakeDamage", RpcTarget.All, dmg);
+        photonView.RPC(nameof(RpcTakeDamage), RpcTarget.All, dmg);
     }
 
     public virtual void Die()
 	{
+        animator.SetTrigger("die");
+
         Debug.Log($"{name} died");
+
+        // Create SP pool
         spPool.transform.SetParent(transform.parent);
         spPool.SetActive(true);
+
+        // Stop AI
+        StopAI();
+
+        // Stop and disable navmesh
+        transform.GetComponent<NavMeshAgent>().isStopped = true;
+        transform.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
+        transform.GetComponent<NavMeshAgent>().destination = transform.position;
+        transform.GetComponent<NavMeshAgent>().enabled = false;
+
+        // Disable Collisions
+        transform.GetComponent<Rigidbody>().detectCollisions = false;
+        transform.GetComponent<Collider>().enabled = false;
+        
 
         // UN-Sub
         FormManager.OnBodyExitForEnemy -= RestTargetAfterSpiritExit;
@@ -134,10 +153,6 @@ public class EnemyForm : MonoBehaviourPun
         OnEnemyKilled?.Invoke(this);
 
         // UN-Subscribe to Event Change Spirit Form
-
-        // Overwrite
-        PhotonNetwork.Destroy(photonView);
-        //Destroy(gameObject);
     }
 
     // Wait until the end of the action to update again the FSM
@@ -286,11 +301,28 @@ public class EnemyForm : MonoBehaviourPun
         stopAI = false;
 	}
 
+    public void DestroyEnemy()
+    {
+        // Only on Master after TakeDamage RPC
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        // Overwrite
+        PhotonNetwork.Destroy(photonView);
+        //Destroy(gameObject);
+    }
+
     public void TakeDamageEffect()
 	{
         // Attach the event to something that will still be alive after eneym death
         GameObject a = Instantiate(hitEffect, transform.position, transform.rotation, transform.parent);
         Destroy(a, 3f);
 	}
+
+    public void DeathEffect()
+    {
+        // Attach the event to something that will still be alive after eneym death
+        GameObject a = Instantiate(deathEffect, transform.position, transform.rotation, transform.parent);
+        Destroy(a, 3f);
+    }
 
 }

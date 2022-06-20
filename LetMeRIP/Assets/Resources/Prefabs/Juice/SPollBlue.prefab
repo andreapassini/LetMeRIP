@@ -33803,7 +33803,7 @@ GameObject:
   - component: {fileID: 6115686495367207332}
   - component: {fileID: 6115686495367207003}
   - component: {fileID: 5871166865231380131}
-  - component: {fileID: 5251313213709141708}
+  - component: {fileID: -9167700213948722936}
   m_Layer: 0
   m_Name: SPollBlue
   m_TagString: Untagged
@@ -38635,7 +38635,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &5251313213709141708
+--- !u!114 &-9167700213948722936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -38644,10 +38644,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6115686495367207002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57e983e7e4de77347aa726b43efd6b44, type: 3}
+  m_Script: {fileID: 11500000, guid: 693708f3ac3ef344d8f1d37efb9052ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupEffect: {fileID: 7888857835762348946, guid: 84dab4a8cf751fc4181b5f09a6186c21, type: 3}
+  holdedSp: 0
 --- !u!1 &7155986404017295723
 GameObject:
   m_ObjectHideFlags: 0

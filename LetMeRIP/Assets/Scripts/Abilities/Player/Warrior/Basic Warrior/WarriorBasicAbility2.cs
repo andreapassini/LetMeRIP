@@ -106,6 +106,8 @@ public class WarriorBasicAbility2 : Ability
                     }
                 }
             }
+            StartCoroutine(Cooldown());
+            EnableActions();
         }
         else
         {

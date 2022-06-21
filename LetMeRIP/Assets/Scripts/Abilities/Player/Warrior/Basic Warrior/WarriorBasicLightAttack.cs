@@ -71,7 +71,10 @@ public class WarriorBasicLightAttack : Ability
                     EnemyForm eform = enemyHit.GetComponent<EnemyForm>();
                     eform.TakeDamage(damage);
                 }
-            }            
+            }
+
+            StartCoroutine(Cooldown());
+
         }
         else
         {

@@ -98,7 +98,7 @@ public class WarriorBasicAbility1 : Ability
 
     public void PerformedAction(WarriorBasic w)
     {
-        if (characterController == w.GetComponent<CharacterController>())
+        if (characterController == w.GetComponent<PlayerController>())
         {
             // Create Collider
 
@@ -140,10 +140,12 @@ public class WarriorBasicAbility1 : Ability
             if (hits > 0 && photonView.IsMine) characterController.HPManager.DecayingHeal(heal * hits, healDecayTime);
 
             StartCoroutine(Cooldown());
+            EnableActions();
         }
         else
         {
             Debug.Log("Not me");
+            EnableActions();
         }
     }
 

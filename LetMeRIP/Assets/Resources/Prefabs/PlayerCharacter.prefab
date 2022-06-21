@@ -196,16 +196,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e255b9c0dc885424d918793d5042545b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerClass: sample
+  playerClass: warrior
   formManager: {fileID: 0}
-  spiritStats: {fileID: 11400000, guid: 914b81d7560a88a408eb0b907232a558, type: 2}
-  bodyStats: {fileID: 11400000, guid: 0ebda0e8c7b520942b5fa99b4e9ba7e2, type: 2}
-  currentStats: {fileID: 0}
+  spiritStatsSrc: {fileID: 0}
+  bodyStatsSrc: {fileID: 0}
+  stats:
+    formName: 
+    health: 0
+    maxHealth: 0
+    spiritGauge: 0
+    maxSpiritGauge: 0
+    strength: 0
+    dexterity: 0
+    intelligence: 0
+    defense: 0
+    swiftness: 0
+    critDamage: 0
+    critChance: 0
+  lam: {fileID: 0}
   movement: {fileID: 0}
   rb: {fileID: 0}
   HPManager: {fileID: 0}
   SGManager: {fileID: 0}
   followPoint: {fileID: 7321366892197641228}
+  playerManager: {fileID: 0}
 --- !u!114 &-8238721795462298622
 MonoBehaviour:
   m_ObjectHideFlags: 0

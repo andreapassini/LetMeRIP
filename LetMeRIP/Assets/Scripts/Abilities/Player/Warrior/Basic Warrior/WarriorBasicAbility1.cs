@@ -47,14 +47,17 @@ public class WarriorBasicAbility1 : Ability
     public override void StartedAction()
     {
         isReady = false;
-        animator.SetTrigger("Ability1");
 
         //animation
-        DisableActions();
+        animator.SetTrigger("Ability1");
+
+        DisableMovement();
+        //DisableActions();
     }
 
     public override void PerformedAction()
     {
+        // StartCoroutine(Cooldown());
         //// Create Collider
         ////StartCoroutine(PerformCoroutine(0.4f));
 
@@ -139,13 +142,10 @@ public class WarriorBasicAbility1 : Ability
 
             if (hits > 0 && photonView.IsMine) characterController.HPManager.DecayingHeal(heal * hits, healDecayTime);
 
-            StartCoroutine(Cooldown());
-            EnableActions();
         }
         else
         {
             Debug.Log("Not me");
-            EnableActions();
         }
     }
 
@@ -159,10 +159,12 @@ public class WarriorBasicAbility1 : Ability
 
     public void CancelAction(WarriorBasic w)
     {
-        if(characterController == w.GetComponent<CharacterController>())
+        if(characterController == w.GetComponent<PlayerController>())
         {
-            // Re-enable actions after animation end
+            // Re-enable movement after animation end
+            EnableMovement();
             EnableActions();
+            StartCoroutine(Cooldown());
         }
         else
         {

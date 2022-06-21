@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
     {
         if (photonView.IsMine)
         {
-            photonView.RPC("RpcSetPlayerManager", RpcTarget.AllBuffered, new List<PlayerManager>(FindObjectsOfType<PlayerManager>()).Find(match => match.photonView.IsMine).photonView.ViewID);
+            photonView.RPC(nameof(RpcSetPlayerManager), RpcTarget.AllBuffered, new List<PlayerManager>(FindObjectsOfType<PlayerManager>()).Find(match => match.photonView.IsMine).photonView.ViewID);
         }
 
         SetupCamera();

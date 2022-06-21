@@ -46,8 +46,7 @@ public class WarriorBasicAbility2 : Ability
     {
         isReady = false;
         animator.SetTrigger("Ability2");
-        DisableActions();
-
+        DisableMovement();
     }
 
     public override void PerformedAction()
@@ -106,8 +105,7 @@ public class WarriorBasicAbility2 : Ability
                     }
                 }
             }
-            StartCoroutine(Cooldown());
-            EnableActions();
+            
         }
         else
         {
@@ -117,7 +115,8 @@ public class WarriorBasicAbility2 : Ability
 
     public override void CancelAction()
     {
-        /* nothing to see here */
+        //StartCoroutine(Cooldown());
+        //EnableActions();
     }
 
     public void CancelAction(WarriorBasic w)
@@ -125,6 +124,7 @@ public class WarriorBasicAbility2 : Ability
         if (w.GetComponent<PlayerController>() == characterController)
         {
             StartCoroutine(Cooldown());
+            EnableMovement();
             EnableActions();
         }
     }

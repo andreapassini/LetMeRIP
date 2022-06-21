@@ -159,7 +159,6 @@ public class WarriorBasicAbility1 : Ability
     {
         if(characterController == w.GetComponent<CharacterController>())
         {
-
             // Re-enable actions after animation end
             EnableActions();
         }

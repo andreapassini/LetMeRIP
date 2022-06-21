@@ -34,8 +34,6 @@ public class WarriorBasicLightAttack : Ability
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
         damage = 10 + characterController.stats.strength * 0.1f + characterController.stats.dexterity * 0.1f;
-
-        this.characterController = characterController;
     }
 
     public override void StartedAction()

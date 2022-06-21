@@ -40,8 +40,6 @@ public class WarriorBasicAbility2 : Ability
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
         damage = 10 + characterController.stats.strength * 0.4f;
-
-        this.characterController = characterController;
     }
 
     public override void StartedAction()

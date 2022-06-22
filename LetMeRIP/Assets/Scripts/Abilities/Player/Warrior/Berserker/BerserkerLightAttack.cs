@@ -24,14 +24,25 @@ public class BerserkerLightAttack : Ability
 
     private void OnEnable()
     {
-        BerserkRebroadcastAnimEvent.ability2 += PerformedAction;
-        BerserkRebroadcastAnimEvent.ability2End += CancelAction;
+        BerserkRebroadcastAnimEvent.lightAttack += PerformedAction;
+        BerserkRebroadcastAnimEvent.lightAttackEnd += CancelAction;
     }
 
     private void OnDisable()
     {
-        BerserkRebroadcastAnimEvent.ability2 -= PerformedAction;
-        BerserkRebroadcastAnimEvent.ability2End -= CancelAction;
+        BerserkRebroadcastAnimEvent.lightAttack -= PerformedAction;
+        BerserkRebroadcastAnimEvent.lightAttackEnd -= CancelAction;
+    }
+
+    public override void StartedAction()
+    {
+        isReady = false;
+        animator.SetTrigger("LightAttack");
+        characterController.lam.EnableLookAround();
+        DisableMovement();
+        //DisableActions();
+        //StartCoroutine(Cooldown());
+
     }
 
     public void PerformedAction(Berserker b)
@@ -39,7 +50,7 @@ public class BerserkerLightAttack : Ability
         if (characterController == b.GetComponent<PlayerController>())
         {
             // Create Collider
-            Utilities.SpawnHitSphere(attackRange, attackPoint.position, 3f);
+            //Utilities.SpawnHitSphere(attackRange, attackPoint.position, 3f);
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange);
             foreach (Collider enemyHit in hitEnemies)
             {
@@ -50,6 +61,8 @@ public class BerserkerLightAttack : Ability
                 }
             }
         }
+        //StartCoroutine(Cooldown());
+        //EnableMovement();
     }
 
     public void CancelAction(Berserker b)
@@ -59,14 +72,11 @@ public class BerserkerLightAttack : Ability
             StartCoroutine(Cooldown());
             EnableMovement();
             EnableActions();
+            characterController.lam.EnableLookAround();
+        } else
+        {
+            Debug.Log("Not me");
         }
-    }
-
-    public override void StartedAction()
-    {
-        isReady = false;
-        animator.SetTrigger("LightAttack");
-        DisableMovement();
     }
 
     public override void PerformedAction()

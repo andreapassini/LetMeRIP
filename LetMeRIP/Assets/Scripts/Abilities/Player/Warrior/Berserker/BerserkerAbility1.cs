@@ -7,10 +7,14 @@ public class BerserkerAbility1 : Ability
     private Animator animator;
     // scalings are in RagePE
 
+    private GameObject initRageEffect;
+
     private void Start()
     {
         cooldown = 0.2f;
         SPCost = 36f;
+
+        initRageEffect = Resources.Load<GameObject>("Particles/BerserkRage");
     }
 
     public override void Init(PlayerController characterController)
@@ -19,23 +23,26 @@ public class BerserkerAbility1 : Ability
         animator = GetComponentInChildren<Animator>(false);
     }
 
-    public override void StartedAction()
-    {
-        isReady = false;
-        //animator.SetTrigger("Ability2");
-    }
-
     private void OnEnable()
     {
-        BerserkRebroadcastAnimEvent.ability2 += PerformedAction;
-        BerserkRebroadcastAnimEvent.ability2End += CancelAction;
+        BerserkRebroadcastAnimEvent.ability1 += PerformedAction;
+        BerserkRebroadcastAnimEvent.ability1End += CancelAction;
     }
 
     private void OnDisable()
     {
-        BerserkRebroadcastAnimEvent.ability2 -= PerformedAction;
-        BerserkRebroadcastAnimEvent.ability2End -= CancelAction;
+        BerserkRebroadcastAnimEvent.ability1 -= PerformedAction;
+        BerserkRebroadcastAnimEvent.ability1End -= CancelAction;
     }
+
+    public override void StartedAction()
+    {
+        isReady = false;
+        //animator.SetTrigger("Ability2");
+        characterController.lam.DisableLookAround();
+    }
+
+  
 
     public void PerformedAction(Berserker b)
     {
@@ -74,7 +81,15 @@ public class BerserkerAbility1 : Ability
         yield return new WaitForSeconds(waitTime); // let the animation play
         RagePE rage = gameObject.AddComponent<RagePE>();
         rage.StartEffect();
-        Utilities.SpawnHitSphere(0.5f, transform.position, 8f);
+
+        // Spawn Rage Init
+        //Utilities.SpawnHitSphere(0.5f, transform.position, 8f);
+        initRageEffect ??= Resources.Load<GameObject>("Particles/BerserkRage");
+        Destroy(Instantiate(initRageEffect, transform), 1f);
+
         EnableActions();
+        EnableMovement();
+        characterController.lam.DisableLookAround();
+
     }
 }

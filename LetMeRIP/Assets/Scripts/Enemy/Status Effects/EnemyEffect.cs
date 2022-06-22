@@ -10,7 +10,7 @@ public class EnemyEffect : MonoBehaviour
 {
     public float Duration { get => duration; set => duration = value; }
     protected float duration;
-
+    protected Coroutine effectCoroutine;
     protected virtual void Start()
     {
         /* nothing to see here yet */
@@ -19,7 +19,7 @@ public class EnemyEffect : MonoBehaviour
 
     public virtual void StartEffect()
     {
-        StartCoroutine(Effect(GetComponent<EnemyForm>()));
+        effectCoroutine = StartCoroutine(Effect(GetComponent<EnemyForm>()));
     }
 
     public virtual IEnumerator Effect(EnemyForm eform) { yield return null; }

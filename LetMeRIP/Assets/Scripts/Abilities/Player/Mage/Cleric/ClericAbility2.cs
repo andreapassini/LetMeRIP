@@ -16,12 +16,16 @@ public class ClericAbility2 : Ability
     private GameObject prefab;
 
     PlayerController p;
+    private GameObject beaconOfHopePrefab;
 
+    PlayerInputActions pactions;
     // Start is called before the first frame update
     void Start()
     {
         cooldown = 12f;
         SPCost = 48f;
+        beaconOfHopePrefab = Resources.Load<GameObject>("Prefabs/BeaconOfHope");
+        playerInputActions.Player.LookAt.Enable();
     }
 
     public override void Init(PlayerController characterController)
@@ -46,7 +50,6 @@ public class ClericAbility2 : Ability
         animator.SetTrigger("Ability2");
 
         DisableMovement();
-
         Cast();
     }
 
@@ -59,14 +62,12 @@ public class ClericAbility2 : Ability
 
     public void Cast()
 	{
-        // Calcolate position as Look at mouse 
-        Vector3 v = GatherDirectionInput();
-
-        //LightDown lightDown = GetComponentInChildren<LightDown>();
-        v.y = transform.position.y;
-
-        GameObject beaconOfHope = PhotonNetwork.Instantiate("Prefabs/BeaconOfHope", v, transform.rotation);
-        beaconOfHope.GetComponent<BeaconOfHope>().Init(p.stats.intelligence);
+        Vector2 mousePos = playerInputActions.Player.LookAt.ReadValue<Vector2>();
+        Vector3 castingPos = GatherDirectionInput();
+        Debug.Log($"Casting position: {castingPos}");
+        beaconOfHopePrefab ??= Resources.Load<GameObject>("Prefabs/BeaconOfHope");
+        GameObject beaconOfHopeInstance = Instantiate(beaconOfHopePrefab, castingPos, Quaternion.identity) ;
+        beaconOfHopeInstance.GetComponent<BeaconOfHope>().Init(p.stats.intelligence);
 
         RestEnable();
     }
@@ -85,16 +86,22 @@ public class ClericAbility2 : Ability
     {
     }
 
+
+    //private void Update()
+    //{
+    //    Debug.Log(Camera.main.ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>()));
+    //}
+
     public Vector3 GatherDirectionInput()
     {
         Camera c = FindObjectOfType<Camera>();
+        
+        Ray ray = Camera.main.ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>());
 
-        Ray ray = c.ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>());
-
-        Vector3 direction = Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, p.GetComponent<LookAtMouse>().groundMask)
-            ? hitInfo.point - transform.position
+        Vector3 position = Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, p.GetComponent<LookAtMouse>().groundMask)
+            ? hitInfo.point
             : Vector3.zero;
-        direction.y = 0;
-        return direction.normalized;
+        position.y = transform.position.y;
+        return position;
     }
 }

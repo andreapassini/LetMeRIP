@@ -1,82 +1,84 @@
-using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class BeaconOfHope : MonoBehaviourPun
+public class BeaconOfHope : MonoBehaviour
 {
-	public float areaOfEffect;
+	public float radius;
+	private float duration = 5f;
+	private float damageOnSummon;
+	private float damageTick;
+	private GameObject vfxSpawn;
 
-	private float damageRise;
-	private float damageDuring;
+    private void Awake()
+    {
+		vfxSpawn = Resources.Load<GameObject>($"Particles/{nameof(BeaconOfHope)}Spawn");
+    }
 
-	private bool isUp = false;
-
-	private SphereCollider collider;
-
-	// Player and if it is inside
-	private List<Transform> playersBuffed;
-
+    /**
+	 * Calculates the damage scaling on caster's intelligence
+	 */
     public void Init(float intelligence)
 	{
-		damageRise = (float)(30 + (0.3 * intelligence));
-		damageDuring = (float)(10 + (0.2 * intelligence));
+		damageOnSummon = (float)(30 + (0.3 * intelligence));
+		damageTick = (float)(10 + (0.2 * intelligence));
 
-		if (PhotonNetwork.IsMasterClient) StartCoroutine(DestroyAfterTime(5f));
-
+		Destroy(gameObject, duration);
 		RiseUP();
 	}
 
-	private void Start()
-	{
-		collider = GetComponent<SphereCollider>();
 
-		collider.isTrigger = true;
-		collider.radius = areaOfEffect;
-	}
-
-	private void OnCollisionStay(Collision e)
-	{
-		if (isUp) 
+	/**
+	 * Adds the proper effect to player and enemies entering the beacon of hope area
+	 * if a player or enemy enetering already has the effect (it shouldn't) it doesn't add another one
+	 * but rather resets its duration
+	 */
+    private void OnTriggerEnter(Collider other)
+    {
+		if (other.CompareTag("Player"))
 		{
-			if (e.transform.CompareTag("Enemy")) {
-
-				EnemyForm enemyForm = e.transform.GetComponent<EnemyForm>();
-
-				if (enemyForm != null) {
-					enemyForm.TakeDamage(damageDuring);
-				}
+			Debug.Log($"{other.name} entered a beacon");
+			//Buff
+			PlayerController player = other.GetComponent<PlayerController>();
+				
+			if(player.TryGetComponent<BeaconOfHopePE>(out BeaconOfHopePE effect))
+            {
+				effect.ResetDuration();
+            } else
+            {
+				effect = player.gameObject.AddComponent<BeaconOfHopePE>();
+				effect.Init(duration);
+				effect.StartEffect();
 			}
+		} else if (other.CompareTag("Enemy") && !other.TryGetComponent<BeaconOfHopeEE>(out BeaconOfHopeEE effect))
+        {
+			effect = other.gameObject.AddComponent<BeaconOfHopeEE>();
+			effect.Init(damageTick, duration);
+			effect.StartEffect();
 		}
 	}
 
-	private void OnCollisionEnter(Collision e)
+	/**
+	 * removes the damaging effect from the exiting enemies
+	 */
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("Enemy") && other.TryGetComponent<BeaconOfHopeEE>(out BeaconOfHopeEE effect))
+		{
+			Destroy(effect);
+        }
+    }
+
+	/**
+	 * Inflicts a higher starting damage to enemies in range 
+	 */
+    public void RiseUP()
 	{
-		if (isUp) {
-			if (e.transform.CompareTag("Player")) {
-				//Buff
-				PlayerController p = e.transform.GetComponent<PlayerController>();
+		Collider[] hitEnemies = Physics.OverlapSphere(transform.position, radius);
 
-				if (!playersBuffed.Contains(p.transform)) {
-
-					p.GetComponent<HPManager>().BuffStats(
-					0.1f,
-					0.1f,
-					0.15f,
-					3f
-					);
-
-					playersBuffed.Add(p.transform);
-					PlayerBuffWaitToGive(p.transform);
-				}
-			}
-		}
-	}
-
-	public void RiseUP()
-	{
-		Collider[] hitEnemies = Physics.OverlapSphere(transform.position, areaOfEffect);
+		vfxSpawn ??= Resources.Load<GameObject>($"Particles/{nameof(BeaconOfHope)}Spawn");
+		Destroy(Instantiate(vfxSpawn, transform), 2f);
 
 		// Check for collision
 		foreach (Collider e in hitEnemies) {
@@ -85,26 +87,9 @@ public class BeaconOfHope : MonoBehaviourPun
 				EnemyForm enemyForm = e.transform.GetComponent<EnemyForm>();
 
 				if (enemyForm != null) {
-					enemyForm.TakeDamage(damageRise);
+					enemyForm.TakeDamage(damageOnSummon);
 				}
 			}
 		}
-
-		isUp = true;
-	}
-
-	private IEnumerator PlayerBuffWaitToGive(Transform player)
-	{
-		// I dont want to keep giving buff inside, just wait for buff cooldown
-		yield return new WaitForSeconds(3f);
-
-		playersBuffed.Remove(player);
-			
-	}
-
-	private IEnumerator DestroyAfterTime(float lifeTime)
-	{
-		yield return new WaitForSeconds(lifeTime);
-		PhotonNetwork.Destroy(gameObject);
 	}
 }

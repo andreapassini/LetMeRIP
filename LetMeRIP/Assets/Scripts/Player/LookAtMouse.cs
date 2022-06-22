@@ -30,7 +30,6 @@ public class LookAtMouse : MonoBehaviourPun
 	private void FixedUpdate()
 	{
         if (!photonView.IsMine || !isEnabled) return;
-        
         Rotate();
 	}
     

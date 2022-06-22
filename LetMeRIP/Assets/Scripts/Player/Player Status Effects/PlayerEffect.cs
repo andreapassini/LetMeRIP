@@ -8,6 +8,7 @@ public class PlayerEffect : MonoBehaviourPun
 {
     public float Duration { get => duration; }
     protected float duration;
+    protected Coroutine effectCoroutine;
 
     protected virtual void Start()
     {
@@ -16,7 +17,7 @@ public class PlayerEffect : MonoBehaviourPun
 
     public virtual void StartEffect()
     {
-        StartCoroutine(Effect(GetComponent<PlayerController>()));
+        effectCoroutine = StartCoroutine(Effect(GetComponent<PlayerController>()));
     }
 
     public virtual IEnumerator Effect(PlayerController characterController) { yield return null; }

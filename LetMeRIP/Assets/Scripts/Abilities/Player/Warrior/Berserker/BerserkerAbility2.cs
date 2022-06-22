@@ -33,6 +33,34 @@ public class BerserkerAbility2 : Ability
         vfx = Resources.Load<GameObject>("Particles/BerserkerAbility2");
     }
 
+    private void OnEnable()
+    {
+        BerserkRebroadcastAnimEvent.ability2 += PerformedAction;
+        BerserkRebroadcastAnimEvent.ability2End += CancelAction;
+    }
+
+    private void OnDisable()
+    {
+        BerserkRebroadcastAnimEvent.ability2 -= PerformedAction;
+        BerserkRebroadcastAnimEvent.ability2End -= CancelAction;
+    }
+
+    public void PerformedAction(Berserker b)
+    {
+        if (characterController == b.GetComponent<PlayerController>())
+        {
+
+        }
+    }
+
+    public void CancelAction(Berserker b)
+    {
+        if (characterController == b.GetComponent<PlayerController>())
+        {
+
+        }
+    }
+
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);

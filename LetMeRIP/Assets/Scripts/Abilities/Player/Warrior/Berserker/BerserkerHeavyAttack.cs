@@ -30,6 +30,34 @@ public class BerserkerHeavyAttack : Ability
         damage = 15 + characterController.stats.strength * 0.3f + characterController.stats.dexterity * 0.3f;
     }
 
+    private void OnEnable()
+    {
+        BerserkRebroadcastAnimEvent.ability2 += PerformedAction;
+        BerserkRebroadcastAnimEvent.ability2End += CancelAction;
+    }
+
+    private void OnDisable()
+    {
+        BerserkRebroadcastAnimEvent.ability2 -= PerformedAction;
+        BerserkRebroadcastAnimEvent.ability2End -= CancelAction;
+    }
+
+    public void PerformedAction(Berserker b)
+    {
+        if (characterController == b.GetComponent<PlayerController>())
+        {
+
+        }
+    }
+
+    public void CancelAction(Berserker b)
+    {
+        if (characterController == b.GetComponent<PlayerController>())
+        {
+
+        }
+    }
+
     public override void StartedAction()
     {
         isReady = false;

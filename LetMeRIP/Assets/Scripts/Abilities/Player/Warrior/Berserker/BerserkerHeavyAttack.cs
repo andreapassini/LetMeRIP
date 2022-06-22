@@ -16,10 +16,17 @@ public class BerserkerHeavyAttack : Ability
     private bool isEnraged = false;
     private Berserker berserker;
 
+    private GameObject prefabSpinEffect;
+    private GameObject vfxCharge;
+
     private void Start()
     {
         cooldown = 4f;
         SPCost = 16f;
+
+        // get the prefabSpinEffect from Resources
+        prefabSpinEffect = Resources.Load<GameObject>("Prefabs/SpinEffect");
+        vfxCharge = Resources.Load<GameObject>($"Particles/{nameof(SpiritHeavyAttack)}Charge2");
     }
 
     public override void Init(PlayerController characterController)
@@ -30,9 +37,26 @@ public class BerserkerHeavyAttack : Ability
         damage = 15 + characterController.stats.strength * 0.3f + characterController.stats.dexterity * 0.3f;
     }
 
+    private void OnEnable()
+    {
+        BerserkRebroadcastAnimEvent.heavyAttack += PerformedAction;
+        BerserkRebroadcastAnimEvent.heavyAttackEnd += CancelAction;
+    }
+
+    private void OnDisable()
+    {
+        BerserkRebroadcastAnimEvent.heavyAttack -= PerformedAction;
+        BerserkRebroadcastAnimEvent.heavyAttackEnd -= CancelAction;
+    }
+
     public override void StartedAction()
     {
         isReady = false;
+        animator.SetTrigger("HeavyAttackCharge");
+        characterController.lam.DisableLookAround();
+        DisableMovement();
+        //DisableActions();
+        StartCoroutine(Charge());
     }
 
     public override void PerformedAction()
@@ -40,16 +64,40 @@ public class BerserkerHeavyAttack : Ability
         //animator.SetTrigger("StartChargeHeavyAttack");
         //animator.SetTrigger("Charge");
         //animator.SetTrigger("HeavyAttack");
-        StartCoroutine(Charge());
-        StartCoroutine(Cooldown());
+        //StartCoroutine(Charge());
+        //StartCoroutine(Cooldown());
+    }
+
+    public void PerformedAction(Berserker b)
+    {
+        if (characterController == b.GetComponent<PlayerController>())
+        {
+            StartCoroutine(Cooldown());
+
+            if (isCharged)
+            {
+                isCharged = false;
+                StartCoroutine(MultipleHits(hits, timeOffset));
+            }
+        }
     }
 
     public override void CancelAction()
     {
-        if (isCharged)
+        //if (isCharged)
+        //{
+        //    isCharged = false;
+        //    StartCoroutine(MultipleHits(hits, timeOffset));
+        //}
+    }
+
+    public void CancelAction(Berserker b)
+    {
+        if (characterController == b.GetComponent<PlayerController>())
         {
-            isCharged = false;
-            StartCoroutine(MultipleHits(hits, timeOffset));
+            EnableActions();
+            EnableMovement();
+            characterController.lam.EnableLookAround();
         }
     }
 
@@ -57,18 +105,29 @@ public class BerserkerHeavyAttack : Ability
     {
         if(!gameObject.TryGetComponent<RagePE>(out RagePE rage))
         {
-            DisableActions();
+            //DisableActions();
+            DisableMovement();
+
+            // Instantiate ChargeEffect
+            vfxCharge ??= Resources.Load<GameObject>($"Particles/{nameof(SpiritHeavyAttack)}Charge2");
+
+            Destroy(Instantiate(vfxCharge, transform), 1.1f);
+
             yield return new WaitForSeconds(timeToCharge);
         }
-        EnableActions();
+        //EnableActions();
 
         isCharged = true;
-        CancelAction();
+        animator.SetTrigger("HeavyAttack");
+        //CancelAction();
     }
 
     private void Hit() 
     {
-        Utilities.SpawnHitSphere(attackRange, transform.position, 3f);
+        //Utilities.SpawnHitSphere(attackRange, transform.position, 3f);
+        prefabSpinEffect ??= Resources.Load<GameObject>("Prefabs/SpinEffect");
+        Destroy(Instantiate(prefabSpinEffect, transform), .5f);
+
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange);
         foreach (Collider enemyHit in hitEnemies)
         {
@@ -84,7 +143,7 @@ public class BerserkerHeavyAttack : Ability
     {
         for(int i = 0; i < amount; i++)
         {
-            // animation here
+            // Instantiate effect here
             Hit();
             yield return new WaitForSeconds(timeOffset);
         }

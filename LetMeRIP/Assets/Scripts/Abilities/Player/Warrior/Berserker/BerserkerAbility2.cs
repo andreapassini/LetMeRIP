@@ -33,6 +33,34 @@ public class BerserkerAbility2 : Ability
         vfx = Resources.Load<GameObject>("Particles/BerserkerAbility2");
     }
 
+    private void OnEnable()
+    {
+        BerserkRebroadcastAnimEvent.ability2 += PerformedAction;
+        BerserkRebroadcastAnimEvent.ability2End += CancelAction;
+    }
+
+    private void OnDisable()
+    {
+        BerserkRebroadcastAnimEvent.ability2 -= PerformedAction;
+        BerserkRebroadcastAnimEvent.ability2End -= CancelAction;
+    }
+
+    public void PerformedAction(Berserker b)
+    {
+        if (characterController == b.GetComponent<PlayerController>())
+        {
+
+        }
+    }
+
+    public void CancelAction(Berserker b)
+    {
+        if (characterController == b.GetComponent<PlayerController>())
+        {
+
+        }
+    }
+
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
@@ -55,7 +83,11 @@ public class BerserkerAbility2 : Ability
         // you can't move while dashing
         if (!direction.Equals(Vector3.zero))
         {
-            playerInputActions.Player.Movement.Disable();
+            //playerInputActions.Player.Movement.Disable();
+            //characterController.lam.DisableLookAround();
+            //DisableMovement();
+            //DisableActions();
+
             currentTime = leapTime;
             isDashing = true;
         } // prevents unresponsive movement if the player tries to dash when standing and moving right after
@@ -63,6 +95,7 @@ public class BerserkerAbility2 : Ability
 
         // dash animation
         animator.SetTrigger("Ability2");
+        StartCoroutine(Cooldown());
     }
 
     /**
@@ -75,7 +108,6 @@ public class BerserkerAbility2 : Ability
         {
             //animator.SetTrigger("Dash");
             StartCoroutine(DashAction());
-            StartCoroutine(Cooldown());
         }
         else
         {
@@ -93,6 +125,9 @@ public class BerserkerAbility2 : Ability
         {
             Hit();
             Debug.Log("Dash finished");
+            EnableMovement();
+            EnableActions();
+            characterController.lam.EnableLookAround();
             playerInputActions.Player.Movement.Enable(); // you can't move while dashing
         }
     }
@@ -102,7 +137,10 @@ public class BerserkerAbility2 : Ability
      */
     private IEnumerator DashAction()
     {
-        DisableActions();
+        characterController.lam.DisableLookAround();
+        DisableMovement();
+        //DisableActions();
+
         while (currentTime > 0)
         {
             if (Physics.Raycast(transform.position + direction * 0.1f, direction, out RaycastHit info, 50f))
@@ -110,7 +148,9 @@ public class BerserkerAbility2 : Ability
                 if (info.collider.CompareTag("Obstacle") && (transform.position - info.transform.position).magnitude < 4f)
                 {
                     isDashing = false;
+                    EnableMovement();
                     EnableActions();
+                    characterController.lam.EnableLookAround();
 
                     CancelAction();
                     yield break;
@@ -120,7 +160,10 @@ public class BerserkerAbility2 : Ability
             rb.MovePosition(transform.position + this.direction * speed * Time.deltaTime);
             yield return new WaitForFixedUpdate();
         }
+
+        EnableMovement();
         EnableActions();
+        characterController.lam.EnableLookAround();
 
         isDashing = false;
         CancelAction();
@@ -147,5 +190,9 @@ public class BerserkerAbility2 : Ability
                 slow.StartEffect();
             }
         }
+
+        EnableMovement();
+        EnableActions();
+        characterController.lam.EnableLookAround();
     }
 }

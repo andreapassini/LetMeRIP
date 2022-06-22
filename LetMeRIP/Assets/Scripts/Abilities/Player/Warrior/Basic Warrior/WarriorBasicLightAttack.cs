@@ -15,6 +15,19 @@ public class WarriorBasicLightAttack : Ability
         cooldown = .86f;
         enemyLayer = LayerMask.NameToLayer("Enemy");
     }
+
+    private void OnEnable()
+    {
+        WarriorBasicRebroadcastAnimEvent.lightAttack += PerformedAction;
+        WarriorBasicRebroadcastAnimEvent.lightAttackEnd += CancelAction;
+    }
+
+    private void OnDisable()
+    {
+        WarriorBasicRebroadcastAnimEvent.lightAttack -= PerformedAction;
+        WarriorBasicRebroadcastAnimEvent.lightAttackEnd -= CancelAction;
+    }
+
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
@@ -27,27 +40,65 @@ public class WarriorBasicLightAttack : Ability
     {
         isReady = false;
         animator.SetTrigger("LightAttack");
+        DisableMovement();
     }
 
     public override void PerformedAction()
     {
-        // Create Collider
-        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange);
-        foreach(Collider enemyHit in hitEnemies)
-        {
-            if (enemyHit.CompareTag("Enemy"))
-            {
-                EnemyForm eform = enemyHit.GetComponent<EnemyForm>();
-                eform.TakeDamage(damage);
-            }
-        }
+        //// Create Collider
+        //Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange);
+        //foreach(Collider enemyHit in hitEnemies)
+        //{
+        //    if (enemyHit.CompareTag("Enemy"))
+        //    {
+        //        EnemyForm eform = enemyHit.GetComponent<EnemyForm>();
+        //        eform.TakeDamage(damage);
+        //    }
+        //}
 
-        StartCoroutine(Cooldown());
+        //StartCoroutine(Cooldown());
     }
+
+    public void PerformedAction(WarriorBasic w)
+    {
+        if(characterController == w.GetComponent<PlayerController>())
+        {
+            // Create Collider
+            Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange);
+            foreach (Collider enemyHit in hitEnemies)
+            {
+                if (enemyHit.CompareTag("Enemy"))
+                {
+                    EnemyForm eform = enemyHit.GetComponent<EnemyForm>();
+                    eform.TakeDamage(damage);
+                }
+            }
+
+            
+
+        }
+        else
+        {
+            Debug.Log("Not me");
+        }
+    }
+
 
     public override void CancelAction()
     {
         /* nothing to see here */
+    }
+
+    public void CancelAction(WarriorBasic w)
+    {
+        if (characterController == w.GetComponent<PlayerController>())
+        {
+            StartCoroutine(Cooldown());
+            EnableMovement();
+        } else
+        {
+            Debug.Log("Not me");
+        }
     }
 
 }

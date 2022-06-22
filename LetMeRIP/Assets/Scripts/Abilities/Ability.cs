@@ -15,6 +15,7 @@ public class Ability : MonoBehaviourPun
     protected bool isReady = true;
     public virtual bool IsReady { get => isReady; }
     protected PlayerController characterController;
+
     // ability instance startup, treat it like an OnEnable, useful to retrieve components instantiated at runtime
     public virtual void Init() { }
     public virtual void Init(PlayerController characterController)

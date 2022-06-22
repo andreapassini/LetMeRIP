@@ -187,6 +187,8 @@ public class EnemyForm : MonoBehaviourPun
     [PunRPC]
     public void RpcTakeDamage(float dmg)
 	{
+        //if (PhotonNetwork.IsMasterClient) return;
+
         animator.SetTrigger("damage");
 
         navMeshAgent.velocity = Vector3.zero;
@@ -296,7 +298,7 @@ public class EnemyForm : MonoBehaviourPun
         stopAI = true;
 	}
 
-    public void RestartAI()
+    public virtual void RestartAI()
 	{
         stopAI = false;
 	}

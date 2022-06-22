@@ -293,4 +293,11 @@ public class EnemyRanged : EnemyForm
 
         Gizmos.DrawWireSphere(transform.position, attackRange);
 	}
+
+    public override void RestartAI()
+    {
+        base.RestartAI();
+
+        fsm.Update();
+    }
 }

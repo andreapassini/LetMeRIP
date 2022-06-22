@@ -23,25 +23,31 @@ public class SimpleAttackAbility : EnemyAbility
 
 	public override void PerformAbility(EnemyForm enemy)
 	{
-        // Create Collider
-        Collider[] hitEnemies = Physics.OverlapSphere(enemy.attackPoint.position, enemy.attackRange);
+        if(this.enemy == enemy)
+        {
+            // Create Collider
+            Collider[] hitEnemies = Physics.OverlapSphere(enemy.attackPoint.position, enemy.attackRange);
 
-        // Check for collision
-        foreach (Collider e in hitEnemies) {
-            if (e.CompareTag("Player")) {
+            // Check for collision
+            foreach (Collider e in hitEnemies)
+            {
+                if (e.CompareTag("Player"))
+                {
 
-                //HPManager hpManager = e.gameObject.GetComponent<PlayerController>().HPManager;
+                    //HPManager hpManager = e.gameObject.GetComponent<PlayerController>().HPManager;
 
 
-                //if (hpManager != null)
-                //{
-                //    Debug.Log("hp manager is not null");
-                //    hpManager.TakeDamage(damage + enemy.enemyStats.attack, enemy.transform.position);
-                //}
-                //else Debug.Log("hpmanager is null!")
+                    //if (hpManager != null)
+                    //{
+                    //    Debug.Log("hp manager is not null");
+                    //    hpManager.TakeDamage(damage + enemy.enemyStats.attack, enemy.transform.position);
+                    //}
+                    //else Debug.Log("hpmanager is null!")
 
-                if(e.transform.TryGetComponent<HPManager>(out HPManager h)) {
-                    h.TakeDamage(damage + enemy.enemyStats.attack, enemy.transform.position);
+                    if (e.transform.TryGetComponent<HPManager>(out HPManager h))
+                    {
+                        h.TakeDamage(damage + enemy.enemyStats.attack, enemy.transform.position);
+                    }
                 }
             }
         }

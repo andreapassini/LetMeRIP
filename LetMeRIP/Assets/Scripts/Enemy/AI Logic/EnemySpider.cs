@@ -43,8 +43,8 @@ public class EnemySpider : EnemyForm
         }        
         
 
-        FSMState search = new FSMState();
-        search.stayActions.Add(Search);
+        //FSMState search = new FSMState();
+        //search.stayActions.Add(Search);
 
         FSMState chase = new FSMState();
         chase.stayActions.Add(Chase);
@@ -63,9 +63,9 @@ public class EnemySpider : EnemyForm
 
         // Search
         //  out: TargetVisible()
-        search.AddTransition(t1, chase);
+        //search.AddTransition(t1, chase);
         //  in: TargetNotVisible()
-        chase.AddTransition(t3, search);
+        //chase.AddTransition(t3, search);
         //      action: GoTo(lastSeenPos)
         // Chase
         //  out: TargetInRange()
@@ -219,4 +219,11 @@ public class EnemySpider : EnemyForm
         target = targets[0].transform;
     }
     #endregion
+
+    public override void RestartAI()
+    {
+        base.RestartAI();
+
+        fsm.Update();
+    }
 }

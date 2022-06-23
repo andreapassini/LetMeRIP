@@ -327,6 +327,7 @@ GameObject:
   - component: {fileID: 8097066376853001090}
   - component: {fileID: 8097066376853001089}
   - component: {fileID: 1235323461}
+  - component: {fileID: 1402040001}
   m_Layer: 11
   m_Name: EnemyBulletJuice
   m_TagString: Enemy
@@ -395,6 +396,25 @@ MonoBehaviour:
   hitDmgEffect: {fileID: 4787146697146794734, guid: e9050f838eb01db44b8958e4d8266866, type: 3}
   destroyAfterTime: 5
   damage: 20
+--- !u!95 &1402040001
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097066376853001092}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bd38c96837f3bcd4faff45bdf89adf05, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &3475487951501244777
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -29,9 +29,8 @@ public abstract class EnemyAbility : ScriptableObject
 
 	public virtual void PerformAbility(EnemyForm enemy)
     {
-		//if (!PhotonNetwork.IsMasterClient) return;
-		enemy.CastAbilityDuration(this);
-		previousAbilityTime = Time.time;
+		// This thing make only one enemy attack
+		previousAbilityTime = Time.time; 
 	}
 
 	public abstract void CancelAbility();

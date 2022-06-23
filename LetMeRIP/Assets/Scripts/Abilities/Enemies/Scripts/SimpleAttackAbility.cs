@@ -73,8 +73,7 @@ public class SimpleAttackAbility : EnemyAbility
         // Look at Target
         enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
 
-        base.PerformAbility(this.enemy);
-
-        enemy.RestartAI();
+        // This thing make only one enemy attack
+        //base.PerformAbility(this.enemy);
     }
 }

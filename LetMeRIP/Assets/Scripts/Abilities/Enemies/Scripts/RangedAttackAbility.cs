@@ -30,8 +30,13 @@ public class RangedAttackAbility : EnemyAbility
 		if (!canShoot)
 			return;
 
-		if(this.enemy == enemy)
+		Debug.Log("This " + this.enemy + " is not this " + enemy); // Not reaching
+
+		if (this.enemy == enemy)
         {
+			Debug.Log("P. 3"); // Not reaching
+
+
 			for (int i = 0; i < numberOfBullets; i++)
 			{
 				enemy.navMeshAgent.velocity = Vector3.zero;
@@ -41,9 +46,11 @@ public class RangedAttackAbility : EnemyAbility
 				// Maybe better to use RigidBody and use Slerp for a smoother rotation
 				enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
 
-
 				// Fire Bullet
 				GameObject bulletFired = Instantiate(bulletPrefab, enemy.attackPoint.position, enemy.attackPoint.rotation);
+
+				Debug.Log("P. 4");
+
 
 				//bulletFired.layer = enemy.gameObject.layer;
 				Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
@@ -72,8 +79,6 @@ public class RangedAttackAbility : EnemyAbility
 		// Look at Target
 		// Maybe better to use RigidBody and use Slerp for a smoother rotation
 		enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
-
-		
 
 		//base.PerformAbility(enemy);
 

@@ -125,6 +125,13 @@ public class EnemyRanged : EnemyForm
     // Target Visible
     public bool TargetVisible()
     {
+        if (target == null)
+        {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            if (targets.Length != 0)
+                target = targets[0].transform;
+        }
+
         Vector3 ray = target.position - transform.position;
         RaycastHit hit;
         if (Physics.Raycast(transform.position, ray, out hit, Mathf.Infinity, ~whatRayHit))
@@ -142,6 +149,13 @@ public class EnemyRanged : EnemyForm
 
     public bool TargetInRange()
     {
+        if (target == null)
+        {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            if (targets.Length != 0)
+                target = targets[0].transform;
+        }
+
         float distance = (target.position - transform.position).magnitude;
         //Debug.Log("Ref " + attackRange + " - " + distance);
         if (distance <= attackRange)
@@ -163,6 +177,13 @@ public class EnemyRanged : EnemyForm
 
     private bool TargetTooNear()
     {
+        if (target == null)
+        {
+            targets = GameObject.FindGameObjectsWithTag(targetTag);
+            if (targets.Length != 0)
+                target = targets[0].transform;
+        }
+
         float distance = (target.position - transform.position).magnitude;
         if (distance <= tooNearRange)
         {

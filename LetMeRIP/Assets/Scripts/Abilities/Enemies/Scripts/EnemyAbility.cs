@@ -43,4 +43,9 @@ public abstract class EnemyAbility : ScriptableObject
 		enemy.rb.rotation = Quaternion.Slerp(enemy.rb.rotation, lookRotation, Time.deltaTime * 20f);
 
 	}
+
+	public override void RestartAI()
+    {
+
+    }
 }

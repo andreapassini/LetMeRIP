@@ -23,7 +23,7 @@ public class SpiritAbility1 : Ability
 
     private void Awake()
     {
-        drainEffect = Resources.Load<GameObject>("Particles/Recharge");
+        drainEffect = Resources.Load<GameObject>("Particles/SpPoolDrainEffect");
     }
 
     public override void Init(PlayerController characterController)

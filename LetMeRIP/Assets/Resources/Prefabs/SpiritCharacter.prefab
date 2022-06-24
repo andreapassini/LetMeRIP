@@ -2564,6 +2564,7 @@ GameObject:
   - component: {fileID: 2888207716991027328}
   - component: {fileID: 2978803929320653202}
   - component: {fileID: 3551788320432185062}
+  - component: {fileID: 5487416208299813144}
   m_Layer: 0
   m_Name: SpiritForm
   m_TagString: Untagged
@@ -2648,6 +2649,18 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
+--- !u!114 &5487416208299813144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2884530941256423480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee53d268a0c68594ebcf7707e57d634d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2884535878310648988
 GameObject:
   m_ObjectHideFlags: 0
@@ -2744,7 +2757,6 @@ GameObject:
   - component: {fileID: 4846996737555478886}
   - component: {fileID: 4846996737555478888}
   - component: {fileID: 4846996737555478889}
-  - component: {fileID: 3130964444350689468}
   - component: {fileID: 2783625197527409681}
   - component: {fileID: -7710990576945519401}
   m_Layer: 3
@@ -2961,22 +2973,6 @@ MonoBehaviour:
   SGManager: {fileID: 0}
   followPoint: {fileID: 4846996737806289074}
   playerManager: {fileID: 0}
---- !u!114 &3130964444350689468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4846996737555478890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!114 &2783625197527409681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2996,7 +2992,6 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 3130964444350689468}
   - {fileID: -7710990576945519401}
   - {fileID: 3551788320432185062}
   sceneViewId: 0

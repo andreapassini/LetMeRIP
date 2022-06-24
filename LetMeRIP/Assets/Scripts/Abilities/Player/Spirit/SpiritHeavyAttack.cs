@@ -22,6 +22,18 @@ public class SpiritHeavyAttack : Ability
         vfxCharge = Resources.Load<GameObject>($"Particles/{nameof(SpiritHeavyAttack)}Charge");
     }
 
+    private void OnEnable()
+    {
+        SpiritFormRebroadcastAnimEvent.heavyAttack += PerformedAction;
+        SpiritFormRebroadcastAnimEvent.heavyAttackEnd += CancelAction;
+    }
+
+    private void OnDisable()
+    {
+        SpiritFormRebroadcastAnimEvent.heavyAttack -= PerformedAction;
+        SpiritFormRebroadcastAnimEvent.heavyAttackEnd -= CancelAction;
+    }
+
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
@@ -33,6 +45,7 @@ public class SpiritHeavyAttack : Ability
     public override void StartedAction()
     {
         isReady = false;
+        StartCoroutine(Cooldown());
     }
 
     public override void PerformedAction()
@@ -43,7 +56,11 @@ public class SpiritHeavyAttack : Ability
         //animator.SetTrigger("StartChargeHeavyAttack");
         //animator.SetTrigger("Charge");
         StartCoroutine(Charge());
-        StartCoroutine(Cooldown());
+    }
+
+    public void PerformedAction(SpiritForm spiritForm)
+    {
+
     }
 
     public override void CancelAction()
@@ -92,6 +109,11 @@ public class SpiritHeavyAttack : Ability
             // enable movement
             //characterController.movement.enabled = true;
         }
+    }
+
+    public void CancelAction(SpiritForm spiritForm)
+    {
+
     }
 
     private IEnumerator Charge()

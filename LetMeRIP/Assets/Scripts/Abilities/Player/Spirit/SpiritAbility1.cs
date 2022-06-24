@@ -8,7 +8,7 @@ public class SpiritAbility1 : Ability
     private Transform attackPoint;
     private Animator animator;
 
-    private float attackRange = 4f;
+    private float attackRange = .5f;
     private float coneAngle = 70; // in degrees
     private Coroutine drainPoolCoroutine;
     private float drainRate = 2f;

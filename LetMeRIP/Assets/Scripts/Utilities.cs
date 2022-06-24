@@ -17,5 +17,14 @@ public class Utilities : MonoBehaviour
         Destroy(hitSphere, timeToLive);
     }
 
+    public static void SpawnHitSphere(float attackRange, Vector3 position, float timeToLive, Transform parent)
+    {
+        GameObject hitSphere = Instantiate(areaIndicator, position, Quaternion.identity);
+        hitSphere.transform.SetParent(parent);
+        hitSphere.transform.localPosition = position;
+        hitSphere.transform.localScale = new Vector3(attackRange, attackRange, attackRange);
+        Destroy(hitSphere, timeToLive);
+    }
+
     public static float DegToRad(float deg) => deg * 0.01745f;
 }

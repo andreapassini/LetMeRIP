@@ -17,10 +17,10 @@ public class ClericHeavyAttack : Ability
     private float maxDamage;
 
     [SerializeField]
-    private float minArea = 2f;
+    private float minArea = 1.8f;
 
     [SerializeField]
-    private float maxArea = 4f;
+    private float maxArea = 2.45f;
 
     private float maxChargeTime = 2.5f;
     private Coroutine chargeCor;
@@ -34,6 +34,7 @@ public class ClericHeavyAttack : Ability
 
     private float timeStep = 0.02f;
     private float sizeMultiplier = 0f;
+    private float maxSizeMultiplier = .75f;
     private Coroutine enlargeCoroutine;
 
     // Start is called before the first frame update
@@ -57,7 +58,6 @@ public class ClericHeavyAttack : Ability
         cooldown = 0.1f;
         SPCost = 0;
 
-
         vfx = Resources.Load<GameObject>("Prefabs/ClericHeavyAttack");
         hammerPrefab = Resources.Load<GameObject>("Prefabs/LightHammer");
     }
@@ -68,10 +68,10 @@ public class ClericHeavyAttack : Ability
         attackPoint = new Vector3(0, 0, 2f);
         animator = GetComponentInChildren<Animator>(false);
 
-        minDamage = (float)(15 + characterController.stats.intelligence * 0.2f +
+        minDamage = (float)(50 + characterController.stats.intelligence * 0.2f +
             0.1 * characterController.stats.strength);
 
-        maxDamage = (float)(40 + characterController.stats.intelligence * 0.3f +
+        maxDamage = (float)(160 + characterController.stats.intelligence * 0.3f +
             0.3 * characterController.stats.strength);
         hammerContainer = Instantiate(new GameObject(), transform);
 
@@ -82,7 +82,7 @@ public class ClericHeavyAttack : Ability
      */
     public override void StartedAction()
     {
-        hammerContainer.transform.localScale = Vector3.one;
+        Debug.Log("Started");
         animator ??= GetComponentInChildren<Animator>(false);
         isReady = false;
         // spawn hammer with visual effect
@@ -93,15 +93,21 @@ public class ClericHeavyAttack : Ability
         hammerInstance.transform.SetParent(hammerContainer.transform);
         hammerAnimator = hammerInstance.GetComponentInChildren<Animator>();
 
+        hammerContainer.transform.localScale = Vector3.one;
+        Debug.Log("enlarge coroutine started");
         enlargeCoroutine = StartCoroutine(Enlarge());
         DisableMovement();
     }
 
     private IEnumerator Enlarge()
     {
-        for (; ; )
+        sizeMultiplier = 0;
+        float currentTime = 0f;
+        while(currentTime <= maxChargeTime) 
         {
-            sizeMultiplier += timeStep;
+            currentTime += timeStep;
+            sizeMultiplier += (maxSizeMultiplier / maxChargeTime )* timeStep;
+            Debug.Log($"Size multiplier {sizeMultiplier}");
             hammerContainer.transform.localScale = Vector3.one * (1 + sizeMultiplier);
             yield return new WaitForSeconds(timeStep);
         }
@@ -120,7 +126,8 @@ public class ClericHeavyAttack : Ability
      */
     public override void CancelAction()
     {
-        StopCoroutine(enlargeCoroutine);
+        if (enlargeCoroutine != null) 
+            StopCoroutine(enlargeCoroutine);
 
         animator.SetTrigger("HeavyAttackCast");
         hammerAnimator.SetTrigger("Release");
@@ -132,13 +139,15 @@ public class ClericHeavyAttack : Ability
     public void HammerDown(Cleric cleric)
 	{
         float difTime = Time.time - startTime;
-        float damage = Mathf.Clamp(minDamage + difTime, minDamage, maxDamage);
-
+        float damage = Mathf.Lerp(minDamage, maxDamage, Mathf.Clamp(difTime, 0, maxChargeTime) / maxChargeTime);
         
         float areaOfImpact = Mathf.Lerp(minArea, maxArea, Mathf.Clamp(difTime, 0, maxChargeTime) / maxChargeTime);
-        Utilities.SpawnHitSphere(areaOfImpact, new Vector3(0, 0, 2f * hammerContainer.transform.localScale.x), 3f);
-        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint, areaOfImpact);
+        attackPoint = new Vector3(0, 0, 2f * hammerContainer.transform.localScale.x);
+       
+        Collider[] hitEnemies = Physics.OverlapSphere(hammerContainer.transform.TransformPoint(attackPoint), areaOfImpact);
+
         foreach (Collider other in hitEnemies) {
+            Debug.Log($"Hit: {other.name}");
             if (other.CompareTag("Enemy") && other.TryGetComponent<EnemyForm>(out EnemyForm enemy)) {
                 enemy.TakeDamage(damage);
             }

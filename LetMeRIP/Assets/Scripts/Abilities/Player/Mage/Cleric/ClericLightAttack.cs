@@ -22,6 +22,7 @@ public class ClericLightAttack : Ability
     // Start is called before the first frame update
     void Start()
     {
+        bulletPrefab = Resources.Load<GameObject>("Prefabs/LightSphere");
         cooldown = 1f;
         SPCost = 4f;
     }
@@ -72,10 +73,9 @@ public class ClericLightAttack : Ability
         if (photonView.GetComponent<Cleric>() != c)
             return;
 
-        GameObject bulletFired = PhotonNetwork.Instantiate("Prefabs/LightSphere", attackPoint.position, attackPoint.rotation);
+        GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
 
         // Fire Bullet
-        bulletFired.layer = gameObject.layer;
         bulletFired.GetComponent<LightSphere>().damage = damage;
         Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
         rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);

@@ -36,7 +36,7 @@ public class SpiritAbility1 : Ability
     public override void StartedAction()
     {
         isReady = false;
-        //animator.SetTrigger("Ability1");
+        animator.SetTrigger("Ability1Start");
     }
 
     public override void PerformedAction()
@@ -75,6 +75,7 @@ public class SpiritAbility1 : Ability
 
     public override void CancelAction()
     {
+        animator.SetTrigger("Ability1End");
         EnableMovement();
         if (drainInstance != null)
         {

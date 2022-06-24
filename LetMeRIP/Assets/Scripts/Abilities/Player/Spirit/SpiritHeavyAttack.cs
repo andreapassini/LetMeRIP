@@ -45,6 +45,7 @@ public class SpiritHeavyAttack : Ability
     public override void StartedAction()
     {
         isReady = false;
+        animator.SetTrigger("HeavyAttackCharge");
         StartCoroutine(Cooldown());
     }
 
@@ -68,7 +69,7 @@ public class SpiritHeavyAttack : Ability
         if (isCharged)
         {
             isCharged = false;
-            //animator.SetTrigger("HeavyAttack");
+            animator.SetTrigger("HeavyAttack");
             float rad = Utilities.DegToRad(coneAngle) * .5f;
 
             Vector3 rbound = new Matrix4x4(
@@ -88,7 +89,7 @@ public class SpiritHeavyAttack : Ability
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange);
             vfx ??= Resources.Load<GameObject>($"Particles/{nameof(SpiritHeavyAttack)}");
             Destroy(Instantiate(vfx, transform.position, transform.rotation), 2f);
-            Utilities.SpawnHitSphere(attackRange, transform.position, 3f);
+            //Utilities.SpawnHitSphere(attackRange, transform.position, 3f);
             foreach (Collider enemyHit in hitEnemies)
             {
                 if (enemyHit.CompareTag("Enemy"))

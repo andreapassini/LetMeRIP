@@ -76,7 +76,7 @@ public class SpiritAbility2 : Ability
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange);
         vfx ??= Resources.Load<GameObject>($"Particles/{nameof(SpiritAbility2)}");
         Destroy(Instantiate(vfx, transform.position, transform.rotation), 2f);
-        Utilities.SpawnHitSphere(attackRange, transform.position, 3f);
+        //Utilities.SpawnHitSphere(attackRange, transform.position, 3f);
         foreach (Collider enemyHit in hitEnemies)
         {
             if (enemyHit.CompareTag("Enemy"))

@@ -15,7 +15,19 @@ public class SpiritLightAttack : Ability
     private void Start()
     {
         cooldown = .8f;
-        bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
+        bulletPrefab = Resources.Load<GameObject>("Prefabs/Juice/PlayerBulletJuice");
+    }
+
+    private void OnEnable()
+    {
+        SpiritFormRebroadcastAnimEvent.lightAttack += PerformedAction;
+        SpiritFormRebroadcastAnimEvent.lightAttackEnd += CancelAction;
+    }
+
+    private void OnDisable()
+    {
+        SpiritFormRebroadcastAnimEvent.lightAttack -= PerformedAction;
+        SpiritFormRebroadcastAnimEvent.lightAttackEnd -= CancelAction;
     }
 
     public override void Init(PlayerController characterController)
@@ -29,19 +41,47 @@ public class SpiritLightAttack : Ability
     public override void StartedAction()
     {
         isReady = false;
-        //animator.SetTrigger("LightAttack");
+        StartCoroutine(Cooldown());
+        animator.SetTrigger("LightAttack");
+
+        DisableMovement();
     }
 
     public override void PerformedAction()
     {
+        //GameObject bullet = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
+        //bullet.GetComponent<Bullet>().damage = damage;
+        //Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+        //bulletRb.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
+
+        //StartCoroutine(Cooldown());
+    }
+
+    public void PerformedAction(SpiritForm spiritForm)
+    {
+        bulletPrefab ??= Resources.Load<GameObject>("Prefabs/Juice/PlayerBulletJuice");
+
+
         GameObject bullet = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
         bullet.GetComponent<Bullet>().damage = damage;
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         bulletRb.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
 
-        StartCoroutine(Cooldown());
+        EnableActions();
+        EnableMovement();
+        characterController.lam.EnableLookAround();
     }
 
-    public override void CancelAction() { }
+    public override void CancelAction() 
+    { 
+
+    }
+
+    public void CancelAction(SpiritForm spiritForm)
+    {
+        EnableActions();
+        EnableMovement();
+        characterController.lam.EnableLookAround();
+    }
 
 }

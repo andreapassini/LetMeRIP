@@ -8,7 +8,7 @@ public class ClericHeavyAttack : Ability
     [SerializeField]
     private Animator animator;
     private Rigidbody rb;
-    private Transform attackPoint;
+    private Vector3 attackPoint;
     private Transform lightDownPoint;
 
     // prevents the cancel action to start too soon
@@ -27,21 +27,45 @@ public class ClericHeavyAttack : Ability
 
     private float startTime;
     private GameObject vfx;
+    private GameObject hammerPrefab;
+    private GameObject hammerInstance;
+    private Animator hammerAnimator;
+    private GameObject hammerContainer;
+
+    private float timeStep = 0.02f;
+    private float sizeMultiplier = 0f;
+    private Coroutine enlargeCoroutine;
+
     // Start is called before the first frame update
+
+    private void OnEnable()
+    {
+        ClericRebroadcastAnimEvent.heavyAttack += HammerDown;
+    }
+
+    private void OnDisable()
+    {
+        ClericRebroadcastAnimEvent.heavyAttack -= HammerDown;
+    }
+
+
     void Start()
     {
-        cooldown = 3.5f;
-        SPCost = 14f;
+        //cooldown = 3.5f;
+        //SPCost = 14f;
 
-        vfx = Resources.Load<GameObject>("Prefabs/LightDown");
+        cooldown = 0.1f;
+        SPCost = 0;
+
+
+        vfx = Resources.Load<GameObject>("Prefabs/ClericHeavyAttack");
+        hammerPrefab = Resources.Load<GameObject>("Prefabs/LightHammer");
     }
 
     public override void Init(PlayerController characterController)
     {
         base.Init(characterController);
-        attackPoint = transform.Find("AttackPoint");
-        lightDownPoint = transform.Find("LightDown");
-        rb = GetComponent<Rigidbody>();
+        attackPoint = new Vector3(0, 0, 2f);
         animator = GetComponentInChildren<Animator>(false);
 
         minDamage = (float)(15 + characterController.stats.intelligence * 0.2f +
@@ -49,6 +73,8 @@ public class ClericHeavyAttack : Ability
 
         maxDamage = (float)(40 + characterController.stats.intelligence * 0.3f +
             0.3 * characterController.stats.strength);
+        hammerContainer = Instantiate(new GameObject(), transform);
+
     }
 
     /**
@@ -56,15 +82,29 @@ public class ClericHeavyAttack : Ability
      */
     public override void StartedAction()
     {
+        hammerContainer.transform.localScale = Vector3.one;
         animator ??= GetComponentInChildren<Animator>(false);
         isReady = false;
-
-        // dash animation
+        // spawn hammer with visual effect
         animator.SetTrigger("HeavyAttackCharge");
 
         startTime = Time.time;
-        //chargeCor = StartCoroutine(ChargeHammer());
+        hammerInstance = Instantiate(hammerPrefab, transform);
+        hammerInstance.transform.SetParent(hammerContainer.transform);
+        hammerAnimator = hammerInstance.GetComponentInChildren<Animator>();
+
+        enlargeCoroutine = StartCoroutine(Enlarge());
         DisableMovement();
+    }
+
+    private IEnumerator Enlarge()
+    {
+        for (; ; )
+        {
+            sizeMultiplier += timeStep;
+            hammerContainer.transform.localScale = Vector3.one * (1 + sizeMultiplier);
+            yield return new WaitForSeconds(timeStep);
+        }
     }
 
     /**
@@ -80,52 +120,33 @@ public class ClericHeavyAttack : Ability
      */
     public override void CancelAction()
     {
-        //StopCoroutine(chargeCor);
+        StopCoroutine(enlargeCoroutine);
+
         animator.SetTrigger("HeavyAttackCast");
-        //HammerDown(); Call this from the animation event
+        hammerAnimator.SetTrigger("Release");
 
         EnableMovement();
         StartCoroutine(Cooldown());
     }
 
-    public void HammerDown()
+    public void HammerDown(Cleric cleric)
 	{
         float difTime = Time.time - startTime;
-
-        // Calculate damage
         float damage = Mathf.Clamp(minDamage + difTime, minDamage, maxDamage);
 
-        // Spawn Particellar effects
-        LightDown lightDown = GetComponentInChildren<LightDown>();
-
-        vfx ??= Resources.Load<GameObject>("Prefabs/LightDown");
-        Instantiate(vfx, transform.position, transform.rotation);
-
-        // Calcolate position
-        Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.y);
-
-        // Create AOE
-        float areaOfImpact = Mathf.Clamp(minArea + difTime, minArea, maxArea);
-
-        // Create Collider
-        Collider[] hitEnemies = Physics.OverlapSphere(pos, areaOfImpact);
-
-        // Check for collision
-        foreach (Collider e in hitEnemies) {
-            if (e.CompareTag("Enemy")) {
-
-                EnemyForm enemyForm = e.transform.GetComponent<EnemyForm>();
-
-                if (enemyForm != null) {
-                    enemyForm.TakeDamage(damage);
-                }
+        
+        float areaOfImpact = Mathf.Lerp(minArea, maxArea, Mathf.Clamp(difTime, 0, maxChargeTime) / maxChargeTime);
+        Utilities.SpawnHitSphere(areaOfImpact, new Vector3(0, 0, 2f * hammerContainer.transform.localScale.x), 3f);
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint, areaOfImpact);
+        foreach (Collider other in hitEnemies) {
+            if (other.CompareTag("Enemy") && other.TryGetComponent<EnemyForm>(out EnemyForm enemy)) {
+                enemy.TakeDamage(damage);
             }
         }
     }
 
- //   private IEnumerator ChargeHammer()
-	//{
- //       yield return new WaitForSeconds(maxChargeTime);
- //       CancelAction();
-	//}
+    private void OnDestroy()
+    {
+        Destroy(hammerContainer);
+    }
 }

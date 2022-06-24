@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightSphere : MonoBehaviourPun
+public class LightSphere : MonoBehaviour
 {
     [SerializeField] GameObject hitDmgEffect;
     [SerializeField] float destroyAfterTime = 5f;
@@ -11,32 +11,21 @@ public class LightSphere : MonoBehaviourPun
 
     void Start()
     {
-        // if is master
-        if(PhotonNetwork.IsMasterClient)
-        StartCoroutine(DestroyBulletAfterTime());
-
-        Physics.IgnoreLayerCollision(9, 9);
+        Destroy(gameObject, destroyAfterTime);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Debug.Log("HIT: " + collision.gameObject.GetComponent<EnemyForm>());
+        if (collision.transform.CompareTag("Enemy"))
+        {
+            EnemyForm enemyHealth = collision.gameObject.GetComponent<EnemyForm>();
 
-        EnemyForm enemyHealth = collision.gameObject.GetComponent<EnemyForm>();
-
-        if (enemyHealth != null) {
-            enemyHealth.TakeDamage(damage);
-            enemyHealth.enemyStats.defense *= 0.1f;
+            if (enemyHealth != null) {
+                enemyHealth.TakeDamage(damage);
+                enemyHealth.enemyStats.defense *= 0.1f;
+            }
         }
 
-        PhotonNetwork.Destroy(photonView);
-        Destroy(gameObject);
-    }
-
-    public IEnumerator DestroyBulletAfterTime()
-    {
-        yield return new WaitForSeconds(destroyAfterTime);
-        PhotonNetwork.Destroy(photonView);
         Destroy(gameObject);
     }
 }

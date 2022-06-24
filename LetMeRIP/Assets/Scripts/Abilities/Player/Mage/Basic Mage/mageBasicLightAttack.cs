@@ -29,6 +29,7 @@ public class mageBasicLightAttack : Ability
     {
         cooldown = 1.2f;
         rb = GetComponent<Rigidbody>();
+        bulletPrefab = Resources.Load<GameObject>("Prefabs/Juice/PlayerBulletJuice");
     }
 
 	private void OnEnable()
@@ -59,8 +60,6 @@ public class mageBasicLightAttack : Ability
      */
     public override void StartedAction()
     {
-        DisableMovement();
-
         animator ??= GetComponentInChildren<Animator>(false);
         isReady = false;
 
@@ -68,6 +67,9 @@ public class mageBasicLightAttack : Ability
         animator.SetTrigger("LightAttack");
 
         isCasting = true;
+        StartCoroutine(Cooldown());
+
+        DisableMovement();
     }
 
     /**
@@ -83,7 +85,7 @@ public class mageBasicLightAttack : Ability
         if(p == m.GetComponent<PlayerController>()) {
             Debug.Log("Casting");
             // Get the prefab
-            GameObject bulletFired = PhotonNetwork.Instantiate("Prefabs/Bullet", attackPoint.position, attackPoint.rotation);
+            GameObject bulletFired = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
 
             // Fire Bullet
             bulletFired.GetComponent<Bullet>().damage = damage;
@@ -93,7 +95,8 @@ public class mageBasicLightAttack : Ability
 
             // isCasting = false;
 
-            RestEnable();
+            EnableActions();
+            EnableMovement();
         }
 
     }
@@ -102,7 +105,6 @@ public class mageBasicLightAttack : Ability
 	{
         
         EnableMovement();
-        StartCoroutine(Cooldown());
 
     }
 

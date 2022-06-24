@@ -37,6 +37,7 @@ public class SpiritAbility1 : Ability
     {
         isReady = false;
         animator.SetTrigger("Ability1Start");
+        characterController.lam.DisableLookAround();
     }
 
     public override void PerformedAction()
@@ -89,6 +90,7 @@ public class SpiritAbility1 : Ability
             isDraining = false;
             if(drainPoolCoroutine != null) StopCoroutine(drainPoolCoroutine);
         }
+        characterController.lam.EnableLookAround();
     }
 
     private IEnumerator DrainPool(SPPool pool)

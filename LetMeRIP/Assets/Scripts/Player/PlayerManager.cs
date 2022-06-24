@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviourPun
 
     private void CreateController()
     {
-        PhotonNetwork.Instantiate(Path.Combine("Prefabs", "MageCharacter"), Vector3.zero, Quaternion.identity);    
+        PhotonNetwork.Instantiate(Path.Combine("Prefabs", "WarriorCharacter"), Vector3.zero, Quaternion.identity);    
     }
 
 

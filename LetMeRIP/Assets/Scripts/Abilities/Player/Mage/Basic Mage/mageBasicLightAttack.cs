@@ -89,7 +89,6 @@ public class mageBasicLightAttack : Ability
 
             // Fire Bullet
             bulletFired.GetComponent<Bullet>().damage = damage;
-            bulletFired.layer = gameObject.layer;
             Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
             rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
 

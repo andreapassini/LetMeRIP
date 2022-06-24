@@ -41,7 +41,7 @@ public class SpiritAbility2 : Ability
         animator.SetTrigger("Ability2");
         StartCoroutine(Cooldown());
 
-        DisableActions();
+        //DisableActions();
         DisableMovement();
         characterController.lam.DisableLookAround();
     }

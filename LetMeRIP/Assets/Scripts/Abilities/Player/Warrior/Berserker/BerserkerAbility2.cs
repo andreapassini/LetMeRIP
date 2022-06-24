@@ -49,7 +49,14 @@ public class BerserkerAbility2 : Ability
     {
         if (characterController == b.GetComponent<PlayerController>())
         {
-
+            if (!isDashing)
+            {
+                Hit();
+                Debug.Log("Dash finished");
+                
+                characterController.lam.EnableLookAround();
+                playerInputActions.Player.Movement.Enable(); // you can't move while dashing
+            }
         }
     }
 
@@ -57,7 +64,8 @@ public class BerserkerAbility2 : Ability
     {
         if (characterController == b.GetComponent<PlayerController>())
         {
-
+            EnableMovement();
+            EnableActions();
         }
     }
 
@@ -96,14 +104,7 @@ public class BerserkerAbility2 : Ability
         // dash animation
         animator.SetTrigger("Ability2");
         StartCoroutine(Cooldown());
-    }
 
-    /**
-     * Starts dashing if the recorded direction is different from 0
-     */
-    public override void PerformedAction()
-    {
-        Debug.Log("Dashing");
         if (isDashing)
         {
             //animator.SetTrigger("Dash");
@@ -117,19 +118,37 @@ public class BerserkerAbility2 : Ability
     }
 
     /**
+     * Starts dashing if the recorded direction is different from 0
+     */
+    public override void PerformedAction()
+    {
+        //Debug.Log("Dashing");
+        //if (isDashing)
+        //{
+        //    //animator.SetTrigger("Dash");
+        //    StartCoroutine(DashAction());
+        //}
+        //else
+        //{
+        //    Debug.Log("Missing direction");
+        //    isReady = true;
+        //}
+    }
+
+    /**
      * if the dash action has finished, ri-enables movement
      */
     public override void CancelAction()
     {
-        if (!isDashing)
-        {
-            Hit();
-            Debug.Log("Dash finished");
-            EnableMovement();
-            EnableActions();
-            characterController.lam.EnableLookAround();
-            playerInputActions.Player.Movement.Enable(); // you can't move while dashing
-        }
+        //if (!isDashing)
+        //{
+        //    Hit();
+        //    Debug.Log("Dash finished");
+        //    EnableMovement();
+        //    EnableActions();
+        //    characterController.lam.EnableLookAround();
+        //    playerInputActions.Player.Movement.Enable(); // you can't move while dashing
+        //}
     }
 
     /**
@@ -166,7 +185,7 @@ public class BerserkerAbility2 : Ability
         characterController.lam.EnableLookAround();
 
         isDashing = false;
-        CancelAction();
+        //CancelAction();
     }
 
     private void Hit()

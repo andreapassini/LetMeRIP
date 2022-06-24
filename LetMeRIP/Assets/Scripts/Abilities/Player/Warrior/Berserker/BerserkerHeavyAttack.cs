@@ -57,6 +57,7 @@ public class BerserkerHeavyAttack : Ability
         DisableMovement();
         //DisableActions();
         StartCoroutine(Charge());
+        StartCoroutine(Cooldown());
     }
 
     public override void PerformedAction()
@@ -72,8 +73,6 @@ public class BerserkerHeavyAttack : Ability
     {
         if (characterController == b.GetComponent<PlayerController>())
         {
-            StartCoroutine(Cooldown());
-
             if (isCharged)
             {
                 isCharged = false;

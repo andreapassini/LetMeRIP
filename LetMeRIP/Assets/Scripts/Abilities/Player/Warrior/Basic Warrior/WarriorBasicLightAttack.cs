@@ -41,6 +41,7 @@ public class WarriorBasicLightAttack : Ability
         isReady = false;
         animator.SetTrigger("LightAttack");
         DisableMovement();
+        StartCoroutine(Cooldown());
     }
 
     public override void PerformedAction()
@@ -93,7 +94,6 @@ public class WarriorBasicLightAttack : Ability
     {
         if (characterController == w.GetComponent<PlayerController>())
         {
-            StartCoroutine(Cooldown());
             EnableMovement();
         } else
         {

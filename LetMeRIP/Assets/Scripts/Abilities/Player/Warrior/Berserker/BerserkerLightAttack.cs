@@ -41,7 +41,7 @@ public class BerserkerLightAttack : Ability
         characterController.lam.EnableLookAround();
         DisableMovement();
         //DisableActions();
-        //StartCoroutine(Cooldown());
+        StartCoroutine(Cooldown());
 
     }
 
@@ -69,7 +69,6 @@ public class BerserkerLightAttack : Ability
     {
         if (characterController == b.GetComponent<PlayerController>())
         {
-            StartCoroutine(Cooldown());
             EnableMovement();
             EnableActions();
             characterController.lam.EnableLookAround();

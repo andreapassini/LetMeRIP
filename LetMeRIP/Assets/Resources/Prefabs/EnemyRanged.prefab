@@ -307,6 +307,7 @@ MonoBehaviour:
   stopAI: 0
   targetTag: Player
   hitEffect: {fileID: 4787146697146794734, guid: e9050f838eb01db44b8958e4d8266866, type: 3}
+  deathEffect: {fileID: 0}
   tooNearRange: 3
   dashAction: {fileID: 11400000, guid: 0a2255bf7ac3c244b89645f338bb3fea, type: 2}
   lateStart: 0
@@ -370,7 +371,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839304754744059133}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
   m_Name: 

@@ -2623,29 +2623,32 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: LightAttack
   - Type: 4
     SynchronizeType: 1
     Name: isRunning
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: Dash
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: HeavyAttack
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: Ability2
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: Ability1Start
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: Ability1Hold
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: Ability1End
+  - Type: 9
+    SynchronizeType: 0
+    Name: HeavyAttackCharge
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0

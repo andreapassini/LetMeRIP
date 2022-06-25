@@ -1124,13 +1124,14 @@ GameObject:
   - component: {fileID: 8189546727674670547}
   - component: {fileID: 8141291026801895651}
   - component: {fileID: 8190014203849727945}
+  - component: {fileID: 3734970330663106954}
   m_Layer: 0
   m_Name: MageBasic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8189546727674670547
 Transform:
   m_ObjectHideFlags: 0
@@ -1200,9 +1201,33 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 1
     Name: Ability2
+  - Type: 4
+    SynchronizeType: 0
+    Name: isRunning
+  - Type: 1
+    SynchronizeType: 0
+    Name: VelocityX
+  - Type: 1
+    SynchronizeType: 0
+    Name: VelocityY
+  - Type: 9
+    SynchronizeType: 0
+    Name: Death
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &3734970330663106954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8191107969833138123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 024446747ad9aec48a85f0af4bfbc675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8191112408283004133
 GameObject:
   m_ObjectHideFlags: 0

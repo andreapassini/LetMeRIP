@@ -20,6 +20,7 @@ public class mageBasicAbility2 : Ability
     private float castTime = 0.5f;
 
     private float startTime;
+    PlayerController p;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,8 @@ public class mageBasicAbility2 : Ability
         base.Init(characterController);
         attackPoint = transform.Find("AttackPoint");
         animator = GetComponentInChildren<Animator>(false);
+
+        p = characterController;
     }
 
     /**
@@ -47,6 +50,8 @@ public class mageBasicAbility2 : Ability
 
         // charge casting animation
         animator.SetTrigger("Ability2");
+
+        prefab = Resources.Load<GameObject>("Prefabs/HealingPoolVampire");
 
         DisableMovement();
 
@@ -73,10 +78,11 @@ public class mageBasicAbility2 : Ability
 	{
         Transform t = transform.Find("pointToSpawn");
 
-        Vector3 v = new Vector3(t.position.x, t.position.y, t.position.z);
+        Vector3 castingPos = GatherDirectionInput();
 
-        GameObject healingPool = PhotonNetwork.Instantiate("Prefabs/HealingPoolVampire", v,
-            attackPoint.rotation);
+        prefab ??= Resources.Load<GameObject>("Prefabs/HealingPoolVampire");
+        
+        GameObject healingPool = Instantiate(prefab, castingPos, Quaternion.identity);
         healingPool.GetComponent<HealingPoolVampire>().Init();
     }
 
@@ -86,5 +92,18 @@ public class mageBasicAbility2 : Ability
         isCasting = false;
 
         StartCoroutine(Cooldown());
+    }
+
+    public Vector3 GatherDirectionInput()
+    {
+        Camera c = FindObjectOfType<Camera>();
+
+        Ray ray = Camera.main.ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>());
+
+        Vector3 position = Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, p.GetComponent<LookAtMouse>().groundMask)
+            ? hitInfo.point
+            : Vector3.zero;
+        position.y = transform.position.y;
+        return position;
     }
 }

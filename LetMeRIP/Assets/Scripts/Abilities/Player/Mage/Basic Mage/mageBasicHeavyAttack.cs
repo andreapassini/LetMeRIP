@@ -53,8 +53,11 @@ public class mageBasicHeavyAttack : Ability
         animator.SetTrigger("HeavyAttackCharge");
 
         isCasting = true;
+        prefab = Resources.Load<GameObject>("Prefabs/BulletTrapassing");
 
         StartCoroutine(CastAction());
+        StartCoroutine(Cooldown());
+
     }
 
     /**
@@ -89,7 +92,7 @@ public class mageBasicHeavyAttack : Ability
         float offsetWork = 0f;
 
         // Get the prefab
-        prefab = Resources.Load<GameObject>("Prefabs/BulletTrapassing");
+        prefab ??= Resources.Load<GameObject>("Prefabs/BulletTrapassing");
 
 		for (int i = 0; i < 5; i++) {
 			// Calcolate angle
@@ -102,7 +105,7 @@ public class mageBasicHeavyAttack : Ability
 			GameObject bulletFired = Instantiate(prefab, v, attackPoint.rotation);
 
 			bulletFired.GetComponent<BulletTrapassing>().damage = damage;
-			bulletFired.layer = gameObject.layer;
+
 			Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
 			rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
         }

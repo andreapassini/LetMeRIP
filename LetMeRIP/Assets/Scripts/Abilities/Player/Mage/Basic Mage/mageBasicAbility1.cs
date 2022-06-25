@@ -10,6 +10,10 @@ public class mageBasicAbility1 : Ability
     private Rigidbody rb;
     private Transform attackPoint;
 
+    private GameObject prefab;
+    private GameObject prefabCharge;
+    private GameObject refPrefabChargeInst;
+
     // prevents the cancel action to start too soon
     private bool isCasting = false;
     private float minDamage;
@@ -33,6 +37,9 @@ public class mageBasicAbility1 : Ability
     {
         cooldown = 5f;
         rb = GetComponent<Rigidbody>();
+
+        prefab = Resources.Load<GameObject>("Particles/LaserCore");
+        prefabCharge = Resources.Load<GameObject>("Particles/mageCharge");
     }
 
     private void OnEnable()
@@ -75,9 +82,11 @@ public class mageBasicAbility1 : Ability
         // charge casting animation
         animator.SetTrigger("Ability1Charge");
 
-        Debug.Log("Casting Ability 1");
+        prefabCharge = Resources.Load<GameObject>("Particles/mageCharge");
+        refPrefabChargeInst = Instantiate(prefabCharge, transform);
 
         DisableMovement();
+        StartCoroutine(Cooldown());
     }
 
     /**
@@ -95,15 +104,14 @@ public class mageBasicAbility1 : Ability
         CastBeam(p.GetComponent<MageBasic>());
 
         // Shoot
+        EnableMovement();
         EnableActions();
         isCasting = false;
-
-
-        StartCoroutine(Cooldown());
     }
 
     private void CastBeam(MageBasic mage)
     {
+        Destroy(refPrefabChargeInst);
         float difTime = Time.time - startTime;
 
         // Trigger Casting animation
@@ -121,9 +129,9 @@ public class mageBasicAbility1 : Ability
         }
 
         // Instantiate Laser
-        //GameObject prefab = Resources.Load<GameObject>("Prefabs/Laser");
+        prefab ??= Resources.Load<GameObject>("Particles/LaserCore");
 
-        PhotonNetwork.Instantiate("Prefabs/LaserBeam", attackPoint.position, attackPoint.rotation);
+        Instantiate(prefab, attackPoint.position, attackPoint.rotation);
 
     }
 

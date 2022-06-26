@@ -40,11 +40,12 @@ public class SpiritLightAttack : Ability
 
     public override void StartedAction()
     {
-        isReady = false;
-        StartCoroutine(Cooldown());
-        animator.SetTrigger("LightAttack");
+        animator.SetTrigger("Act");
+        //isReady = false;
+        //StartCoroutine(Cooldown());
+        //animator.SetTrigger("LightAttack");
 
-        DisableMovement();
+        //DisableMovement();
     }
 
     public override void PerformedAction()

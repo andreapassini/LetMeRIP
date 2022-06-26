@@ -7,7 +7,7 @@ public class PlayerManager : MonoBehaviourPun
     public PlayerController.Stats spiritStats;
     public PlayerController.Stats bodyStats;
 
-    [SerializeField] private string character = "Observer";
+    [SerializeField] private string character = "WarriorCharacter";
 
     private void Awake()
     {

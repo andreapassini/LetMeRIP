@@ -15,11 +15,13 @@ public class SpiritForm : PlayerForm
         SpiritHeavyAttack ha = gameObject.AddComponent<SpiritHeavyAttack>();
         SpiritAbility1 a1 = gameObject.AddComponent<SpiritAbility1>();
         SpiritAbility2 a2 = gameObject.AddComponent<SpiritAbility2>();
+        Act act = gameObject.AddComponent<Act>();
 
         abilities[playerInputActions.Player.LightAttack.name] = la;
         abilities[playerInputActions.Player.HeavyAttack.name] = ha;
         abilities[playerInputActions.Player.Ability1.name] = a1;
         abilities[playerInputActions.Player.Ability2.name] = a2;
+        abilities[playerInputActions.Player.AnimationRise.name] = act;
 
         abilityHandler = gameObject.AddComponent<AbilityHandler>();
         abilityHandler.Init(abilities, characterController);

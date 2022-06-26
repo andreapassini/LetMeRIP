@@ -545,6 +545,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1007646460364817206, guid: 56959a78e281980439bb57218668de89, type: 3}
   m_PrefabInstance: {fileID: 2124907213946112080}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &3591385736602327578
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7952445224496861529}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!114 &1952192546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,6 +654,19 @@ MonoBehaviour:
   useBarkTitlePicker: 1
   useQuestNamePicker: 1
   selectedDatabase: {fileID: 11400000, guid: 6bb7a0c6d6e5cbc4ebeb7eb462aabbdb, type: 2}
+--- !u!65 &5330828589330751788
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7952445224496861529}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.305809, y: 3.414207, z: 4.5467095}
+  m_Center: {x: 0.27896813, y: 1.207103, z: -1.7733563}
 --- !u!1001 &2124907214537570266
 PrefabInstance:
   m_ObjectHideFlags: 0

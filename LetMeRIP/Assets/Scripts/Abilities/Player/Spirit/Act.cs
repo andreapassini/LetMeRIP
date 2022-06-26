@@ -22,6 +22,6 @@ public class Act : Ability
         animator.SetTrigger("Act");
 
         prefab ??= Resources.Load<GameObject>("Particles/SpiritRise");
-        Instantiate(prefab, transform);
+        Instantiate(prefab, transform.parent);
     }
 }

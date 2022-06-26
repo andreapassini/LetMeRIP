@@ -184,21 +184,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c810da61f51aae4d87fe6e1897033ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyStats: {fileID: 11400000, guid: 828a1eaa568f8a54faa250bf80988581, type: 2}
+  enemyStatsSrc: {fileID: 0}
+  enemyStats:
+    enemyName: 
+    health: 0
+    maxHealth: 0
+    attack: 0
+    defense: 0
+    swiftness: 0
+    rewardSp: 0
   attackAction: {fileID: 11400000, guid: 44149625b820b5a4abb30b053e82ff74, type: 2}
   chaseAction: {fileID: 11400000, guid: 11bc26dd1a157a8459c06a21789eda7e, type: 2}
   searchAction: {fileID: 11400000, guid: 2578fd283d54ae24abc0f9d87a44e47d, type: 2}
   AiFrameRate: 0.1
   attackPoint: {fileID: 8607900224844952020}
   attackRange: 3
+  health: 0
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
-  whatICanSeeThrough:
+  whatRayHit:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   animator: {fileID: 8607900224311430714}
+  takeDamageDuration: 2
+  navMeshAgent: {fileID: 0}
+  stopAI: 0
   targetTag: Player
+  hitEffect: {fileID: 0}
+  deathEffect: {fileID: 0}
+  lateStart: 0
 --- !u!1 &8607900224652204166
 GameObject:
   m_ObjectHideFlags: 0

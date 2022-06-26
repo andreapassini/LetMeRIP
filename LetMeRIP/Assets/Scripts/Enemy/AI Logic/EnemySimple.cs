@@ -20,7 +20,7 @@ public class EnemySimple : EnemyForm
         Init();
 
         // Gather Stats
-        health = enemyStats.maxHealth;
+        //health = enemyStats.maxHealth;
         // Debug.Log("Start Health " + health);
 
         rb = GetComponent<Rigidbody>();
@@ -73,7 +73,8 @@ public class EnemySimple : EnemyForm
 
         fsm = new FSM(chase);
 
-        StartCoroutine(Patrol());
+        // Stop AI for Camera
+        //StartCoroutine(Patrol());
     }
 
     private void OnEnable()

@@ -78,7 +78,8 @@ public class EnemySpider : EnemyForm
 
         if (!PhotonNetwork.IsMasterClient) return;
 
-        StartCoroutine(Patrol());
+        // Stop AI for Camera
+        //StartCoroutine(Patrol());
     }
 
     private void OnEnable()

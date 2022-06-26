@@ -7,6 +7,8 @@ public class PlayerManager : MonoBehaviourPun
     public PlayerController.Stats spiritStats;
     public PlayerController.Stats bodyStats;
 
+    private string character = "Observer";
+
     private void Awake()
     {
         spiritStats = new PlayerController.Stats();
@@ -24,7 +26,17 @@ public class PlayerManager : MonoBehaviourPun
 
     private void CreateController()
     {
-        PhotonNetwork.Instantiate(Path.Combine("Prefabs", "MageCharacter"), Vector3.zero, Quaternion.identity);    
+        if (character.Equals("Observer"))
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            CinemachineSwitcher.Instance.SwitchPriority();
+            GameObject.Find("HUD").SetActive(false);
+        } else
+        {
+            PhotonNetwork.Instantiate(Path.Combine("Prefabs", character), Vector3.zero, Quaternion.identity);
+            Destroy(GameObject.Find("ObserverPlayer"));
+        }
     }
 
 

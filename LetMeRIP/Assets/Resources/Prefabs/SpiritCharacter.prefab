@@ -3083,9 +3083,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4846996737555478893}
     m_Modifications:
+    - target: {fileID: 119631937102994741, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 360033064102660984, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_Name
       value: BillboardPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 360033064102660984, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1350043317892239101, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: gradient.ctime0
@@ -3193,19 +3201,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6793709287015700793, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.622
       objectReference: {fileID: 0}
     - target: {fileID: 6793709287015700793, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8392190204735460930, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.614
       objectReference: {fileID: 0}
     - target: {fileID: 8392190204735460930, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}

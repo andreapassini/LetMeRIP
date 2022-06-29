@@ -191,7 +191,7 @@ public class BerserkerAbility2 : Ability
     private void Hit()
     {
         vfx ??= Resources.Load<GameObject>("Particles/BerserkerAbility2");
-        Destroy(Instantiate(vfx, transform.position, Quaternion.identity), 2f);
+        Destroy(Instantiate(vfx, transform.position - new Vector3(0, 0.5f, 0), Quaternion.identity), 2f);
 
         //Utilities.SpawnHitSphere(attackRange, transform.position, 3f);
 

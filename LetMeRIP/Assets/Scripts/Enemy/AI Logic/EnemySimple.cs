@@ -74,7 +74,7 @@ public class EnemySimple : EnemyForm
         fsm = new FSM(chase);
 
         // Stop AI for Camera
-        //StartCoroutine(Patrol());
+        StartCoroutine(Patrol());
     }
 
     private void OnEnable()

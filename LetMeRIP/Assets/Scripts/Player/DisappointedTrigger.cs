@@ -1,26 +1,36 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class DisappointedTrigger : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] InputAction action;
+    [SerializeField] InputAction enterDisappointed;
+    [SerializeField] InputAction exitDisappointed;
 
     private void OnEnable()
     {
-        action.Enable();
+        enterDisappointed.Enable();
+        exitDisappointed.Enable();
     }
 
     private void OnDisable()
     {
-        action.Disable();
+        enterDisappointed.Disable();
+        exitDisappointed.Disable();
     }
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        action.performed += _ => DisappointedAction();
+        enterDisappointed.performed += _ => DisappointedAction();
+        exitDisappointed.performed += _ => ExitDisappointedAction();
         GetComponent<FormManager>().OnFormChanged += _ => RefreshAnimator();
+    }
+
+    private void ExitDisappointedAction()
+    {
+        animator.SetTrigger("Disappointed");
     }
 
     private void DisappointedAction()
@@ -32,6 +42,6 @@ public class DisappointedTrigger : MonoBehaviour
     [ContextMenu("Refresh animator")]
     public void RefreshAnimator()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 }

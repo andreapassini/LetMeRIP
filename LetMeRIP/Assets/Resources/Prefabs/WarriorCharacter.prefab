@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 8962096826416829948}
   - component: {fileID: 4379680379420823532}
   - component: {fileID: -6299029709340786098}
+  - component: {fileID: 1683830288458140781}
   m_Layer: 7
   m_Name: WarriorCharacter
   m_TagString: Player
@@ -418,6 +419,53 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1683830288458140781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854728853611677831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fccca52a5ed66c74b94b783ba3651b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  enterDisappointed:
+    m_Name: Enter Disappointed
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6eb55d80-f956-4065-bd70-4266179609e5
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 18602f1a-239b-4f84-bd6b-756257339695
+      m_Path: <Keyboard>/o
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Enter Disappointed
+      m_Flags: 0
+    m_Flags: 0
+  exitDisappointed:
+    m_Name: Exit Disappointed
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 2af5ea27-0bba-49bf-ae56-23b78b6ff5e7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 713a34d8-fd2c-4175-945b-1d0bca08e4ac
+      m_Path: <Keyboard>/i
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Exit Disappointed
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1001 &450325488437670882
 PrefabInstance:
   m_ObjectHideFlags: 0

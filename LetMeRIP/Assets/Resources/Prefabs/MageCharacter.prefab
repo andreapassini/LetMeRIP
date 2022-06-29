@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5658010000004687132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.08, y: 0.02, z: 1.63}
+  m_LocalPosition: {x: 0, y: 0, z: 1.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5658010001665344123}
@@ -641,6 +641,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MageBasic
       objectReference: {fileID: 0}
+    - target: {fileID: 8191107969833138123, guid: 73333dae40f517342ae8e439cf7eecf2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73333dae40f517342ae8e439cf7eecf2, type: 3}
 --- !u!4 &6749038218511601059 stripped
@@ -1021,6 +1025,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BillboardPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 360033064102660984, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3217856679875056004, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 85.8
@@ -1147,19 +1155,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6793709287015700793, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.622
       objectReference: {fileID: 0}
     - target: {fileID: 6793709287015700793, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8392190204735460930, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.614
       objectReference: {fileID: 0}
     - target: {fileID: 8392190204735460930, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}

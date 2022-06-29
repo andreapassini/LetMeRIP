@@ -120,18 +120,18 @@ public class mageBasicAbility1 : Ability
         // Damage
         float damage = Mathf.Clamp(minDamage + difTime, minDamage, maxDamage);
 
-        RaycastHit hit;
+        RaycastHit[] hits = Physics.RaycastAll(attackPoint.position, attackPoint.position - transform.position, 1000);
         // Cast beam
-        if (Physics.Raycast(attackPoint.position, attackPoint.forward, out hit, 1000)) {
-            if (hit.transform.tag == "Enemy") {
+        foreach(RaycastHit hit in hits)
+        {
+            if (hit.transform.CompareTag("Enemy"))
                 hit.transform.GetComponent<EnemyForm>().TakeDamage(damage);
-            }
         }
 
         // Instantiate Laser
         prefab ??= Resources.Load<GameObject>("Particles/LaserCore");
 
-        Instantiate(prefab, attackPoint.position, attackPoint.rotation);
+        Destroy(Instantiate(prefab, attackPoint.position, attackPoint.rotation), 3.5f);
 
     }
 

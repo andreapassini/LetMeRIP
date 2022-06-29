@@ -32,6 +32,15 @@ public class FormManager : MonoBehaviourPun
         get => isOut;
     }
 
+    private GameObject absorbSpiritVfx;
+    private GameObject expelSpiritVfx;
+
+    private void Start()
+    {
+        absorbSpiritVfx = Resources.Load<GameObject>("Particles/AbsorbSpirit");
+        expelSpiritVfx = Resources.Load<GameObject>("Particles/ExpelSpirit");
+    }
+
     public virtual void Init(PlayerController characterController)
     {
         this.characterController = characterController;
@@ -267,6 +276,10 @@ public class FormManager : MonoBehaviourPun
         PlayerController myBody = PhotonView.Find(bodyViewId).GetComponent<PlayerController>();
         if (myBody == null) return; // body not found, abort
         myBody.Init();
+
+        Destroy(Instantiate(expelSpiritVfx, transform.position, transform.rotation), 2f);
+        Destroy(Instantiate(absorbSpiritVfx, myBody.transform), 2f);
+
         myBody.formManager.OnFormChanged?.Invoke(myBody.formManager);
         characterController.playerManager.bodyStats.spiritGauge = characterController.SGManager.SpiritGauge; // transfer new value of sg
 

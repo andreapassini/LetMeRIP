@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using System.Collections.Generic;
 
 public class CinemachineSwitcher : MonoBehaviour
 {
@@ -13,19 +14,14 @@ public class CinemachineSwitcher : MonoBehaviour
     [SerializeField]
     InputAction action;
     [SerializeField]
-    private CinemachineVirtualCamera vcam1; // observer
-    [SerializeField]
-    private CinemachineVirtualCamera vcam2; // player
-
-    private Animator animator;
-    private bool observerCamera = false;
-    
+    private List<CinemachineVirtualCamera> vcams;
+    private int currentCamera = 0;  // 0 player
+                                    // 1 observer perspective
+                                    // 2 observer orthographic
     private void Awake()
     {
         if (instance != null && instance != this) Destroy(this.gameObject);
         else instance = this;
-
-        animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -40,38 +36,22 @@ public class CinemachineSwitcher : MonoBehaviour
 
     private void Start()
     {
-        action.performed += _ => SwitchPriority();
+        action.performed += _ => SwitchState();
     }
 
     private void SwitchState()
     {
-        Camera.main.orthographic = !Camera.main.orthographic;
-        observerCamera = !observerCamera;
-
-        if (observerCamera) 
-        {
-            animator.Play("Observer");
-        }
-        else
-        {
-            animator.Play("Player");
-        }
+        SetState((currentCamera + 1) % vcams.Count);
     }
 
-    public void SwitchPriority()
+    public void SetState(int state)
     {
-        Camera.main.orthographic = !Camera.main.orthographic;
-        observerCamera = !observerCamera;
+        currentCamera = state;
 
-        if (observerCamera)
-        {
-            vcam1.Priority = 1;
-            vcam2.Priority = 0;
-        }
-        else
-        {
-            vcam1.Priority = 0;
-            vcam2.Priority = 1;
-        }
+        if (currentCamera == 0 || currentCamera ==  2) Camera.main.orthographic = true;
+        else Camera.main.orthographic = false;
+
+        vcams.ForEach(vcam => vcam.Priority = 0);
+        vcams[currentCamera].Priority = 1;
     }
 }

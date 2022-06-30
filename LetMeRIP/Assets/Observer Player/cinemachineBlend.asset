@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CustomBlends:
   - m_From: PlayerCamera
-    m_To: ObserverCamera
+    m_To: ObserverPerspectiveCamera
     m_Blend:
       m_Style: 4
       m_Time: 1
@@ -24,10 +24,21 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: ObserverCamera
-    m_To: PlayerCamera
+  - m_From: ObserverPerspectiveCamera
+    m_To: ObserverIsometricCamera
     m_Blend:
       m_Style: 5
+      m_Time: 1
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: ObserverIsometricCamera
+    m_To: PlayerCamera
+    m_Blend:
+      m_Style: 3
       m_Time: 1
       m_CustomCurve:
         serializedVersion: 2

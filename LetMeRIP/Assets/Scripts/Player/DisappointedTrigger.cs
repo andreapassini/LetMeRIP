@@ -35,7 +35,7 @@ public class DisappointedTrigger : MonoBehaviour
 
     private void DisappointedAction()
     {
-        if (animator != null) animator.Play("Disappointed");
+        if (animator != null) animator.SetTrigger("DisappointedEnter");
         else Debug.LogError("Disappointed action failed, animator is null");
     }
 

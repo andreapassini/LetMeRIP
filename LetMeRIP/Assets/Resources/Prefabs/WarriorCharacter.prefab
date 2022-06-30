@@ -673,7 +673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7151514847598013931, guid: 831ba05a7be732845a0aaec848e194ca, type: 3}
       propertyPath: m_SynchronizeParameters.Array.size
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7151514847598013931, guid: 831ba05a7be732845a0aaec848e194ca, type: 3}
       propertyPath: m_SynchronizeParameters.Array.data[6].Name
@@ -681,6 +681,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7151514847598013931, guid: 831ba05a7be732845a0aaec848e194ca, type: 3}
       propertyPath: m_SynchronizeParameters.Array.data[6].Type
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151514847598013931, guid: 831ba05a7be732845a0aaec848e194ca, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[7].Name
+      value: Disappointed
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151514847598013931, guid: 831ba05a7be732845a0aaec848e194ca, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[7].Type
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151514847598013931, guid: 831ba05a7be732845a0aaec848e194ca, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[8].Name
+      value: DisappointedEnter
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151514847598013931, guid: 831ba05a7be732845a0aaec848e194ca, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[8].Type
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7151514847598013931, guid: 831ba05a7be732845a0aaec848e194ca, type: 3}
@@ -701,11 +717,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7151514847598013931, guid: 831ba05a7be732845a0aaec848e194ca, type: 3}
       propertyPath: m_SynchronizeParameters.Array.data[4].SynchronizeType
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7151514847598013931, guid: 831ba05a7be732845a0aaec848e194ca, type: 3}
       propertyPath: m_SynchronizeParameters.Array.data[5].SynchronizeType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151514847598013931, guid: 831ba05a7be732845a0aaec848e194ca, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[7].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151514847598013931, guid: 831ba05a7be732845a0aaec848e194ca, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[8].SynchronizeType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 831ba05a7be732845a0aaec848e194ca, type: 3}

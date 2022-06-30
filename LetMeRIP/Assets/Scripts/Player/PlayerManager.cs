@@ -34,6 +34,7 @@ public class PlayerManager : MonoBehaviourPun
             GameObject.Find("HUD").SetActive(false);
         } else
         {
+            CinemachineSwitcher.Instance.SetState(0);
             PhotonNetwork.Instantiate(Path.Combine("Prefabs", character), Vector3.zero, Quaternion.identity);
             Destroy(GameObject.Find("ObserverPlayer"));
         }

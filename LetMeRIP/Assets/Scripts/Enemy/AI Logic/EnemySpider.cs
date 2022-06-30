@@ -23,7 +23,7 @@ public class EnemySpider : EnemyForm
         Init();
 
         // Gather Stats
-        health = enemyStats.maxHealth;
+        //health = enemyStats.maxHealth;
         // Debug.Log("Start Health " + health);
 
         rb = transform.GetComponent<Rigidbody>();

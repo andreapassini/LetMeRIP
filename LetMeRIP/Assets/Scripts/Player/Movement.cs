@@ -68,7 +68,7 @@ public class Movement : MonoBehaviourPun, IPunObservable
         // Prediction in Fixed Update
         if (!photonView.IsMine) {
 
-            rb.MovePosition(Vector3.Lerp(rb.position, networkPosition, Time.fixedDeltaTime));
+            rb.MovePosition(Vector3.Lerp(rb.position, networkPosition, Time.fixedDeltaTime * 100f));
             rb.MoveRotation(Quaternion.Lerp(rb.rotation, networkRotation, Time.fixedDeltaTime * 100.0f));
 
             //rb.position = Vector3.MoveTowards(rb.position, networkPosition, Time.fixedDeltaTime);

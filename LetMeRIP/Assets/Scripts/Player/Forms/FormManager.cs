@@ -262,9 +262,12 @@ public class FormManager : MonoBehaviourPun
             if (playerHit.CompareTag("Player"))
             {
                 PlayerController pc = playerHit.GetComponent<PlayerController>();
-                if (!pc.photonView.IsMine || pc.formManager.isSpirit) continue;
-                photonView.RPC("RpcAssignBodyToEnter", RpcTarget.All, pc.photonView.ViewID);
-                break;
+                Debug.Log($"{pc.name} is mine: {pc.IsMine}");
+                if (pc.photonView.IsMine && pc.gameObject != gameObject)
+                {
+                    photonView.RPC("RpcAssignBodyToEnter", RpcTarget.All, pc.photonView.ViewID);
+                    break;
+                }
             }
         }
         

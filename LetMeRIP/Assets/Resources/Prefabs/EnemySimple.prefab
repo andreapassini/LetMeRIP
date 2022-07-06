@@ -747,7 +747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3905508844711230769, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3905508844711230769, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
       propertyPath: m_SynchronizeParameters.Array.size
@@ -760,6 +760,26 @@ PrefabInstance:
     - target: {fileID: 3905508844711230769, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
       propertyPath: m_SynchronizeParameters.Array.data[4].Type
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905508844711230769, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[0].SynchronizeType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905508844711230769, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[1].SynchronizeType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905508844711230769, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[2].SynchronizeType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905508844711230769, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[3].SynchronizeType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905508844711230769, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[4].SynchronizeType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3939930171311101740, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
       propertyPath: m_LocalPosition.x

@@ -30,8 +30,8 @@ public class RangedAttackAbility : EnemyAbility
 		//if (!canShoot)
 		//	return;
 
-		//if (this.enemy != enemy)
-		//	return;
+		if (this.enemy != enemy)
+			return;
 		
 		for (int i = 0; i < numberOfBullets; i++)
 		{

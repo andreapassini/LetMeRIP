@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviourPun
         bodyStats = new PlayerController.Stats();
         spiritStats.formName = "";
         bodyStats.formName = "";
-
+        character = ClassSelector.Instance.SelectedClass.ToString();
     }
 
     private void Start()
@@ -26,7 +26,7 @@ public class PlayerManager : MonoBehaviourPun
 
     private void CreateController()
     {
-        if (character.Equals("Observer"))
+        if (character.ToLower().Equals("observer"))
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -35,7 +35,7 @@ public class PlayerManager : MonoBehaviourPun
         } else
         {
             CinemachineSwitcher.Instance.SetState(0);
-            PhotonNetwork.Instantiate(Path.Combine("Prefabs", character), Vector3.zero, Quaternion.identity);
+            PhotonNetwork.Instantiate(Path.Combine("Prefabs", $"{character}Character"), Vector3.zero, Quaternion.identity);
             Destroy(GameObject.Find("ObserverPlayer"));
         }
     }

@@ -55,4 +55,9 @@ public class MenuManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void SelectClass(int playerClass)
+    {
+        ClassSelector.Instance.ChangeClass(playerClass);
+    }
 }

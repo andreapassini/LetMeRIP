@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 7782176274613503255}
   - component: {fileID: 3253883247923010639}
   m_Layer: 7
-  m_Name: MageCharacter
+  m_Name: mageCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1027,7 +1027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 360033064102660984, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3217856679875056004, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1155,19 +1155,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6793709287015700793, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.622
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6793709287015700793, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8392190204735460930, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.614
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8392190204735460930, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7952526cc939c8d4bacbfeedd722d800, type: 3}

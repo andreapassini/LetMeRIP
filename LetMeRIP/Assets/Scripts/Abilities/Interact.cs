@@ -26,7 +26,7 @@ public class Interact : Ability
 
     public override void PerformedAction()
     {
-        Utilities.SpawnHitSphere(range, direction.position, 3f);
+        //Utilities.SpawnHitSphere(range, direction.position, 3f);
 
         Collider[] hits = Physics.OverlapSphere(direction.position, range);
         foreach (Collider hit in hits)

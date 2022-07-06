@@ -71,6 +71,9 @@ public class Movement : MonoBehaviourPun, IPunObservable
             rb.MovePosition(Vector3.Lerp(rb.position, networkPosition, Time.fixedDeltaTime * 100f));
             rb.MoveRotation(Quaternion.Lerp(rb.rotation, networkRotation, Time.fixedDeltaTime * 100.0f));
 
+            //rb.position = Vector3.Lerp(rb.position, networkPosition, Time.fixedDeltaTime * 100f);
+            //rb.rotation = Quaternion.Lerp(rb.rotation, networkRotation, Time.fixedDeltaTime * 100.0f);
+
             //rb.position = Vector3.MoveTowards(rb.position, networkPosition, Time.fixedDeltaTime);
             //rb.rotation = Quaternion.RotateTowards(rb.rotation, networkRotation, Time.fixedDeltaTime * 100.0f);
         }

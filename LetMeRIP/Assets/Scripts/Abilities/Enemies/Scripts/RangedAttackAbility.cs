@@ -27,28 +27,28 @@ public class RangedAttackAbility : EnemyAbility
 
 	public override void PerformAbility(EnemyForm enemy)
 	{
-		if (!canShoot)
-			return;
+		//if (!canShoot)
+		//	return;
 
-		if(this.enemy == enemy)
-        {
-			for (int i = 0; i < numberOfBullets; i++)
-			{
-				enemy.navMeshAgent.velocity = Vector3.zero;
-				//enemy.navMeshAgent.isStopped = true;
+		//if (this.enemy != enemy)
+		//	return;
+		
+		for (int i = 0; i < numberOfBullets; i++)
+		{
+			enemy.navMeshAgent.velocity = Vector3.zero;
+			//enemy.navMeshAgent.isStopped = true;
 
-				// Look at Target
-				// Maybe better to use RigidBody and use Slerp for a smoother rotation
-				enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
+			// Look at Target
+			// Maybe better to use RigidBody and use Slerp for a smoother rotation
+			enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
 
 
-				// Fire Bullet
-				GameObject bulletFired = Instantiate(bulletPrefab, enemy.attackPoint.position, enemy.attackPoint.rotation);
+			// Fire Bullet
+			GameObject bulletFired = Instantiate(bulletPrefab, enemy.attackPoint.position, enemy.attackPoint.rotation);
 
-				//bulletFired.layer = enemy.gameObject.layer;
-				Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
-				rbBullet.AddForce(enemy.attackPoint.forward * bulletForce, ForceMode.Impulse);
-			}
+			//bulletFired.layer = enemy.gameObject.layer;
+			Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
+			rbBullet.AddForce(enemy.attackPoint.forward * bulletForce, ForceMode.Impulse);
 		}
 
 		enemy.RestartAI();
@@ -58,13 +58,15 @@ public class RangedAttackAbility : EnemyAbility
 	{
 		base.StartAbility(enemy);
 
-		if (previousAbilityTime + coolDown > Time.time)
-		{
-			canShoot = false;
-		} else {
-			canShoot = true;
-			enemy.animator.SetTrigger("attack");
-		}
+		//if (previousAbilityTime + coolDown > Time.time)
+		//{
+		//	canShoot = false;
+		//} else {
+		//	canShoot = true;
+		//	enemy.animator.SetTrigger("attack");
+		//}
+
+		enemy.animator.SetTrigger("attack");
 
 		enemy.navMeshAgent.velocity = Vector3.zero;
 		//enemy.navMeshAgent.isStopped = true;

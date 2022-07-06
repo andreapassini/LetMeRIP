@@ -13,9 +13,7 @@ public class EnemyBullet : MonoBehaviour
 
     void Start()
     {
-        if (PhotonNetwork.IsConnected && PhotonNetwork.IsMasterClient)
-            StartCoroutine(DestroyBulletAfterTime());
-        else Destroy(gameObject, destroyAfterTime);
+        Destroy(gameObject, destroyAfterTime);
     }
 
     private void OnCollisionEnter(Collision collision)

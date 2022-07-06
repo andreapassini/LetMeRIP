@@ -104,7 +104,7 @@ public class EnemyRanged : EnemyForm
         //// out: TargetTargetNotTooNear()
         escape.AddTransition(t6, attack);
 
-        fsm = new FSM(attack);
+        fsm = new FSM(search);
 
         fightFSM = new FSM(chase);
 

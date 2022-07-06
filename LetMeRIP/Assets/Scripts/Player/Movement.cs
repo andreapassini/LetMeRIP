@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Movement : MonoBehaviourPun
+public class Movement : MonoBehaviourPun, IPunObservable
 {
 	private Rigidbody rb;
     private Vector3 direction;
@@ -13,8 +13,10 @@ public class Movement : MonoBehaviourPun
     public Animator animator;
     private PlayerController characterController;
     FormManager formManager;
+	private Vector3 networkPosition;
+	private Quaternion networkRotation;
 
-    private void Start()
+	private void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>(false);
@@ -41,10 +43,37 @@ public class Movement : MonoBehaviourPun
         
 	}
 
-	private void FixedUpdate()
+    // We can also store the results of this and apply those in FixedUpdate
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting) {
+            stream.SendNext(this.rb.position);
+            stream.SendNext(this.rb.rotation);
+            stream.SendNext(this.rb.velocity);
+        } else {
+            networkPosition = (Vector3)stream.ReceiveNext();
+            networkRotation = (Quaternion)stream.ReceiveNext();
+            rb.velocity = (Vector3)stream.ReceiveNext();
+
+            float lag = Mathf.Abs((float)(PhotonNetwork.Time - info.timestamp));
+            networkPosition += (this.rb.velocity * lag);
+        }
+    }
+
+    private void FixedUpdate()
     {
         if (!photonView.IsMine) return;
         Move();
+
+        // Prediction in Fixed Update
+        if (!photonView.IsMine) {
+
+            rb.MovePosition(Vector3.Lerp(rb.position, networkPosition, Time.fixedDeltaTime));
+            rb.MoveRotation(Quaternion.Lerp(rb.rotation, networkRotation, Time.fixedDeltaTime * 100.0f));
+
+            //rb.position = Vector3.MoveTowards(rb.position, networkPosition, Time.fixedDeltaTime);
+            //rb.rotation = Quaternion.RotateTowards(rb.rotation, networkRotation, Time.fixedDeltaTime * 100.0f);
+        }
     }
 
     public void GatherInputs()

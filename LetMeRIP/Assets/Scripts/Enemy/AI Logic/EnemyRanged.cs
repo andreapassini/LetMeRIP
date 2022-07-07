@@ -300,4 +300,11 @@ public class EnemyRanged : EnemyForm
 
         fsm.Update();
     }
+
+    public override void OnAttack()
+	{
+        base.OnAttack();
+        StartCoroutine(waitToShoot(.05f, attackAction));
+    }
+
 }

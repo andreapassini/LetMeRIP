@@ -106,9 +106,8 @@ public class EnemyForm : MonoBehaviourPun
     }
     // This method will cast an event when Attack Anim. Event is cast
     // Cause anim events are only related to the object attached to the animator
-    public void OnAttack()
+    public virtual void OnAttack()
     {
-        StartCoroutine(waitToShoot(.05f, attackAction));
         Debug.Log("On Attack called " + this);
         OnEnemyAttack?.Invoke(this);
     }

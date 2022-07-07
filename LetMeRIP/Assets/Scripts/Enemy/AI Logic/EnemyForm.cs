@@ -108,6 +108,8 @@ public class EnemyForm : MonoBehaviourPun
     // Cause anim events are only related to the object attached to the animator
     public void OnAttack()
     {
+        StartCoroutine(waitToShoot(.05f, attackAction));
+        Debug.Log("On Attack called " + this);
         OnEnemyAttack?.Invoke(this);
     }
 
@@ -327,4 +329,10 @@ public class EnemyForm : MonoBehaviourPun
         Destroy(a, 3f);
     }
 
+    public IEnumerator waitToShoot(float time, EnemyAbility rangedAbility)
+	{
+		yield return new WaitForSeconds(time);
+
+        rangedAbility.PerformAbility(this);
+	}
 }

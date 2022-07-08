@@ -33,13 +33,13 @@ public class HPManager : MonoBehaviourPun, IOnPhotonViewPreNetDestroy
     public void Heal(float amount, bool overHeal = false)
     {
         if (PhotonNetwork.IsMasterClient && amount > 0)
-            photonView.RPC("RpcHeal", RpcTarget.All, amount, overHeal);
+            photonView.RPC(nameof(RpcHeal), RpcTarget.All, amount, overHeal);
     }
 
     public void DecayingHeal(float amount, float timeToDecay)
     {
         if (PhotonNetwork.IsMasterClient && amount > 0)
-            photonView.RPC("RpcDecayingHeal", RpcTarget.All, amount, timeToDecay);
+            photonView.RPC(nameof(RpcDecayingHeal), RpcTarget.All, amount, timeToDecay);
     }
 
     private IEnumerator DecayingHealCo(float amount, float timeToDecay)
@@ -127,14 +127,8 @@ public class HPManager : MonoBehaviourPun, IOnPhotonViewPreNetDestroy
 
         if (!formManager.IsSpirit)
         {
-            //GameObject model = formManager.currentForm.formModelPrefab;
-            //model.GetComponent<PhotonAnimatorView>().enabled = false;
-            //model.transform.SetParent(transform.parent);
-            if (photonView.IsMine)
-            {
-                if (!formManager.IsOut) formManager.ToggleSpiritForm();
-            }
-
+            if (photonView.IsMine && !formManager.IsOut)
+                formManager.ToggleSpiritForm();
             OnPlayerKilled?.Invoke(characterController);
         }
         else if (photonView.IsMine)
@@ -154,7 +148,7 @@ public class HPManager : MonoBehaviourPun, IOnPhotonViewPreNetDestroy
     {
         if (photonView.IsMine)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(.2f);
             //any vfx
             PhotonNetwork.Destroy(gameObject);
         }

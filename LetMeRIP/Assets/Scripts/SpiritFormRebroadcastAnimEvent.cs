@@ -17,7 +17,6 @@ public class SpiritFormRebroadcastAnimEvent : MonoBehaviour
 
     public static event Action<SpiritForm> ability2;
     public static event Action<SpiritForm> ability2End;
-    public static event Action<SpiritForm> death;
 
     SpiritForm spiritForm;
 
@@ -65,10 +64,5 @@ public class SpiritFormRebroadcastAnimEvent : MonoBehaviour
     public void OnAbility2End()
     {
         ability2End?.Invoke(spiritForm);
-    }
-
-    public void OnDeath()
-    {
-        death?.Invoke(spiritForm);
     }
 }

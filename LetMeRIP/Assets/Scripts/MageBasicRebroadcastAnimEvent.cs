@@ -10,7 +10,6 @@ public class MageBasicRebroadcastAnimEvent : MonoBehaviour
     public static event Action<MageBasic> heavyAttack;
     public static event Action<MageBasic> ability1;
     public static event Action<MageBasic> ability2;
-    public static event Action<MageBasic> death;
 
     MageBasic mageBasic;
 

@@ -51,7 +51,6 @@ public class SpiritLightAttack : Ability
     {
         if (!spiritForm.CharacterController.Equals(characterController)) return;
         
-        Debug.Log($"APPARENTLY {name} IS MINE {spiritForm.photonView.IsMine}");
         bulletPrefab ??= Resources.Load<GameObject>("Prefabs/Juice/PlayerBulletJuice");
 
 

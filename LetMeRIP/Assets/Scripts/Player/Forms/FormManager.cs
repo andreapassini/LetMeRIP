@@ -165,7 +165,7 @@ public class FormManager : MonoBehaviourPun
 
     public void SwitchForm(int index, bool enableAbilities = true)
     {
-        photonView.RPC("RpcSwitchForm", RpcTarget.All, index, enableAbilities);
+        photonView.RPC(nameof(RpcSwitchForm), RpcTarget.All, index, enableAbilities);
     }
 
     [PunRPC]
@@ -248,13 +248,6 @@ public class FormManager : MonoBehaviourPun
 
     private void EnterBody()
     {
-        photonView.RPC("RpcEnterBody", RpcTarget.All);
-    }
-
-    [PunRPC]
-    public void RpcEnterBody()
-    {
-        // check if the body is in range
         PlayerController myBody = null;
         Collider[] playersHit = Physics.OverlapSphere(transform.position, spiritReturnRange);
         foreach (Collider playerHit in playersHit)
@@ -262,15 +255,13 @@ public class FormManager : MonoBehaviourPun
             if (playerHit.CompareTag("Player"))
             {
                 PlayerController pc = playerHit.GetComponent<PlayerController>();
-                Debug.Log($"{pc.name} is mine: {pc.IsMine}");
-                if (pc.photonView.IsMine && !pc.gameObject.Equals(gameObject))
+                if (pc.IsMine && !pc.gameObject.Equals(gameObject))
                 {
-                    photonView.RPC("RpcAssignBodyToEnter", RpcTarget.All, pc.photonView.ViewID);
+                    photonView.RPC(nameof(RpcAssignBodyToEnter), RpcTarget.All, pc.photonView.ViewID);
                     break;
                 }
             }
         }
-        
     }
 
     [PunRPC]
@@ -280,6 +271,7 @@ public class FormManager : MonoBehaviourPun
         if (myBody == null) return; // body not found, abort
         myBody.Init();
 
+        Debug.Log($"BODY FOUND {myBody.name}");
         Destroy(Instantiate(expelSpiritVfx, transform.position, transform.rotation), 2f);
         Destroy(Instantiate(absorbSpiritVfx, myBody.transform), 2f);
 

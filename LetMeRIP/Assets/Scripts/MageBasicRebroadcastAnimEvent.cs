@@ -10,6 +10,7 @@ public class MageBasicRebroadcastAnimEvent : MonoBehaviour
     public static event Action<MageBasic> heavyAttack;
     public static event Action<MageBasic> ability1;
     public static event Action<MageBasic> ability2;
+    public static event Action<MageBasic> death;
 
     MageBasic mageBasic;
 
@@ -17,7 +18,6 @@ public class MageBasicRebroadcastAnimEvent : MonoBehaviour
     {
         // Get the MageBasicComponet from the father
         mageBasic = (MageBasic)transform.GetComponentInParent(typeof(MageBasic));
-        
     }
 
     public void OnLightAttack()

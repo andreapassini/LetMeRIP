@@ -13,7 +13,7 @@ public class PlayerForm : MonoBehaviourPun
     protected Dictionary<string, Ability> abilities;
     public GameObject formModelPrefab; // contains the model and the animator of the transformation
     protected PlayerController characterController;
-
+    public PlayerController CharacterController { get => characterController; }
     private void Awake()
     {
         abilities = new Dictionary<string, Ability>();

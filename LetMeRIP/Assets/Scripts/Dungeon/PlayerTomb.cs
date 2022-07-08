@@ -11,12 +11,14 @@ public class PlayerTomb : Interactable, IOnEventCallback
     private int segments = 4;
     private int remainingSegments;
     private byte remainingSegmentsEventCode = 1;
+    private PlayerController cc;
+
     protected override void Start()
     {
         base.Start();
         remainingSegments = segments;
     }
-    private PlayerController cc;
+    
     public override void Effect(PlayerController characterController)
     {
         base.Effect(characterController);
@@ -37,14 +39,10 @@ public class PlayerTomb : Interactable, IOnEventCallback
 
     private void ReviveSpirit()
     {
-        GameObject what = PhotonView.Find(photonView.ViewID).gameObject;
-        Debug.Log(what.name);
-        Debug.Log($"THIS SHIT IS DEFINITELY MINE: {photonView.IsMine} | viewID: {photonView.ViewID}");
-        if (photonView.IsMine)
-        {
-            GameObject player = PhotonNetwork.Instantiate("Prefabs/SpiritCharacter", transform.position, transform.rotation);
-            StartCoroutine(LateHeal(player));
-        }
+        if (!photonView.IsMine) return;
+
+        GameObject player = PhotonNetwork.Instantiate("Prefabs/SpiritCharacter", transform.position, transform.rotation);
+        StartCoroutine(LateHeal(player));
         PhotonNetwork.Destroy(gameObject);
     }
 

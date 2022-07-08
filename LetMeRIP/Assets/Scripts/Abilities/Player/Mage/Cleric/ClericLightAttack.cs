@@ -92,7 +92,7 @@ public class ClericLightAttack : Ability
     }
 
     /**
-     * if the dash action has finished, ri-enables movement
+     * if the dash action has finished, re-enables movement
      */
     public override void CancelAction()
     {

@@ -19,7 +19,6 @@ public class HPManager : MonoBehaviourPun, IOnPhotonViewPreNetDestroy
     public float Health { get => stats.health; }
     public float MaxHealth { get => stats.maxHealth; }
 
-
     void Start()
     {
         characterController = gameObject.GetComponent<PlayerController>();
@@ -63,7 +62,6 @@ public class HPManager : MonoBehaviourPun, IOnPhotonViewPreNetDestroy
     private void RpcDecayingHeal(float amount, float timeToDecay)
     {
         StartCoroutine(DecayingHealCo(amount, timeToDecay));
-
     }
 
     [PunRPC]
@@ -97,74 +95,68 @@ public class HPManager : MonoBehaviourPun, IOnPhotonViewPreNetDestroy
         if (health <= 0 && photonView.IsMine)
         {
             Debug.Log("calling die");
-            photonView.RPC("RpcDie", RpcTarget.All);
+            Die();
         }
 
         // Take damage Event
         OnPlayerDamaged?.Invoke(this);
     }
 
-    [PunRPC]
-    private void RpcDie()
+    
+    private void Die()
     {
         if (isDead) return;
         isDead = true;
-        int i = 0;
-        Debug.Log("someone died");
-        FormManager formManager = characterController.formManager;
+        characterController.enabled = false;
 
-        Debug.Log($"someone died {photonView.ViewID}, is mine: {photonView.IsMine}, was out: {formManager.IsOut}");
         Animator animator = GetComponentInChildren<Animator>();
         animator.SetTrigger("Death");
 
+        int i = 0;
+        FormManager formManager = characterController.formManager;
+        Debug.Log($"{name} died {photonView.ViewID}, is mine: {photonView.IsMine}, was out: {formManager.IsSpirit}");
 
         Collider capsuleCollider = GetComponent<Collider>();
         capsuleCollider.enabled = false;
         characterController.lam.enabled = false;
         characterController.movement.playerInputActions.Player.Movement.Disable();
         formManager.DisableAbilities();
+        formManager.UnbindAbilities();
 
         if (photonView.IsMine) characterController.HPManager.Heal(characterController.HPManager.maxHealth, false);
 
         if (!formManager.IsSpirit)
         {
-            GameObject model = formManager.currentForm.formModelPrefab;
-            model.GetComponent<PhotonAnimatorView>().enabled = false;
-            model.transform.SetParent(transform.parent);
-    
-            if (!formManager.IsOut && photonView.IsMine) formManager.ToggleSpiritForm();
-            if (photonView.IsMine) PhotonNetwork.Destroy(gameObject);
+            //GameObject model = formManager.currentForm.formModelPrefab;
+            //model.GetComponent<PhotonAnimatorView>().enabled = false;
+            //model.transform.SetParent(transform.parent);
+            if (photonView.IsMine)
+            {
+                if (!formManager.IsOut) formManager.ToggleSpiritForm();
+            }
+
             OnPlayerKilled?.Invoke(characterController);
         }
         else if (photonView.IsMine)
-        PhotonNetwork.Instantiate("Prefabs/PlayerTomb", transform.position, Quaternion.identity);
-
-
-        Debug.Log($"Destroying {name}, may i: {photonView.IsMine}");
-        if (photonView.IsMine)
         {
-            characterController.formManager.UnbindAbilities();
-            characterController.movement.playerInputActions.Player.Movement.Disable();
-            Debug.Log($"Destroying {name}");
+            PhotonNetwork.Instantiate("Prefabs/PlayerTomb", transform.position, Quaternion.identity);
         }
-        PhotonNetwork.Destroy(gameObject);
+
+        StartCoroutine(LateNetDestroy());
     }
-
- //   public IEnumerator BuffStats(float str, float dex, float Int, float duration)
-	//{
- //       stats.strength *= str;
- //       stats.dexterity *= dex;
- //       stats.intelligence *= Int;
-
- //       yield return new WaitForSeconds(duration);
-
- //       stats.strength /= str;
- //       stats.dexterity /= dex;
- //       stats.intelligence /= Int;
- //   }
 
     public void OnPreNetDestroy(PhotonView rootView)
     {
         OnPlayerKilled?.Invoke(characterController);
+    }
+
+    private IEnumerator LateNetDestroy()
+    {
+        if (photonView.IsMine)
+        {
+            yield return new WaitForSeconds(1.5f);
+            //any vfx
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 }

@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
         {
             photonView.RPC(nameof(RpcSetPlayerManager), RpcTarget.AllBuffered, new List<PlayerManager>(FindObjectsOfType<PlayerManager>()).Find(match => match.photonView.IsMine).photonView.ViewID);
         }
-
+        
         SetupCamera();
 
         movement ??= gameObject.AddComponent<Movement>();
@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
         lam.enabled = true;
         movement.enabled = true;
 
-        if (formManager != null)
+        if (formManager != null && photonView.IsMine) 
         {
             formManager.BindAbilities();
             formManager.EnableAbilities();

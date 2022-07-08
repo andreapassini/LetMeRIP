@@ -20,14 +20,14 @@ public class SpiritLightAttack : Ability
 
     private void OnEnable()
     {
-        SpiritFormRebroadcastAnimEvent.lightAttack += PerformedAction;
-        SpiritFormRebroadcastAnimEvent.lightAttackEnd += CancelAction;
+        SpiritFormRebroadcastAnimEvent.lightAttack += Cast;
+        SpiritFormRebroadcastAnimEvent.lightAttackEnd += EndCast;
     }
 
     private void OnDisable()
     {
-        SpiritFormRebroadcastAnimEvent.lightAttack -= PerformedAction;
-        SpiritFormRebroadcastAnimEvent.lightAttackEnd -= CancelAction;
+        SpiritFormRebroadcastAnimEvent.lightAttack -= Cast;
+        SpiritFormRebroadcastAnimEvent.lightAttackEnd -= EndCast;
     }
 
     public override void Init(PlayerController characterController)
@@ -47,18 +47,11 @@ public class SpiritLightAttack : Ability
         DisableMovement();
     }
 
-    public override void PerformedAction()
+    public void Cast(SpiritForm spiritForm)
     {
-        //GameObject bullet = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation);
-        //bullet.GetComponent<Bullet>().damage = damage;
-        //Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-        //bulletRb.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
-
-        //StartCoroutine(Cooldown());
-    }
-
-    public void PerformedAction(SpiritForm spiritForm)
-    {
+        if (!spiritForm.CharacterController.Equals(characterController)) return;
+        
+        Debug.Log($"APPARENTLY {name} IS MINE {spiritForm.photonView.IsMine}");
         bulletPrefab ??= Resources.Load<GameObject>("Prefabs/Juice/PlayerBulletJuice");
 
 
@@ -72,13 +65,12 @@ public class SpiritLightAttack : Ability
         characterController.lam.EnableLookAround();
     }
 
-    public override void CancelAction() 
-    { 
 
-    }
-
-    public void CancelAction(SpiritForm spiritForm)
+    public void EndCast(SpiritForm spiritForm)
     {
+        if (!spiritForm.photonView.IsMine) return;
+        Debug.Log($"APPARENTLY {name} IS MINE {spiritForm.photonView.IsMine}");
+
         EnableActions();
         EnableMovement();
         characterController.lam.EnableLookAround();

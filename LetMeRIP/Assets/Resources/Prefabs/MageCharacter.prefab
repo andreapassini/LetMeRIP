@@ -552,6 +552,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3587234622654408675, guid: 9d50ea1d2678a184f8a38e7ad7e4be0b, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[9].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3588975962355129435, guid: 9d50ea1d2678a184f8a38e7ad7e4be0b, type: 3}
       propertyPath: m_Name
       value: Cleric
@@ -637,13 +641,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8190014203849727945, guid: 73333dae40f517342ae8e439cf7eecf2, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[0].SynchronizeType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190014203849727945, guid: 73333dae40f517342ae8e439cf7eecf2, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[1].SynchronizeType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190014203849727945, guid: 73333dae40f517342ae8e439cf7eecf2, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[2].SynchronizeType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190014203849727945, guid: 73333dae40f517342ae8e439cf7eecf2, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[3].SynchronizeType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190014203849727945, guid: 73333dae40f517342ae8e439cf7eecf2, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[4].SynchronizeType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190014203849727945, guid: 73333dae40f517342ae8e439cf7eecf2, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[5].SynchronizeType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190014203849727945, guid: 73333dae40f517342ae8e439cf7eecf2, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[6].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190014203849727945, guid: 73333dae40f517342ae8e439cf7eecf2, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[9].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8191107969833138123, guid: 73333dae40f517342ae8e439cf7eecf2, type: 3}
       propertyPath: m_Name
       value: MageBasic
       objectReference: {fileID: 0}
     - target: {fileID: 8191107969833138123, guid: 73333dae40f517342ae8e439cf7eecf2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73333dae40f517342ae8e439cf7eecf2, type: 3}

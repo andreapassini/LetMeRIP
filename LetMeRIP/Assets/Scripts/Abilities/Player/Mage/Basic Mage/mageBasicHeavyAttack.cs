@@ -104,9 +104,13 @@ public class mageBasicHeavyAttack : Ability
 			// Instantiate spheres
 			GameObject bulletFired = Instantiate(prefab, v, attackPoint.rotation);
 
-			bulletFired.GetComponent<BulletTrapassing>().damage = damage;
+            bulletFired.GetComponent<Bullet>().damage = damage;
+            bulletFired.transform.localScale = new Vector3(
+                bulletFired.transform.localScale.x * 0.75f,
+                bulletFired.transform.localScale.y * 0.75f,
+                bulletFired.transform.localScale.z * 0.75f);
 
-			Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
+            Rigidbody rbBullet = bulletFired.GetComponent<Rigidbody>();
 			rbBullet.AddForce(attackPoint.forward * bulletForce, ForceMode.Impulse);
         }
 

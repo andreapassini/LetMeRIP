@@ -76,19 +76,25 @@ public class mageBasicAbility2 : Ability
 
     private void SummonHealingPool()
 	{
-        Transform t = transform.Find("pointToSpawn");
-
-        Vector3 castingPos = GatherDirectionInput();
+        //Vector3 castingPos = GatherDirectionInput();
+        Vector3 castingPos = new Vector3(
+            transform.position.x,
+            transform.position.y - 0.5f,
+            transform.position.z);
 
         prefab ??= Resources.Load<GameObject>("Prefabs/HealingPoolVampire");
         
         GameObject healingPool = Instantiate(prefab, castingPos, Quaternion.identity);
+
         healingPool.GetComponent<HealingPoolVampire>().Init();
+
+        RestEnable();
     }
 
     private void RestEnable()
 	{
         EnableMovement();
+        EnableActions();
         isCasting = false;
 
         StartCoroutine(Cooldown());

@@ -123,8 +123,8 @@ GameObject:
   - component: {fileID: 4727071522890166308}
   - component: {fileID: 4727071522890166307}
   - component: {fileID: 4727071522890166305}
-  - component: {fileID: 4727071522890166306}
   - component: {fileID: 1551060910672544689}
+  - component: {fileID: 3604408346671607730}
   m_Layer: 7
   m_Name: BulletTrapassing 1
   m_TagString: Untagged
@@ -176,21 +176,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4727071522890166306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4727071522890166309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a57b3878df20dc847b45e32d6ce6c596, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitDmgEffect: {fileID: 0}
-  destroyAfterTime: 1.5
-  damage: 10
 --- !u!96 &1551060910672544689
 TrailRenderer:
   serializedVersion: 2
@@ -379,3 +364,18 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 1
   m_Emitting: 1
+--- !u!114 &3604408346671607730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4727071522890166309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b34344c1ec25a54fb5d2d9e6832ff01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitDmgEffect: {fileID: 0}
+  destroyAfterTime: 3
+  damage: 10

@@ -23,9 +23,11 @@ public class EnemyBullet : MonoBehaviour
             player.HPManager.TakeDamage(damage, transform.position);
         }
 
-        if (PhotonNetwork.IsConnected && PhotonNetwork.IsMasterClient)
-            PhotonNetwork.Destroy(gameObject);
-        else Destroy(gameObject);
+        //if (PhotonNetwork.IsConnected && PhotonNetwork.IsMasterClient)
+        //    PhotonNetwork.Destroy(gameObject);
+        //else Destroy(gameObject);
+
+        Destroy(gameObject);
     }
 
     public IEnumerator DestroyBulletAfterTime()

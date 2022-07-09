@@ -66,7 +66,7 @@ public class RangedAttackAbility : EnemyAbility
 
 		// Look at Target
 		// Maybe better to use RigidBody and use Slerp for a smoother rotation
-		enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
+		//enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z), Vector3.up);
 
 		// Fire Bullet
 		GameObject bulletFired = Instantiate(bulletPrefab, enemy.attackPoint.position, enemy.attackPoint.rotation);

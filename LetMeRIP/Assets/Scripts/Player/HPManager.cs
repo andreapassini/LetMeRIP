@@ -7,6 +7,8 @@ using UnityEngine;
 public class HPManager : MonoBehaviourPun, IOnPhotonViewPreNetDestroy
 {
     public static event Action<PlayerController> OnPlayerKilled;
+    public static event Action<HPManager> OnPlayerTakeDamage;
+    public static event Action<HPManager> OnPlayerH;
     public event Action<HPManager> OnPlayerDamaged;
     public event Action<HPManager> OnPlayerHealed;
     public PlayerController.Stats stats;

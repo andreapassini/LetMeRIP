@@ -27,6 +27,7 @@ public class EnemyForm : MonoBehaviourPun
 
     public static event Action<EnemyForm> OnEnemyKilled;
     public event Action<EnemyForm> OnEnemyDamaged;
+    public static event Action<EnemyForm> OnEnemyTakeDamage;
     public static event Action<EnemyForm> OnEnemyAttack;
 
     public EnemyStats enemyStatsSrc;
@@ -210,6 +211,7 @@ public class EnemyForm : MonoBehaviourPun
 
         // Take damage Event
         OnEnemyDamaged?.Invoke(this);
+        OnEnemyTakeDamage?.Invoke(this);
     }
 
     public virtual void Init()

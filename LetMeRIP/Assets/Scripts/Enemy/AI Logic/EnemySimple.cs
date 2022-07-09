@@ -98,11 +98,10 @@ public class EnemySimple : EnemyForm
     // Chase
     public void Chase()
     {
-        if (target == null) {
-            targets = GameObject.FindGameObjectsWithTag(targetTag);
-            if(targets.Length != 0)
-                target = targets[0].transform;
-        }
+        target = FindNearTarget();
+
+        if (target == null)
+            return;
 
         chaseAction.StartAbility(this);
         animator.SetBool("run", true);

@@ -334,4 +334,22 @@ public class EnemyForm : MonoBehaviourPun
 
         rangedAbility.PerformAbility(this);
 	}
+
+    public Transform FindNearTarget()
+    {
+        float minDistance = float.MaxValue ;
+        Transform nearTarget = null;
+
+        foreach (GameObject t in targets)
+        {
+            float calculatedDistance = (t.transform.position - transform.position).magnitude;
+            if (calculatedDistance < minDistance)
+            {
+                minDistance = calculatedDistance;
+                nearTarget = t.transform;
+            }
+        }
+
+        return nearTarget;
+    }
 }

@@ -74,9 +74,6 @@ public class WarriorBasicLightAttack : Ability
                     eform.TakeDamage(damage);
                 }
             }
-
-            
-
         }
         else
         {

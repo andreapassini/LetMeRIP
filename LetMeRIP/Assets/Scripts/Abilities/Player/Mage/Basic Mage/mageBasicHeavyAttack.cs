@@ -16,6 +16,8 @@ public class mageBasicHeavyAttack : Ability
     private float damage;
 
     private GameObject prefab;
+    private GameObject chargePrefab;
+    private GameObject refCharge;
 
     [SerializeField]
     private float bulletForce = 7f;
@@ -54,6 +56,10 @@ public class mageBasicHeavyAttack : Ability
 
         isCasting = true;
         prefab = Resources.Load<GameObject>("Prefabs/BulletTrapassing");
+        chargePrefab = Resources.Load<GameObject>("Particles/mageChargeHeavyAttack");
+
+        refCharge = Instantiate(chargePrefab, attackPoint);
+        Destroy(refCharge, chargeTime);
 
         StartCoroutine(CastAction());
         StartCoroutine(Cooldown());
@@ -85,6 +91,8 @@ public class mageBasicHeavyAttack : Ability
 
     private void CastTempest()
 	{
+        Destroy(refCharge);
+
         // Trigger Casting animation
         animator.SetTrigger("HeavyAttackCast");
 
@@ -93,8 +101,9 @@ public class mageBasicHeavyAttack : Ability
 
         // Get the prefab
         prefab ??= Resources.Load<GameObject>("Prefabs/BulletTrapassing");
+        chargePrefab ??= Resources.Load<GameObject>("Particles/mageChargeHeavyAttack");
 
-		for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
 			// Calcolate angle
 			offSet += (i * 0.5f);
 			offsetWork = offSet;

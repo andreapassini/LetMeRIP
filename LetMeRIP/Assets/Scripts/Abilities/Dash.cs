@@ -16,6 +16,8 @@ public class Dash : Ability
     // prevents the cancel action to start too soon
     private bool isDashing = false;
 
+    private GameObject dashPrefab;
+
     private void Start()
     {
         cooldown = .7f;
@@ -35,6 +37,9 @@ public class Dash : Ability
      */
     public override void StartedAction()
     {
+        dashPrefab = Resources.Load<GameObject>("Particles/Dash");
+        //Instantiate(dashPrefab, transform);
+
         animator ??= GetComponentInChildren<Animator>(false);
         isReady = false;
 
@@ -72,6 +77,7 @@ public class Dash : Ability
      */
     public override void CancelAction()
     {
+
         if (!isDashing)
         {
             playerInputActions.Player.Movement.Enable(); // you can't move while dashing
@@ -83,6 +89,7 @@ public class Dash : Ability
      */
     private IEnumerator DashAction()
     {
+        characterController.lam.DisableLookAround();
         DisableActions();
         while (currentTime > 0)
         {
@@ -94,6 +101,10 @@ public class Dash : Ability
                     EnableActions();
                     CancelAction();
                     yield break;
+                } else
+                {
+                    // Spawn Dash Particle Effect
+                    SpawnDashParticleEffect();
                 }
             }
             currentTime -= Time.deltaTime;
@@ -101,8 +112,16 @@ public class Dash : Ability
             yield return new WaitForFixedUpdate();
         }
         EnableActions();
+        characterController.lam.EnableLookAround();
 
         isDashing = false;
         CancelAction();
+    }
+
+    private void SpawnDashParticleEffect()
+    {
+        dashPrefab ??= Resources.Load<GameObject>("Particles/Dash");
+        Vector3 point = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
+        Instantiate(dashPrefab, point, Quaternion.identity);
     }
 }

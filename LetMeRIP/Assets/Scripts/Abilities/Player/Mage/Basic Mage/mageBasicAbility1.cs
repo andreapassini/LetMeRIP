@@ -83,7 +83,7 @@ public class mageBasicAbility1 : Ability
         animator.SetTrigger("Ability1Charge");
 
         prefabCharge = Resources.Load<GameObject>("Particles/mageCharge");
-        refPrefabChargeInst = Instantiate(prefabCharge, transform);
+        refPrefabChargeInst = Instantiate(prefabCharge, attackPoint);
 
         DisableMovement();
         StartCoroutine(Cooldown());

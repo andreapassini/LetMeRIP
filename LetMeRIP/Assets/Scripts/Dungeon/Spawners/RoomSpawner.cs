@@ -73,7 +73,12 @@ public class RoomSpawner : MonoBehaviourPun
         try
         {
             foreach (GameObject enemy in currentEnemies)
+            {
+                //enemy.GetComponent<EnemyForm>().Die();
+
+                // This was not working for not-Host side
                 PhotonNetwork.Destroy(enemy); // if you want to use Die, remember to prepare a list of EnemyForm components otherwise it throws an exception
+            }
         } catch(InvalidOperationException e)
         {
             StartCoroutine(RetryAfterSeconds(ClearAllEnemies, .1f));

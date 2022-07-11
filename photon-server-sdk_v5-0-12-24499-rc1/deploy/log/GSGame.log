@@ -23339,3 +23339,203 @@
 2022-07-11 18:18:40,283 [15] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level2, new=Level1
 2022-07-11 18:19:41,025 [8] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level1 to Lowest with input 8
 2022-07-11 18:19:41,025 [8] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level1, new=Lowest
+2022-07-11 18:23:58,661 [15] DEBUG Photon.LoadBalancing.GameServer.GameApplication - CreatePeer for 486a88ac-5ce9-4085-9db8-fdab2366
+2022-07-11 18:23:58,662 [15] DEBUG Photon.LoadBalancing.GameServer.GameApplication - incoming game peer at 127.0.0.1:5056 from 127.0.0.1:61861
+2022-07-11 18:23:58,662 [15] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker scheduled. authTimeout:20000 p:GameClientPeer: PID: 19, IsConnected: False, IsDisposed: False, Last Activity: Operation 0 at UTC 0001-01-01T00:00:00, in Room '', IP 127.0.0.1:61861, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2022-07-11 18:23:58,721 [30] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=19, opCode=230
+2022-07-11 18:23:58,721 [30] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 19, IsConnected: True, IsDisposed: False, Last Activity: Operation 230 at UTC 2022-07-11T16:23:58, in Room '', IP 127.0.0.1:61861, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2022-07-11 18:23:58,722 [30] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Token Validation: checking token with GS: localhost and GameId:dwadwa
+2022-07-11 18:23:58,754 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=19, opCode=226
+2022-07-11 18:23:58,755 [10] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=226
+2022-07-11 18:23:58,755 [10] DEBUG Photon.Hive.HivePeer - Game 'dwadwa' userId '1a5c638b-2b98-44d0-9243-e5d263b5a1d6' failed to join. msg:Game does not exist -- peer:GameClientPeer: PID: 19, IsConnected: True, IsDisposed: False, Last Activity: Operation 226 at UTC 2022-07-11T16:23:58, in Room '', IP 127.0.0.1:61861, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2022-07-11 18:23:58,793 [15] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 19, IsConnected: False, IsDisposed: False, Last Activity: Operation 226 at UTC 2022-07-11T16:23:58, in Room '', IP 127.0.0.1:61861, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2022-07-11 18:23:58,793 [15] DEBUG Photon.Hive.HivePeer - OnDisconnect: conId=19, reason=0, reasonDetail=
+2022-07-11 18:23:58,794 [15] DEBUG Photon.Hive.HivePeer - RemovePeerFromCurrentRoom: Room Reference is null for p:GameClientPeer: PID: 19, IsConnected: False, IsDisposed: False, Last Activity: Operation 226 at UTC 2022-07-11T16:23:58, in Room '', IP 127.0.0.1:61861, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2022-07-11 18:23:59,666 [31] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=c68715d2-8543-46da-9901-5f153c8b746d
+2022-07-11 18:25:10,729 [12] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Lowest to Level1 with input 11
+2022-07-11 18:25:10,730 [12] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Lowest, new=Level1
+2022-07-11 18:25:22,082 [12] DEBUG Photon.LoadBalancing.GameServer.GameApplication - CreatePeer for 486a88ac-5ce9-4085-9db8-fdab2366
+2022-07-11 18:25:22,083 [12] DEBUG Photon.LoadBalancing.GameServer.GameApplication - incoming game peer at 127.0.0.1:5056 from 127.0.0.1:61434
+2022-07-11 18:25:22,084 [12] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker scheduled. authTimeout:20000 p:GameClientPeer: PID: 20, IsConnected: False, IsDisposed: False, Last Activity: Operation 0 at UTC 0001-01-01T00:00:00, in Room '', IP 127.0.0.1:61434, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2022-07-11 18:25:22,150 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=20, opCode=230
+2022-07-11 18:25:22,151 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 20, IsConnected: True, IsDisposed: False, Last Activity: Operation 230 at UTC 2022-07-11T16:25:22, in Room '', IP 127.0.0.1:61434, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2022-07-11 18:25:22,151 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Token Validation: checking token with GS: localhost and GameId:fefeefefsf
+2022-07-11 18:25:22,178 [32] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=20, opCode=226
+2022-07-11 18:25:22,178 [32] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=226
+2022-07-11 18:25:22,179 [32] DEBUG Photon.Hive.HivePeer - Game 'fefeefefsf' userId '9f64d2b7-7188-44a6-bc91-1b82bdee2cba' failed to join. msg:Game does not exist -- peer:GameClientPeer: PID: 20, IsConnected: True, IsDisposed: False, Last Activity: Operation 226 at UTC 2022-07-11T16:25:22, in Room '', IP 127.0.0.1:61434, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2022-07-11 18:25:22,215 [28] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 20, IsConnected: False, IsDisposed: False, Last Activity: Operation 226 at UTC 2022-07-11T16:25:22, in Room '', IP 127.0.0.1:61434, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2022-07-11 18:25:22,216 [28] DEBUG Photon.Hive.HivePeer - OnDisconnect: conId=20, reason=0, reasonDetail=
+2022-07-11 18:25:22,216 [28] DEBUG Photon.Hive.HivePeer - RemovePeerFromCurrentRoom: Room Reference is null for p:GameClientPeer: PID: 20, IsConnected: False, IsDisposed: False, Last Activity: Operation 226 at UTC 2022-07-11T16:25:22, in Room '', IP 127.0.0.1:61434, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2022-07-11 18:25:23,091 [15] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=c68715d2-8543-46da-9901-5f153c8b746d
+2022-07-11 18:26:54,846 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - OnStopRequested: serverid=5e34f97b-7dd4-4d15-9756-e0253ec89c7f
+2022-07-11 18:26:54,861 [30] WARN  Photon.LoadBalancing.GameServer.OutgoingMasterServerPeer - s2s MS connection: connection closed (id=1, reason=0, detail=), serverId=5e34f97b-7dd4-4d15-9756-e0253ec89c7f
+2022-07-11 18:26:55,854 [1] INFO  Photon.SocketServer.ApplicationBase - Application is stopping: AppId=Game
+2022-07-11 18:26:55,864 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - TearDown: serverId=5e34f97b-7dd4-4d15-9756-e0253ec89c7f
+2022-07-11 18:26:55,865 [1] INFO  Photon.SocketServer.ApplicationBase - Application stop: AppId=Game
+2022-07-11 18:27:06,223 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Using Server GC:True
+2022-07-11 18:27:06,238 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Using GC LatencyMode:Interactive
+2022-07-11 18:27:06,239 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Setup: serverId=caa5a5f0-919d-49bc-9de0-fe63c1e3867d
+2022-07-11 18:27:06,257 [1] INFO  Photon.Hive.Plugin.PluginManager - Plugin configured: name=TestPlugins
+2022-07-11 18:27:06,257 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: AsyncJoin=False
+2022-07-11 18:27:06,257 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: BaseUrl=http://localhost:55557/realtime-webhooks-1.2
+2022-07-11 18:27:06,258 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: HasErrorInfo=true
+2022-07-11 18:27:06,258 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: IsPersistent=true
+2022-07-11 18:27:06,258 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: PathClose=GameClose
+2022-07-11 18:27:06,258 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: PathCreate=GameCreate
+2022-07-11 18:27:06,259 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: PathEvent=GameEvent
+2022-07-11 18:27:06,259 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: PathGameProperties=GameProperties
+2022-07-11 18:27:06,259 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: PathJoin=GameJoin
+2022-07-11 18:27:06,259 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: PathLeave=GameLeave
+2022-07-11 18:27:06,260 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: PathLoad=GameCreate
+2022-07-11 18:27:06,263 [1] DEBUG Photon.Hive.Plugin.PluginManager - Plugin path is set to 'E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\Plugins/TestPlugins//bin/TestPlugins.dll'
+2022-07-11 18:27:06,281 [1] INFO  Photon.Hive.Plugin.PluginManager - Loaded Assembly Name=TestPlugins, Version=5.0.12.24499, Culture=, PublicKey token=, Path=E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\Plugins/TestPlugins//bin/TestPlugins.dll
+2022-07-11 18:27:06,281 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=mscorlib, Version=4.0.0.0, Culture=, PublicKey token=B7-7A-5C-56-19-34-E0-89, Path=
+2022-07-11 18:27:06,281 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=System.Core, Version=4.0.0.0, Culture=, PublicKey token=B7-7A-5C-56-19-34-E0-89, Path=
+2022-07-11 18:27:06,282 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=System, Version=4.0.0.0, Culture=, PublicKey token=B7-7A-5C-56-19-34-E0-89, Path=
+2022-07-11 18:27:06,282 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=PhotonHivePlugin, Version=1.1.0.24499, Culture=, PublicKey token=, Path=
+2022-07-11 18:27:06,282 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=PhotonHive, Version=5.0.12.24499, Culture=, PublicKey token=, Path=
+2022-07-11 18:27:06,282 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=Newtonsoft.Json, Version=11.0.0.0, Culture=, PublicKey token=30-AD-4F-E6-B2-A6-AE-ED, Path=
+2022-07-11 18:27:06,283 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=PhotonHive.WebHooksPlugin1.2, Version=5.0.12.24499, Culture=, PublicKey token=, Path=
+2022-07-11 18:27:06,283 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=nunit.framework, Version=3.12.0.0, Culture=, PublicKey token=26-38-CD-05-61-07-44-EB, Path=
+2022-07-11 18:27:06,284 [1] INFO  Photon.Hive.Plugin.PluginManager - Plugin Type TestPlugins.PluginFactory from assembly TestPlugins, Version=5.0.12.24499, Culture=neutral, PublicKeyToken=null was successfuly created
+2022-07-11 18:27:06,334 [1] INFO  Photon.Hive.Plugin.PluginManager - Plugin manager (version=1.1.0.24499) is setup. type=TestPlugins.PluginFactory;path=E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\Plugins/TestPlugins//bin/TestPlugins.dll;version=1.1.0.24499
+2022-07-11 18:27:06,984 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - TokenCreator initialized with an expiration of 01:00:00
+2022-07-11 18:27:07,925 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Bandwidth counters are not valid
+2022-07-11 18:27:07,927 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter Business Logic Queue
+2022-07-11 18:27:07,927 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter ENet Queue
+2022-07-11 18:27:07,928 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter ENet Threads Processing
+2022-07-11 18:27:07,928 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter ENet Threads Active
+2022-07-11 18:27:07,929 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter TCP: Disconnected Peers +/sec
+2022-07-11 18:27:07,929 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter TCP: Disconnected Peers (C) +/sec
+2022-07-11 18:27:07,929 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter TCP: Peers
+2022-07-11 18:27:07,930 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter UDP: Disconnected Peers +/sec
+2022-07-11 18:27:07,930 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter UDP: Disconnected Peers (C) +/sec
+2022-07-11 18:27:07,930 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter UDP: Peers
+2022-07-11 18:27:07,941 [1] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackControlSystem - Initialized FeedbackControlSystem with 1 controllers from config file.
+2022-07-11 18:27:07,979 [1] INFO  Photon.Common.LoadBalancer.ServerStateManager - Watching for application state file in E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\ServerState.txt
+2022-07-11 18:27:07,980 [1] INFO  Photon.Common.LoadBalancer.ServerStateManager - Server state is set to online
+2022-07-11 18:27:07,981 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Initializing master server connection ...
+2022-07-11 18:27:07,982 [1] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - ConnectionId=27763774-098a-4dfc-af95-c184e1b88fb1
+2022-07-11 18:27:07,985 [1] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: MasterServer endpoint for address 127.0.0.1 updated to 127.0.0.1:4520
+2022-07-11 18:27:07,997 [1] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: Parameters to register on master: address 127.0.0.1, TCP 4531, UDP 5056, WebSocket 9091, Secure WebSocket 19091, ServerID caa5a5f0-919d-49bc-9de0-fe63c1e3867d, Hostname localhost, IPv6Address , WebRTC 7072
+2022-07-11 18:27:08,011 [1] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: Connecting to master at 127.0.0.1:4520, serverId=caa5a5f0-919d-49bc-9de0-fe63c1e3867d
+2022-07-11 18:27:08,013 [1] INFO  Photon.SocketServer.ApplicationBase - Application start: AppId=Game; AppPath=E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\LoadBalancing\GameServer, Type=Photon.LoadBalancing.GameServer.GameApplication 
+2022-07-11 18:27:08,013 [1] INFO  Photon.SocketServer.ApplicationBase - Using Server GC:True
+2022-07-11 18:27:08,013 [1] INFO  Photon.SocketServer.ApplicationBase - Using GC LatencyMode:Interactive
+2022-07-11 18:27:10,728 [30] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: connection established: address:127.0.0.1, ConnectionId:27763774-098a-4dfc-af95-c184e1b88fb1
+2022-07-11 18:27:10,729 [30] INFO  Photon.Common.LoadBalancer.ServerStateManager - Server state is set to online
+2022-07-11 18:27:10,733 [30] INFO  Photon.LoadBalancing.GameServer.OutgoingMasterServerPeer - Successfully registered at master server: serverId=caa5a5f0-919d-49bc-9de0-fe63c1e3867d
+2022-07-11 18:27:10,734 [30] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: connection registered on master: address:127.0.0.1
+2022-07-11 18:27:10,736 [30] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnection - Update Expected Games Count event sent. endpoint:127.0.0.1:4520, connectionId:27763774-098a-4dfc-af95-c184e1b88fb1
+2022-07-11 18:30:01,857 [28] DEBUG Photon.LoadBalancing.GameServer.GameApplication - CreatePeer for 486a88ac-5ce9-4085-9db8-fdab2366
+2022-07-11 18:30:01,858 [28] DEBUG Photon.LoadBalancing.GameServer.GameApplication - incoming game peer at 127.0.0.1:5056 from 127.0.0.1:57900
+2022-07-11 18:30:01,865 [28] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker scheduled. authTimeout:20000 p:GameClientPeer: PID: 2, IsConnected: False, IsDisposed: False, Last Activity: Operation 0 at UTC 0001-01-01T00:00:00, in Room '', IP 127.0.0.1:57900, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2022-07-11 18:30:01,868 [28] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=_Total
+2022-07-11 18:30:01,982 [28] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_rpc
+2022-07-11 18:30:02,224 [14] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=2, opCode=230
+2022-07-11 18:30:02,229 [14] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 2, IsConnected: True, IsDisposed: False, Last Activity: Operation 230 at UTC 2022-07-11T16:30:02, in Room '', IP 127.0.0.1:57900, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2022-07-11 18:30:02,239 [14] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Token Validation: checking token with GS: localhost and GameId:huiniui
+2022-07-11 18:30:02,318 [32] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=2, opCode=227
+2022-07-11 18:30:02,319 [32] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=227
+2022-07-11 18:30:02,333 [32] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_game
+2022-07-11 18:30:02,461 [32] DEBUG Photon.Hive.Caching.RoomCacheBase - Created room instance reference: roomName=huiniui, referenceCount=1
+2022-07-11 18:30:02,469 [14] DEBUG Photon.Hive.Plugin.PluginManager - Assembly requests assembly. name1:TestPlugins, Version=5.0.12.24499, Culture=neutral, PublicKeyToken=null, name2:PhotonHive.WebHooksPlugin1.2, Version=5.0.12.24499, Culture=neutral, PublicKeyToken=null, path1:E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\Plugins/TestPlugins//bin/TestPlugins.dll, path2:E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\Plugins\TestPlugins\bin\PhotonHive.WebHooksPlugin1.2.dll
+2022-07-11 18:30:02,470 [14] DEBUG Photon.Hive.Plugin.PluginManager - Loading assembly 'PhotonHive.WebHooksPlugin1.2, Version=5.0.12.24499, Culture=neutral, PublicKeyToken=null' from path 'E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\Plugins\TestPlugins\bin\PhotonHive.WebHooksPlugin1.2.dll'
+2022-07-11 18:30:02,472 [14] DEBUG Photon.Hive.Plugin.PluginManager - Assembly 'PhotonHive.WebHooksPlugin1.2, Version=5.0.12.24499, Culture=neutral, PublicKeyToken=null' are loaded successfully from 'E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\Plugins\TestPlugins\bin\PhotonHive.WebHooksPlugin1.2.dll'
+2022-07-11 18:30:02,477 [14] INFO  Photon.Hive.Plugin.PluginManager - Plugin successfully created:Type:TestPlugins.PluginFactory, path:E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\Plugins/TestPlugins//bin/TestPlugins.dll
+2022-07-11 18:30:02,492 [14] DEBUG Photon.Hive.Plugin.CreateGameCallInfo - Continue.
+2022-07-11 18:30:02,494 [14] DEBUG Photon.Hive.HiveGame - Processing Join from IP: 127.0.0.1 to port: 5056
+2022-07-11 18:30:02,504 [14] DEBUG Photon.Hive.Collections.ActorsManager - Actor added: 1 0ee7711f-2cd0-40e0-a36c-47ab1e5b42ef to game: huiniui -- peer:GameClientPeer: PID: 2, IsConnected: True, IsDisposed: False, Last Activity: Operation 227 at UTC 2022-07-11T16:30:02, in Room 'huiniui', IP 127.0.0.1:57900, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 4 
+2022-07-11 18:30:02,505 [14] DEBUG Photon.Hive.HiveGame - JoinApplyGameStateChanges: Actor 1 is added. MasterClientId is 1
+2022-07-11 18:30:02,508 [14] DEBUG Photon.Hive.HiveGame - Created Game - name=huiniui, lobbyName=, lobbyType=Default, maxPlayers=0, IsOpen=True, IsVisible=True, EmptyRoomLiveTime=0, PlayerTTL=0, CheckUserOnJoin=True, PublishUserId=False, ExpectedUsers=
+2022-07-11 18:30:02,529 [14] DEBUG Photon.LoadBalancing.GameServer.Game - UpdateGameStateOnMasterOnCreate: game - 'huiniui'
+2022-07-11 18:30:02,533 [14] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
+2022-07-11 18:30:02,545 [14] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=27763774-098a-4dfc-af95-c184e1b88fb1
+2022-07-11 18:30:02,565 [30] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=2, opCode=252
+2022-07-11 18:30:02,566 [30] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=252
+2022-07-11 18:30:02,570 [30] DEBUG Photon.Hive.Plugin.BeforeSetPropertiesCallInfo - Continue.
+2022-07-11 18:30:02,576 [30] DEBUG Photon.Hive.Plugin.SetPropertiesCallInfo - Continue.
+2022-07-11 18:30:02,881 [29] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=27763774-098a-4dfc-af95-c184e1b88fb1
+2022-07-11 18:30:20,313 [31] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 2, IsConnected: False, IsDisposed: False, Last Activity: Operation 252 at UTC 2022-07-11T16:30:02, in Room 'huiniui', IP 127.0.0.1:57900, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
+2022-07-11 18:30:20,314 [31] DEBUG Photon.Hive.HivePeer - OnDisconnect: conId=2, reason=0, reasonDetail=
+2022-07-11 18:30:20,315 [31] DEBUG Photon.Hive.HivePeer - RemovePeerFromCurrentRoom: Removing peer from room. p:GameClientPeer: PID: 2, IsConnected: False, IsDisposed: False, Last Activity: Operation 252 at UTC 2022-07-11T16:30:02, in Room 'huiniui', IP 127.0.0.1:57900, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
+2022-07-11 18:30:20,316 [32] DEBUG Photon.Hive.HiveGame - ProcessMessage 1
+2022-07-11 18:30:20,316 [31] DEBUG Photon.Hive.Caching.RoomCacheBase - Removed room instance reference: roomName=huiniui, referenceCount=0
+2022-07-11 18:30:20,317 [31] DEBUG Photon.Hive.Caching.RoomCacheBase - Room has no references. Trying to remove it. room:huiniui
+2022-07-11 18:30:20,317 [31] DEBUG Photon.Hive.Caching.RoomCacheBase - Room BeforeRemoveFromCache returned 'false'. Removing stopped. room:huiniui
+2022-07-11 18:30:20,318 [32] DEBUG Photon.Hive.Plugin.LeaveGameCallInfo - Continue.
+2022-07-11 18:30:20,320 [32] DEBUG Photon.Hive.HiveGame - Clean up actor Actor: 1; Peer:'GameClientPeer: PID: 2, IsConnected: False, IsDisposed: True, Last Activity: Operation 252 at UTC 2022-07-11T16:30:02, in Room '', IP 127.0.0.1:57900, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 ', DeactivationTime:'', UserId:'0ee7711f-2cd0-40e0-a36c-47ab1e5b42ef',nick:'Player 0509', RemovedFromInactive:01/01/0001 00:00:00 - DeleteCacheOnLeave:
+2022-07-11 18:30:20,323 [32] DEBUG Photon.Hive.HiveGame - Actor 1 left. MasterClientId is 0
+2022-07-11 18:30:20,324 [32] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
+2022-07-11 18:30:20,325 [32] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=27763774-098a-4dfc-af95-c184e1b88fb1
+2022-07-11 18:30:20,325 [32] DEBUG Photon.Hive.Collections.ActorsManager - Actor removed: 1 0ee7711f-2cd0-40e0-a36c-47ab1e5b42ef to game: huiniui -- peer:GameClientPeer: PID: 2, IsConnected: False, IsDisposed: True, Last Activity: Operation 252 at UTC 2022-07-11T16:30:02, in Room '', IP 127.0.0.1:57900, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
+2022-07-11 18:30:20,327 [32] DEBUG Photon.Hive.Plugin.BeforeCloseGameCallInfo - Continue.
+2022-07-11 18:30:20,329 [32] DEBUG Photon.Hive.Plugin.CloseGameCallInfo - Continue.
+2022-07-11 18:30:20,330 [32] DEBUG Photon.Hive.Caching.RoomCacheBase - Removed room instance: roomId=huiniui
+2022-07-11 18:30:20,330 [32] DEBUG Photon.Hive.Room - Release for room:huiniui, RemovePath:;BeforeRemoveFromCacheCalled(16:30:20);BeforeRemoveFromCacheActionCalled(16:30:20);ProcessBeforeCloseGameCalled(16:30:20);ProcessBeforeCloseGameCalledEmptyRoomLiveTimeLECalled(16:30:20);TriggerPluginOnCloseCalled(16:30:20);ProcessCloseGameCalled(16:30:20);TryRemoveRoomFromCacheCalled(16:30:20)
+2022-07-11 18:30:20,331 [32] DEBUG Photon.Hive.Room - Tried to remove room: roomName=huiniui, removed=True
+2022-07-11 18:30:20,332 [32] DEBUG Photon.Hive.Room - Disposing room 'huiniui', dispose:True
+2022-07-11 18:30:20,337 [32] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Flush for appId:, version:
+2022-07-11 18:30:21,323 [11] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=27763774-098a-4dfc-af95-c184e1b88fb1
+2022-07-11 18:30:32,266 [32] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Lowest to Level1 with input 11
+2022-07-11 18:30:32,267 [32] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Lowest, new=Level1
+2022-07-11 18:31:07,775 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - OnStopRequested: serverid=caa5a5f0-919d-49bc-9de0-fe63c1e3867d
+2022-07-11 18:31:07,790 [10] WARN  Photon.LoadBalancing.GameServer.OutgoingMasterServerPeer - s2s MS connection: connection closed (id=1, reason=0, detail=), serverId=caa5a5f0-919d-49bc-9de0-fe63c1e3867d
+2022-07-11 18:31:08,782 [1] INFO  Photon.SocketServer.ApplicationBase - Application is stopping: AppId=Game
+2022-07-11 18:31:08,790 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - TearDown: serverId=caa5a5f0-919d-49bc-9de0-fe63c1e3867d
+2022-07-11 18:31:08,791 [1] INFO  Photon.SocketServer.ApplicationBase - Application stop: AppId=Game
+2022-07-11 18:31:20,101 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Using Server GC:True
+2022-07-11 18:31:20,116 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Using GC LatencyMode:Interactive
+2022-07-11 18:31:20,117 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Setup: serverId=7ecf4774-625d-4376-b706-16f83b74687d
+2022-07-11 18:31:20,135 [1] INFO  Photon.Hive.Plugin.PluginManager - Plugin configured: name=TestPlugins
+2022-07-11 18:31:20,135 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: AsyncJoin=False
+2022-07-11 18:31:20,136 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: BaseUrl=http://localhost:55557/realtime-webhooks-1.2
+2022-07-11 18:31:20,136 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: HasErrorInfo=true
+2022-07-11 18:31:20,136 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: IsPersistent=true
+2022-07-11 18:31:20,136 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: PathClose=GameClose
+2022-07-11 18:31:20,137 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: PathCreate=GameCreate
+2022-07-11 18:31:20,137 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: PathEvent=GameEvent
+2022-07-11 18:31:20,137 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: PathGameProperties=GameProperties
+2022-07-11 18:31:20,137 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: PathJoin=GameJoin
+2022-07-11 18:31:20,138 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: PathLeave=GameLeave
+2022-07-11 18:31:20,138 [1] INFO  Photon.Hive.Plugin.PluginManager - 	Attribute: PathLoad=GameCreate
+2022-07-11 18:31:20,141 [1] DEBUG Photon.Hive.Plugin.PluginManager - Plugin path is set to 'E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\Plugins/TestPlugins//bin/TestPlugins.dll'
+2022-07-11 18:31:20,160 [1] INFO  Photon.Hive.Plugin.PluginManager - Loaded Assembly Name=TestPlugins, Version=5.0.12.24499, Culture=, PublicKey token=, Path=E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\Plugins/TestPlugins//bin/TestPlugins.dll
+2022-07-11 18:31:20,160 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=mscorlib, Version=4.0.0.0, Culture=, PublicKey token=B7-7A-5C-56-19-34-E0-89, Path=
+2022-07-11 18:31:20,160 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=System.Core, Version=4.0.0.0, Culture=, PublicKey token=B7-7A-5C-56-19-34-E0-89, Path=
+2022-07-11 18:31:20,161 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=System, Version=4.0.0.0, Culture=, PublicKey token=B7-7A-5C-56-19-34-E0-89, Path=
+2022-07-11 18:31:20,161 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=PhotonHivePlugin, Version=1.1.0.24499, Culture=, PublicKey token=, Path=
+2022-07-11 18:31:20,161 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=PhotonHive, Version=5.0.12.24499, Culture=, PublicKey token=, Path=
+2022-07-11 18:31:20,162 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=Newtonsoft.Json, Version=11.0.0.0, Culture=, PublicKey token=30-AD-4F-E6-B2-A6-AE-ED, Path=
+2022-07-11 18:31:20,162 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=PhotonHive.WebHooksPlugin1.2, Version=5.0.12.24499, Culture=, PublicKey token=, Path=
+2022-07-11 18:31:20,162 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=nunit.framework, Version=3.12.0.0, Culture=, PublicKey token=26-38-CD-05-61-07-44-EB, Path=
+2022-07-11 18:31:20,163 [1] INFO  Photon.Hive.Plugin.PluginManager - Plugin Type TestPlugins.PluginFactory from assembly TestPlugins, Version=5.0.12.24499, Culture=neutral, PublicKeyToken=null was successfuly created
+2022-07-11 18:31:20,214 [1] INFO  Photon.Hive.Plugin.PluginManager - Plugin manager (version=1.1.0.24499) is setup. type=TestPlugins.PluginFactory;path=E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\Plugins/TestPlugins//bin/TestPlugins.dll;version=1.1.0.24499
+2022-07-11 18:31:20,910 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - TokenCreator initialized with an expiration of 01:00:00
+2022-07-11 18:31:21,901 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Bandwidth counters are not valid
+2022-07-11 18:31:21,903 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter Business Logic Queue
+2022-07-11 18:31:21,903 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter ENet Queue
+2022-07-11 18:31:21,904 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter ENet Threads Processing
+2022-07-11 18:31:21,904 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter ENet Threads Active
+2022-07-11 18:31:21,905 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter TCP: Disconnected Peers +/sec
+2022-07-11 18:31:21,905 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter TCP: Disconnected Peers (C) +/sec
+2022-07-11 18:31:21,905 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter TCP: Peers
+2022-07-11 18:31:21,906 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter UDP: Disconnected Peers +/sec
+2022-07-11 18:31:21,906 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter UDP: Disconnected Peers (C) +/sec
+2022-07-11 18:31:21,906 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter UDP: Peers
+2022-07-11 18:31:21,918 [1] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackControlSystem - Initialized FeedbackControlSystem with 1 controllers from config file.
+2022-07-11 18:31:21,961 [1] INFO  Photon.Common.LoadBalancer.ServerStateManager - Watching for application state file in E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\ServerState.txt
+2022-07-11 18:31:21,963 [1] INFO  Photon.Common.LoadBalancer.ServerStateManager - Server state is set to online
+2022-07-11 18:31:21,964 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Initializing master server connection ...
+2022-07-11 18:31:21,965 [1] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - ConnectionId=7d787a5c-b671-4592-bb6e-764f9bad6cf0
+2022-07-11 18:31:21,968 [1] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: MasterServer endpoint for address 127.0.0.1 updated to 127.0.0.1:4520
+2022-07-11 18:31:21,981 [1] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: Parameters to register on master: address 127.0.0.1, TCP 4531, UDP 5056, WebSocket 9091, Secure WebSocket 19091, ServerID 7ecf4774-625d-4376-b706-16f83b74687d, Hostname localhost, IPv6Address , WebRTC 7072
+2022-07-11 18:31:21,994 [1] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: Connecting to master at 127.0.0.1:4520, serverId=7ecf4774-625d-4376-b706-16f83b74687d
+2022-07-11 18:31:21,996 [1] INFO  Photon.SocketServer.ApplicationBase - Application start: AppId=Game; AppPath=E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\LoadBalancing\GameServer, Type=Photon.LoadBalancing.GameServer.GameApplication 
+2022-07-11 18:31:21,996 [1] INFO  Photon.SocketServer.ApplicationBase - Using Server GC:True
+2022-07-11 18:31:21,997 [1] INFO  Photon.SocketServer.ApplicationBase - Using GC LatencyMode:Interactive
+2022-07-11 18:31:24,777 [30] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: connection established: address:127.0.0.1, ConnectionId:7d787a5c-b671-4592-bb6e-764f9bad6cf0
+2022-07-11 18:31:24,778 [30] INFO  Photon.Common.LoadBalancer.ServerStateManager - Server state is set to online
+2022-07-11 18:31:24,782 [30] INFO  Photon.LoadBalancing.GameServer.OutgoingMasterServerPeer - Successfully registered at master server: serverId=7ecf4774-625d-4376-b706-16f83b74687d
+2022-07-11 18:31:24,783 [30] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: connection registered on master: address:127.0.0.1
+2022-07-11 18:31:24,785 [30] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnection - Update Expected Games Count event sent. endpoint:127.0.0.1:4520, connectionId:7d787a5c-b671-4592-bb6e-764f9bad6cf0

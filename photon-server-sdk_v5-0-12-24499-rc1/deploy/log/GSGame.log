@@ -23335,3 +23335,7 @@
 2022-07-11 18:17:53,741 [12] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level4, new=Level3
 2022-07-11 18:18:13,964 [24] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level3 to Level2 with input 28
 2022-07-11 18:18:13,965 [24] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level3, new=Level2
+2022-07-11 18:18:40,283 [15] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level2 to Level1 with input 18
+2022-07-11 18:18:40,283 [15] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level2, new=Level1
+2022-07-11 18:19:41,025 [8] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level1 to Lowest with input 8
+2022-07-11 18:19:41,025 [8] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level1, new=Lowest

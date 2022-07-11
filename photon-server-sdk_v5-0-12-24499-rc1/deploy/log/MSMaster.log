@@ -922,3 +922,11 @@ host_localhost, state_Normal, load_Level3, lbPriority_0, serverId_3412af34-de3c-
 2022-07-11 18:18:13,967 [24] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:3412af34-de3c-4b9f-ac51-1627820354de], State:Normal, Load:Level3, Prio:0, Weight:13], oldWorkload=Level3, newWorkload=Level2
 2022-07-11 18:18:13,968 [24] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level2 and load of the rest=Level2
 2022-07-11 18:18:13,969 [24] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 18:18:40,283 [15] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level2 to Level1, PeerCount 1
+2022-07-11 18:18:40,283 [15] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:3412af34-de3c-4b9f-ac51-1627820354de], State:Normal, Load:Level2, Prio:0, Weight:15], oldWorkload=Level2, newWorkload=Level1
+2022-07-11 18:18:40,283 [15] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level1 and load of the rest=Level1
+2022-07-11 18:18:40,283 [15] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 18:19:41,025 [8] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level1 to Lowest, PeerCount 1
+2022-07-11 18:19:41,025 [8] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:3412af34-de3c-4b9f-ac51-1627820354de], State:Normal, Load:Level1, Prio:0, Weight:17], oldWorkload=Level1, newWorkload=Lowest
+2022-07-11 18:19:41,025 [8] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Lowest and load of the rest=Lowest
+2022-07-11 18:19:41,025 [8] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current

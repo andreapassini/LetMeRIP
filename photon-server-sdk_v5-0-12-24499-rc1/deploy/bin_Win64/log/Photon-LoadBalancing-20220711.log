@@ -1,0 +1,301 @@
+13180: 16:58:39.357 - ---
+13180: 16:58:39.357 - Service: "Photon Socket Server" starting
+13180: 16:58:39.358 - Config File: E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\bin_Win64\PhotonServer.config
+13180: 16:58:39.358 - Config|INFO| Adding config path macro: "[CONFIG]" - "E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\bin_Win64"
+13180: 16:58:39.358 - Config|INFO| Adding config path macro: "[DEPLOY]" - "[CONFIG]\.."
+13180: 16:58:39.358 - Config|INFO| Adding config path macro: "[EXE]" - "E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\bin_Win64"
+13180: 16:58:39.360 - Will produce at most: 10 crash dumps
+13180: 16:58:39.360 - Construction of service object complete
+13180: 16:58:39.362 - Server Starting...
+13180: 16:58:39.362 -    Tick count: 179025859 (wraps in: 47.6382 days)
+13180: 16:58:39.362 - Tick count 64: 179025859
+13180: 16:58:39.362 - ENet high resolution Tick count: 179040524 (wraps in: 47.638 days)
+13180: 16:58:39.362 - Photon Version: 5.0.12.7770
+13180: 16:58:39.362 - Photon Build: RELEASE - x64 - VS2019 (16.8) - 192829336
+13180: 16:58:39.362 - PID: 11676
+13180: 16:58:39.362 - EXE: E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\bin_Win64\PhotonSocketServer.exe
+13180: 16:58:39.362 - OpenSSL 1.1.1i  8 Dec 2020
+13180: 16:58:39.364 - Config File: E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\bin_Win64\PhotonServer.config
+13180: 16:58:39.365 - Will NOT log unimportant exceptions
+13180: 16:58:39.367 - Performance Counter Configuration for: "Photon Socket Server"
+13180: 16:58:39.367 - CPerformanceCounterInstaller::DumpCounterConfiguration() - Counters are not installed
+13180: 16:58:39.368 - Counters are installed? - "Photon Socket Server"
+13180: 16:58:39.368 - Not using perfmon performance counters as they are not currently installed. Run the service with /InstallCounters to install them.
+13180: 16:58:39.368 - Using in-proc performance counters, access via Interop API only
+13180: 16:58:39.375 - Shutdown timeout enabled: 60000ms
+13180: 16:58:39.375 - Starting I/O thread pool with 4 threads
+6872: 16:58:39.375 - InitialiseWorkerThread - I/O thread - COM enabled
+26792: 16:58:39.375 - InitialiseWorkerThread - I/O thread - COM enabled
+3368: 16:58:39.376 - InitialiseWorkerThread - I/O thread - COM enabled
+22524: 16:58:39.376 - InitialiseWorkerThread - I/O thread - COM enabled
+13180: 16:58:39.376 - ENet: buffer size: 4096
+13180: 16:58:39.376 - ENet: buffer pool: 5000
+13180: 16:58:39.376 - Max message size: 512000
+13180: 16:58:39.376 - CMultiPoolBufferAllocator::GetAllocator() - "CENetThreadPool"
+18452: 16:58:39.376 - Initialise - ENet thread pool thread
+1964: 16:58:39.376 - Initialise - ENet thread pool thread
+4068: 16:58:39.376 - Initialise - ENet thread pool thread
+23648: 16:58:39.376 - Initialise - ENet thread pool thread
+21656: 16:58:39.376 - Initialise - ENet thread pool thread
+23784: 16:58:39.376 - Initialise - ENet thread pool thread
+13056: 16:58:39.376 - Initialise - ENet thread pool thread
+13180: 16:58:39.376 - Starting ENet thread pool with the following settings
+13180: 16:58:39.376 - InitialThreads: 8 threads
+21728: 16:58:39.376 - Initialise - ENet thread pool thread
+13180: 16:58:39.376 - MinThreads: 8 threads
+13180: 16:58:39.376 - Thread pool is fixed size
+13180: 16:58:39.376 - OnlyDispatchTimers: False
+13180: 16:58:40.529 - Resolution ~ 147704 - 14ms
+13180: 16:58:40.529 - ENet timer granularity: 15ms
+13180: 16:58:40.529 - ENet high performance timers: False
+13180: 16:58:40.529 - Config|INFO| TCP S2S: no explicit configuration, using defaults. Add a <S2S> node to configure.
+13180: 16:58:40.529 - Config|INFO| TCP S2S:  - flow control: Max queued bytes: 50000
+13180: 16:58:40.529 - Config|INFO| TCP S2S:  - flow control: Notification step size: 25
+13180: 16:58:40.529 - Config|INFO| TCP S2S:  - no read timeout
+13180: 16:58:40.529 - Config|INFO| TCP S2S:  - rate limit: 32000 bytes per 250ms (125KB/sec)
+13180: 16:58:40.529 - Config|INFO| TCP S2S: Nagle: disabled
+13180: 16:58:40.529 - Config|INFO| TCP S2S: PingFrequency: 2500
+13180: 16:58:40.529 - Config|INFO| TCP S2S: MaxInboundMessageSize: 512000
+13180: 16:58:40.529 - Config|INFO| TCP S2S: MaxOutboundMessageSize: 512000
+13180: 16:58:40.529 - Config|INFO| TCP S2S: ConnectTimeout: 30000ms
+13180: 16:58:40.529 - Config|INFO| TCP S2S: No App Data inactivity timeout
+13180: 16:58:40.529 - Config|INFO| TCP S2S: No write completion timeout
+13180: 16:58:40.536 - GetRuntime - About to load CLR - versions available:
+13180: 16:58:40.536 - v2.0.50727
+13180: 16:58:40.536 - v4.0.30319
+13180: 16:58:40.536 - Configuration requests: "v4.0.30319"
+13180: 16:58:40.536 - About to load version: "v4.0.30319"
+13180: 16:58:40.539 - About to load runtime: PhotonHostRuntime.PhotonDomainManager from PhotonHostRuntime, Culture=neutral, PublicKeyToken=02C301B61B060C4D
+13180: 16:58:40.539 - CLRBaseDirectory set to "E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy"
+13180: 16:58:40.540 - Start: About to load CLR - versions available:
+13180: 16:58:40.540 - v2.0.50727
+13180: 16:58:40.540 - v4.0.30319
+13180: 16:58:40.540 - No preference in configuration file, will load latest.
+13180: 16:58:40.540 - About to load version: "v4.0.30319"
+13180: 16:58:40.540 - Using server GC
+13180: 16:58:40.540 - GC: Server garbage collector enabled
+13180: 16:58:40.540 - GC: Concurrent garbage collector enabled
+13180: 16:58:40.540 - GC: Trim on commit disabled
+13180: 16:58:40.540 - Using CLR config file: E:\andrea\UNI\MAGISTRALE\ANNO 1\OGD\Progetto\LetMeRIP\photon-server-sdk_v5-0-12-24499-rc1\deploy\bin_Win64\PhotonSocketServer.exe.config
+13180: 16:58:40.541 - Loaded version: "v4.0.30319"
+13180: 16:58:40.753 - Photon host runtime loaded
+13180: 16:58:42.052 - License is valid.
+13180: 16:58:42.052 - Licensed for 100 concurrent connections.
+13180: 16:58:42.052 - ENet: Ping interval: 1000 ms
+13180: 16:58:42.052 - ENet: Data sending delay: 5 ms
+13180: 16:58:42.052 - ENet: ACK sending delay: 5 ms
+13180: 16:58:42.052 - ENet: Max Reliable Data In Transit (awaiting ACKs) per peer : 51200 bytes
+13180: 16:58:42.052 - ENet: Per peer bandwidth limit
+13180: 16:58:42.052 - ENet: Transmit Rate Limit: 256 KB/Sec
+13180: 16:58:42.052 - ENet: Limit period: 200ms
+13180: 16:58:42.052 - ENet: Limit per period: 52428 bytes
+13180: 16:58:42.052 - ENet: Max queued data for transmission per peer: 512000 bytes
+13180: 16:58:42.052 - ENet: Minimum retransmit timeout: 200
+13180: 16:58:42.053 - ENet: No Maximum retransmit timeout
+13180: 16:58:42.053 - ENet: Minimum timeout: 5000ms
+13180: 16:58:42.053 - ENet: Maximum timeout: 30000ms
+13180: 16:58:42.053 - ENet: Max Inbound Reliable Data Queued (awaiting resends of earlier sequence numbers) per peer : 163840 bytes
+13180: 16:58:42.053 - ENet: Will validate inbound ENet datagram CRC if present
+13180: 16:58:42.053 - ENet: No RTT ACK adjustment timeout
+13180: 16:58:42.053 - ENet: Packet throttle enabled: True
+13180: 16:58:42.053 - ENet: Default packet throttle: 32
+13180: 16:58:42.053 - ENet: Packet throttle scale: 32
+13180: 16:58:42.053 - ENet: Packet throttle counter: 7
+13180: 16:58:42.053 - ENet: Round Trip throttle multiplier: 2
+13180: 16:58:42.053 - ENet: Unreliable Queue timeout: 5ms
+13180: 16:58:42.053 - ENet: AO: Initial queue size: 4096
+13180: 16:58:42.053 - ENet: AO: Max consecutive ops: 200
+13180: 16:58:42.053 - ENet: max pooled buffers in peer: 10
+13180: 16:58:42.053 - ENet: Packet trace ring buffer size: 10
+13180: 16:58:42.053 - ENet: No Application data inactivity timeout
+13180: 16:58:42.053 - CMultiPoolBufferAllocator::GetAllocator() - "CENetHost"
+13180: 16:58:42.053 - Config|INFO| New TCP: Max message size: 512000
+13180: 16:58:42.053 - About to load application: Master from Photon.LoadBalancing
+13180: 16:58:43.445 - Taking reference on default app domain
+13180: 16:58:43.808 - Application: "Master" started in app domain: 2
+13180: 16:58:43.808 - About to load application: Game from Photon.LoadBalancing
+13180: 16:58:44.995 - Taking reference on default app domain
+13180: 16:58:45.159 - Application: "Game" started in app domain: 3
+13180: 16:58:45.160 - About to load application: NameServer from Photon.NameServer
+13180: 16:58:46.354 - Taking reference on default app domain
+13180: 16:58:46.476 - Application: "NameServer" started in app domain: 4
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4530 - adding listener
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4530 - listen backlog: 150
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4530 - flow control: Max queued bytes: 50000
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4530 - flow control: Notification step size: 25
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4530 - read timeout: 10000ms
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4530 - rate limit: 32000 bytes per 250ms (125KB/sec)
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4530 - nagle disabled
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4530 - send "Fast Path" disabled
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4530 - Forcing all applications ids to: "Master"
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4530 - MaxInboundMessageSize: 512000
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4530 - MaxOutboundMessageSize: 512000
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4530 - no message rate limit - Set RateLimitMessagesSec to configure.
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4530 - Recording performance counters in instance: New TCP: 0.0.0.0:4530
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4531 - adding listener
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4531 - listen backlog: 150
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4531 - flow control: Max queued bytes: 50000
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4531 - flow control: Notification step size: 25
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4531 - read timeout: 10000ms
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4531 - rate limit: 32000 bytes per 250ms (125KB/sec)
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4531 - nagle disabled
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4531 - send "Fast Path" disabled
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4531 - Forcing all applications ids to: "Game"
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4531 - MaxInboundMessageSize: 512000
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4531 - MaxOutboundMessageSize: 512000
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4531 - no message rate limit - Set RateLimitMessagesSec to configure.
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4531 - Recording performance counters in instance: New TCP: 0.0.0.0:4531
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4533 - adding listener
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4533 - listen backlog: 150
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4533 - flow control: Max queued bytes: 50000
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4533 - flow control: Notification step size: 25
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4533 - read timeout: 10000ms
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4533 - rate limit: 32000 bytes per 250ms (125KB/sec)
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4533 - nagle disabled
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4533 - send "Fast Path" disabled
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4533 - Forcing all applications ids to: "NameServer"
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4533 - MaxInboundMessageSize: 512000
+13180: 16:58:46.476 - Config|INFO| New TCP: 0.0.0.0:4533 - MaxOutboundMessageSize: 512000
+13180: 16:58:46.477 - Config|INFO| New TCP: 0.0.0.0:4533 - no message rate limit - Set RateLimitMessagesSec to configure.
+13180: 16:58:46.477 - Config|INFO| New TCP: 0.0.0.0:4533 - Recording performance counters in instance: New TCP: 0.0.0.0:4533
+13180: 16:58:46.477 - Config|INFO| New TCP: 0.0.0.0:4520 - adding listener
+13180: 16:58:46.477 - Config|INFO| New TCP: 0.0.0.0:4520 - listen backlog: 150
+13180: 16:58:46.477 - Config|INFO| New TCP: 0.0.0.0:4520 - flow control: Max queued bytes: 50000
+13180: 16:58:46.477 - Config|INFO| New TCP: 0.0.0.0:4520 - flow control: Notification step size: 25
+13180: 16:58:46.477 - Config|INFO| New TCP: 0.0.0.0:4520 - read timeout: 10000ms
+13180: 16:58:46.477 - Config|INFO| New TCP: 0.0.0.0:4520 - rate limit: 32000 bytes per 250ms (125KB/sec)
+13180: 16:58:46.477 - Config|INFO| New TCP: 0.0.0.0:4520 - nagle disabled
+13180: 16:58:46.477 - Config|INFO| New TCP: 0.0.0.0:4520 - send "Fast Path" disabled
+13180: 16:58:46.477 - Config|INFO| New TCP: 0.0.0.0:4520 - MaxInboundMessageSize: 512000
+13180: 16:58:46.477 - Config|INFO| New TCP: 0.0.0.0:4520 - MaxOutboundMessageSize: 512000
+13180: 16:58:46.477 - Config|INFO| New TCP: 0.0.0.0:4520 - no message rate limit - Set RateLimitMessagesSec to configure.
+13180: 16:58:46.477 - Config|INFO| New TCP: 0.0.0.0:4520 - Recording performance counters in instance: New TCP: 0.0.0.0:4520
+13180: 16:58:46.477 - ENet: Host Settings: EncTypesAllowed: ALL
+13180: 16:58:46.477 - Config|INFO| NewUDP - Forcing all applications ids to: "Master"
+13180: 16:58:46.477 - Config|INFO| NewUDP - MaxInboundMessageSize: 512000
+13180: 16:58:46.477 - ENet: EncTypesAllowed: ALL
+13180: 16:58:46.477 - NewUDP: address specified as: "0.0.0.0" adding listener to each available IPv4 address
+13180: 16:58:46.477 - NewUDP: Adding listener on: 192.168.178.20: 5055 with a listen backlog of: 500
+13180: 16:58:46.477 - CMultiPoolBufferAllocator::GetAllocator() - "CUDPSocketServer:UDP:192.168.178.20:5055"
+13180: 16:58:46.477 - NewUDP: Adding listener on: 127.0.0.1: 5055 with a listen backlog of: 500
+13180: 16:58:46.477 - CMultiPoolBufferAllocator::GetAllocator() - "CUDPSocketServer:UDP:127.0.0.1:5055"
+13180: 16:58:46.477 - Config|INFO| NewUDP - Forcing all applications ids to: "Master"
+13180: 16:58:46.477 - Config|INFO| NewUDP - MaxInboundMessageSize: 512000
+13180: 16:58:46.477 - ENet: EncTypesAllowed: ALL
+13180: 16:58:46.477 - NewUDP: address specified as: "0.0.0.0" adding listener to each available IPv4 address
+13180: 16:58:46.478 - NewUDP: Adding listener on: 192.168.178.20: 27001 with a listen backlog of: 500
+13180: 16:58:46.478 - CMultiPoolBufferAllocator::GetAllocator() - "CUDPSocketServer:UDP:192.168.178.20:27001"
+13180: 16:58:46.478 - NewUDP: Adding listener on: 127.0.0.1: 27001 with a listen backlog of: 500
+13180: 16:58:46.478 - CMultiPoolBufferAllocator::GetAllocator() - "CUDPSocketServer:UDP:127.0.0.1:27001"
+13180: 16:58:46.478 - Config|INFO| NewUDP - Forcing all applications ids to: "Game"
+13180: 16:58:46.478 - Config|INFO| NewUDP - MaxInboundMessageSize: 512000
+13180: 16:58:46.478 - ENet: EncTypesAllowed: ALL
+13180: 16:58:46.478 - NewUDP: address specified as: "0.0.0.0" adding listener to each available IPv4 address
+13180: 16:58:46.478 - NewUDP: Adding listener on: 192.168.178.20: 5056 with a listen backlog of: 500
+13180: 16:58:46.478 - CMultiPoolBufferAllocator::GetAllocator() - "CUDPSocketServer:UDP:192.168.178.20:5056"
+13180: 16:58:46.478 - NewUDP: Adding listener on: 127.0.0.1: 5056 with a listen backlog of: 500
+13180: 16:58:46.478 - CMultiPoolBufferAllocator::GetAllocator() - "CUDPSocketServer:UDP:127.0.0.1:5056"
+13180: 16:58:46.478 - Config|INFO| NewUDP - Forcing all applications ids to: "Game"
+13180: 16:58:46.478 - Config|INFO| NewUDP - MaxInboundMessageSize: 512000
+13180: 16:58:46.478 - ENet: EncTypesAllowed: ALL
+13180: 16:58:46.478 - NewUDP: address specified as: "0.0.0.0" adding listener to each available IPv4 address
+13180: 16:58:46.478 - NewUDP: Adding listener on: 192.168.178.20: 27002 with a listen backlog of: 500
+13180: 16:58:46.478 - CMultiPoolBufferAllocator::GetAllocator() - "CUDPSocketServer:UDP:192.168.178.20:27002"
+13180: 16:58:46.478 - NewUDP: Adding listener on: 127.0.0.1: 27002 with a listen backlog of: 500
+13180: 16:58:46.478 - CMultiPoolBufferAllocator::GetAllocator() - "CUDPSocketServer:UDP:127.0.0.1:27002"
+13180: 16:58:46.478 - Config|INFO| NewUDP - Forcing all applications ids to: "NameServer"
+13180: 16:58:46.478 - Config|INFO| NewUDP - MaxInboundMessageSize: 512000
+13180: 16:58:46.478 - ENet: EncTypesAllowed: ALL
+13180: 16:58:46.478 - NewUDP: address specified as: "0.0.0.0" adding listener to each available IPv4 address
+13180: 16:58:46.479 - NewUDP: Adding listener on: 192.168.178.20: 5058 with a listen backlog of: 500
+13180: 16:58:46.479 - CMultiPoolBufferAllocator::GetAllocator() - "CUDPSocketServer:UDP:192.168.178.20:5058"
+13180: 16:58:46.479 - NewUDP: Adding listener on: 127.0.0.1: 5058 with a listen backlog of: 500
+13180: 16:58:46.479 - CMultiPoolBufferAllocator::GetAllocator() - "CUDPSocketServer:UDP:127.0.0.1:5058"
+13180: 16:58:46.479 - Config|INFO| NewUDP - Forcing all applications ids to: "NameServer"
+13180: 16:58:46.479 - Config|INFO| NewUDP - MaxInboundMessageSize: 512000
+13180: 16:58:46.479 - ENet: EncTypesAllowed: ALL
+13180: 16:58:46.479 - NewUDP: address specified as: "0.0.0.0" adding listener to each available IPv4 address
+13180: 16:58:46.479 - NewUDP: Adding listener on: 192.168.178.20: 27000 with a listen backlog of: 500
+13180: 16:58:46.479 - CMultiPoolBufferAllocator::GetAllocator() - "CUDPSocketServer:UDP:192.168.178.20:27000"
+13180: 16:58:46.479 - NewUDP: Adding listener on: 127.0.0.1: 27000 with a listen backlog of: 500
+13180: 16:58:46.479 - CMultiPoolBufferAllocator::GetAllocator() - "CUDPSocketServer:UDP:127.0.0.1:27000"
+13180: 16:58:46.479 - Config|INFO| HTTP: 0.0.0.0:9090 (*:9090::Master) - adding listener
+13180: 16:58:46.479 - Config|INFO| HTTP: 0.0.0.0:9090 (*:9090::Master) - listen backlog: 150
+13180: 16:58:46.479 - Config|INFO| HTTP: 0.0.0.0:9090 (*:9090::Master) - flow control: Max queued bytes: 50000
+13180: 16:58:46.479 - Config|INFO| HTTP: 0.0.0.0:9090 (*:9090::Master) - flow control: Notification step size: 25
+13180: 16:58:46.479 - Config|INFO| HTTP: 0.0.0.0:9090 (*:9090::Master) - read timeout: 10000ms
+13180: 16:58:46.479 - Config|INFO| HTTP: 0.0.0.0:9090 (*:9090::Master) - rate limit: 32000 bytes per 250ms (125KB/sec)
+13180: 16:58:46.479 - Config|INFO| HTTP: 0.0.0.0:9090 (*:9090::Master) - nagle disabled
+13180: 16:58:46.479 - Config|INFO| HTTP: 0.0.0.0:9090 (*:9090::Master) - MaxInboundMessageSize: 512000
+13180: 16:58:46.479 - Config|INFO| HTTP: 0.0.0.0:9090 (*:9090::Master) - MaxOutboundMessageSize: 512000
+13180: 16:58:46.479 - Config|INFO| HTTP: 0.0.0.0:9090 (*:9090::Master) - Recording performance counters in instance: *:9090::Master
+13180: 16:58:46.479 - Config|INFO| *:9090::Master - permitted origins: "*"
+13180: 16:58:46.479 - Config|INFO| *:9090::Master - disable nagle: True
+13180: 16:58:46.479 - Config|INFO| *:9090::Master - adding cache suppression headers
+13180: 16:58:46.479 - Config|INFO| *:9090::Master - Recording performance counters in instance: *:9090::Master
+13180: 16:58:46.479 - Config|INFO| *:9090::Master - permitted origins: "*"
+13180: 16:58:46.479 - Config|INFO| *:9090::Master - disable nagle: True
+13180: 16:58:46.479 - Config|INFO| *:9090::Master - adding cache suppression headers
+13180: 16:58:46.479 - Config|INFO| *:9090::Master - Recording performance counters in instance: *:9090::Master
+13180: 16:58:46.479 - Config|INFO| *:9090::Master - inactivity timeout: 10000ms
+13180: 16:58:46.479 - Config|INFO| HTTP: 0.0.0.0:9090 (*:9090::Master) - Per route performance counters are disabled when there's only one route
+13180: 16:58:46.479 - Config|INFO| HTTP: 0.0.0.0:9090 (*:9090::Master) - HTTP Keep-Alive timeout set from inactivity timeout: 10 seconds
+13180: 16:58:46.479 - Config|INFO| *:9090::Master:/* - permitted origins: "*"
+13180: 16:58:46.479 - Config|INFO| *:9090::Master:/* - peer type: WebSocket
+13180: 16:58:46.479 - Config|INFO| *:9090::Master:/* - adding cache suppression headers
+13180: 16:58:46.479 - Config|INFO| *:9090::Master:/* - inactivity timeout: 10000ms
+13180: 16:58:46.479 - Config|INFO| *:9090::Master:/* - Forcing all applications ids to: "Master"
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9091 (*:9091::Game) - adding listener
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9091 (*:9091::Game) - listen backlog: 150
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9091 (*:9091::Game) - flow control: Max queued bytes: 50000
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9091 (*:9091::Game) - flow control: Notification step size: 25
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9091 (*:9091::Game) - read timeout: 10000ms
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9091 (*:9091::Game) - rate limit: 32000 bytes per 250ms (125KB/sec)
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9091 (*:9091::Game) - nagle disabled
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9091 (*:9091::Game) - MaxInboundMessageSize: 512000
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9091 (*:9091::Game) - MaxOutboundMessageSize: 512000
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9091 (*:9091::Game) - Recording performance counters in instance: *:9091::Game
+13180: 16:58:46.480 - Config|INFO| *:9091::Game - permitted origins: "*"
+13180: 16:58:46.480 - Config|INFO| *:9091::Game - disable nagle: True
+13180: 16:58:46.480 - Config|INFO| *:9091::Game - adding cache suppression headers
+13180: 16:58:46.480 - Config|INFO| *:9091::Game - Recording performance counters in instance: *:9091::Game
+13180: 16:58:46.480 - Config|INFO| *:9091::Game - permitted origins: "*"
+13180: 16:58:46.480 - Config|INFO| *:9091::Game - disable nagle: True
+13180: 16:58:46.480 - Config|INFO| *:9091::Game - adding cache suppression headers
+13180: 16:58:46.480 - Config|INFO| *:9091::Game - Recording performance counters in instance: *:9091::Game
+13180: 16:58:46.480 - Config|INFO| *:9091::Game - inactivity timeout: 10000ms
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9091 (*:9091::Game) - Per route performance counters are disabled when there's only one route
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9091 (*:9091::Game) - HTTP Keep-Alive timeout set from inactivity timeout: 10 seconds
+13180: 16:58:46.480 - Config|INFO| *:9091::Game:/* - permitted origins: "*"
+13180: 16:58:46.480 - Config|INFO| *:9091::Game:/* - peer type: WebSocket
+13180: 16:58:46.480 - Config|INFO| *:9091::Game:/* - adding cache suppression headers
+13180: 16:58:46.480 - Config|INFO| *:9091::Game:/* - inactivity timeout: 10000ms
+13180: 16:58:46.480 - Config|INFO| *:9091::Game:/* - Forcing all applications ids to: "Game"
+13180: 16:58:46.480 - Config|INFO| *:9091::Game - websocket ping: 2000ms
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9093 (*:9093::NameServer) - adding listener
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9093 (*:9093::NameServer) - listen backlog: 150
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9093 (*:9093::NameServer) - flow control: Max queued bytes: 50000
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9093 (*:9093::NameServer) - flow control: Notification step size: 25
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9093 (*:9093::NameServer) - read timeout: 10000ms
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9093 (*:9093::NameServer) - rate limit: 32000 bytes per 250ms (125KB/sec)
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9093 (*:9093::NameServer) - nagle disabled
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9093 (*:9093::NameServer) - MaxInboundMessageSize: 512000
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9093 (*:9093::NameServer) - MaxOutboundMessageSize: 512000
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9093 (*:9093::NameServer) - Recording performance counters in instance: *:9093::NameServer
+13180: 16:58:46.480 - Config|INFO| *:9093::NameServer - permitted origins: "*"
+13180: 16:58:46.480 - Config|INFO| *:9093::NameServer - disable nagle: True
+13180: 16:58:46.480 - Config|INFO| *:9093::NameServer - adding cache suppression headers
+13180: 16:58:46.480 - Config|INFO| *:9093::NameServer - Recording performance counters in instance: *:9093::NameServer
+13180: 16:58:46.480 - Config|INFO| *:9093::NameServer - permitted origins: "*"
+13180: 16:58:46.480 - Config|INFO| *:9093::NameServer - disable nagle: True
+13180: 16:58:46.480 - Config|INFO| *:9093::NameServer - adding cache suppression headers
+13180: 16:58:46.480 - Config|INFO| *:9093::NameServer - Recording performance counters in instance: *:9093::NameServer
+13180: 16:58:46.480 - Config|INFO| *:9093::NameServer - inactivity timeout: 10000ms
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9093 (*:9093::NameServer) - Per route performance counters are disabled when there's only one route
+13180: 16:58:46.480 - Config|INFO| HTTP: 0.0.0.0:9093 (*:9093::NameServer) - HTTP Keep-Alive timeout set from inactivity timeout: 10 seconds
+13180: 16:58:46.480 - Config|INFO| *:9093::NameServer:/* - permitted origins: "*"
+13180: 16:58:46.480 - Config|INFO| *:9093::NameServer:/* - peer type: WebSocket
+13180: 16:58:46.480 - Config|INFO| *:9093::NameServer:/* - adding cache suppression headers
+13180: 16:58:46.480 - Config|INFO| *:9093::NameServer:/* - inactivity timeout: 10000ms
+13180: 16:58:46.480 - Config|INFO| *:9093::NameServer:/* - Forcing all applications ids to: "NameServer"
+13180: 16:58:46.548 - Service is running...

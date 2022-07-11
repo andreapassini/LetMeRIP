@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ExitgamesMSBuildTasksPath>.\</ExitgamesMSBuildTasksPath>
+    <ExitgamesMSBuildTasksLib>$(ExitgamesMSBuildTasksPath)\EGMSBuildExt.dll</ExitgamesMSBuildTasksLib>
+  </PropertyGroup>
+
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="MSBuildExt.SmartExec"/>
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="MSBuildExt.Console"/>
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="MSBuildExt.FileUpdate" />
+
+  <!--Configuration-->
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="EGBuildTasks.EGTFileContentValidation" />
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="EGBuildTasks.EGTRenameReplace" />
+
+  <!--SVN-->
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="MSBuild.Community.Tasks.Subversion.SvnCheckout" />
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="MSBuild.Community.Tasks.Subversion.SvnClient" />
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="MSBuild.Community.Tasks.Subversion.SvnCopy" />
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="MSBuild.Community.Tasks.Subversion.SvnCommit" />
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="MSBuild.Community.Tasks.Subversion.SvnExport" />
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="MSBuild.Community.Tasks.Subversion.SvnInfo" />
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="MSBuild.Community.Tasks.Subversion.SvnUpdate" />
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="MSBuild.Community.Tasks.Subversion.SvnVersion" />
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="MSBuild.Community.Tasks.Subversion.SvnStatus" />
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="MSBuild.Community.Tasks.Time" />
+  <UsingTask AssemblyFile="$(ExitgamesMSBuildTasksLib)" TaskName="MSBuild.Community.Tasks.Zip" />
+
+</Project>

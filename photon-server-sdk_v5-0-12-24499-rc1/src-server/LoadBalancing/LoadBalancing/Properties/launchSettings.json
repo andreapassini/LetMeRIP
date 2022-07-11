@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "LoadBalancing": {
+      "commandName": "Executable",
+      "executablePath": "../../../../deploy/bin_Win64/PhotonSocketServer.exe",
+      "commandLineArgs": "/debug LoadBalancing /config PhotonServer.LB.Dev.config",
+      "workingDirectory": "../../dev_out/framework/config"
+    }
+  }
+}

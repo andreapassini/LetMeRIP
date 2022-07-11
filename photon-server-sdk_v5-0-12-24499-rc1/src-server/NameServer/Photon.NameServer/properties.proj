@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Error" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+
+    <AuthTokenKey>76B2814E-2A50-4E29-838A-20411D335FC9</AuthTokenKey>
+    <HMACTokenKey>DD6FD4DE-BF09-46A1-833E-ACDC22DD3FC7</HMACTokenKey>
+    <Region>EU</Region>
+    <PrivateCloud>Public</PrivateCloud>
+    <Cluster>Default</Cluster>
+
+    <PublicMasterServerPortUdp>5055</PublicMasterServerPortUdp>
+    <PublicMasterServerPortTcp>4530</PublicMasterServerPortTcp>
+    <PublicMasterServerPortWebSocket>9090</PublicMasterServerPortWebSocket>
+    <PublicMasterServerPortSecureWebSocket>19090</PublicMasterServerPortSecureWebSocket>
+    <MasterServerWsUrlPath>Master</MasterServerWsUrlPath>
+
+    <OnlyLogLimitsViolations>true</OnlyLogLimitsViolations>
+
+    <NSCustomAuthLimitHttpResponseMaxSize>20000</NSCustomAuthLimitHttpResponseMaxSize>
+  </PropertyGroup>
+
+</Project>

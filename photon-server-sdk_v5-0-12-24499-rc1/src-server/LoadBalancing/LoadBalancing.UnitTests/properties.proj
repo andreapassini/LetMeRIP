@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <PluginName>TestPlugins</PluginName>
+    <PluginAssemblyName>TestPlugins.dll</PluginAssemblyName>
+    <PluginType>TestPlugins.PluginFactory</PluginType>
+
+    <PluginBaseUrl>http://localhost:55557/realtime-webhooks-1.2</PluginBaseUrl>
+
+    <AuthTokenKey>76B2814E-2A50-4E29-838A-20411D335FC9</AuthTokenKey>
+    <HMACTokenKey>DD6FD4DE-BF09-46A1-833E-ACDC22DD3FC7</HMACTokenKey>
+
+    <Region>EU</Region>
+
+    <AllowPlugins>True</AllowPlugins>
+
+    <AllowCustomAuth>True</AllowCustomAuth>
+    <AllowAnonymous>True</AllowAnonymous>
+    <CustomAuthUrl>https://wt-e4c18d407aa73a40e4182aaf00a2a2eb-0.run.webtask.io/auth/auth-demo</CustomAuthUrl>
+
+    <EventCacheEventsCountLimit>10</EventCacheEventsCountLimit>
+    <EventCacheSlicesCountLimit>10</EventCacheSlicesCountLimit>
+    <ActorEventCacheEventsCountLimit>10</ActorEventCacheEventsCountLimit>
+
+    <WrongWordsForQueryData>ALTER;CREATE;DELETE;DROP;EXEC;EXECUTE;INSERT;INSERT INTO;MERGE;SELECT;UPDATE;UNION;UNION ALL</WrongWordsForQueryData>
+    <OnlyLogQueryDataErrors>False</OnlyLogQueryDataErrors>
+
+    <MasterIPAddress>127.0.0.1</MasterIPAddress>
+    <PublicIPAddress>127.0.0.1</PublicIPAddress>
+    <EnablePerformanceCounters>false</EnablePerformanceCounters>
+
+    <OnlyLogLimitsViolations>false</OnlyLogLimitsViolations>
+    <SupportedProtocols></SupportedProtocols>
+
+    <GSLimitMaxPropertiesSizePerGame>800</GSLimitMaxPropertiesSizePerGame>
+    <GSWebRPCLimitHttpResponseMaxSize>1024</GSWebRPCLimitHttpResponseMaxSize>
+    <GSHttpQueueLimitHttpResponseMaxSize>1024</GSHttpQueueLimitHttpResponseMaxSize>
+
+    <MSLimitMaxPropertiesSizePerRequest>51000</MSLimitMaxPropertiesSizePerRequest>
+
+    <GameServerWsUrlPath>Game</GameServerWsUrlPath>
+
+    <EnableNamedPipe>true</EnableNamedPipe>
+  </PropertyGroup>
+
+</Project>

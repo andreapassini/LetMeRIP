@@ -1,0 +1,1045 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>bolt.compiler</name>
+    </assembly>
+    <members>
+        <member name="T:Photon.Bolt.Compiler.AxisSelections">
+            <summary>
+            Enum for Axis Selection
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AxisSelections.XYZ">
+            <summary>All Axis</summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AxisSelections.XY">
+            <summary>XY Axis</summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AxisSelections.XZ">
+            <summary>ZX Axis</summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AxisSelections.YZ">
+            <summary>YZ Axis</summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AxisSelections.X">
+            <summary>X Axis</summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AxisSelections.Y">
+            <summary>Y Axis</summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AxisSelections.Z">
+            <summary>Z Axis</summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AxisSelections.Disabled">
+            <summary>Disabled for all Axis</summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.ReplicationMode">
+            <summary>
+            Enum for the Replication Mode
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.ExtrapolationVelocityModes">
+            <summary>
+            Enum to select which velocity used to extrapolate the position of the transform
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.SmoothingAlgorithms">
+            <summary>
+            Enum to select the Smoothing Algorithm
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.TransformSpaces">
+            <summary>
+            Enum to select the Transform Space of positioning
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.TransformRotationMode">
+            <summary>
+            Enum to select the Rotation mode of Quaternions inside a Transform
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.MecanimMode">
+            <summary>
+            Enum to select the Property Mecanim mode when synchonizing properties
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.MecanimDirection">
+            <summary>
+            Enum to select the mode where the Animation properties would be read and written 
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.MecanimDirection.UsingAnimatorMethods">
+            <summary>
+            Uses the Animator methods to read and write values from the Animator controller
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.MecanimDirection.UsingBoltProperties">
+            <summary>
+            Uses Bolt property values from state to update the Mecanim properties
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.StringEncodings">
+            <summary>
+            Enum to select the String encoding
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.AssetFolder">
+            <summary>
+            Asset Folder
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetFolder.Deleted">
+            <summary>
+            Mark this Asset Folder as Deleted
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetFolder.Name">
+            <summary>
+            Name of Folder
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetFolder.Expanded">
+            <summary>
+            If it's expanded or not
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetFolder.Folders">
+            <summary>
+            List of Folders
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetFolder.Assets">
+            <summary>
+            List of Assets
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetFolder.Guid">
+            <summary>
+            GUID of Folder
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetFolder.Children">
+            <summary>
+            List of Children objects into this Folder
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetFolder.AssetsAll">
+            <summary>
+            All assets inside this folder, including on subfolders
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.CodeGenerator">
+            <summary>
+            Class responsible by generating code when Bolt is compiled
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.CodeGenerator.States">
+            <summary>
+            List of states
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.CodeGenerator.Objects">
+            <summary>
+            List of Objects
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.CodeGenerator.Events">
+            <summary>
+            List of Events
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.CodeGenerator.Commands">
+            <summary>
+            List of Commands
+            </summary>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.CodeGenerator.Run(Photon.Bolt.Compiler.Assets.BoltProject,System.String)">
+            <summary>
+            Run the Code Compiler in order to generate custom types based on the project definition
+            </summary>
+            <param name="context">Project definition</param>
+            <param name="file">Output file where the project will be created</param>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.CodeGenerator.FindFilter(System.Int32)">
+            <summary>
+            Search in the Filters list for a Filter with the argument index
+            </summary>
+            <param name="index">Index to search</param>
+            <returns>FilterDefinition reference</returns>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.CodeGenerator.FindState(System.Guid)">
+            <summary>
+            Find a State based on the GUID
+            </summary>
+            <param name="guid">GUID used to search the State</param>
+            <returns>StateDecorator reference</returns>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.CodeGenerator.FindStruct(System.Guid)">
+            <summary>
+            Find a Object Struct based on the GUID
+            </summary>
+            <param name="guid">GUID used to search the Object</param>
+            <returns>ObjectDecorator reference</returns>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.CodeGenerator.HasState(System.Guid)">
+            <summary>
+            Check if the current project contains the State with the GUID
+            </summary>
+            <param name="guid">GUID used to search for the State</param>
+            <returns>True if there is State witht his GUID, false otherwise</returns>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.CodeGenerator.DeclareInterface(System.String,System.String[])">
+            <summary>
+            Declare a new Interface inside the main Namespace used for the Bolt compilation
+            </summary>
+            <param name="name">Interface Name</param>
+            <param name="inherits">List of inherit interfaces</param>
+            <returns>CodeTypeDeclaration reference of the new Interface</returns>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.CodeGenerator.DeclareStruct(System.String)">
+            <summary>
+            Declare a new Struct inside the main Namespace used for the Bolt compilation
+            </summary>
+            <param name="name">Struct name</param>
+            <returns>CodeTypeDeclaration reference of the new Object Struct</returns>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.CodeGenerator.DeclareClass(System.String)">
+            <summary>
+            Declare a new Class Type inside the main Namespace used for the Bolt compilation
+            </summary>
+            <param name="name">Class name</param>
+            <returns>CodeTypeDeclaration reference of the new Class</returns>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.CommandObjectDecorator">
+            <summary>
+            Decorator for a Object on the Command Definition
+            </summary>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.CommandObjectDecorator.#ctor(Photon.Bolt.Compiler.ObjectDefinition)">
+            <summary>
+            Create a new Command Object Decorator based on the Object Definition
+            </summary>
+            <param name="def">Object Definition reference</param>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.CommandObjectDecorator.EmitAsInterface">
+            <summary>
+            Signal if should Emit as an Interface
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.CommandObjectDecorator.BaseInterface">
+            <summary>
+            Name of Base interface for this Asset Decorator
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.CommandObjectDecorator.BaseClassMeta">
+            <summary>
+            Defines the base class for an Asset Meta class
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.CommandObjectDecorator.BaseClass">
+            <summary>
+            Defines the base class for an Asset
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.CommandDecorator">
+            <summary>
+            Decorator for Commands
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.CommandDecorator.FactoryInterface">
+            <summary>
+            Base Command Factory Interface
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.CommandDecorator.BaseClass">
+            <summary>
+            Base Class for all Commands
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.CommandDecorator.EmitPropertyChanged">
+            <summary>
+            Define if a change on the property should be signaled
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.CommandDecorator.Properties">
+            <summary>
+            List of properties for this Command
+            </summary>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.CommandDecorator.#ctor(Photon.Bolt.Compiler.CommandDefinition)">
+            <summary>
+            Create a new Command Decorator based on the Command Definition
+            </summary>
+            <param name="def">Command Definition reference</param>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.EventDecorator">
+            <summary>
+            Defines a Event Decorator of a Event Definition
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.EventDecorator.FactoryInterface">
+            <summary>
+            Factory Interface Name
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.EventDecorator.BaseClass">
+            <summary>
+            Defines the base class for an Asset
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.EventDecorator.EmitPropertyChanged">
+            <summary>
+            Signal if changed property should be notified
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.EventDecorator.Properties">
+            <summary>
+            List of properties for this Asset
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.EventDecorator.ListenerInterface">
+            <summary>
+            Listener Interface Name
+            </summary>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.EventDecorator.#ctor(Photon.Bolt.Compiler.EventDefinition)">
+            <summary>
+            Create a new Event Decorator based on a Event Definition
+            </summary>
+            <param name="def">Event Definition reference</param>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.PropertyDecorator">
+            <summary>
+            Defines a Property Decorator, base for all property generators
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDecorator.OffsetStorage">
+            <summary>
+            Offset in Storage
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDecorator.OffsetObjects">
+            <summary>
+            Offset in the Objects 
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDecorator.OffsetProperties">
+            <summary>
+            Offset in the Properties
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDecorator.Generator">
+            <summary>
+            Reference to Property Decorator
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDecorator.DefiningAsset">
+            <summary>
+            Reference to the Asset Decorator
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDecorator.Definition">
+            <summary>
+            Reference to the Property Definition
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDecorator.Attributes">
+            <summary>
+            Member Atributes 
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.PropertyDecorator.ClrType">
+            <summary>
+            C# Type that represents this property
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.PropertyDecorator.RequiredObjects">
+            <summary>
+            How many objects are required for this Property
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.PropertyDecorator.RequiredStorage">
+            <summary>
+            How many storage spaces are required for this Property
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.PropertyDecorator.RequiredProperties">
+            <summary>
+            How many properties are required for this Property
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.PropertyDecorator.PropertyClassName">
+            <summary>
+            Return the full Property Type name used to construct the code
+            </summary>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.PropertyDecorator.CreateEmitter">
+            <summary>
+            Creates an code Emitter for a particular property type
+            </summary>
+            <returns>PropertyCodeEmitter reference</returns>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.PropertyDecorator.Decorate(System.Collections.Generic.IEnumerable{Photon.Bolt.Compiler.PropertyDefinition},Photon.Bolt.Compiler.AssetDecorator)">
+            <summary>
+            Fill the PropertyDefinition with information from the Decorators
+            </summary>
+            <param name="definitions">PropertyDefinition list to be filled</param>
+            <param name="asset">Asset decorator that will contain the new PropertyDecorator</param>
+            <returns>PropertyDecorator list already filled with custom data from the AssetDecorator</returns>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.PropertyDecorator.Decorate(Photon.Bolt.Compiler.PropertyDefinition,Photon.Bolt.Compiler.AssetDecorator)">
+            <summary>
+            Fill a PropertyDecorator with custom references from a PropertyDefinition and AssetDecorator
+            </summary>
+            <param name="definition">PropertyDefinition used as base for to create the new PropertyDecorator</param>
+            <param name="asset">AssetDecorator that will hold the new PropertyDecorator</param>
+            <returns>PropertyDecorator reference setup for use</returns>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.PropertyDecorator`1">
+            <summary>
+            Base type for especilized PropertyDecorators
+            </summary>
+            <typeparam name="T">PropertyType used for the particular PropertyDecorator</typeparam>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.PropertyDecorator`1.PropertyType">
+            <summary>
+            Reference to the Type that this PropertyDecorator holds
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.StateDecorator">
+            <summary>
+            Defines an State decorator, used to build State classes
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.StateDecorator.HasParent">
+            <summary>
+            Signal if this state has a parent State
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.StateDecorator.FactoryInterface">
+            <summary>
+            Return the Factory Interface Type
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.StateDecorator.BaseClass">
+            <summary>
+            Return the State base class
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.StateDecorator.EmitAsInterface">
+            <summary>
+            Signal if should emit as an interface
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.StateDecorator.EmitLegacyModifyMethod">
+            <summary>
+            Signal if the Modified code should be emitted
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.StateDecorator.BaseInterface">
+            <summary>
+            Name of Base interface for this Asset Decorator
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.StateDecorator.ParentInterfaces">
+            <summary>
+            List of Parent Interfaces for this State
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.StateDecorator.Properties">
+            <summary>
+            List of Properties from this State
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.StateDecorator.Parent">
+            <summary>
+            Parent State reference
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.StateDecorator.ParentList">
+            <summary>
+            List of Parents for this State
+            </summary>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.StateDecorator.#ctor(Photon.Bolt.Compiler.StateDefinition)">
+            <summary>
+            Creates a new State Decorator based on a State Definition
+            </summary>
+            <param name="def">State Definition to crete the State Decorator</param>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.AssetDecorator">
+            <summary>
+            Base class to define all Asset Types on Bolt
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetDecorator.TypeId">
+            <summary>
+            ID of the TYpe
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetDecorator.CountStorage">
+            <summary>
+            Total number of Storage space used by the Asset
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetDecorator.CountObjects">
+            <summary>
+            Total number of Objects on the Asset
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetDecorator.CountProperties">
+            <summary>
+            Total number of Properties on the Asset
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetDecorator.Generator">
+            <summary>
+            Reference to Code Generator
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetDecorator.Definition">
+            <summary>
+            Reference to the Asset Definition
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetDecorator.Guid">
+            <summary>
+            GUID for the Asset Decorator
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetDecorator.Name">
+            <summary>
+            Name of the Asset Decorator
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetDecorator.NameMeta">
+            <summary>
+            Name of the base Meta Class for this Asset Decorator
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetDecorator.BaseInterface">
+            <summary>
+            Name of Base interface for this Asset Decorator
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetDecorator.ParentInterfaces">
+            <summary>
+            List of Parent interfaces
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetDecorator.BaseClass">
+            <summary>
+            Defines the base class for an Asset
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetDecorator.BaseClassMeta">
+            <summary>
+            Defines the base class for an Asset Meta class
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetDecorator.NameInterface">
+            <summary>
+            Defines the name of the Interface of this Asset
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetDecorator.EmitLegacyModifyMethod">
+            <summary>
+            Signal if the Modified code should be emitted
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetDecorator.EmitAsInterface">
+            <summary>
+            Signal if should Emit code as Interface
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetDecorator.EmitPropertyChanged">
+            <summary>
+            Signal if changed property should be notified
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetDecorator.FactoryInterface">
+            <summary>
+            Factory Interface Name
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetDecorator.Properties">
+            <summary>
+            List of properties for this Asset
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.AssetDecorator`1">
+            <summary>
+            Asset Decorator designed for a particular Asset Definition
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetDecorator`1.Definition">
+            <summary>
+            Asset Definition Reference
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.ObjectDecorator">
+            <summary>
+            Defines a Object Decorator for a Object Definition
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.ObjectDecorator.FactoryInterface">
+            <summary>
+            Factory Interface Name
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.ObjectDecorator.Properties">
+            <summary>
+            List of properties for this Asset
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.ObjectDecorator.EmitLegacyModifyMethod">
+            <summary>
+            Signal if the Modified code should be emitted
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.ObjectDecorator.Dependencies">
+            <summary>
+            List of Object Decorator dependencies
+            </summary>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.ObjectDecorator.#ctor(Photon.Bolt.Compiler.ObjectDefinition)">
+            <summary>
+            Create a new Object Decorator based on an Object Definition
+            </summary>
+            <param name="def"></param>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.DomBlock">
+            <summary>
+            Represents a block o code generated by the Bolt compiler
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.DomBlock.Stmts">
+            <summary>
+            Gets all the statements of this block
+            </summary>
+            <value>The stmts.</value>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.DomBlock.Add(System.CodeDom.CodeExpression)">
+            <summary>
+            Add the specified expression to the statements
+            </summary>
+            <param name="expression">Expression.</param>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.DomBlock.Add(System.CodeDom.CodeStatement)">
+            <summary>
+            Add the specified expression to the statements
+            </summary>
+            <param name="statement">Statement.</param>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.DomBlock.#ctor(System.CodeDom.CodeStatementCollection,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Bolt.DomBlock"/> class.
+            </summary>
+            <param name="stmts">Collection of statements.</param>
+            <param name="prefix">Prefix.</param>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.DomBlock.#ctor(System.CodeDom.CodeStatementCollection)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Bolt.DomBlock"/> class
+            without a prefix
+            </summary>
+            <param name="stmts">Collection of statements.</param>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.DomBlock.TempVar">
+            <summary>
+            Creates a temporary var name
+            </summary>
+            <returns>The variable.</returns>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.EventCodeEmitter.EmitPost(System.CodeDom.CodeTypeDeclaration)">
+            <summary>
+            Create All the Post methods on the Events implmementations
+            You can use them to send and eventy more easily
+            </summary>
+            <param name="type">Event Type Declaration</param>
+            <remarks></remarks>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.PropertyCodeEmitter">
+            <summary>
+            Base class for the Propery Emitters, that are used to build code for each Property type
+            on the final generated code.
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.PropertyCodeEmitter.Offsets">
+            <summary>
+            Define the offsets of this property on the Storage
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyCodeEmitter.Offsets.OffsetStorage">
+            <summary>
+            Offset in Storage
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyCodeEmitter.Offsets.OffsetObjects">
+            <summary>
+            Offset in the Objects 
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyCodeEmitter.Offsets.OffsetProperties">
+            <summary>
+            Offset in the Properties
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyCodeEmitter.Decorator">
+            <summary>
+            Reference to Property Decorator
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.PropertyCodeEmitter.Generator">
+            <summary>
+            Referenece to Decorator Generator
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.PropertyCodeEmitter.StorageField">
+            <summary>
+            Build the Storage Field Name
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.PropertyCodeEmitter.SerializerClassName">
+            <summary>
+            Defines the Class Serialzer Name
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.PropertyCodeEmitter.AllowSetter">
+            <summary>
+            Enable Setter for the Property
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.PropertyCodeEmitter.VerifyModify">
+            <summary>
+            Enable if the modification should be verified
+            </summary>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.PropertyCodeEmitter.AddSettings(System.CodeDom.CodeExpression,System.CodeDom.CodeStatementCollection)">
+            <summary>
+            Add specific settings to the property code based on the property type
+            This can be the compression settings or similar, for example
+            </summary>
+            <param name="expr"></param>
+            <param name="statements"></param>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.INamedAsset">
+            <summary>
+            Defines as Named Asset
+            </summary>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.INamedAsset.GetName">
+            <summary>
+            Retrieve the Asset Name
+            </summary>
+            <returns>String with the Asset Name</returns>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.PropertyDefinition">
+            <summary>
+            Base class for all Property definition
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.Nudge">
+            <summary>
+            Mark property as nudged
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.Deleted">
+            <summary>
+            Mark property as deleted
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.IsArrayElement">
+            <summary>
+            If this property is element of an array
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.Adjust">
+            <summary>
+            Adjust property in the list 
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.Context">
+            <summary>
+            Reference the root Project
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.Name">
+            <summary>
+            Name of the Property
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.Enabled">
+            <summary>
+            Mark if property is enabled
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.Replicated">
+            <summary>
+            Makr if property should be replicated
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.Expanded">
+            <summary>
+            Mark if property is expanded or not
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.Controller">
+            <summary>
+            Mark if property should be replicated to everyone
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.ReplicationMode">
+            <summary>
+            Signal the replication mode of this property
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.Comment">
+            <summary>
+            Some comments of the property
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.Priority">
+            <summary>
+            Set the property priority
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.PropertyType">
+            <summary>
+            Set the Property Type
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.AssetSettings">
+            <summary>
+            Reference to Property Settings
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.PropertyDefinition.Filters">
+            <summary>
+            Flag mask of the filters used on this property
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.PropertyDefinition.StateAssetSettings">
+            <summary>
+            Retrieve the Property Settings as a PropertyStateSettings
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.PropertyDefinition.EventAssetSettings">
+            <summary>
+            Retrieve the Property Settings as a EventAssetSettings
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.PropertyDefinition.CommandAssetSettings">
+            <summary>
+            Retrieve the Property Settings as a CommandAssetSettings
+            </summary>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.PropertyDefinition.Oncreated">
+            <summary>
+            Setup the Property when created
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.Axis">
+            <summary>
+            Axis definition Offset
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.Axis.X">
+            <summary>
+            Axis offset for X axis
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.Axis.Y">
+            <summary>
+            Axis offset for Y axis
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.Axis.Z">
+            <summary>
+            Axis offset for Z axis
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.SortOrder">
+            <summary>
+            Asset Definition Sort Order
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.SortOrder.Manual">
+            <summary>
+            Manual Mode
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.SortOrder.Name">
+            <summary>
+            Sort by Name
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.SortOrder.Priority">
+            <summary>
+            Sort by priority
+            </summary>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.AssetDefinition">
+            <summary>
+            Asset definition describes all properties of an Bolt Asset
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetDefinition.Deleted">
+            <summary>
+            Mark this Definition as Deleted
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetDefinition.Project">
+            <summary>
+            Reference to Project where this Asset is defined
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetDefinition.Name">
+            <summary>
+            Name of the Asset
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetDefinition.Guid">
+            <summary>
+            GUID of Asset
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetDefinition.Comment">
+            <summary>
+            Custom comment for the Asset
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetDefinition.Enabled">
+            <summary>
+            Flag to enable the Asset
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetDefinition.Groups">
+            <summary>
+            List of Groups this Asset belongs to
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.AssetDefinition.SortOrder">
+            <summary>
+            Sort Order of this Asset
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.AssetDefinition.AllowedPropertyTypes">
+            <summary>
+            List of Type this Asset allows
+            </summary>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.Serialization.JsonSerializerUtils.SaveProject(Photon.Bolt.Compiler.Assets.BoltProject,System.String)">
+            <summary>
+            Serializes BoltProject to file.
+            </summary>
+            <returns><c>true</c>, if the reference was serialized, <c>false</c> otherwise.</returns>
+            <param name="project">BoltProject reference.</param>
+            <param name="path">Path to destination file.</param>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.Serialization.JsonSerializerUtils.LoadProject(Photon.Bolt.Compiler.Assets.BoltProject@,System.String)">
+            <summary>
+            Deserializes a BoltProject from a file.
+            </summary>
+            <returns><c>true</c>, if the BoltProject was deserialized, <c>false</c> otherwise.</returns>
+            <param name="project">BoltProject output.</param>
+            <param name="path">Path to JSON file.</param>
+            <exception cref="T:System.IO.FileNotFoundException">Thrown when the JSON file was not found at path</exception>
+        </member>
+        <member name="T:Photon.Bolt.Compiler.Assets.BoltProject">
+            <summary>
+            Represents the Asset collection of all networked data on the current game project
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.Assets.BoltProject.Assets">
+            <summary>
+            Collection of Assets on this particular project
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.Assets.BoltProject.ActiveGroup">
+            <summary>
+            Current active group
+            </summary>
+        </member>
+        <member name="F:Photon.Bolt.Compiler.Assets.BoltProject.Filters">
+            <summary>
+            List of filters applied to the assets
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.Assets.BoltProject.Groups">
+            <summary>
+            List of Defined groups
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.Assets.BoltProject.States">
+            <summary>
+            List of State Assets
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.Assets.BoltProject.Structs">
+            <summary>
+            List of Structs (Object) Assets
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.Assets.BoltProject.Events">
+            <summary>
+            List of Event Assets
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.Assets.BoltProject.Commands">
+            <summary>
+            List of Command Assets
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.Assets.BoltProject.EnabledFilters">
+            <summary>
+            List of enabled Filters
+            </summary>
+        </member>
+        <member name="P:Photon.Bolt.Compiler.Assets.BoltProject.UseFilters">
+            <summary>
+            If this Project is using Filters
+            </summary>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.Assets.BoltProject.#ctor">
+            <summary>
+            Initializes the internal Asset list
+            </summary>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.Assets.BoltProject.FindState(System.Guid)">
+            <summary>
+            Finds a state asset by its guid.
+            </summary>
+            <returns>The state or null if not found.</returns>
+            <param name="guid">GUID of the State.</param>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.Assets.BoltProject.GetInheritanceTree(Photon.Bolt.Compiler.StateDefinition)">
+            <summary>
+            Gets the inheritance tree of a State
+            </summary>
+            <returns>The inheritance tree.</returns>
+            <param name="state">State to check the inheritance tree</param>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.Assets.BoltProject.GetInheritanceTree(Photon.Bolt.Compiler.StateDefinition,System.Collections.Generic.List{System.Guid})">
+            <summary>
+            Gets the inheritance tree of a State and save to the list
+            </summary>
+            <param name="state">State to check the inheritance tree</param>
+            <param name="result">Result list of states.</param>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.Assets.BoltProject.Convert(Photon.Bolt.Compiler.Project)">
+            <summary>
+            Convert a Project into a reference of BoltProject
+            </summary>
+            <param name="project">Base project used for the conversion</param>
+            <returns>A reference a new BoltProject</returns>
+        </member>
+        <member name="M:Photon.Bolt.Compiler.Assets.BoltProject.DeepClone">
+            <summary>
+            Run a deep copy on the fields of the BoltProject
+            </summary>
+            <returns>A new reference of the BoltProject with all fields cloned</returns>
+        </member>
+    </members>
+</doc>

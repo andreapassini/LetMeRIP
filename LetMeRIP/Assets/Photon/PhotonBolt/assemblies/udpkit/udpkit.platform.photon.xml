@@ -1,0 +1,369 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>udpkit.platform.photon</name>
+    </assembly>
+    <members>
+        <member name="T:UdpKit.Platform.PhotonPlatform">
+            <summary>
+            Platform used to connect with the Photon Cloud
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.PhotonPlatform.PhotonConfig">
+            <summary>
+            Reference to a Configuration struct used to setup the PhotonPlatform
+            </summary>
+        </member>
+        <member name="M:UdpKit.Platform.PhotonPlatform.#ctor(UdpKit.Platform.PhotonPlatformConfig)">
+            <summary>
+            Constructor for PhotonPlatform based on a PhotonPlatformConfig 
+            </summary>
+            <param name="config">PhotonPlatformConfig reference used to configure the instance</param>
+        </member>
+        <member name="T:UdpKit.Platform.Photon.PhotonPoller">
+            <summary>
+            This class will act as a controller and bridge to the underlayng layer of Photon Realtime,
+            receiving/sending/treating messages using the Photon services.
+            </summary>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.PhotonPoller.CreatePoller(UdpKit.Platform.PhotonPlatform,UdpKit.Platform.PhotonPlatformConfig,System.Boolean)">
+            <summary>
+            Creates the Photon Poller instance. This will populate the internal instance with one of:
+            (i) If there is no instances of PhotonPoller in the scene, it will create a new one.
+            (ii) If there is only 1 instance of PhotonPoller in the scene, it will use this as the main instance.
+            (iii) If there is more then 1 instance in the scene, it will destroy copies but one, and use it as the main instance.
+            </summary>
+            <example>
+            <code>
+            void CreatePollerExample()
+            {
+                PhotonPoller.CreatePoller(new PhotonPlatformConfig().InitDefaults(), true);
+            }
+            </code>
+            </example>
+            <param name="photonPlatform">Reference to Photon Platform</param>
+            <param name="config">Configuration used to setup the PhotonPoller instance.</param>
+            <param name="force">If set to <c>true</c> will destroy the current main instance, in order to create a new one.</param>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.PhotonPoller.StartPhotonClient(UdpKit.UdpEndPoint,System.Action{System.Boolean,UdpKit.UdpConnectionDisconnectReason})">
+            <summary>
+            Starts the LoadBalancingClient.
+            </summary>
+            <param name="localEndPoint">End point.</param>
+            <param name="doneCallback">Callback that will be invoked at the end of the operation</param>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.PhotonPoller.RegisterInstance``1">
+            <summary>
+            Register a Type that fully implements PhotonPoller to be used as the main instance.
+            </summary>
+            <typeparam name="T">An External Type that extends PhotonPoller.</typeparam>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.PhotonPoller.InstatiatePoller(UdpKit.Platform.Photon.PhotonPoller@)">
+            <summary>
+            Creates a new PhotonPoller instance based on the External Type.
+            </summary>
+            <param name="photonPoller">Photon poller variable to be populated.</param>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.PhotonPoller.PollOut">
+            <summary>
+            Pushes out all queued messages on the <see cref="F:UdpKit.Platform.Photon.PhotonPoller._packetSend"/> list and send through Photon services
+            using <see cref="F:UdpKit.Platform.Photon.PhotonPoller.DATA_EVENT_CODE"/> as Event code.
+            </summary>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.PhotonPoller.SetHostInfo(UdpKit.UdpSession,System.Action{System.Boolean,UdpKit.UdpSessionError})">
+            <summary>
+            Setup host info based on a <see cref="T:UdpKit.UdpSession"/>
+            </summary>
+            <returns><c>true</c>, if host info was set, <c>false</c> otherwise.</returns>
+            <param name="session">Session information.</param>
+            <param name="result">Callback result that will be invoked at the end of the operation</param>
+        </member>
+        <member name="T:UdpKit.Platform.Photon.PhotonSession">
+            <summary>
+            This is a wrapper around the Photon Rooms used to expose the same API as the UdpSession
+            </summary>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.PhotonSession.Build(System.String)">
+            <summary>
+            Builds a Photon Session with only it's identifier name. This can be useful if you want to connect
+            to a specific session using the name of the room.
+            </summary>
+            <returns>An session with only it's name.</returns>
+            <param name="roomName">Room name.</param>
+        </member>
+        <member name="P:UdpKit.Platform.Photon.PhotonSession.Properties">
+            <summary>
+            Dictionary like structure that stores all properties of the room
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.Photon.PhotonSession.IsOpen">
+            <summary>
+            Signal if this session is open or not
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.Photon.PhotonSession.IsVisible">
+            <summary>
+            Signal if this session is visible or not
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.Photon.PhotonSession.IsDedicatedServer">
+            <summary>
+            Signal if this session is hosted by a dedicated server
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.Photon.PhotonSession.Source">
+            <summary>
+            Signal the source of this Session, in this case always <see cref="F:UdpKit.UdpSessionSource.Photon"/>
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.Photon.PhotonSession.IsPunchEnabled">
+            <summary>
+            Signal if this game session is published by a Server with NAT Punch enabled
+            </summary>
+        </member>
+        <member name="T:UdpKit.Platform.Photon.ConnectState">
+            <summary>
+            The current connection status
+            </summary>
+        </member>
+        <member name="T:UdpKit.Platform.Photon.PhotonRegion">
+            <summary>
+            Represents a Photon Region on the Cloud Service
+            </summary>
+        </member>
+        <member name="T:UdpKit.Platform.Photon.PhotonRegion.Regions">
+            <summary>
+            List of available regions
+            </summary>
+        </member>
+        <member name="F:UdpKit.Platform.Photon.PhotonRegion.regions">
+            <summary>
+            Map of the Regions Enum and the PhotonRegion struct, that holds meta data from the Regions
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.Photon.PhotonRegion.Code">
+            <summary>
+            Region CODE
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.Photon.PhotonRegion.Name">
+            <summary>
+            Region Full Name
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.Photon.PhotonRegion.City">
+            <summary>
+            City where the data center os located
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.Photon.PhotonRegion.Region">
+            <summary>
+            Region ENUM value
+            </summary>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.PhotonRegion.GetRegion(System.String)">
+            <summary>
+            Get a Region info based on the region code as string
+            </summary>
+            <param name="regionCode">Region Code</param>
+            <returns>PhotonRegion reference if exists</returns>
+            <remarks>It will throw an Exception if no Region was found with the Code</remarks>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.PhotonRegion.GetRegion(UdpKit.Platform.Photon.PhotonRegion.Regions)">
+            <summary>
+            Get a Region metadata based on the Region enum
+            </summary>
+            <param name="targetRegion">Region enum to look for</param>
+            <returns>PhotonRegion reference</returns>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.PhotonRegion.ToString">
+            <summary>
+            Build a string representation of the Region
+            </summary>
+            <returns>String describing the Region</returns>
+        </member>
+        <member name="T:UdpKit.Platform.Photon.Coroutine.RoutineManager">
+            <summary>
+            This class will act as the Corroutine manager from Unity and will run and control corroutines.
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.Photon.Realtime.PhotonClient.CurrentMasterId">
+            <summary>
+            Gets the current Master client of the current Room.
+            </summary>
+            <returns>The master client ID if the client in inside a Room, -1 otherwise.</returns>
+        </member>
+        <member name="F:UdpKit.Platform.Photon.Realtime.PhotonClient.retryJoinLobby">
+            <summary>
+            Retry Join lobby ?
+            true = yes
+            false = no
+            null = wait to leave the room
+            </summary>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.Realtime.PhotonClient.RealtimeFallbackThread">
+            <summary>
+            A thread which runs independent from the Update() calls.
+            Keeps connections online while loading or in background.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:UdpKit.Platform.Photon.Realtime.SocketUdpPool">
+            <summary>
+            Internal class to encapsulate the network i/o functionality for the realtime libary.
+            </summary>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.Realtime.SocketUdpPool.#ctor(ExitGames.Client.Photon.PeerBase)">
+            <summary>
+            Build a new custom Socket UDP
+            </summary>
+            <param name="npeer">Base Peer used for communication</param>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.Realtime.SocketUdpPool.Finalize">
+            <summary>
+            Dispose the UDP Socket
+            </summary>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.Realtime.SocketUdpPool.Dispose">
+            <summary>
+            Dispose implementation
+            </summary>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.Realtime.SocketUdpPool.Connect">
+            <summary>
+            Start the connection with the Cloud service
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.Realtime.SocketUdpPool.Disconnect">
+            <summary>
+            Disconnect from the Cloud service
+            </summary>
+            <returns>True if all went fine when disconnecting</returns>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.Realtime.SocketUdpPool.Send(System.Byte[],System.Int32)">
+            <summary>used by PhotonPeer*</summary>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.Realtime.SocketUdpPool.Receive(System.Byte[]@)">
+            <summary>
+            Receive data
+            </summary>
+        </member>
+        <member name="M:UdpKit.Platform.Photon.Realtime.SocketUdpPool.ReceiveLoop">
+            <summary>Endless loop, run in Receive Thread.</summary>
+        </member>
+        <member name="T:UdpKit.Platform.PhotonPlatformConfig">
+            <summary>
+            Photon Platform configuration class.
+            It holds the main configuration settings to setup the PhotonPlatform
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.PhotonPlatformConfig.AppId">
+            <summary>
+            Photon Application ID
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.PhotonPlatformConfig.AuthenticationValues">
+            <summary>
+            Custom Authentication Credentials
+            </summary>
+        </member>
+        <member name="F:UdpKit.Platform.PhotonPlatformConfig.Region">
+            <summary>
+            Region to Connect to. See <see cref="T:UdpKit.Platform.Photon.PhotonRegion"/>
+            </summary>
+        </member>
+        <member name="F:UdpKit.Platform.PhotonPlatformConfig.UsePunchThrough">
+            <summary>
+            Set to <code>true</code>, to enable the Punch Through behavior.
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.PhotonPlatformConfig.ConnectionProtocol">
+            <summary>
+            Selects the Connection Protocol used by the internal LoadBalancingClient when exchanging data with Photon Cloud
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.PhotonPlatformConfig.SerializationProtocol">
+            <summary>
+            Selects the Serializaion Protocol used by the internal LoadBalancingClient when exchanging data with Photon Cloud
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.PhotonPlatformConfig.ForceExternalEndPoint">
+            <summary>
+            This suppresses the STUN process and forces the usage of the configured IPEndPoint as the external endpoint
+            used to punch to this peer. This is mainly focused when you are running a GameServer on a dedicated cloud service
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.PhotonPlatformConfig.RoomCreateTimeout">
+            <summary>
+            Gets or sets the room creation timeout in seconds.
+            Min 10 sec, max 60 sec.
+            </summary>
+            <value>The room creation timeout.</value>
+        </member>
+        <member name="P:UdpKit.Platform.PhotonPlatformConfig.RoomJoinTimeout">
+            <summary>
+            Gets or sets the room join timeout in seconds.
+            Min 10 sec, max 60 sec.
+            </summary>
+            <value>The room join timeout.</value>
+        </member>
+        <member name="P:UdpKit.Platform.PhotonPlatformConfig.MaxConnections">
+            <summary>
+            Gets the max number of connections acceptable in the room.
+            </summary>
+        </member>
+        <member name="P:UdpKit.Platform.PhotonPlatformConfig.CustomSTUNServer">
+            <summary>
+            Set a custom STUN Server to be used on the punch process.
+            Must be described as "DNS-resolvable-name:port", for example: "stun.l.google.com:19302"
+            </summary>
+        </member>
+        <member name="F:UdpKit.Platform.PhotonPlatformConfig.BackgroundConnectionTimeout">
+            <summary>
+            Amount of time the background connection with the Photon Servers will be maintained until
+            timeout and stop sending acknowledge messages.
+            </summary>
+        </member>
+        <member name="F:UdpKit.Platform.PhotonPlatformConfig.CurrentPlatform">
+            <summary>
+            Current Running platform
+            </summary>
+        </member>
+        <member name="F:UdpKit.Platform.PhotonPlatformConfig.ConnectionRequestAttempts">
+            <summary>
+            Total Connection Request Attempts
+            </summary>
+        </member>
+        <member name="F:UdpKit.Platform.PhotonPlatformConfig.ConnectionLANRequestAttempts">
+            <summary>
+            Total Connection LAN Request Attempts
+            </summary>
+        </member>
+        <member name="M:UdpKit.Platform.PhotonPlatformConfig.#ctor">
+            <summary>
+            PhotonPlatformConfig constructor.
+            It will also initilize the configuration using the default settings
+            </summary>
+        </member>
+        <member name="M:UdpKit.Platform.PhotonPlatformConfig.InitDefaults">
+            <summary>
+            Initialize the Photon Configuration with the values from Bolt Settings
+            </summary>
+            <returns>The defaults.</returns>
+        </member>
+        <member name="M:UdpKit.Platform.PhotonPlatformConfig.UpdateBestRegion(UdpKit.Platform.Photon.PhotonRegion)">
+            <summary>
+            Save a Region as the Best Region on the Bolt Settings
+            </summary>
+            <param name="region">Region to save.</param>
+        </member>
+        <member name="M:UdpKit.Platform.PhotonPlatformConfig.IsAppId(System.String)">
+            <summary>
+            Valids an String as containing a AppID
+            </summary>
+            <returns><c>true</c>, if app identifier was valid, <c>false</c> otherwise.</returns>
+            <param name="val">Value.</param>
+        </member>
+    </members>
+</doc>

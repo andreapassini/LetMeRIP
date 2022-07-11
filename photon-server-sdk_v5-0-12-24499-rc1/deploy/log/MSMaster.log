@@ -1,0 +1,112 @@
+2022-07-11 18:55:13,267 [33] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Lowest to Level1, PeerCount 1
+2022-07-11 18:55:13,267 [33] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Lowest, Prio:0, Weight:20], oldWorkload=Lowest, newWorkload=Level1
+2022-07-11 18:55:13,268 [33] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level1 and load of the rest=Level1
+2022-07-11 18:55:13,268 [33] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 18:55:36,561 [24] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level1 to Level2, PeerCount 1
+2022-07-11 18:55:36,561 [24] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level1, Prio:0, Weight:17], oldWorkload=Level1, newWorkload=Level2
+2022-07-11 18:55:36,562 [24] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level2 and load of the rest=Level2
+2022-07-11 18:55:36,562 [24] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 18:56:49,433 [37] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level2 to Level1, PeerCount 1
+2022-07-11 18:56:49,434 [37] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level2, Prio:0, Weight:15], oldWorkload=Level2, newWorkload=Level1
+2022-07-11 18:56:49,434 [37] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level1 and load of the rest=Level1
+2022-07-11 18:56:49,434 [37] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 18:57:11,643 [25] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level1 to Lowest, PeerCount 1
+2022-07-11 18:57:11,643 [25] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level1, Prio:0, Weight:17], oldWorkload=Level1, newWorkload=Lowest
+2022-07-11 18:57:11,643 [25] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Lowest and load of the rest=Lowest
+2022-07-11 18:57:11,643 [25] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:01:15,092 [38] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Lowest to Level1, PeerCount 1
+2022-07-11 19:01:15,092 [38] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Lowest, Prio:0, Weight:20], oldWorkload=Lowest, newWorkload=Level1
+2022-07-11 19:01:15,092 [38] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level1 and load of the rest=Level1
+2022-07-11 19:01:15,092 [38] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:04:29,125 [25] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level1 to Lowest, PeerCount 1
+2022-07-11 19:04:29,125 [25] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level1, Prio:0, Weight:17], oldWorkload=Level1, newWorkload=Lowest
+2022-07-11 19:04:29,126 [25] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Lowest and load of the rest=Lowest
+2022-07-11 19:04:29,126 [25] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:09:32,201 [22] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Lowest to Level1, PeerCount 1
+2022-07-11 19:09:32,202 [22] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Lowest, Prio:0, Weight:20], oldWorkload=Lowest, newWorkload=Level1
+2022-07-11 19:09:32,202 [22] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level1 and load of the rest=Level1
+2022-07-11 19:09:32,202 [22] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:11:32,412 [36] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level1 to Lowest, PeerCount 1
+2022-07-11 19:11:32,412 [36] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level1, Prio:0, Weight:17], oldWorkload=Level1, newWorkload=Lowest
+2022-07-11 19:11:32,413 [36] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Lowest and load of the rest=Lowest
+2022-07-11 19:11:32,413 [36] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:11:57,629 [25] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Lowest to Level1, PeerCount 1
+2022-07-11 19:11:57,630 [25] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Lowest, Prio:0, Weight:20], oldWorkload=Lowest, newWorkload=Level1
+2022-07-11 19:11:57,630 [25] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level1 and load of the rest=Level1
+2022-07-11 19:11:57,631 [25] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:12:49,125 [27] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level1 to Level2, PeerCount 1
+2022-07-11 19:12:49,126 [27] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level1, Prio:0, Weight:17], oldWorkload=Level1, newWorkload=Level2
+2022-07-11 19:12:49,126 [27] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level2 and load of the rest=Level2
+2022-07-11 19:12:49,126 [27] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:13:43,704 [22] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level2 to Level1, PeerCount 1
+2022-07-11 19:13:43,704 [22] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level2, Prio:0, Weight:15], oldWorkload=Level2, newWorkload=Level1
+2022-07-11 19:13:43,705 [22] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level1 and load of the rest=Level1
+2022-07-11 19:13:43,705 [22] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:16:11,113 [33] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level1 to Lowest, PeerCount 1
+2022-07-11 19:16:11,113 [33] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level1, Prio:0, Weight:17], oldWorkload=Level1, newWorkload=Lowest
+2022-07-11 19:16:11,114 [33] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Lowest and load of the rest=Lowest
+2022-07-11 19:16:11,114 [33] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:20:56,987 [24] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Lowest to Level1, PeerCount 1
+2022-07-11 19:20:56,988 [24] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Lowest, Prio:0, Weight:20], oldWorkload=Lowest, newWorkload=Level1
+2022-07-11 19:20:56,988 [24] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level1 and load of the rest=Level1
+2022-07-11 19:20:56,988 [24] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:22:43,154 [22] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level1 to Lowest, PeerCount 1
+2022-07-11 19:22:43,154 [22] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level1, Prio:0, Weight:17], oldWorkload=Level1, newWorkload=Lowest
+2022-07-11 19:22:43,154 [22] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Lowest and load of the rest=Lowest
+2022-07-11 19:22:43,155 [22] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:23:18,543 [27] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Lowest to Level1, PeerCount 1
+2022-07-11 19:23:18,544 [27] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Lowest, Prio:0, Weight:20], oldWorkload=Lowest, newWorkload=Level1
+2022-07-11 19:23:18,544 [27] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level1 and load of the rest=Level1
+2022-07-11 19:23:18,545 [27] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:24:18,232 [37] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level1 to Lowest, PeerCount 1
+2022-07-11 19:24:18,232 [37] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level1, Prio:0, Weight:17], oldWorkload=Level1, newWorkload=Lowest
+2022-07-11 19:24:18,233 [37] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Lowest and load of the rest=Lowest
+2022-07-11 19:24:18,233 [37] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:33:35,027 [30] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Lowest to Level1, PeerCount 1
+2022-07-11 19:33:35,027 [30] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Lowest, Prio:0, Weight:20], oldWorkload=Lowest, newWorkload=Level1
+2022-07-11 19:33:35,028 [30] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level1 and load of the rest=Level1
+2022-07-11 19:33:35,028 [30] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:35:07,015 [30] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level1 to Lowest, PeerCount 1
+2022-07-11 19:35:07,015 [30] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level1, Prio:0, Weight:17], oldWorkload=Level1, newWorkload=Lowest
+2022-07-11 19:35:07,016 [30] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Lowest and load of the rest=Lowest
+2022-07-11 19:35:07,016 [30] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:37:49,678 [31] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Lowest to Level1, PeerCount 1
+2022-07-11 19:37:49,679 [31] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Lowest, Prio:0, Weight:20], oldWorkload=Lowest, newWorkload=Level1
+2022-07-11 19:37:49,679 [31] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level1 and load of the rest=Level1
+2022-07-11 19:37:49,680 [31] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:41:40,768 [24] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level1 to Lowest, PeerCount 1
+2022-07-11 19:41:40,768 [24] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level1, Prio:0, Weight:17], oldWorkload=Level1, newWorkload=Lowest
+2022-07-11 19:41:40,769 [24] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Lowest and load of the rest=Lowest
+2022-07-11 19:41:40,769 [24] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:44:48,765 [25] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Lowest to Level1, PeerCount 1
+2022-07-11 19:44:48,766 [25] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Lowest, Prio:0, Weight:20], oldWorkload=Lowest, newWorkload=Level1
+2022-07-11 19:44:48,766 [25] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level1 and load of the rest=Level1
+2022-07-11 19:44:48,766 [25] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:47:10,158 [37] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level1 to Lowest, PeerCount 1
+2022-07-11 19:47:10,158 [37] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level1, Prio:0, Weight:17], oldWorkload=Level1, newWorkload=Lowest
+2022-07-11 19:47:10,158 [37] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Lowest and load of the rest=Lowest
+2022-07-11 19:47:10,159 [37] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:47:46,521 [38] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Lowest to Level1, PeerCount 1
+2022-07-11 19:47:46,521 [38] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Lowest, Prio:0, Weight:20], oldWorkload=Lowest, newWorkload=Level1
+2022-07-11 19:47:46,522 [38] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level1 and load of the rest=Level1
+2022-07-11 19:47:46,522 [38] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:49:27,547 [33] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level1 to Lowest, PeerCount 1
+2022-07-11 19:49:27,547 [33] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level1, Prio:0, Weight:17], oldWorkload=Level1, newWorkload=Lowest
+2022-07-11 19:49:27,548 [33] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Lowest and load of the rest=Lowest
+2022-07-11 19:49:27,548 [33] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:50:58,389 [33] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Lowest to Level1, PeerCount 1
+2022-07-11 19:50:58,390 [33] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Lowest, Prio:0, Weight:20], oldWorkload=Lowest, newWorkload=Level1
+2022-07-11 19:50:58,390 [33] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level1 and load of the rest=Level1
+2022-07-11 19:50:58,390 [33] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:53:03,648 [31] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level1 to Lowest, PeerCount 1
+2022-07-11 19:53:03,648 [31] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level1, Prio:0, Weight:17], oldWorkload=Level1, newWorkload=Lowest
+2022-07-11 19:53:03,648 [31] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Lowest and load of the rest=Lowest
+2022-07-11 19:53:03,648 [31] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:54:02,199 [38] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Lowest to Level1, PeerCount 1
+2022-07-11 19:54:02,199 [38] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Lowest, Prio:0, Weight:20], oldWorkload=Lowest, newWorkload=Level1
+2022-07-11 19:54:02,199 [38] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Level1 and load of the rest=Level1
+2022-07-11 19:54:02,199 [38] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current
+2022-07-11 19:54:54,689 [33] DEBUG Photon.LoadBalancing.MasterServer.GameServer.GameServerContext - UpdateGameServer - from LoadLevel Level1 to Lowest, PeerCount 1
+2022-07-11 19:54:54,689 [33] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - Updating server: server=[Server:[key:127.0.0.1-5056-4531, serverId:7ecf4774-625d-4376-b706-16f83b74687d], State:Normal, Load:Level1, Prio:0, Weight:17], oldWorkload=Level1, newWorkload=Lowest
+2022-07-11 19:54:54,689 [33] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is 0 with load=Lowest and load of the rest=Lowest
+2022-07-11 19:54:54,689 [33] DEBUG Photon.Common.LoadBalancer.LoadBalancer`1 - new candidate for current priority is equal to current

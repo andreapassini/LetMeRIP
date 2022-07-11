@@ -143,7 +143,7 @@ namespace Photon.Realtime
         /// <summary>OnStatusChanged: The server is not available or the address is wrong. Make sure the port is provided and the server is up.</summary>
         ExceptionOnConnect,
 
-        /// <summary>OnStatusChanged: Dns resolution for a hostname failed. The exception for this is being catched and logged with error level.</summary>
+        /// <summary>OnStatusChanged: Dns resolution for a hostname failed. The exception for this is being caught and logged with error level.</summary>
         DnsExceptionOnConnect,
 
         /// <summary>OnStatusChanged: The server address was parsed as IPv4 illegally. An illegal address would be e.g. 192.168.1.300. IPAddress.TryParse() will let this pass but our check won't.</summary>
@@ -898,7 +898,7 @@ namespace Photon.Realtime
                 this.LoadBalancingPeer.TransportProtocol = appSettings.Protocol;
                 this.ExpectedProtocol = null;
             }
-            
+
             this.EnableProtocolFallback = appSettings.EnableProtocolFallback;
 
             this.bestRegionSummaryFromStorage = appSettings.BestRegionSummaryFromStorage;
@@ -3638,7 +3638,14 @@ namespace Photon.Realtime
         /// <summary>
         /// Called when the Name Server provided a list of regions for your title.
         /// </summary>
-        /// <remarks>Check the RegionHandler class description, to make use of the provided values.</remarks>
+        /// <remarks>
+        /// This callback is called as soon as the list is available. No pings were sent for Best Region selection yet.
+        /// If the client is set to connect to the Best Region (lowest ping), one or more regions get pinged.
+        /// Not all regions are pinged. As soon as the results are final, the client will connect to the best region,
+        /// so you can check the ping results when connected to the Master Server.
+        ///
+        /// Check the RegionHandler class description, to make use of the provided values.
+        /// </remarks>
         /// <param name="regionHandler">The currently used RegionHandler.</param>
         void OnRegionListReceived(RegionHandler regionHandler);
 
@@ -3880,17 +3887,23 @@ namespace Photon.Realtime
 
 
         /// <summary>
-        /// Called when a room's custom properties changed. The propertiesThatChanged contains all that was set via Room.SetCustomProperties.
+        /// Called when room properties changed. The propertiesThatChanged contain only the keys that changed.
         /// </summary>
         /// <remarks>
-        /// Since v1.25 this method has one parameter: Hashtable propertiesThatChanged.<br/>
-        /// Changing properties must be done by Room.SetCustomProperties, which causes this callback locally, too.
+        /// In most cases, this method gets called when some player changes the Room Properties.
+        /// However, there are also "Well Known Properties" (which use byte keys) and this callback may include them.
+        /// Especially when entering a room, the server will also send the required Well Known Properties and they
+        /// are not filtered out for the OnRoomPropertiesUpdate callback.
+        ///
+        /// You can safely ignore the byte typed keys in propertiesThatChanged.
+        ///
+        /// Changing properties is usually done by Room.SetCustomProperties.
         /// </remarks>
         /// <param name="propertiesThatChanged"></param>
         void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged);
 
         /// <summary>
-        /// Called when custom player-properties are changed. Player and the changed properties are passed as object[].
+        /// Called when custom player-properties are changed.
         /// </summary>
         /// <remarks>
         /// Changing properties must be done by Player.SetCustomProperties, which causes this callback locally, too.

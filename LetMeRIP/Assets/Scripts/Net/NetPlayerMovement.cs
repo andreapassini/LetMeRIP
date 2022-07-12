@@ -5,6 +5,7 @@ using Photon.Bolt;
 
 public class NetPlayerMovement : EntityBehaviour<ICustomCubeState>
 {
+    public Animator animator;
     public PlayerInputActions playerInputActions;
 
     private Vector3 direction;
@@ -16,6 +17,8 @@ public class NetPlayerMovement : EntityBehaviour<ICustomCubeState>
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
         state.SetTransforms(state.CustomCubeTransform, transform);
+
+        state.SetAnimator(animator);
     }
 
     // Update() on owner pc
@@ -23,6 +26,19 @@ public class NetPlayerMovement : EntityBehaviour<ICustomCubeState>
     {
         GatherInputs();
         Move();
+    }
+
+    // For every PC, not only owner
+    private void Update()
+    {
+        if (state.IsMoving)
+        {
+            state.Animator.Play("NetMove");
+        }
+        else
+        {
+            state.Animator.Play("NetIdle");
+        }
     }
 
     public void Move()
@@ -38,6 +54,12 @@ public class NetPlayerMovement : EntityBehaviour<ICustomCubeState>
         if(movement != Vector3.zero)
         {
             transform.position = transform.position + (movement.normalized * speed * BoltNetwork.FrameDeltaTime);
+            
+            state.IsMoving = true;
+        }
+        else
+        {
+            state.IsMoving = false;
         }
     }
 

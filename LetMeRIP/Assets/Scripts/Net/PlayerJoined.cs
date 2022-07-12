@@ -7,7 +7,6 @@ public class PlayerJoined : EntityBehaviour<ICustomCubeState>
     {
         var evnt = PlayerJoinedEvent.Create();
         evnt.Message = "Hello there";
-        
         evnt.Send();
     }
 }

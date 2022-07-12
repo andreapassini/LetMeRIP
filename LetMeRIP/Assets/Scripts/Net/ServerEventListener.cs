@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Bolt;
 
@@ -10,3 +8,4 @@ public class ServerEventListener : GlobalEventListener
         Debug.Log(evnt.Message);
     }
 }
+

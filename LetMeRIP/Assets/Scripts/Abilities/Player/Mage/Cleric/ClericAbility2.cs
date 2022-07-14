@@ -66,7 +66,8 @@ public class ClericAbility2 : Ability
         Vector3 castingPos = GatherDirectionInput();
         Debug.Log($"Casting position: {castingPos}");
         beaconOfHopePrefab ??= Resources.Load<GameObject>("Prefabs/BeaconOfHope");
-        GameObject beaconOfHopeInstance = Instantiate(beaconOfHopePrefab, castingPos, Quaternion.identity) ;
+        //GameObject beaconOfHopeInstance = Instantiate(beaconOfHopePrefab, castingPos, Quaternion.identity) ;
+        GameObject beaconOfHopeInstance = Instantiate(beaconOfHopePrefab, attackPoint.position, Quaternion.identity);
         beaconOfHopeInstance.GetComponent<BeaconOfHope>().Init(p.stats.intelligence);
 
         RestEnable();

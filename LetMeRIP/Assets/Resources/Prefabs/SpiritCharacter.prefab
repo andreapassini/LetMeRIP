@@ -2621,37 +2621,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 9
-    SynchronizeType: 0
-    Name: LightAttack
-  - Type: 4
-    SynchronizeType: 1
-    Name: isRunning
-  - Type: 9
-    SynchronizeType: 0
-    Name: Dash
-  - Type: 9
-    SynchronizeType: 0
-    Name: HeavyAttack
-  - Type: 9
-    SynchronizeType: 0
-    Name: Ability2
-  - Type: 9
-    SynchronizeType: 0
-    Name: Ability1Start
-  - Type: 9
-    SynchronizeType: 0
-    Name: Ability1Hold
-  - Type: 9
-    SynchronizeType: 0
-    Name: Ability1End
-  - Type: 9
-    SynchronizeType: 0
-    Name: HeavyAttackCharge
-  m_SynchronizeLayers:
-  - SynchronizeType: 1
-    LayerIndex: 0
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers: []
 --- !u!114 &5487416208299813144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2920,6 +2891,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 4835c015-9fb8-4dd7-b131-84e071acc21e
     m_ActionName: Player/Interact[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0b7aef75-5c26-45ee-b4bb-9bbe872ed459
+    m_ActionName: Player/Look[/Mouse/delta,/XInputControllerWindows/leftStick]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -2940,6 +2915,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  rotationSmoothing: 0
+  isGamepad: 0
 --- !u!114 &4846996737555478889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2993,10 +2970,8 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: -7710990576945519401}
-  - {fileID: 3551788320432185062}
+  observableSearch: 0
+  ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -3013,7 +2988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 1
+  m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &4846996737806289075

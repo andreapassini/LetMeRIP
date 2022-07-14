@@ -241,6 +241,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 4835c015-9fb8-4dd7-b131-84e071acc21e
     m_ActionName: Player/Interact[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0b7aef75-5c26-45ee-b4bb-9bbe872ed459
+    m_ActionName: Player/Look[/Mouse/delta,/XInputControllerWindows/leftStick]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -261,6 +265,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  rotationSmoothing: 1000
+  isGamepad: 0
 --- !u!114 &5658010001665344127
 MonoBehaviour:
   m_ObjectHideFlags: 0

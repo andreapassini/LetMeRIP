@@ -122,6 +122,7 @@ public class Dash : Ability
     {
         dashPrefab ??= Resources.Load<GameObject>("Particles/Dash");
         Vector3 point = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
-        Instantiate(dashPrefab, point, Quaternion.identity);
+        GameObject dashEffect = Instantiate(dashPrefab, point, Quaternion.identity);
+        Destroy(dashEffect, 2f);
     }
 }

@@ -24,15 +24,16 @@ public class LookAtMouse : MonoBehaviourPun
         playerInputActions.Player.Enable();
 
         playerCamera = Camera.main;
+        playerInput = transform.GetComponent<PlayerInput>();
+
+        currentControlScheme = playerInput.currentControlScheme;
     }
     
     private void Update()
     {
         if (!photonView.IsMine) return;
 
-        // Keyboard and Mouse
         directionToLook = GatherDirectionInput();
-
     }
 
 	private void FixedUpdate()
@@ -53,47 +54,32 @@ public class LookAtMouse : MonoBehaviourPun
     {
         if (this.directionToLook == Vector3.zero) return;
 
-        Vector3 playerDiredction =
+        if (!isGamepad)
+        {
+            // KBM
+            Ray ray = playerCamera.ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>());
+
+            Vector3 direction = Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask)
+                ? hitInfo.point - transform.position
+                : Vector3.zero;
+            direction.y = 0;
+
+            directionToLook = direction.normalized;
+
+            this.directionToLook.y = 0;
+            transform.forward = this.directionToLook;
+        }
+        else
+        {
+            // Gamepad
+            Vector3 playerDiredction =
                 Vector3.right * directionToLook.x +
                 Vector3.forward * directionToLook.y;
 
-        if (playerDiredction.sqrMagnitude > 0.0f)
-        {
+            
             Quaternion newRot = Quaternion.LookRotation(playerDiredction.ToIso(), Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, newRot, rotationSmoothing * Time.deltaTime);
         }
-
-        //if (!isGamepad)
-        //{
-        //    // KBM
-        //    Ray ray = playerCamera.ScreenPointToRay(playerInputActions.Player.LookAt.ReadValue<Vector2>());
-
-        //    Vector3 direction = Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask)
-        //        ? hitInfo.point - transform.position
-        //        : Vector3.zero;
-        //    direction.y = 0;
-
-        //    directionToLook = direction.normalized;
-
-        //    this.directionToLook.y = 0;
-        //    transform.forward = this.directionToLook;
-        //}
-        //else
-        //{
-        //    // Gamepad
-        //    Vector3 playerDiredction = 
-        //        Vector3.right * directionToLook.x +
-        //        Vector3.forward * directionToLook.y;
-
-        //    if (playerDiredction.sqrMagnitude > 0.0f)
-        //    {
-        //        Quaternion newRot = Quaternion.LookRotation(playerDiredction, Vector3.up);
-        //        transform.rotation = Quaternion.RotateTowards(
-        //            transform.rotation,
-        //            newRot,
-        //            rotationSmoothing * Time.deltaTime);
-        //    }
-        //}
 
 
     }
@@ -108,12 +94,9 @@ public class LookAtMouse : MonoBehaviourPun
         isEnabled = false;
     }
 
-    public void OnDeviceChange()
+    public void OnDeviceChange(PlayerInput pi)
     {
-        if (currentControlScheme.Equals(playerInput.currentControlScheme))
-            return;
-
-        if (playerInput.currentControlScheme.Equals("Gamepad"))
+        if (pi.currentControlScheme.Equals("Gamepad"))
         {
             isGamepad = true;
         }

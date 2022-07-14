@@ -10,9 +10,8 @@ using System;
 * It keeps track of a number of things: the enemies in it, their spawn position and rate,
 * the time since the player came in and the gates for the next rooms if any.
 */
-public class Room : MonoBehaviour
+public class Room : MonoBehaviourPun
 {
-    public PhotonView photonView;
     private Dungeon dungeon;
     [SerializeField] private List<Gate> inputGates;
     
@@ -31,7 +30,6 @@ public class Room : MonoBehaviour
     protected virtual void Awake()
     {
         dungeon = gameObject.GetComponentInParent<Dungeon>();
-        photonView = GetComponent<PhotonView>();
 
         connectedRooms = new List<Room>();
         gates = new Dictionary<int, Gate>();

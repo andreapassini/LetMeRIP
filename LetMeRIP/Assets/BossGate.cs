@@ -6,7 +6,7 @@ public class BossGate : MonoBehaviour
 {
     private Animator animator;
     [SerializeField] private InputAction action;
-
+    [SerializeField] private GameObject winUI;
     private void OnEnable()
     {
         action.Enable();
@@ -24,8 +24,14 @@ public class BossGate : MonoBehaviour
         action.performed += _ => OpenGate();
     }
 
-    private void OpenGate()
+    public void OpenGate()
     {
         animator.SetTrigger("open");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        winUI.SetActive(true);
     }
 }

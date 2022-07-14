@@ -11,6 +11,8 @@ public class SurvivalRoom : Room
 
     [SerializeField] private float timeToSurvive = 10;
     [SerializeField] private float respawnOffset = 3f;
+    [SerializeField] private GameObject winUI;
+    [SerializeField] private BossGate bossGate;
 
     private Coroutine closeGatesCoroutine;
     private Coroutine survivalTimerCoroutine;
@@ -70,15 +72,15 @@ public class SurvivalRoom : Room
         StopCoroutine(respawnEnemiesCoroutine);
         spawners.ClearAllEnemies();
 
-        OpenInnerGates();
-        OpenOuterGates();
-        photonView.RPC("RpcHideUITimer", RpcTarget.All);
+        photonView.RPC(nameof(RpcHideUITimer), RpcTarget.All);
         Debug.Log("ROOM CLEARED");
     }
+
     [PunRPC]
     private void RpcHideUITimer()
     {
         HudController.Instance.HideTimer();
+        bossGate.OpenGate();
     }
 
     /**

@@ -92,10 +92,11 @@ public class HPManager : MonoBehaviourPun, IOnPhotonViewPreNetDestroy
         if (dmg > 0)
             health -= dmg - (dmg * (stats.defense * 0.01f));
 
-        if (health <= 0 && photonView.IsMine)
+        if (health <= 0)
         {
-            Debug.Log("calling die");
-            Die();
+            characterController.stats.isDead = true;
+            OnPlayerKilled?.Invoke(characterController);
+            if (photonView.IsMine) Die();
         }
 
         // Take damage Event
@@ -105,14 +106,11 @@ public class HPManager : MonoBehaviourPun, IOnPhotonViewPreNetDestroy
     
     private void Die()
     {
-        if (isDead) return;
-        isDead = true;
-        characterController.enabled = false;
+        characterController.enabled = false; // prevents other entities to interact with it (unless they already have a direct reference to it)
 
         Animator animator = GetComponentInChildren<Animator>();
         animator.SetTrigger("Death");
 
-        int i = 0;
         FormManager formManager = characterController.formManager;
         Debug.Log($"{name} died {photonView.ViewID}, is mine: {photonView.IsMine}, was out: {formManager.IsSpirit}");
 
@@ -129,7 +127,6 @@ public class HPManager : MonoBehaviourPun, IOnPhotonViewPreNetDestroy
         {
             if (photonView.IsMine && !formManager.IsOut)
                 formManager.ToggleSpiritForm();
-            OnPlayerKilled?.Invoke(characterController);
         }
         else if (photonView.IsMine)
         {

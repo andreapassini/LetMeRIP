@@ -3,43 +3,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameOverManager : MonoBehaviourPun
+public class GameOverManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject gameOverUI;
 
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
-
-        StartCoroutine(LateStart());
+        HPManager.OnPlayerKilled += _ => GameOverCheck();
     }
 
-    private IEnumerator LateStart()
+    private void GameOverCheck()
     {
-        yield return new WaitForSeconds(.5f);
-        HPManager.OnPlayerKilled += GameOverCheck;
-    }
+        PlayerManager[] players = FindObjectsOfType<PlayerManager>();
 
-    private void GameOverCheck(PlayerController cc)
-    {
-        if (PhotonNetwork.IsMasterClient) photonView.RPC("RpcGameOverCheck", RpcTarget.All, cc.photonView.ViewID);
-    }
-
-    [PunRPC]
-    public void RpcGameOverCheck(int playerViewId)
-    {
-        List<PlayerController> players = new List<PlayerController>(FindObjectsOfType<PlayerController>());
-        PlayerController playerDied = PhotonView.Find(playerViewId).GetComponent<PlayerController>();
-        if(playerDied != null)
-            players.Remove(playerDied);
-        Debug.Log($"Players count: {players.Count}");
-        if(players.Count <= 0)
+        foreach (PlayerManager p in players)
         {
-            Debug.Log("enabling gameover ui");
-            gameOverUI.SetActive(true);
-
-            Debug.Log("gameover ui enabled");
+            Debug.Log($"Checking{p.name}");
+            if (!p.spiritStats.isDead) 
+            {
+                Debug.Log("Still has spirit"); return;
+            }
+            if (!p.bodyStats.isDead)
+            {
+                Debug.Log("Still has body"); return;
+            }
+            //if (!(p.spiritStats.isDead && p.bodyStats.isDead)) return;
         }
+
+        gameOverUI.SetActive(true);
+        gameOverUI.SetActive(true);
     }
+
+    //public void RpcGameOverCheck(int playerViewId)
+    //{
+    //    List<PlayerController> players = new List<PlayerController>(FindObjectsOfType<PlayerController>());
+    //    PlayerController playerDied = PhotonView.Find(playerViewId).GetComponent<PlayerController>();
+    //    if(playerDied != null)
+    //        players.Remove(playerDied);
+    //    Debug.Log($"Players count: {players.Count}");
+    //    if(players.Count <= 0)
+    //    {
+    //        Debug.Log("enabling gameover ui");
+    //        gameOverUI.SetActive(true);
+
+    //        Debug.Log("gameover ui enabled");
+    //    }
+    //}
 }

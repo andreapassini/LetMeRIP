@@ -1,7 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class UIGameOverController : MonoBehaviourPun
+public class UIGameOverController : MonoBehaviour
 {
     public static UIGameOverController Instance;
 

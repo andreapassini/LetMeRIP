@@ -306,6 +306,7 @@ MonoBehaviour:
     swiftness: 0
     critDamage: 0
     critChance: 0
+    isDead: 0
   lam: {fileID: 0}
   movement: {fileID: 0}
   rb: {fileID: 0}
@@ -684,7 +685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7151514847598013931, guid: 831ba05a7be732845a0aaec848e194ca, type: 3}
       propertyPath: m_SynchronizeParameters.Array.data[4].SynchronizeType
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7151514847598013931, guid: 831ba05a7be732845a0aaec848e194ca, type: 3}
       propertyPath: m_SynchronizeParameters.Array.data[5].SynchronizeType

@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunInstantiateMagicC
 
         public float critDamage;
         public float critChance;
+        public bool isDead = false;
     }
 
     PlayerInputActions playerInputActions;

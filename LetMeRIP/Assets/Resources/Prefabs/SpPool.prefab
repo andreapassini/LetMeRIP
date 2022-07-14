@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1312420190384366254}
   - component: {fileID: 1372072199265230148}
   - component: {fileID: 8389971003588444153}
+  - component: {fileID: 6400801126939832047}
   m_Layer: 0
   m_Name: SpPool
   m_TagString: Pool
@@ -111,6 +112,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.6
   m_Center: {x: 0.00000023841858, y: 0.49999997, z: 0.00000035762787}
+--- !u!114 &6400801126939832047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312420190382439534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &5969974333169624900
 GameObject:
   m_ObjectHideFlags: 0

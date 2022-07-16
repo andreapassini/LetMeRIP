@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,12 @@ public class EnemySimpleTest : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     [SerializeField] private Transform target;
     [SerializeField] private float AIFrameRate;
+    
     private bool stopAI = false;
+    private Vector3 standarVelocity;
+
+    [SerializeField] private float cooldownDoubleClick;
+    private float startTime;
 
     #region FSM
     FSM fsm;
@@ -37,7 +43,10 @@ public class EnemySimpleTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        action.performed += _ => StopMoving();
+        action.performed += _ => StopRestartAI();
+
+        standarVelocity = navMeshAgent.velocity;
+        //startTime = Time.time - (2 * cooldown);
 
         FSMState chase = new FSMState();
         chase.stayActions.Add(Chase);
@@ -65,10 +74,38 @@ public class EnemySimpleTest : MonoBehaviour
         }
     }
 
+    private void StopRestartAI()
+	{
+		if (!CooldownOff())
+			return;
+
+		if (stopAI) 
+        {
+            stopAI = false;
+            StopMoving();
+        } 
+        else 
+        {
+            stopAI = true;
+            StartMoving();
+        }
+    }
+
     private void StopMoving()
     {
-        stopAI = true;
         navMeshAgent.velocity = Vector3.zero;
         navMeshAgent.isStopped = true;
     }
+    private void StartMoving()
+	{
+        navMeshAgent.isStopped = false;
+        navMeshAgent.velocity = standarVelocity;
+    }
+
+	private bool CooldownOff()
+	{
+		if ((Time.time - startTime) >= cooldownDoubleClick)
+			return true;
+		return false;
+	}
 }

@@ -79,11 +79,12 @@ public class EnemyForm : MonoBehaviourPun
     public GameObject hitEffect;
     public GameObject deathEffect;
 
-
     private EnemyBillboard healthBar;
-    
+    private Vector3 standarVelocity;
+
     void Start()
     {
+        standarVelocity = navMeshAgent.velocity;
     }
 
     GameObject spPool;
@@ -192,10 +193,8 @@ public class EnemyForm : MonoBehaviourPun
 
         animator.SetTrigger("damage");
 
-        navMeshAgent.velocity = Vector3.zero;
-        navMeshAgent.isStopped = true;
-
-        //TakeDamageEffect();
+        StopAI();
+        StopMoving();
 
         // Calcolate defense reduction
         dmg = dmg - (dmg * enemyStats.defense * 0.01f); ;
@@ -302,6 +301,7 @@ public class EnemyForm : MonoBehaviourPun
     public virtual void RestartAI()
 	{
         stopAI = false;
+        StartMoving();
 	}
 
     public void DestroyEnemy()
@@ -351,5 +351,16 @@ public class EnemyForm : MonoBehaviourPun
         }
 
         return nearTarget;
+    }
+
+    private void StopMoving()
+    {
+        navMeshAgent.velocity = Vector3.zero;
+        navMeshAgent.isStopped = true;
+    }
+    private void StartMoving()
+    {
+        navMeshAgent.isStopped = false;
+        navMeshAgent.velocity = standarVelocity;
     }
 }

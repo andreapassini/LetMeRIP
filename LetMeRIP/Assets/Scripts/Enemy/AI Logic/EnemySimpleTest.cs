@@ -9,7 +9,7 @@ public class EnemySimpleTest : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
     [SerializeField] private Transform target;
-    [SerializeField] private float frameRate;
+    [SerializeField] private float AIFrameRate;
     private bool stopAI = false;
 
     #region FSM
@@ -61,7 +61,7 @@ public class EnemySimpleTest : MonoBehaviour
                 fsm.Update();
             }
 
-            yield return new WaitForSeconds(frameRate);
+            yield return new WaitForSeconds(AIFrameRate);
         }
     }
 

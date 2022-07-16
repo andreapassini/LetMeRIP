@@ -9,10 +9,17 @@ public class EnemySimpleTest : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
     [SerializeField] private Transform target;
+    [SerializeField] private float frameRate;
+    private bool stopAI = false;
 
+    #region FSM
+    FSM fsm;
+
+    #endregion
+
+    #region Input
     [SerializeField] private InputAction action;
-
-	private void OnEnable()
+    private void OnEnable()
     {
         action.Enable();
     }
@@ -20,8 +27,9 @@ public class EnemySimpleTest : MonoBehaviour
     {
         action.Disable();
     }
+    #endregion
 
-	private void Awake()
+    private void Awake()
 	{
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
@@ -29,20 +37,37 @@ public class EnemySimpleTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        action.performed += _ => StopAITest();
+        action.performed += _ => StopMoving();
 
+        FSMState chase = new FSMState();
+        chase.stayActions.Add(Chase);
+        
+        fsm = new FSM(chase);
+
+        StartCoroutine(Patrol());
+    }
+
+    private void Chase()
+    {
         navMeshAgent.destination = target.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator Patrol()
     {
-        
+        while (true)
+        {
+            if (!stopAI)
+            {
+                fsm.Update();
+            }
+
+            yield return new WaitForSeconds(frameRate);
+        }
     }
 
-    private void StopAITest()
+    private void StopMoving()
     {
-        //navMeshAgent.destination = transform.position;
+        stopAI = true;
         navMeshAgent.velocity = Vector3.zero;
         navMeshAgent.isStopped = true;
     }

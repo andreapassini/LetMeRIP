@@ -24,8 +24,11 @@ public class EnemyBullet : MonoBehaviour
         }
 
         if (PhotonNetwork.IsConnected && PhotonNetwork.IsMasterClient)
+        {
             PhotonNetwork.Destroy(gameObject);
-        else Destroy(gameObject);
+        }
+
+        Destroy(gameObject);
     }
 
     public IEnumerator DestroyBulletAfterTime()

@@ -205,6 +205,7 @@ public class EnemySpider : EnemyForm
             if (!stopAI)
             {
                 navMeshAgent.speed = enemyStats.swiftness;
+                FindNearTarget();
                 fsm.Update();
             }
                 

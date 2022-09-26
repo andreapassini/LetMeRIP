@@ -250,6 +250,7 @@ public class EnemyRanged : EnemyForm
             if (!stopAI)
             {
                 navMeshAgent.speed = enemyStats.swiftness;
+                FindNearTarget();
                 fsm.Update();
             }
 

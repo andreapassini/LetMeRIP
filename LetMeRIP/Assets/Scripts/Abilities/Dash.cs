@@ -77,7 +77,6 @@ public class Dash : Ability
      */
     public override void CancelAction()
     {
-
         if (!isDashing)
         {
             playerInputActions.Player.Movement.Enable(); // you can't move while dashing

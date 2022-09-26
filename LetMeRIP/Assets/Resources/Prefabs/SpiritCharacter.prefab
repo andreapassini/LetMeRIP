@@ -2908,7 +2908,7 @@ MonoBehaviour:
     m_ActionId: 0b7aef75-5c26-45ee-b4bb-9bbe872ed459
     m_ActionName: Player/Look[/Mouse/delta,/XInputControllerWindows/leftStick]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -2927,8 +2927,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  rotationSmoothing: 0
-  isGamepad: 0
+  rotationSmoothing: 1000
+  isGamepad: 1
 --- !u!114 &4846996737555478889
 MonoBehaviour:
   m_ObjectHideFlags: 0

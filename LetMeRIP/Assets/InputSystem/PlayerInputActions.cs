@@ -469,8 +469,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""9bc8a5d7-fe1f-4e00-a2ba-0033beee90f8"",
-                    ""path"": ""<XInputController>/leftStick"",
+                    ""id"": ""04c2cc03-491c-4ceb-b134-d61a4cf9b9b3"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",

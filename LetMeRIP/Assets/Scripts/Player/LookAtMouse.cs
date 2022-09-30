@@ -87,12 +87,13 @@ public class LookAtMouse : MonoBehaviourPun
 
     public void EnableLookAround()
     {
+        Debug.LogError("EnableLookAround");
         isEnabled = true;
     }
 
     public void DisableLookAround()
     {
-        Debug.LogError("Disable Look Around");
+        Debug.LogError("DisableLookAround");
         isEnabled = false;
     }
 

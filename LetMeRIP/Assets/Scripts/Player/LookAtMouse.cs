@@ -55,7 +55,7 @@ public class LookAtMouse : MonoBehaviourPun
     private void Rotate()
     {
         if (this.directionToLook == Vector3.zero) {
-            Debug.Log("Vector3 Zero");
+            //Debug.Log("Vector3 Zero");
             return; 
         }
 

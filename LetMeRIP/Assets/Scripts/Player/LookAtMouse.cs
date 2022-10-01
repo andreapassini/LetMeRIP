@@ -46,6 +46,8 @@ public class LookAtMouse : MonoBehaviourPun
     {
         Vector2 direction = playerInputActions.Player.LookAt.ReadValue<Vector2>();
 
+        Debug.LogError("Direction X:" + direction.x + " Y:" + direction.y);
+
         return direction;
     }
 
@@ -57,6 +59,16 @@ public class LookAtMouse : MonoBehaviourPun
             return; 
         }
 
+        // Gamepad
+        Vector3 playerDiredction =
+            Vector3.right * directionToLook.x +
+            Vector3.forward * directionToLook.y;
+
+
+        Quaternion newRot = Quaternion.LookRotation(playerDiredction.ToIso(), Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, newRot, rotationSmoothing * Time.deltaTime);
+
+        /*
         if (!isGamepad)
         {
             // KBM
@@ -83,17 +95,19 @@ public class LookAtMouse : MonoBehaviourPun
             Quaternion newRot = Quaternion.LookRotation(playerDiredction.ToIso(), Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, newRot, rotationSmoothing * Time.deltaTime);
         }
+
+        */
     }
 
     public void EnableLookAround()
     {
-        Debug.LogError("EnableLookAround");
+        //Debug.LogError("EnableLookAround");
         isEnabled = true;
     }
 
     public void DisableLookAround()
     {
-        Debug.LogError("DisableLookAround");
+        //Debug.LogError("DisableLookAround");
         isEnabled = false;
     }
 
